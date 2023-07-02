@@ -1,0 +1,530 @@
+%---Macros-Introduction---------------------------------------------------------------
+
+
+\newcommand{\TBD}{\textbf{To be done}}
+
+\newcommand{\rounddown}[1]{\left\lfloor#1\right\rfloor} %floor function
+\def\ur{\in_R} %element chosen uniformly at random
+
+%Graph properties
+\newcommand{\numberVertices}[1]{v\left({#1}\right)} %number of vertices in a graph
+\newcommand{\vertexSet}[1]{V\left(#1\right)} %vertex set of a graph
+\newcommand{\edgeSet}[1]{E\left(#1\right)} %edge set of a graph
+\newcommand{\numberEdges}[1]{e\left({#1}\right)} %number of edges in a graph
+
+\newcommand{\maxdegree}[1]{\Delta\left(#1\right)} %maximum degree
+\def\class{\mathcal{A}}
+\def\crg{A} %constrained random graph
+
+\DeclareMathOperator{\Cv}{cv} %fraction of cut vertices in a graph
+\newcommand{\cv}[1]{\Cv\left(#1\right)} %fraction of cut vertices in a graph
+
+\DeclareMathOperator{\Diam}{diam} %diameter of a graph
+\newcommand{\diam}[1]{\Diam\left(#1\right)} %diameter of a graph
+
+%Probability
+\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]} %probability
+\newcommand{\expec}[1]{\mathbb{E}\left[#1\right]} %expectation
+\def\N{\mathbb{N}} %natural numbers
+
+%Asymptotic notation
+\newcommand{\smallo}[1]{o\left(#1\right)}
+\newcommand{\bigo}[1]{O\left(#1\right)}
+\newcommand{\OP}[1]{O_p\left(#1\right)}
+\newcommand{\smallomega}[1]{\omega\left(#1\right)}
+\newcommand{\OmegaP}[1]{\Omega_p\left(#1\right)}
+\newcommand{\ThetaP}[1]{\Theta_p\left(#1\right)}
+\newcommand{\Th}[1]{\Theta\left(#1\right)}
+
+%Rooted graphs and limits
+\newcommand{\rootedGraph}[2]{\left(#1, #2\right)}
+\newcommand{\distributionalLimit}[2]{#1~\xrightarrow{~d~}~#2}
+\DeclareMathOperator{\GWT}{GWT}
+\newcommand{\gwt}[1]{\GWT\left(#1\right)}
+\def\skeletonTree{T_\infty}
+\newcommand{\ball}[3]{B_{#1}\left(#2, #3\right)}
+\newcommand{\expansion}[3]{\lambda_{#1}\left(#2, #3\right)}
+\newcommand{\expansionP}[2]{\lambda_{#1}\left(#2\right)}
+
+%Random graph process
+\newcommand{\pro}[2]{P_{#1,#2}} %graph process (graph after #2 edges have been tested)
+\newcommand{\acc}[2]{P_{#1,m=#2}} %graph process (graph after #2 edges have been accepted)
+\newcommand{\er}[2]{G_{#1,#2}} %graph process (graph after #2 edges have been considered and all of them were added)
+
+%Names
+\def\Erdos{Erd\H{o}s}
+\def\Renyi{R\'enyi}
+\def\Luczak{\L{}uczak}
+\def\ER{\Erdos-\Renyi}
+\def\Bollobas{Bollob\'{a}s}
+\def\GW{Galton-Watson}
+
+
+%---Macros-Cycles_Blocks---------------------------------------------------------------
+\newcommand{\proofof}[1]{\subsection{Proof of \Cref{#1}}}
+\newcommand{\proofofL}[1]{\subsection{Proof of \Cref{#1}}\label{CBproof:#1}}
+\newcommand{\proofofN}[2]{\subsection[#1]{#1: Proof of \Cref{#2}}}
+\newcommand{\proofofLN}[2]{\subsection[#1]{#1: Proof of \Cref{#2}}\label{CBproof:#2}}
+\DeclareMathOperator{\cov}{Cov}
+%\newcommand{\N}{\mathbb{N}} %natural numbers
+\newcommand{\R}{\mathbb{R}} %real numbers
+\newcommand{\whp}{whp}%with high probability}
+\newcommand{\Whp}{Whp}%Beginning of a sentence
+
+%\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]} %Probability
+\newcommand{\condprob}[2]{\mathbb{P}\left[#1 \;\middle|\; #2\right]}
+\newcommand{\variance}[1]{\mathbb{V}\left[#1\right]}
+\newcommand{\covariance}[2]{\cov\left[#1, #2\right]}
+%\newcommand{\expec}[1]{\mathbb{E}\left[#1\right]} %Expectation
+%\newcommand{\rounddown}[1]{\left\lfloor#1\right\rfloor} %floor function
+
+\def\Erdos{Erd\H{o}s}
+\def\Renyi{R\'enyi}
+\def\ER{\Erdos-\Renyi}
+\def\nc{N}
+\def\nd{k}
+\def\val{x}
+\def\valSecond{y}
+\def\ind{i}
+\def\indSecond{j}
+\def\fixGraph{H}
+\def\fixMultigraph{H}
+\def\randomGraph{A}
+\def\ur{\in_R}
+\def\minimum{{X_*}}
+\def\maximum{{X^*}}
+\def\LargestComponent{L_1}
+\def\planarClass{\mathcal{P}}
+\def\planarRandomGraph{P}
+\def\randomCore{C}
+\def\randomMultiCore{\tilde{C}}
+\def\constant{M}
+\def\generalGraphClass{\mathcal{A}}
+\def\generalRandomGraph{A}
+\def\colour{F}
+\def\pl{kernel-stable}
+\def\Pl{Kernel-stable}
+\def\loopInsertion{loop insertion}
+\def\loopInsertions{loop insertions}
+\def\LoopInsertion{Loop insertion}
+\def\cl{\mathcal{A}}
+\def\property{\mathcal{Q}}
+\def\2s{2-simple}
+\def\ce{\alpha}
+\def\rest{R}
+\def\bridgeInsertion{bridge insertion}
+\def\bridgeInsertions{bridge insertions}
+\def\BridgeInsertion{Bridge insertion}
+\def\bridgeClass{\mathcal{M}}
+\def\bridgeMarkedClass{\mathcal{M}'}
+\def\bridgeGraph{M}
+\def\bridgeStable{bridge-stable}
+\def\BridgeStable{Bridge-stable}
+\def\bridgeNumber{bridge number}
+\def\BridgeNumber{Bridge number}
+\def\bridgeNumbers{bridge numbers}
+\def\block{B}
+\def\bridge{e}
+\def\largeBlock{dominant}
+\def\bb{b}
+\def\wb{w}
+\def\condRandomGraph{F}
+\def\exponent{\mu}
+\def\func{\Phi}
+\def\seq{\mathbf{s}}
+
+\newcommand{\girth}[1]{g\left({#1}\right)}
+\newcommand{\longestCycle}[1]{c\left({#1}\right)}
+\newcommand{\numberLoops}[1]{\lambda\left(#1\right)}
+\def\NumberLoops{\lambda}
+\newcommand{\numberBridges}[1]{b\left(#1\right)}
+\def\NumberBridges{b}
+\newcommand{\Tp}[1]{\Theta_p\left(#1\right)}
+\newcommand{\Op}[1]{O_p\left(#1\right)}
+\newcommand{\Omp}[1]{\Omega_p\left(#1\right)}
+\newcommand{\T}[1]{\Theta\left(#1\right)}
+\newcommand{\Om}[1]{\Omega\left(#1\right)}
+\newcommand{\weight}[1]{w\left(#1\right)}
+%\newcommand{\numberVertices}[1]{v\left({#1}\right)}
+%\newcommand{\numberEdges}[1]{e\left({#1}\right)}
+\newcommand{\core}[1]{C\left(#1\right)}
+\newcommand{\kernel}[1]{K\left(#1\right)}
+\newcommand{\complexPart}[1]{Q\left(#1\right)}
+\newcommand{\largestComponent}[1]{L_1\left(#1\right)}
+%\newcommand{\vertexSet}[1]{V\left(#1\right)}
+%\newcommand{\edgeSet}[1]{E\left(#1\right)}
+\newcommand{\Rest}[1]{R\left(#1\right)}
+\newcommand{\bn}[1]{\beta\left(#1\right)}
+\newcommand{\Bn}[2]{\beta_{#1}\left(#2\right)}
+\newcommand{\Nb}[2]{\beta\left(#1, #2\right)}
+\newcommand{\blockOrder}[2]{b_{#1}\left(#2\right)}
+\newcommand{\blockLargest}[2]{B_{#1}\left(#2\right)}
+\newcommand{\subdivisionNumber}[1]{S\left(#1\right)}
+\newcommand{\condGraph}[2]{#1 \mid #2}
+\definecolor{lightGray}{RGB}{220,220,220}
+
+
+%---Macros-Cycles_Blocks------------------------------------------------------------
+
+%\DeclareMathOperator{\Cv}{cv}
+%\newcommand{\cv}[1]{\Cv\left(#1\right)}
+%\def\ur{\in_R} %element chosen uniformly at random
+%\newcommand{\smallo}[1]{o\left(#1\right)}
+%\newcommand{\bigo}[1]{O\left(#1\right)}
+%\newcommand{\smallomega}[1]{\omega\left(#1\right)}
+%\def\N{\mathbb{N}}
+%\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]}    %Probability
+%\def\Erdos{Erd\H{o}s}
+%\def\Renyi{R\'enyi}
+%\def\ER{\Erdos-\Renyi}
+%\def\Luczak{\L{}uczak}
+\DeclareMathOperator{\po}{Po}
+\newcommand{\poisson}[1]{\po\left(#1\right)}
+%\newcommand{\condprob}[2]{\mathbb{P}\left[#1 \;\middle|\; #2\right]}
+
+
+
+%---Macros-Max_Degree-----------------------------------------------------------
+
+%\newcommand{\whp}{whp}%with high probability}
+%\newcommand{\Whp}{Whp}%Beginning of a sentence
+%\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]} %Probability
+\newcommand{\probLarge}[1]{\mathbb{P}\big[#1\big]} %Probability with large parentheses
+%\newcommand{\condprob}[2]{\mathbb{P}\left[#1 \;\middle|\; #2\right]}
+%\newcommand{\variance}[1]{\mathbb{V}\left[#1\right]}
+%\newcommand{\expec}[1]{\mathbb{E}\left[#1\right]} %Expectation
+
+%\def\Erdos{Erd\H{o}s}
+%\def\Renyi{R\'enyi}
+%\def\Luczak{\L{}uczak}
+%\def\ER{\Erdos-\Renyi}
+%\def\Bollobas{Bollob\'{a}s}
+
+
+%\newcommand{\proofof}[1]{\subsection{Proof of \Cref{#1}}}
+
+%\def\N{\mathbb{N}} %natural numbers
+\def\R{\mathbb{R}} %real numbers
+%\def\ur{\in_R} %element chosen uniformly at random
+%\newcommand{\rounddown}[1]{\left\lfloor#1\right\rfloor} %floor function
+
+\def\twoconcentration{D}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Balls into bins
+
+\def\bin{\mathcal{B}}
+%\def\ball{B}
+\def\nbins{n} %number of bins
+\def\nballs{k} %number of balls
+\def\location{\mathbf{A}} %location vector
+\def\locationBit{A} %coordinate of a location vector
+\def\loadvector{\mathbf{\lambda}} %vector of loads
+\def\load{\lambda} %load of a bin, i.e. number of balls in the bin
+\def\maxload{\lambda^\ast} %maximum load
+\DeclareMathOperator{\BB}{BB}
+\DeclareMathOperator{\MBB}{M}
+\newcommand{\binsandballs}[2]{\BB\left(#1, #2\right)}
+\newcommand{\maxbinsandballs}[2]{\MBB\left(#1, #2\right)}
+
+\def\maxloadsubset{\nu^\ast} %maximum load after a certain number of balls
+
+\newcommand{\concentration}[2]{\nu\left(#1, #2\right)} %unique solution of equation k^x*e^x/(x^(x+1/2)n^(x-1))=1
+\newcommand{\specialconcentration}[1]{\nu\left(#1\right)} %unique solution of equation above for the special case k=n
+\def\Concentration{\nu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Forests of trees with specified roots
+\def\ntrees{t} %number of trees
+\def\rootrv{Z} 
+\def\rootvector{\mathbf{Y}} 
+\def\rootvectorbit{Y} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Landau notation
+%\newcommand{\smallo}[1]{o\left(#1\right)}
+%\newcommand{\bigo}[1]{O\left(#1\right)}
+%\newcommand{\smallomega}[1]{\omega\left(#1\right)}
+%\newcommand{\Th}[1]{\Theta\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Graph classes and random graphs
+
+\def\planargraph{P} %planar graph
+\def\planarclass{\mathcal{P}} %class of planar graphs
+
+\def\multigraph{M} %multigraph
+
+\def\forest{F} %forest of trees with specified roots
+\def\forestclass{\mathcal{F}} %class of forests of trees with specified roots
+
+\def\nocomplex{U} %graph without complex component
+\def\nocomplexclass{\mathcal{U}} %class of graphs without complex components
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Graph notations
+%\newcommand{\maxdegree}[1]{\Delta\left(#1\right)} %maximum degree
+\newcommand{\maxdegreeLarge}[1]{\Delta\big(#1\big)} %maximum degree (with big parentheses)
+\newcommand{\largestcomponent}[1]{L\left(#1\right)} %largest component
+\def\Largestcomponent{L} %largest component
+%\newcommand{\rest}[1]{R\left(#1\right)} %graph without largest component ('rest')
+%\def\Rest{R} %graph without largest component ('rest')
+\def\degreesequence{\mathbf{d}}
+\def\ratio{\mu}
+\def\niv{k}
+\def\nie{l}
+\def\md{d}
+\newcommand{\degree}[2]{d_{#2}\left(#1\right)} %degree of a vertex
+%\newcommand{\vertexSet}[1]{V\left(#1\right)} %vertex set of a graph
+%\newcommand{\edgeSet}[1]{E\left(#1\right)} %edge set of a graph
+%\newcommand{\numberVertices}[1]{v\left({#1}\right)} %number of vertices in a graph
+%\newcommand{\numberEdges}[1]{e\left({#1}\right)} %number of edges in a graph
+\newcommand{\numberVerticesLarge}[1]{v\big({#1}\big)} %number of vertices in a graph (with big parentheses)
+\newcommand{\numberEdgesLarge}[1]{e\big({#1}\big)} %number of edges in a graph (with big parentheses)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Decomposition
+%\newcommand{\core}[1]{C\left(#1\right)} %core
+\newcommand{\complexpart}[1]{Q\left(#1\right)} %complex part
+\newcommand{\restcomplex}[1]{U\left(#1\right)} %graph without complex part
+\newcommand{\restcomplexLarge}[1]{U\big(#1\big)}
+\def\Restcomplex{U} %graph without complex part
+\def\Complexlargestcore{Q_L} %complex part of the largest component of the core
+\newcommand{\complexlargestcore}[1]{Q_L\left(#1\right)}
+\newcommand{\complexlargestcoreLarge}[1]{Q_L\big(#1\big)}
+\def\Complexrestcore{Q_S} %complex part of the rest (=graph without largest component) of the core
+\newcommand{\complexrestcore}[1]{Q_S\left(#1\right)}
+\newcommand{\complexrestcoreLarge}[1]{Q_S\big(#1\big)}
+\def\complexclass{\mathcal{Q}}
+\def\complexgraph{Q}
+\def\funcL{\ell}
+\def\funcR{r}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%conditional random graphs
+\def\cl{\mathcal{A}} %class of graphs
+\def\func{\Phi} %function with domain a set of graphs
+%\def\seq{\mathbf{a}} %sequence
+\def\term{a} %element of the sequence
+%newcommand{\condGraph}[2]{#1 \mid #2} %conditional random graph
+%\def\randomGraph{A}
+%\def\property{\mathcal{R}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Notation for random variables
+\newcommand{\contiguous}[2]{#1 \triangleleft #2} %contiguous random variables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Pruefer sequence
+\def\prueferseqence{\psi} %Pruefer sequence
+\def\prueferinvers{\psi^{-1}} %invers function of the Pruefer sequence
+\newcommand{\sequences}[2]{\mathcal{S}\left(#1, #2\right)} %set of Pruefer sequences
+\newcommand{\frequency}[2]{\#\left(#1, #2\right)} %number of occurences of an element in a Pruefer sequence
+
+
+\newcommand{\setbuilder}[2]{\left\{#1 \mid #2\right\}} %set-builder notation
+
+\newcommand{\lessorequal}{\hspace{0.06cm}\leq\hspace{0.06cm}}
+\newcommand{\greaterorequal}{\hspace{0.06cm}\geq\hspace{0.06cm}}
+\newcommand{\equal}{\hspace{0.06cm}=\hspace{0.06cm}}
+\newcommand{\greater}{\hspace{0.06cm}>\hspace{0.06cm}}
+\newcommand{\defined}{\hspace{0.06cm}:=\hspace{0.06cm}}
+
+\newcommand{\transformation}[2]{#1\rightarrow #2}
+
+\newtheorem{question}[thm]{Question}
+\crefname{question}{question}{questions}
+
+
+%---Macros-Process------------------------------------------------------------
+%\newcommand{\whp}{whp}%with high probability}
+%\newcommand{\Whp}{Whp}%Beginning of a sentence
+%\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]} %Probability
+%\newcommand{\probLarge}[1]{\mathbb{P}\big[#1\big]} %Probability with large parentheses
+%\newcommand{\condprob}[2]{\mathbb{P}\left[#1 \;\middle|\; #2\right]}
+%\newcommand{\variance}[1]{\mathbb{V}\left[#1\right]}
+%\newcommand{\expec}[1]{\mathbb{E}\left[#1\right]} %Expectation
+
+%\def\Erdos{Erd\H{o}s}
+%\def\Renyi{R\'enyi}
+%\def\Luczak{\L{}uczak}
+%\def\ER{\Erdos-\Renyi}
+%\def\Bollobas{Bollob\'{a}s}
+
+%\newcommand{\proofof}[1]{\subsection{Proof of \Cref{#1}}}
+\newcommand{\proofofW}[1]{\subsection*{Proof of \Cref{#1}}}
+
+%\def\N{\mathbb{N}} %natural numbers
+%\def\R{\mathbb{R}} %real numbers
+%\def\ur{\in_R} %element chosen uniformly at random
+%\newcommand{\rounddown}[1]{\left\lfloor#1\right\rfloor} %floor function
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Landau notation
+%\newcommand{\smallo}[1]{o\left(#1\right)}
+%\newcommand{\bigo}[1]{O\left(#1\right)}
+%\newcommand{\smallomega}[1]{\omega\left(#1\right)}
+%\newcommand{\Th}[1]{\Theta\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Graph notations
+%\newcommand{\maxdegree}[1]{\Delta\left(#1\right)} %maximum degree
+%\newcommand{\maxdegreeLarge}[1]{\Delta\big(#1\big)} %maximum degree (with big parentheses)
+%\newcommand{\largestcomponent}[1]{L\left(#1\right)} %largest component
+%\def\Largestcomponent{L} %largest component
+%\newcommand{\rest}[1]{R\left(#1\right)} %graph without largest component ('rest')
+%\def\Rest{R} %graph without largest component ('rest')
+
+%\newcommand{\vertexSet}[1]{V\left(#1\right)} %vertex set of a graph
+%\newcommand{\edgeSet}[1]{E\left(#1\right)} %edge set of a graph
+%\newcommand{\numberVertices}[1]{v\left({#1}\right)} %number of vertices in a graph
+%\newcommand{\numberEdges}[1]{e\left({#1}\right)} %number of edges in a graph
+%\newcommand{\numberVerticesLarge}[1]{v\big({#1}\big)} %number of vertices in a graph (with big parentheses)
+%\newcommand{\numberEdgesLarge}[1]{e\big({#1}\big)} %number of edges in a graph (with big parentheses)
+
+%\newcommand{\setbuilder}[2]{\left\{#1 \mid #2\right\}} %set-builder notation
+
+%\def\cl{\mathcal{P}}
+%\newcommand{\pro}[2]{P_{#1,#2}} %graph process (graph after #2 edges have been tested)
+%\newcommand{\acc}[2]{P_{#1,m=#2}} %graph process (graph after #2 edges have been accepted)
+%\newcommand{\er}[2]{G_{#1,#2}} %graph process (graph after #2 edges have been considered and all of them were added)
+
+\newcommand{\sol}[1]{\beta\left(#1\right)}
+\newcommand{\funcPro}[1]{f\left(#1\right)}
+\newcommand{\invFunc}[1]{f^{-1}\left(#1\right)}
+
+\DeclareMathOperator{\excess}{ex}
+\newcommand{\ex}[1]{\excess\left(#1\right)}
+%\newcommand{\weight}[1]{w\left(#1\right)}
+%\newcommand{\core}[1]{C\left(#1\right)} %core
+\newcommand{\forestPro}[1]{F\left(#1\right)} 
+\DeclareMathOperator{\binDistribution}{Bin}
+\newcommand{\binPro}[2]{\binDistribution\left(#1,#2\right)} 
+\DeclareMathOperator{\numberTreeComponents}{\#t}
+\newcommand{\nt}[1]{\numberTreeComponents\left(#1\right)} 
+\DeclareMathOperator{\considered}{q}
+\newcommand{\con}[1]{\considered\left(#1\right)}
+\DeclareMathOperator{\forbidden}{forb}
+\newcommand{\forb}[1]{\forbidden\left(#1\right)}
+\DeclareMathOperator{\addable}{add}
+\newcommand{\add}[1]{\addable\left(#1\right)}
+\newcommand{\rej}[1]{r\left(#1\right)}
+
+
+%---Macros-Local-structure------------------------------------------------------------
+%\newcommand{\class}[1]{\mathcal{#1}}
+%\newcommand{\whp}{whp}%with high probability}
+%\newcommand{\Whp}{Whp}%Beginning of a sentence
+%\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]}    %Probability
+%\newcommand{\probLarge}[1]{\mathbb{P}\big[#1\big]}    %Probability with large parentheses
+%\newcommand{\condprob}[2]{\mathbb{P}\left[#1 \;\middle|\; #2\right]}
+%\newcommand{\variance}[1]{\mathbb{V}\left[#1\right]}
+%\newcommand{\expec}[1]{\mathbb{E}\left[#1\right]}    %Expectation
+%\DeclareMathOperator{\po}{Po}
+%\newcommand{\poisson}[1]{\po\left(#1\right)}
+
+
+%\def\Erdos{Erd\H{o}s}
+%\def\Renyi{R\'enyi}
+%\def\Luczak{\L{}uczak}
+%\def\ER{\Erdos--\Renyi}
+%\def\Bollobas{Bollob\'{a}s}
+%\def\GW{Galton--Watson}
+
+
+
+%\def\N{\mathbb{N}} %natural numbers
+%\def\Z{\mathbb{Z}} %integers
+%\def\R{\mathbb{R}} %real numbers
+%\def\ur{\in_R} %element chosen uniformly at random
+\newcommand{\roundup}[1]{\left\lceil#1\right\rceil} %ceil function
+%\newcommand{\rounddown}[1]{\left\lfloor#1\right\rfloor} %floor function
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%random forests
+\def\forest{F}
+\def\forestClass{\mathcal{F}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Landau notation
+%\newcommand{\smallo}[1]{o\left(#1\right)}
+%\newcommand{\bigo}[1]{O\left(#1\right)}
+%\newcommand{\smallomega}[1]{\omega\left(#1\right)}
+%\newcommand{\Op}[1]{O_p\left(#1\right)}
+%\newcommand{\Th}[1]{\Theta\left(#1\right)}
+%\newcommand{\ThetaP}[1]{\Theta_p\left(#1\right)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Graph classes
+%\def\planargraph{P}     %planar graph
+%\def\planarclass{\mathcal{P}} %class of planar graphs
+\def\erClass{\mathcal{G}} %class of graphs
+\def\nocomplexClass{\mathcal{U}} %class of graphs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Graph notations
+%\newcommand{\largestcomponent}[1]{L\left(#1\right)} %largest component
+%\def\Largestcomponent{L} %largest component
+\newcommand{\restLocal}[1]{S\left(#1\right)} %graph without largest component ('rest')
+\def\RestLocal{S} %graph without largest component ('rest')
+%\newcommand{\vertexSet}[1]{V\left(#1\right)} %vertex set of a graph
+%\newcommand{\edgeSet}[1]{E\left(#1\right)} %edge set of a graph
+%\newcommand{\numberVertices}[1]{v\left({#1}\right)} %number of vertices in a graph
+%\newcommand{\numberEdges}[1]{e\left({#1}\right)} %number of edges in a graph
+\DeclareMathOperator{\dist}{dist}
+\newcommand{\distance}[3]{\dist_{#1}\left(#2, #3\right)}
+%\newcommand{\degree}[2]{d_{#2}\left(#1\right)} %degree of a vertex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Core-Kernel approach
+%\newcommand{\core}[1]{C\left(#1\right)} %core
+%\newcommand{\kernel}[1]{K\left(#1\right)} %kernel
+%\newcommand{\complexpart}[1]{Q\left(#1\right)} %complex part
+%\newcommand{\restcomplex}[1]{U\left(#1\right)} %graph without complex part
+%\newcommand{\restcomplexLarge}[1]{U\big(#1\big)}
+%\def\Restcomplex{U} %graph without complex part
+%\def\complexclass{\mathcal{Q}}
+%\def\complexgraph{Q}
+\def\numberVerticesOutside{n_U}
+\def\numberEdgesOutside{m_U}
+\newcommand{\subdivisionNumberLocal}[2]{S_{#1}\left(#2\right)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%conditional random graphs
+%\def\cl{\mathcal{A}} %class of graphs
+%\def\func{\Phi} %function with domain a set of graphs
+\def\seqLocal{\mathbf{a}} %sequence
+%\def\term{a} %element of the sequence
+%\newcommand{\condGraph}[2]{#1 \mid #2} %conditional random graph
+\def\imageSet{\mathcal{S}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%rooted graphs and limits
+\def\root{r} %root of a graph
+\def\rootSet{R} %root of a graph
+\def\radius{\ell} %root of a graph
+%\newcommand{\ball}[3]{B_{#1}\left(#2, #3\right)}
+\newcommand{\ballP}[2]{B_{#1}\left(#2\right)}
+\def\isomorphic{\cong}
+%\newcommand{\rootedGraph}[2]{\left(#1, #2\right)}
+%\newcommand{\distributionalLimit}[2]{#1~\xrightarrow{~d~}~#2}
+%\DeclareMathOperator{\GWT}{GWT}
+%\newcommand{\gwt}[1]{\GWT\left(#1\right)}
+%\def\skeletonTree{T_\infty}
+\newcommand{\skeletonTreeRays}[1]{T_\infty^{\left(#1\right)}}
+\newcommand{\unbiased}[1]{#1_\circ}
+\newcommand{\contiguousLocal}[2]{#1 \triangleleft \triangleright #2}
+\def\detGraph{W} %a deterministic rooted graph
+\def\planeTree{Z} %a deterministic plane tree
+\newcommand{\infinitepath}[1]{P_{\infty}^{\left(#1\right)}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\setbuilder}[2]{\left\{#1 \mid #2\right\}} %set-builder notation
+\newcommand{\setbuilderBig}[2]{\big\{#1 \mid #2\big\}}
+%\newcommand{\lessorequal}{\hspace{0.06cm}\leq\hspace{0.06cm}}
+%\newcommand{\greaterorequal}{\hspace{0.06cm}\geq\hspace{0.06cm}}
+%\newcommand{\equal}{\hspace{0.06cm}=\hspace{0.06cm}}
+%\newcommand{\greater}{\hspace{0.06cm}>\hspace{0.06cm}}
+%\newcommand{\defined}{\hspace{0.06cm}:=\hspace{0.06cm}}
+\newcommand{\symmetricDifference}[2]{#1\triangle#2}
+%\def\ntrees{t} %number of trees

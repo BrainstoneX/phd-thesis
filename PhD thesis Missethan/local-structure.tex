@@ -1,0 +1,1384 @@
+% !TEX root = phd-missethan.tex
+
+\chapter{Local structure of random planar graphs}\label{cha:local_structure}
+
+\section{Introduction and results}\label{LSsec:intro}
+
+\subsection{Motivation}\label{LSsub:motivation}
+In 1959 \Erdos\ and \Renyi\ \cite{ErdoesRenyi1959} introduced the \ER\ random graph $G(n,m)$, which is a graph chosen uniformly at random from the class $\mathcal{G}(n,m)$ of all vertex-labelled graphs on vertex set $[n]:=\left\{1, \ldots, n\right\}$ with $m=m(n)$ edges, denoted by $G(n,m)\ur\mathcal{G}(n,m)$. Since then, $G(n,m)$ and the closely related binomial random graph $G(n,p)$ have been intensively studied (see \cite{FriezeKaronski2016,JansonLuczakRucinski2000,Bollobas2001} for an overview). Prominent examples of properties that were considered in $G(n,m)$ are the order of the largest component \cite{ErdoesRenyi1960,Luczak1990,Bollobas1984}, the length of the longest cycle \cite{Luczak1991b,LuczakPittelWierman1994,AjtaiKomlosSzemeredi1981}, and the maximum degree \cite{Bollobas1982,Bollobas1980b,RiordanSelby2000}. While these are all \lq global\rq\ properties, also the \lq local\rq\ structure of $G(n,m)$ was studied. For instance, it is well known that if $m=cn/2$ for a constant $c\geq 0$, then $G(n,m)$ locally looks like a \GW\ tree $\gwt{c}$ with offspring distribution $\poisson{c}$. To make that statement more formal, we use the concept of {\em local weak convergence} of random rooted graphs, which was introduced by Benjamini and Schramm \cite{BenjaminiSchramm2001} and by Aldous and Steele \cite{AldousSteele2004}: A {\em rooted graph} is a pair $\rootedGraph{H}{\root}$, where $H$ is a graph and $\root$ is a vertex of $H$. Two rooted graphs $\rootedGraph{H_1}{\root_1}$ and $\rootedGraph{H_2}{\root_2}$ are {\em isomorphic}, denoted by $\rootedGraph{H_1}{\root_1}\isomorphic\rootedGraph{H_2}{\root_2}$, if there exists an isomorphism of $H_1$ onto $H_2$ which takes $r_1$ to $r_2$. Given a rooted graph $\rootedGraph{H}{\root}$ and $\radius\in\N:=\left\{1, 2, \ldots\right\}$, the ball $\ball{\radius}{H}{\root}$ of radius $\radius$ and centre $\root$ in $H$ is the subgraph of $H$ induced on the vertices with distance at most $\radius$ to $\root$. For each $n\in\N$ let $\rootedGraph{G}{\root}=\rootedGraph{G}{\root}(n)$ be a random rooted graph, that is a random variable which takes rooted graphs as values. We say that another random rooted graph $\rootedGraph{G_0}{\root_0}$ is the {\em local weak limit}, or just the local limit, of $\rootedGraph{G}{\root}$, denoted by $\distributionalLimit{\rootedGraph{G}{\root}}{\rootedGraph{G_0}{\root_0}}$, if for each fixed rooted graph $\rootedGraph{H}{\root_H}$ and $\radius\in\N$ we have
+\begin{align*}
+\prob{\ball{\radius}{G}{\root}\isomorphic\rootedGraph{H}{\root_H}}~\to~ \prob{\ball{\radius}{G_0}{\root_0}\isomorphic\rootedGraph{H}{\root_H}} \text{~~~~as~~~~} n\to \infty.
+\end{align*}
+In the literature the local weak limit is also called the distributional limit or Benjamini-Schramm local weak limit. We can consider the \ER\ random graph $G=G(n,m)$ as a random rooted graph $\rootedGraph{G}{\root}$ by assuming that given the realisation $H$ of $G$ the root $\root$ is chosen uniformly at random from the vertices of $H$, denoted by $r\ur\vertexSet{G}$. Using the notions introduced above we can describe the local structure of $G$ as follows.
+\begin{thm}\label{LSthm:local_er}
+Let $G=G(n,m)\ur\mathcal{G}(n,m)$ be the \ER\ random graph, $\root=\root(n)\ur \vertexSet{G}$, $c\geq 0$, and $m=m(n)$ such that $2m/n\to c$ as $n \to \infty$. Then $\distributionalLimit{\rootedGraph{G}{\root}}{\gwt{c}}$.
+\end{thm}
+A proof of \Cref{LSthm:local_er} can be found for example in \cite{DemboMontanari2010}. Another random graph for which the local structure is well understood is the random tree $T=T(n)$, which is a graph chosen uniformly at random from the class of all vertex-labelled trees on vertex set $[n]$. Grimmett \cite{Grimmett198081} showed that the local limit of $T$ is the {\em Skeleton tree} $\skeletonTree$, which can be obtained by connecting independent \GW\ trees $T_1, T_2, \ldots$ with offspring distribution $\poisson{1}$ and roots $\root_1, \root_2, \ldots$ via edges $\root_1\root_2, \root_2\root_3, \ldots$ and considering $\root_1$ as the root of $\skeletonTree$. We refer to \Cref{LSfig:skeleton_tree} for an illustration of $\skeletonTree$ and note that further results on limits of random trees can be found for example in \cite{Aldous1991,Devroye1998,Aldous1991b}.
+\begin{figure}[t]
+\centering
+	\begin{tikzpicture}[scale=1, line width=0.4mm, every node/.style={circle,fill=gray, inner sep=0, minimum size=0.22cm}]
+		\node (1) at (0,0) [rectangle,draw]  {};
+		\node (1a) at (0,-0.4) [draw=none, fill=none]  {$\root_1$};
+		\node (2) at (1,0) [draw]  {};
+		\node (2a) at (1,-0.4) [draw=none, fill=none]  {$\root_2$};
+		\node (3) at (2,0) [draw]  {};
+		\node (3a) at (2,-0.4) [draw=none, fill=none]  {$\root_3$};
+		\node (4) at (3,0) [draw]  {};
+		\node (4a) at (3,-0.4) [draw=none, fill=none]  {$\root_4$};
+		\node (5) at (4,0) [draw]  {};
+		\node (5a) at (4,-0.4) [draw=none, fill=none]  {$\root_5$};
+		\node (6) at (5,0) [draw]  {};
+		\node (6a) at (5,-0.4) [draw=none, fill=none]  {$\root_6$};
+		\node (7) at (6,0) [draw]  {};
+		\node (7a) at (6,-0.4) [draw=none, fill=none]  {$\root_7$};
+		\node (8) at (7,0) [draw]  {};
+		\node (8a) at (7,-0.4) [draw=none, fill=none]  {$\root_8$};
+		\draw[-] (1) to (2);
+		\draw[-] (2) to (3);
+		\draw[-] (3) to (4);
+		\draw[-] (4) to (5);
+		\draw[-] (5) to (6);
+		\draw[-] (6) to (7);
+		\draw[-] (7) to (8);
+		\node (9) at (0,0.7) [draw]  {};
+		\draw[-] (1) to (9);
+		\node (10) at (0.7,0.7) [draw]  {};
+		\node (11) at (1.3,0.7) [draw]  {};
+		\draw[-] (2) to (10);
+		\draw[-] (2) to (11);
+		\node (12) at (0.2,1.4) [draw]  {};
+		\node (13) at (0.7,1.4) [draw]  {};
+		\node (14) at (1.2,1.4) [draw]  {};
+		\draw[-] (10) to (12);
+		\draw[-] (10) to (13);
+		\draw[-] (10) to (14);
+		\node (15) at (0.2,2.1) [draw]  {};
+		\node (16) at (0.9,2.1) [draw]  {};
+		\node (17) at (1.5,2.1) [draw]  {};
+		\draw[-] (12) to (15);
+		\draw[-] (14) to (16);
+		\draw[-] (14) to (17);
+		\node (18) at (-0.1,2.8) [draw]  {};
+		\node (19) at (0.5,2.8) [draw]  {};	
+		\draw[-] (15) to (18);
+		\draw[-] (15) to (19);
+		\node (20) at (0.5,3.5) [draw]  {};
+		\draw[-] (19) to (20);	
+		\node (21) at (5.6,0.7) [draw]  {};
+		\node (22) at (6,0.7) [draw]  {};
+		\node (23) at (6.4,0.7) [draw]  {};
+		\draw[-] (7) to (21);	
+		\draw[-] (7) to (22);	
+		\draw[-] (7) to (23);
+		\node (24) at (5.3,1.4) [draw]  {};
+		\node (25) at (5.9,1.4) [draw]  {};
+		\node (26) at (6.4,1.4) [draw]  {};
+		\draw[-] (21) to (24);	
+		\draw[-] (21) to (25);	
+		\draw[-] (23) to (26);
+		\node (27) at (5.3,2.1) [draw]  {};
+		\node (28) at (6,2.1) [draw]  {};
+		\node (29) at (6.4,2.1) [draw]  {};
+		\node (30) at (6.8,2.1) [draw]  {};
+		\draw[-] (24) to (27);	
+		\draw[-] (26) to (28);	
+		\draw[-] (26) to (29);
+		\draw[-] (26) to (30);	
+		\node (31) at (5,2.8) [draw]  {};
+		\node (32) at (5.6,2.8) [draw]  {};
+		\node (33) at (6.4,2.8) [draw]  {};
+		\node (34) at (6.8,2.8) [draw]  {};
+		\draw[-] (27) to (31);	
+		\draw[-] (27) to (32);	
+		\draw[-] (29) to (33);
+		\draw[-] (30) to (34);
+		\node (35) at (5,3.5) [draw]  {};
+		\node (36) at (6.2,3.5) [draw]  {};
+		\node (37) at (6.6,3.5) [draw]  {};
+		\draw[-] (31) to (35);	
+		\draw[-] (33) to (36);	
+		\draw[-] (33) to (37);
+		\node (38) at (5,4.2) [draw]  {};
+		\node (39) at (6.2,4.2) [draw]  {};
+		\draw[-] (35) to (38);	
+		\draw[-] (36) to (39);	
+		\node (40) at (4,0.7) [draw]  {};
+		\node (41) at (3.7,1.4) [draw]  {};
+		\node (42) at (4.3,1.4) [draw]  {};
+		\node (43) at (3.7,2.1) [draw]  {};	
+		\draw[-] (5) to (40);	
+		\draw[-] (40) to (41);	
+		\draw[-] (40) to (42);	
+		\draw[-] (41) to (43);	
+		\node (44) at (3,0.7) [draw]  {};
+		\node (45) at (3,1.4) [draw]  {};	
+		\draw[-] (4) to (44);	
+		\draw[-] (44) to (45);	
+		\node (46) at (7.8,0) [draw=none, fill=none]  {};
+		\draw[->] (8) to (46);
+		\node (47) at (8.2,1) [draw=none, fill=none]  {\Huge $\ldots$};
+	\end{tikzpicture}
+	\caption{The Skeleton Tree $\skeletonTree$ with root $\root=\root_1$.}
+	\label{LSfig:skeleton_tree}
+\end{figure}
+\begin{thm}[\hspace{1sp}\cite{Grimmett198081}]\label{LSthm:limit_tree1}
+Let $T=T(n)$ be a random tree and $\root=\root(n)\ur\vertexSet{T}$. Then $\distributionalLimit{\rootedGraph{T}{\root}}{\skeletonTree}$.
+\end{thm}
+In the last decades random planar graphs and, more generally, random graphs on surfaces have attracted attention \cite{KangLuczak2012,McDiarmidStegerWelsh2005,GerkeMcDiarmidStegerWeissl2005,McDiarmidReed2008,Fusy2009,DrmotaGimenezNoy2011,McDiarmid2008,KangMosshammerSpruessel2020,ChapuyFusyGimenezMoharNoy2011}. In this paper we investigate the local structure of $\planargraph(n,m)$, which is a graph chosen uniformly at random from the class $\planarclass(n,m)$ of all vertex-labelled planar graphs on vertex set $[n]$ with $m=m(n)$ edges, denoted by $\planargraph(n,m)\ur\planarclass(n,m)$. In particular, we determine the local weak limit of $\planargraph(n,m)$, in the flavour of \Cref{LSthm:local_er}. We note that there are results on similar types of convergence in related structures known, like random planar maps \cite{LeGallMiermont2012}, random outerplanar graphs \cite{PanagiotouStuflerWeller2016}, and $n$-vertex random planar graphs \cite{StuflerAppear}.
+
+\subsection{Main results}\label{LSsub:main}
+Throughout the paper, we use the standard Landau notations for asymptotic orders and all asymptotics are taken as $n\to\infty$. We investigate the local weak limit of $\planargraph(n,m)$ in the sparse regime when $m\leq n+\smallo{n\left(\log n\right)^{-2/3}}$ and distinguish four cases depending on how large the number of edges $m$ is. The first regime is when $m\leq n/2+\bigo{n^{2/3}}$, where $\planargraph(n,m)$ behaves very similarly as the \ER\ random graph $G(n,m)$ and has therefore also a \GW\ tree as its local limit.
+\begin{thm}\label{LSthm:main1}
+Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$, $\root=\root(n)\ur \vertexSet{\planargraph}$, and $m=m(n)\leq n/2+\bigo{n^{2/3}}$ such that $2m/n \to c\in[0,1]$. Then $\distributionalLimit{\rootedGraph{\planargraph}{\root}}{\gwt{c}}$.	
+\end{thm}
+
+Kang and \Luczak\ \cite{KangLuczak2012} showed that if $m\geq n/2+\smallomega{n^{2/3}}$, then with high probability (meaning with probability tending to 1 as $n$ tends to infinity, {\em \whp} for short) the largest component of $\planargraph=\planargraph(n,m)$ has significantly more vertices than the second largest component. Therefore, we determine in the following the local limit not only for $\planargraph$, but also for the largest component $\largestcomponent{\planargraph}$ of $\planargraph$ and the remaining part $\restLocal{\planargraph}:=\planargraph\setminus\largestcomponent{\planargraph}$, which we call (the union of) the small components. We write $\root_L\ur\vertexSet{\Largestcomponent}$ (and $\root_\RestLocal\ur\vertexSet{\RestLocal}$) for a vertex that is obtained by first picking the realisation $H$ of $\planargraph$ and then choosing uniformly at random a vertex from the largest component $\largestcomponent{H}$ of $H$ (and the small components $\restLocal{H}$, respectively). The next case is when $m\geq n/2+\smallomega{n^{2/3}}$, but the average degree $2m/n$ still tends to 1.
+\begin{thm}\label{LSthm:main2}
+Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$, $\Largestcomponent=\largestcomponent{P}$ be the largest component of $P$, and $\RestLocal=\restLocal{\planargraph}=\planargraph\setminus\Largestcomponent$. Assume $m=m(n)=n/2+s$ for $s=s(n)>0$ such that $s=\smallo{n}$ and $s^3n^{-2}\to\infty$. Moreover, let $\root=\root(n)\ur\vertexSet{\planargraph}$, $\root_L=\root_L(n)\ur\vertexSet{\Largestcomponent}$, and $\root_\RestLocal=\root_\RestLocal(n)\ur\vertexSet{\RestLocal}$. Then we have
+\begin{enumerate}[label=\normalfont(\roman*)]
+\item\label{LSthm:main2A} $\distributionalLimit{\rootedGraph{\Largestcomponent}{\root_L}}{\skeletonTree}$;
+\item\label{LSthm:main2B}
+$\distributionalLimit{\rootedGraph{\RestLocal}{\root_\RestLocal}}{\gwt{1}}$;
+\item\label{LSthm:main2C}
+$\distributionalLimit{\rootedGraph{\planargraph}{\root}}{\gwt{1}}$.
+\end{enumerate}
+\end{thm}
+Next, we consider the regime when the average degree $2m/n$ tends to a constant $c\in (1,2)$. Then the local limit of $\planargraph(n,m)$ is a \lq linear combination\rq\ of the \GW\ tree $\gwt{1}$ and the Skeleton tree $\skeletonTree$. More formally, given two random rooted graphs $\rootedGraph{G_1}{\root_1}, \rootedGraph{G_2}{\root_2}$ and a constant $a\in[0,1]$, we write $a\rootedGraph{G_1}{\root_1}+(1-a)\rootedGraph{G_2}{\root_2}$ for the random rooted graph $\rootedGraph{G}{\root}$ that satisfies 
+\begin{align*}
+\prob{\rootedGraph{G}{\root}=\rootedGraph{H}{\root_H}}=a~\prob{\rootedGraph{G_1}{\root_1}=\rootedGraph{H}{\root_H}}+(1-a)~\prob{\rootedGraph{G_2}{\root_2}=\rootedGraph{H}{\root_H}},
+\end{align*}
+for each fixed rooted graph $\rootedGraph{H}{\root_H}$.
+\begin{thm}\label{LSthm:main3}
+	Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$, $\Largestcomponent=\largestcomponent{P}$ be the largest component of $P$, and $\RestLocal=\restLocal{\planargraph}=\planargraph\setminus\Largestcomponent$. Assume $m=m(n)=\alpha n/2$, where $\alpha=\alpha(n)$ tends to a constant $c\in (1,2)$. Moreover, let $\root=\root(n)\ur\vertexSet{\planargraph}$, $\root_L=\root_L(n)\ur\vertexSet{\Largestcomponent}$, and $\root_\RestLocal=\root_\RestLocal(n)\ur\vertexSet{\RestLocal}$. Then we have
+	\begin{enumerate}[label=\normalfont(\roman*)]
+		\item\label{LSthm:main3A} $\distributionalLimit{\rootedGraph{\Largestcomponent}{\root_L}}{\skeletonTree}$;
+		\item\label{LSthm:main3B}
+		$\distributionalLimit{\rootedGraph{\RestLocal}{\root_\RestLocal}}{\gwt{1}}$;
+		\item\label{LSthm:main3C}
+		$\distributionalLimit{\rootedGraph{\planargraph}{\root}}{\left(c-1\right)\skeletonTree+\left(2-c\right)\gwt{1}}$.
+	\end{enumerate}
+\end{thm}
+
+Finally, we consider the case that the average degree $2m/n$ tends to 2 and $m\leq n+\smallo{n\left(\log n\right)^{-2/3}}$.
+\begin{thm}\label{LSthm:main4}
+	Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$, $\Largestcomponent=\largestcomponent{P}$ be the largest component of $P$, and $\RestLocal=\restLocal{\planargraph}=\planargraph\setminus\Largestcomponent$. Assume $m=m(n)$ is such that $m=n+\smallo{n}$ and $m\leq n+\smallo{n\left(\log n\right)^{-2/3}}$. Moreover, let $\root=\root(n)\ur\vertexSet{\planargraph}$, $\root_L=\root_L(n)\ur\vertexSet{\Largestcomponent}$, and $\root_\RestLocal=\root_\RestLocal(n)\ur\vertexSet{\RestLocal}$. Then we have
+	\begin{enumerate}[label=\normalfont(\roman*)]
+		\item $\distributionalLimit{\rootedGraph{\Largestcomponent}{\root_L}}{\skeletonTree}$;
+		\item
+		$\distributionalLimit{\rootedGraph{\RestLocal}{\root_\RestLocal}}{\gwt{1}}$;
+		\item
+		$\distributionalLimit{\rootedGraph{\planargraph}{\root}}{\skeletonTree}$.
+	\end{enumerate}
+\end{thm}
+We conclude this section with some observations on the case that $m$ is as in \Cref{LSthm:main2}, \ref{LSthm:main3}, or \ref{LSthm:main4}. The local limit of the largest component $\largestcomponent{\planargraph}$ of $\planargraph=\planargraph(n,m)$ is the Skeleton tree $\skeletonTree$ and that of the small components $\restLocal{\planargraph}$ is the \GW\ tree $\gwt{1}$. In view of \Cref{LSthm:local_er,LSthm:limit_tree1} this indicates that $\largestcomponent{\planargraph}$ locally looks like a tree and $\restLocal{\planargraph}$ like the \ER\ random graph with average degree 1. Moreover, \Cref{LSthm:main3} provides a {\em smooth} transition between the cases when the average degree $2m/n$ is tending to 1 and 2, in the sense that we obtain the statements of \Cref{LSthm:main2,LSthm:main4} if we plug in the extreme cases $c=1$ and $c=2$ in \Cref{LSthm:main3}, respectively. \Cref{LSthm:main3}\ref{LSthm:main3C} says that the local limit of $\planargraph$ is a \lq linear combination\rq\ of the local limit of the largest component $\largestcomponent{\planargraph}$ and that of the small components $\restLocal{\planargraph}$. 
+
+\subsection{Outline of the paper} 
+The rest of the paper is structured as follows. After setting the basic notations and definitions in \Cref{LSsec:prelim}, we present our proof strategy in \Cref{LSsec:strategy}. In \Cref{LSsec:local_er_non_complex} we provide statements on the local structure of the \ER\ random graph and the so-called non-complex part, which will be later the main ingredients to determine the local limit of the small components. Similarly, we consider in \Cref{LSsec:local_complex} the so-called complex part, which we will use later to deduce the local limit of the largest component. \Cref{LSsec:proofs} is devoted to the proofs of the main results. Subsequently in \Cref{LSsec:local_core_kernel}, we look deeper into the local structure of a random planar graph by considering cores and kernels. In \Cref{LSapp:local_er} we prove an auxiliary result on the local structure of the \ER\ random graph. Finally in \Cref{LSsec:discussion}, we conclude with a possible generalisation of our results.
+
+\section{Preliminaries}\label{LSsec:prelim}
+\subsection{Notations for graphs}
+Throughout the paper, we consider only undirected (simple or multi) graphs.
+\begin{definition}
+	Given a (simple or multi) graph $H$ we denote by
+	\begin{itemize}
+		\item 
+		$\vertexSet{H}$ the vertex set of $H$ and
+		\item[]
+		$\numberVertices{H}$ the order of $H$, i.e. the number of vertices in $H$;
+		\item 
+		$\edgeSet{H}$ the edge set of $H$ and
+		\item[]
+		$\numberEdges{H}$ the size of $H$, i.e. the number of edges in $H$;	
+		\item 
+		$\largestcomponent{H}$ the largest component of $H$;
+		\item
+		$\restLocal{H}:=H \setminus \largestcomponent{H}$ the graph obtained from $H$ by deleting the largest component, called (the union of) the small components;
+		\item
+		$\distance{H}{v}{w}$ the distance between the vertices $v,w\in\vertexSet{H}$ in $H$, i.e. the length of the shortest path from $v$ to $w$. 
+	\end{itemize}
+\end{definition}
+\begin{definition}\label{LSdef:graph_class}
+	Given a class $\cl$ of graphs, we write
+	$\cl(n)$ for the subclass of $\cl$ containing the graphs on vertex set $[n]$ 
+	and $\cl(n,m)$ for the subclass of $\cl$ containing the graphs on vertex set $[n]$ with $m$ edges, respectively. We denote by $A(n)\ur \cl(n)$ a graph chosen uniformly at random from $\cl(n)$
+	and by $A(n,m)\ur \cl(n,m)$ a graph chosen uniformly at random from $\cl(n,m)$, respectively. We tacitly assume that $|\cl(n)|$ and $|\cl(n,m)|$ are finite for all considered classes $\cl$ and all $n,m\in \N$.  
+\end{definition}
+
+\subsection{Complex part, core, and kernel}\label{LSsub:decomposition}
+Given a graph $H$, we call a component {\em complex} if it has at least two cycles. Furthermore, we say that $H$ is {\em complex} if all its components are. We denote by $\complexpart{H}$ the {\em complex part} of $H$, which is the union of all complex components. The remaining part $\restcomplex{H}:=H\setminus\complexpart{H}$ is called the {\em non-complex part} of $H$. We denote by $n_U(H):=\numberVertices{\restcomplex{H}}$ and $m_U(H):=\numberEdges{\restcomplex{H}}$ the number of vertices and edges in $\restcomplex{H}$, respectively. The {\em core} $\core{H}$ is the maximal subgraph of $\complexpart{H}$ with minimum degree at least two. Equivalently, the core $\core{H}$ is obtained by recursively deleting vertices of degree one in $\complexpart{H}$. Conversely, the complex part $\complexpart{H}$ can be constructed by replacing each vertex in $\core{H}$ by a rooted tree. Finally, we obtain the {\em kernel} $\kernel{H}$ of $H$ by replacing all maximal paths in $\core{H}$ having only internal vertices of degree two by an edge between the endpoints of the path. We note that the kernel $\kernel{H}$ can contain multiple edges and loops. Reversing this construction, the core $\core{H}$ arises from the kernel $\kernel{H}$ by subdividing edges.
+
+Later we will see that the local structures of the largest component $\largestcomponent{\planargraph}$ of $\planargraph=\planargraph(n,m)$ and the small components $\restLocal{\planargraph}$ are closely related to the local limits of the complex part $\complexpart{\planargraph}$ and the non-complex part $\restcomplex{\planargraph}$, respectively. In order to analyse $\complexpart{\planargraph}$ and $\restcomplex{\planargraph}$, we will use the following random graphs.
+
+\begin{definition}\label{LSdef:random_complex}
+	Let $C$ be a core, i.e. a graph with minimum degree at least two, and $q\in\N$. We denote by $Q(C,q)$ a graph chosen uniformly at random from the class of all complex graphs having core $C$ and vertex set $[q]$.
+\end{definition}
+
+\begin{definition}\label{LSdef:random_non_complex}
+	We let $\nocomplexClass$ be the class of all graphs without complex components. For $n,m\in\N$ we denote by $\nocomplexClass(n,m)$ the subclass of $\nocomplexClass$ containing all graphs on vertex set $[n]$ with $m$ edges and write $U(n,m)\ur \nocomplexClass(n,m)$ for a graph chosen uniformly at random from $\nocomplexClass(n,m)$.
+\end{definition}
+
+\subsection{Internal structure of a random planar graph}
+In the proofs of \Cref{LSthm:main2,LSthm:main3,LSthm:main4} we will use results on the internal structure of $\planargraph=\planargraph(n,m)$ from \cite{KangMosshammerSpruessel2020}, e.g. the order of the largest component $\largestcomponent{\planargraph}$, the complex part $\complexpart{\planargraph}$, and the core $\core{\planargraph}$.
+\begin{thm}[\hspace{1sp}\cite{KangMosshammerSpruessel2020}]\label{LSthm:internal_structure}
+	Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$ be the random planar graph, $Q=\complexpart{\planargraph}$ the complex part of $\planargraph$, $C=\core{\planargraph}$ the core, $K=\kernel{\planargraph}$ the kernel, $\largestcomponent{\planargraph}$ the largest component, and $\restLocal{\planargraph}$ the small components. We denote by $\largestcomponent{Q}$ and $\restLocal{Q}$ the largest component and the small components of $Q$, respectively. Moreover, let $\numberVerticesOutside=\numberVerticesOutside(\planargraph)$ and $\numberEdgesOutside=\numberEdgesOutside(\planargraph)$ be the number of vertices and edges in the non-complex part $\restcomplex{\planargraph}$ of $\planargraph$, respectively. We assume that either $m=n/2+s$ for $s=s(n)>0$ such that $s=\smallo{n}$ and $s^3n^{-2}\to \infty$, $m=\alpha n/2$ for $\alpha=\alpha(n)$ tending to a constant in $(1,2)$, or $m=n+\smallo{n}$ and $m\leq n+\smallo{n\left(\log n\right)^{-2/3}}$. Then \whp
+	\begin{enumerate}[label=\normalfont(\roman*)]
+		\item\label{LSthm:internal_structure1}
+		$\numberEdges{K}=\smallo{\numberVertices{C}}$;
+		\item\label{LSthm:internal_structure9}
+		$\numberEdges{K}=\left(3/2+\smallo{1}\right)\numberVertices{K}$;
+		\item\label{LSthm:internal_structure2}
+		$\numberVertices{C}=\smallo{\numberVertices{Q}}$;
+		\item\label{LSthm:internal_structure3}
+		$\numberVertices{\largestcomponent{\planargraph}}=\left(2m/n-1+\smallo{1}\right)n$;
+		\item\label{LSthm:internal_structure4}
+		$\numberVerticesOutside=\smallomega{1}$;
+		\item\label{LSthm:internal_structure5}
+		$m_U= n_U/2+\bigo{hn_U^{2/3}}$ for each function $h=h(n)=\smallomega{1}$;
+		\item\label{LSthm:internal_structure6}
+		$\largestcomponent{\planargraph}=\largestcomponent{Q}$;
+		\item\label{LSthm:internal_structure7}
+		$\numberVertices{\restLocal{Q}}=\smallo{\numberVertices{Q}}$;
+		\item\label{LSthm:internal_structure8}
+		$\numberVertices{\restLocal{Q}}=\smallo{\numberVerticesOutside}$.
+	\end{enumerate}
+\end{thm}
+\subsection{Rooted graphs}
+We can relate each random graph $G$ to a random rooted graph $\unbiased{G}$ in a canonical way as follows.
+\begin{definition}\label{LSdef:unbiased}
+Given a random graph $G$, the random rooted graph $\unbiased{G}$ is the random rooted graph $\rootedGraph{G}{\root}$ where we first sample $G$ and given the realisation $H$ of $G$ the root $\root\ur\vertexSet{H}$ is chosen uniformly at random from $\vertexSet{H}$.
+\end{definition}
+In \cite{BenjaminiSchramm2001} the random rooted graph $\unbiased{G}$ is also called {\em unbiased}, as the root of $\unbiased{G}$ is chosen {\em uniformly} at random. In some cases we want to pick the root only from a subset of vertices rather than from the whole vertex set as in \Cref{LSdef:unbiased}, e.g. from the set of all vertices that are in the largest component. 
+
+\begin{definition}\label{LSdef:R_rooted}
+Let $\cl$ be a class of graphs and for each graph $H\in\cl$ let $\rootSet=\rootSet(H)\subseteq\vertexSet{H}$ be a non-empty subset. The {\em random $\rootSet$-rooted graph} $A_{\rootSet}=A_{\rootSet}(n)$ is the random rooted graph $\rootedGraph{A}{\root_{\rootSet}}$ where
+\begin{itemize}
+\item
+$A=A(n)\ur\cl(n)$ is chosen uniformly at random from $\cl(n)$ and
+\item
+given the realisation $H$ of $A$, $\root_{\rootSet}\ur\rootSet(H)$ is chosen uniformly at random from $\rootSet(H)$.
+\end{itemize}
+\end{definition}
+In most of our applications of \Cref{LSdef:R_rooted} the subset $\rootSet=\rootSet(H)$ will be given as the vertex set $V(H')$ of a subgraph $H'$ of $H$, i.e. $\rootSet=\vertexSet{H'}$. With a slight abuse of notation we will write $A_{H'}$ instead of $A_{V(H')}$, e.g. $A_\Largestcomponent$ denotes the random rooted graph where the root is chosen uniformly at random from $V(\Largestcomponent)$, i.e. the set of all vertices that lie in the largest component $\Largestcomponent$. If we want to specify the root of the random rooted graph $A_{\rootSet}$ explicitly, we will use $\rootedGraph{A}{\root_{\rootSet}}$ instead of $A_{\rootSet}$. The next lemma will allow to analyse the local structure of a random rooted graph by means of random $\rootSet$-rooted graphs. In particular, we will use it to deduce the local limit of the random planar graph $\planargraph=\planargraph(n,m)$ from the local limits of the largest component $\largestcomponent{\planargraph}$ and the small components $\restLocal{\planargraph}$.
+
+\begin{lem}\label{LSlem:linear_combination}
+Let $\cl$ be a class of graphs and $A=A(n)\ur\cl(n)$. Furthermore, for each $H\in\cl$ let $\rootSet=\rootSet(H)\subseteq\vertexSet{H}$ and $\overline{\rootSet}=\overline{\rootSet}(H):=\vertexSet{H}\setminus\rootSet$ be non-empty subsets. We suppose that there exist a constant $a \in [0,1]$ and random rooted graphs $G_1$ and $G_2$ such that \begin{enumerate}[label=\normalfont(\roman*)]
+\item\label{LSass:1}
+\whp\ $\left|\rootSet\left(A\right)\right|=\left(a+\smallo{1}\right)n$;
+\item\label{LSass:2}
+$\distributionalLimit{A_{\rootSet}}{G_1}$ and $\distributionalLimit{A_{\overline{\rootSet}}}{G_2}$.
+\end{enumerate}
+Then we have
+\begin{align*}
+\distributionalLimit{\unbiased{A}}{a~G_1+\left(1-a\right)G_2}.
+\end{align*} 
+\end{lem}
+\begin{proof}
+Assume $\unbiased{A}=\rootedGraph{A}{\root}$, where $r=r(n)\ur[n]$. We denote by $\tilde{\cl}(n)\subseteq\cl(n)$ the subclass containing those graphs $H\in\cl(n)$ satisfying $\left|\rootSet\left(H\right)\right|=\left(a+\smallo{1}\right)n$. By assumption \ref{LSass:1} we have \whp\ $A\in\tilde{\cl}(n)$. Using that we obtain for each rooted graph $\detGraph$ and $\radius\in \N$
+
+\begin{align}\label{LSeq:2}
+&\prob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}=\sum_{H\in\tilde{\cl}(n)}\prob{A=H,\root\in \rootSet(H)}\condprob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}{A=H,\root\in \rootSet(H)}\nonumber
+\\&+\sum_{H\in\tilde{\cl}(n)}\prob{A=H,\root\in \overline{\rootSet}(H)}\condprob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}{A=H,\root\in \overline{\rootSet}(H)}+\smallo{1}.
+\end{align}
+By definition of $\tilde{\cl}$ we have uniformly over all $H\in\tilde{\cl}(n)$
+\begin{align}\label{LSeq:5}
+\prob{A=H,\root\in \rootSet(H)}&=\prob{A=H}\condprob{\root\in\rootSet(H)}{A=H}
+\nonumber
+\\
+&=\left|\cl(n)\right|^{-1}\frac{\left|\rootSet(H)\right|}{n}
+\nonumber
+\\
+&= \left(a+\smallo{1}\right)\left|\cl(n)\right|^{-1}.
+\end{align}
+Moreover, we have
+\begin{align}\label{LSeq:6}
+\condprob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}{A=H,\root\in \rootSet(H)}&=\condprob{\ballP{\ell}{A_{\rootSet}}\isomorphic\detGraph}{A=H}
+\nonumber
+\\[0.1cm]
+&=\left|\cl(n)\right|\prob{\ballP{\ell}{A_{\rootSet}}\isomorphic\detGraph, A=H}.
+\end{align}
+Combining (\ref{LSeq:5}) and (\ref{LSeq:6}) yields
+\begin{align}\label{LSeq:7}
+\sum_{H\in\tilde{\cl}(n)}&\prob{A=H,\root\in \rootSet(H)}\condprob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}{A=H,\root\in \rootSet(H)}
+\nonumber
+\\
+&=\left(a+\smallo{1}\right)\sum_{H\in\tilde{\cl}(n)}\prob{\ballP{\ell}{A_{\rootSet}}\isomorphic\detGraph, A=H}\nonumber
+\\
+&=\left(a+\smallo{1}\right)\prob{\ballP{\ell}{A_{\rootSet}}\isomorphic\detGraph, A\in\tilde{\cl}}\nonumber
+\\
+&
+=\left(a+\smallo{1}\right)\prob{\ballP{\ell}{A_{\rootSet}}\isomorphic\detGraph},
+\end{align}
+where we used in the last equality that \whp\ $A\in\tilde{\cl}$. Analogously, we obtain
+\begin{align}\label{LSeq:8}
+	\sum_{H\in\tilde{\cl}(n)}\prob{A=H,\root\in \overline{\rootSet}(H)}\condprob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}{A=H,\root\in \overline{\rootSet}(H)}
+	\\
+	=\left(1-a+\smallo{1}\right)\prob{\ballP{\ell}{A_{\overline{\rootSet}}}\isomorphic\detGraph}.
+\end{align}
+Next we plug (\ref{LSeq:7}) and (\ref{LSeq:8}) in equation (\ref{LSeq:2}) to get
+\begin{align*}
+\prob{\ballP{\ell}{\unbiased{A}}\isomorphic\detGraph}&=\left(a+\smallo{1}\right)\prob{\ballP{\ell}{A_{\rootSet}}\isomorphic\detGraph}+\left(1-a+\smallo{1}\right)\prob{\ballP{\ell}{A_{\overline{\rootSet}}}\isomorphic\detGraph}\hspace{-0.06cm}+\hspace{-0.06cm}\smallo{1}
+\\
+&=a~\prob{\ballP{\ell}{G_1}\isomorphic\detGraph}+\left(1-a\right)\prob{\ballP{\ell}{G_2}\isomorphic\detGraph}+\smallo{1},
+\end{align*}
+as $\distributionalLimit{A_{\rootSet}}{G_1}$ and $\distributionalLimit{A_{\overline{\rootSet}}}{G_2}$ by assumption \ref{LSass:2}. As this is true for all rooted graphs $\detGraph$ and $\radius\in\N$, we obtain $\distributionalLimit{\unbiased{A}}{a~G_1+\left(1-a\right)G_2}$, as desired.
+\end{proof}
+
+\subsection{Conditional random rooted graphs}\label{LSsub:conditional_random_graphs}
+Instead of considering $\planargraph=\planargraph(n,m)$ directly, we will later analyse the local structure of $\planargraph$ conditioned that certain properties hold, e.g. $\planargraph$ has a given graph $C$ as its core. We expect that if \lq most\rq\ of these \lq conditional\rq\ random rooted graphs have the same local limit $G$, then $G$ should also be the local limit of $\planargraph$. In the following we make that more precise by considering conditional random rooted graphs, which generalise the concept of conditional random graphs introduced in \cite[Section 3.4]{KangMissethan2021}.
+\begin{definition}
+Let $\cl$ be a class of graphs, $\rootSet=\rootSet(H)\subseteq \vertexSet{H}$ a non-empty subset for each graph $H\in\cl$, $\imageSet$ a set, and $\func:\cl\to \imageSet$ a function. We call a sequence $\seqLocal=\left(\term_n\right)_{n\in\N}$ {\em feasible} for $\left(\cl, \func\right)$ if for each $n\in\N$ there exists a graph $H\in\cl(n)$ such that $\func(H)=\term_n$. Furthermore, for each $n\in\N$ we denote by $\left(\condGraph{A_{\rootSet}}{\seqLocal}\right)(n)$ the random rooted graph $\rootedGraph{G}{\root}$ which is constructed in two steps as follows:
+\begin{itemize}
+	\item
+	$G$ is chosen uniformly at random from the set $\setbuilder{H\in\cl(n)}{\func(H)=\term_n}$;
+	\item
+	Given the realisation $H$ of $G$, the root $\root$ is chosen uniformly at random from $\rootSet(H)$.
+\end{itemize} 
+We will often omit the dependence on $n$ and write just $\condGraph{A_{\rootSet}}{\seqLocal}$.
+\end{definition}
+
+\begin{lem}\label{LSlem:conditional}
+Let $\cl$ be a class of graphs, $\rootSet=\rootSet(H)\subseteq\vertexSet{H}$ a non-empty subset for each graph $H\in\cl$, $\imageSet$ a set, and $\func:\cl\to \imageSet$. Suppose that $G$ is a random rooted graph such that $\distributionalLimit{\condGraph{A_{\rootSet}}{\seqLocal}}{G}$ for each sequence $\seqLocal$ that is feasible for $\left(\cl, \func\right)$. Then we have $\distributionalLimit{A_{\rootSet}}{G}$.
+\end{lem}
+\begin{proof}
+Assume $A_{\rootSet}=\rootedGraph{A}{\root_{\rootSet}}$, where $A=A(n)\ur\cl(n)$. Furthermore, let $\detGraph$ be a rooted graph and $\radius\in\N$. We define $\seqLocal^\ast=\left(\term_n^\ast\right)_{n\in\N}$ such that for each $n\in \N$ the probability $\condprob{\ballP{\radius}{A_{\rootSet}(n)}\isomorphic \detGraph}{\func(A)=\term}$ is maximised for $\term=\term_n^\ast$ (among all $\term\in \imageSet$ for which there is a graph $H\in\cl(n)$ with $\func(H)=\term$). Then we have for $n\in\N$
+\begin{align}\label{LSeq:9}
+\prob{\ballP{\radius}{A_{\rootSet}}\isomorphic \detGraph}&=\sum_{\term\in \imageSet}\prob{\func(A)=\term}\condprob{\ballP{\radius}{A_{\rootSet}}\isomorphic \detGraph}{\func(A)=\term}\nonumber
+\\
+&
+\leq\sum_{\term\in \imageSet}\prob{\func(A)=\term}\condprob{\ballP{\radius}{A_{\rootSet}}\isomorphic \detGraph}{\func(A)=\term_n^\ast}\nonumber
+\\
+&
+=\condprob{\ballP{\radius}{A_{\rootSet}}\isomorphic \detGraph}{\func(A)=\term_n^\ast}\nonumber
+\\
+&
+=\prob{\ballP{\radius}{\condGraph{A_{\rootSet}}{\seqLocal^\ast}}\isomorphic \detGraph}.
+\end{align}
+We note that the sequence $\seqLocal^\ast$ is feasible and therefore we have $\distributionalLimit{\condGraph{A_{\rootSet}}{\seqLocal^\ast}}{G}$. Using that in (\ref{LSeq:9}) yields $\prob{\ballP{\radius}{A_{\rootSet}}\isomorphic \detGraph}\leq\prob{\ballP{\radius}{G}\isomorphic \detGraph}+\smallo{1}$. Analogously, we obtain $\prob{\ballP{\radius}{A_{\rootSet}}\isomorphic \detGraph}\geq \prob{\ballP{\radius}{G}\isomorphic \detGraph}+\smallo{1}$ and therefore $\distributionalLimit{A_{\rootSet}}{G}$, as desired.
+\end{proof}
+
+\subsection{Contiguity of random rooted graphs}
+To express that the local structures of two random rooted graphs are asymptotically similar, we use the concept of contiguity.  
+\begin{definition}
+For each $n\in\N$, let $G_1=G_1(n)$ and $G_2=G_2(n)$ be random rooted graphs. We say that $G_1$ and $G_2$ are {\em contiguous}, denoted by $\contiguousLocal{G_1}{G_2}$, if for all rooted graphs $\detGraph$ and $\radius\in\N$
+\begin{align*}
+\Big|\prob{\ballP{\radius}{G_1}\isomorphic\detGraph}-\prob{\ballP{\radius}{G_2}\isomorphic\detGraph}\Big|=\smallo{1}.
+\end{align*}
+\end{definition}
+
+As expected, the local limits of two contiguous random rooted graphs coincide provided they exist.
+\begin{lem}\label{LSlem:contiguous1}
+For each $n\in\N$, let $G_1=G_1(n)$ and $G_2=G_2(n)$ be random rooted graphs such that $\contiguousLocal{G_1}{G_2}$. If there exists a random rooted graph $G$ such that $\distributionalLimit{G_1}{G}$, then also $\distributionalLimit{G_2}{G}$.
+\end{lem}
+\begin{proof}
+Let $\detGraph$ be a rooted graph and $\radius\in\N$. We have
+\begin{align*}
+\prob{\ballP{\radius}{G_2}\isomorphic\detGraph}=\prob{\ballP{\radius}{G_1}\isomorphic\detGraph}+\smallo{1}=\prob{\ballP{\radius}{G}\isomorphic\detGraph}+\smallo{1},
+\end{align*}
+which shows the statement.
+\end{proof}
+
+Finally, we again consider the random $\rootSet$-rooted graph $A_{\rootSet}$ introduced in \Cref{LSdef:R_rooted}. Roughly speaking, the next lemma states that the local structure of $A_{\rootSet}$ is \lq robust\rq\ against minor changes of the class $\cl$ or the root set $\rootSet$.
+\begin{lem}\label{LSlem:contiguous2}
+Let $\cl$ be a class of graphs, $A=A(n)\ur\cl(n)$, and for each graph $H\in\cl$ let $\rootSet=\rootSet(H)\subseteq\vertexSet{H}$ be a non-empty subset.
+\begin{enumerate}[label=\normalfont(\roman*)]
+\item\label{LSlem:contiguous2A}
+Let $\tilde{\cl}\subseteq\cl$ be a subclass and $\tilde{A}=\tilde{A}(n)\ur\tilde{\cl}(n)$. If \whp\ $A\in\tilde{\cl}$, then $\contiguousLocal{A_\rootSet}{\tilde{A}_\rootSet}$.
+\item\label{LSlem:contiguous2B}
+For each $H\in\cl$ let $\rootSet'=\rootSet'(H)\subseteq\vertexSet{H}$ be a non-empty subset. If \whp\ $\left|\symmetricDifference{\rootSet(A)}{\rootSet'(A)}\right|=\smallo{\left|\rootSet(A)\right|}$, then $\contiguousLocal{A_{\rootSet}}{A_{\rootSet'}}$.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+Let $\detGraph$ be a rooted graph and $\radius\in\N$. Conditioned on the event $A\in\tilde{\cl}$ the random rooted graph $A_\rootSet$ is distributed like $\tilde{A}_{\rootSet}$. Hence, we obtain
+\begin{align*}
+\prob{\ballP{\radius}{A_{\rootSet}}\isomorphic\detGraph}&=\prob{A\in \tilde{\cl}}\condprob{\ballP{\radius}{A_{\rootSet}}\isomorphic\detGraph}{A\in \tilde{\cl}}+\smallo{1}
+\\
+&=\left(1-\smallo{1}\right)\prob{\ballP{\radius}{\tilde{A}_{\rootSet}}\isomorphic\detGraph}+\smallo{1}
+\\
+&=\prob{\ballP{\radius}{\tilde{A}_{\rootSet}}\isomorphic\detGraph}+\smallo{1},
+\end{align*}
+which shows \ref{LSlem:contiguous2A}. For \ref{LSlem:contiguous2B} let $A_\rootSet=\rootedGraph{A}{\root_{\rootSet}}$ and $A_{\rootSet'}=\rootedGraph{A}{\root_{\rootSet'}}$, i.e. $\root_{\rootSet}\ur\rootSet(A)$ and $\root_{\rootSet'}\ur\rootSet'(A)$. Since \whp\ $\left|\symmetricDifference{\rootSet(A)}{\rootSet'(A)}\right|=\smallo{\left|\rootSet(A)\right|}$, we have \whp\ $\left|\rootSet(A)\cap\rootSet'(A)\right|=\left(1+\smallo{1}\right)\left|\rootSet(A)\right|=\left(1+\smallo{1}\right)\left|\rootSet'(A)\right|$. Hence, \whp\ $\root_{\rootSet}, \root_{\rootSet'}\in \rootSet(A)\cap\rootSet'(A)$. Using that we obtain
+\begin{align*}
+\prob{\ball{\radius}{A}{\root_{\rootSet}}\isomorphic\detGraph}&=\condprob{\ball{\radius}{A}{\root_{\rootSet}}\isomorphic\detGraph}{\root_{\rootSet}\in \rootSet(A)\cap\rootSet'(A)}+\smallo{1}
+\\
+&=\condprob{\ball{\radius}{A}{\root_{\rootSet'}}\isomorphic\detGraph}{\root_{\rootSet'}\in \rootSet(A)\cap\rootSet'(A)}+\smallo{1}
+\\
+&=\prob{\ball{\radius}{A}{\root_{\rootSet'}}\isomorphic\detGraph}+\smallo{1},
+\end{align*}
+which proves \ref{LSlem:contiguous2B}.
+\end{proof}
+
+
+\section{Proof strategy for main results}\label{LSsec:strategy}
+\subsection{Local structure of the \ER\ random graph}\label{LSsub:strategy_er}
+In order to show \Cref{LSthm:main1} we will use a result of Britikov \cite{Britikov1989} which implies that the random planar graph $\planargraph(n,m)$ \lq behaves\rq\ similarly like the \ER\ random graph $G(n,m)$ as long as $m\leq n/2+\bigo{n^{2/3}}$(see \Cref{LSthm:non_complex}). Then we will obtain \Cref{LSthm:main1} by analysing the local structure of $G(n,m)$ (see \Cref{LSlem:local_er}).
+
+\subsection{Global and local structure of the random planar graph}
+If $m$ is as in \Cref{LSthm:main2,LSthm:main3,LSthm:main4} we cannot transfer asymptotic results from $G(n,m)$ to $\planargraph=\planargraph(n,m)$ any more. Roughly speaking, we will show the following instead. The largest component $\Largestcomponent=\largestcomponent{\planargraph}$ of $\planargraph$ consists of a family of trees which is connected via a \lq small\rq\ graph of minimum degree at least two. Thus, a randomly chosen root $\root_L$ from $\Largestcomponent$ will typically lie \lq far away\rq\ from all vertices which are not in the same tree as $\root_L$. This will imply that the local limit of $\Largestcomponent$ coincides with that of a random tree, which is known to be the Skeleton Tree $\skeletonTree$ (see \Cref{LSthm:limit_tree1}). In addition, we will see that the graph $\RestLocal=P\setminus\Largestcomponent$ outside the largest component $\Largestcomponent$ \lq behaves\rq\ asymptotically like the \ER\ random graph $G(n_U, n_U/2)$ for a suitable $n_U=n_U(n)\in\N$. Thus, the local limit of $\RestLocal$ will be $\gwt{1}$, as it is well known that this is the case for $G(n_U, n_U/2)$. Finally for the local structure of $\planargraph$, we use the known fact that \whp\ $\numberVertices{\Largestcomponent}=\left(c-1+\smallo{1}\right)n$, where $c:=\lim_{n\to\infty} 2m/n$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure3}). Thus, the probability that the root $\root$ is in the largest component tends to $(c-1)$ and the local limit of $P=\Largestcomponent \cup\RestLocal$ will be a \lq linear combination\rq\ of the local limit of $\Largestcomponent$, which is $\skeletonTree$, and that of $\RestLocal$, which is $\gwt{1}$, i.e. $\left(c-1\right)\skeletonTree+\left(2-c\right)\gwt{1}$. We refer to \Cref{LSfig:local_structure_planar} for an illustration of the \lq typical\rq\ structure of $\planargraph(n,m)$.
+
+\begin{figure}[t]
+\centering
+	\begin{tikzpicture}[scale=0.71, line width=0.4mm, every node/.style={circle,fill=gray, inner sep=0, minimum size=0.22cm}]
+		\node (A) at (0,0) [draw,rectangle]  {};
+		\node (B) at (0.5,-0.95) [draw,rectangle]  {};
+		\node (C) at (1.5,-1.4) [draw,rectangle]  {};
+		\node (D) at (2.5,-0.95) [draw,rectangle]  {};
+		\node (E) at (3,0) [draw,rectangle]  {};
+		\node (F) at (2.5,0.95) [draw,rectangle]  {};
+		\node (G) at (1.5,1.4) [draw,rectangle]  {};
+		\node (H) at (0.5,0.95) [draw,rectangle]  {};
+		\draw[-] (A) to (B);
+		\draw[-] (B) to (C);
+		\draw[-] (C) to (D);
+		\draw[-] (D) to (E);
+		\draw[-] (E) to (F);
+		\draw[-] (F) to (G);
+		\draw[-] (G) to (H);
+		\draw[-] (H) to (A);
+		\draw[-] (C) to (F);
+		\draw[-] (C) to (H);
+		
+		\node (I) at (4.2,0) [draw,rectangle]  {};
+		\node (J) at (5,1) [draw,rectangle]  {};
+		\node (K) at (6.2,0.7) [draw,rectangle]  {};
+		\node (L) at (6.2,-0.7) [draw,rectangle]  {};
+		\node (M) at (5,-1) [draw,rectangle]  {};
+		\draw[-] (I) to (J);
+		\draw[-] (J) to (K);
+		\draw[-] (K) to (L);
+		\draw[-] (L) to (M);
+		\draw[-] (M) to (I);
+		\draw[-] (E) to (I);
+		
+		\node (N) at (5.8,-1.7) [draw]  {};
+		\node (O) at (5.95,-1.15) [draw]  {};
+		\node (P) at (6.6,-1.3) [draw]  {};
+		\node (Q) at (7.4,-1.1) [draw]  {};
+		\node (R) at (8.1,-1.5) [draw]  {};
+		\node (S) at (8.1,-0.7) [draw]  {};
+		\node (T) at (8.8,-0.4) [draw]  {};
+		\node (U) at (8.8,-1.0) [draw]  {};
+		\node (V) at (9.5,-0.7) [draw]  {};
+		\node (W) at (9.5,-0.1) [draw]  {};
+		\node (X) at (9.5,-1.3) [draw]  {};
+		\node (Y) at (10.2,-0.7) [draw]  {};
+		\node (Z) at (10.2,-1.3) [draw]  {};
+		\draw[-] (M) to (N);
+		\draw[-] (M) to (O);
+		\draw[-] (N) to (P);
+		\draw[-] (P) to (Q);
+		\draw[-] (Q) to (R);
+		\draw[-] (Q) to (S);
+		\draw[-] (S) to (T);
+		\draw[-] (S) to (U);
+		\draw[-] (U) to (V);
+		\draw[-] (U) to (X);
+		\draw[-] (T) to (W);
+		\draw[-] (V) to (Y);
+		\draw[-] (X) to (Z);
+		
+		
+		\node (1) at (3.3,-0.6) [draw]  {};
+		\node (2) at (3.3,-1.3) [draw]  {};
+		\node (3) at (4,-0.8) [draw]  {};
+		\node (4) at (4,-1.3) [draw]  {};
+		\node (5) at (4,-1.8) [draw]  {};
+		\node (6) at (4.7,-1.8) [draw]  {};
+		\draw[-] (D) to (1);
+		\draw[-] (D) to (2);
+		\draw[-] (2) to (3);
+		\draw[-] (2) to (4);
+		\draw[-] (2) to (5);
+		\draw[-] (5) to (6);
+		
+		\node (7) at (7,1.1) [draw]  {};
+		\node (8) at (7,0.35) [draw]  {};
+		\node (9) at (7.7,1.1) [draw]  {};
+		\draw[-] (K) to (7);
+		\draw[-] (K) to (8);
+		\draw[-] (7) to (9);
+		
+		\node (10) at (0.6,-1.5) [draw]  {};
+		\node (11) at (-0.2,-1.2) [draw]  {};
+		\node (12) at (-0.9,-0.8) [draw]  {};
+		\node (13) at (-0.9,-1.5) [draw]  {};
+		\node (14) at (-1.6,-1.7) [draw]  {};
+		\node (15) at (-1.6,-1.2) [draw]  {};
+		\node (16) at (-1.6,-0.4) [draw]  {};
+		\node (17) at (-1.6,-0.8) [draw]  {};
+		\node (18) at (-2.1,-0.2) [draw]  {};
+		\node (19) at (-2.1,-0.8) [draw]  {};
+		
+		\draw[-] (C) to (10);
+		\draw[-] (10) to (11);
+		\draw[-] (11) to (12);
+		\draw[-] (11) to (13);
+		\draw[-] (13) to (14);
+		\draw[-] (12) to (15);
+		\draw[-] (12) to (16);
+		\draw[-] (12) to (17);
+		\draw[-] (16) to (18);
+		\draw[-] (17) to (19);
+		
+		\node (20) at (4.4,1.2) [draw]  {};
+		\node (21) at (5.6,1.2) [draw]  {};
+		\draw[-] (J) to (20);
+		\draw[-] (J) to (21);
+		
+		\node (22) at (-0.7,0.3) [draw]  {};
+		\node (23) at (-1.3,0.5) [draw]  {};
+		\draw[-] (A) to (22);
+		\draw[-] (22) to (23);
+		
+		\node (24) at (3.2,1.2) [draw]  {};
+		\draw[-] (F) to (24);
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\node (25) at (12.5,1.4) [draw]  {};
+		\node (26) at (12.5,0.8) [draw]  {};
+		\node (27) at (12.5,0.2) [draw]  {};
+		\node (28) at (12.8,-0.4) [draw]  {};
+		\node (29) at (12.1,-0.4) [draw]  {};
+		\node (30) at (12.1,-1) [draw]  {};
+		\node (31) at (11.8,-1.6) [draw]  {};
+		\node (32) at (12.4,-1.6) [draw]  {};
+		
+		\draw[-] (25) to (26);
+		\draw[-] (26) to (27);
+		\draw[-] (27) to (28);
+		\draw[-] (27) to (29);
+		\draw[-] (29) to (30);
+		\draw[-] (30) to (31);
+		\draw[-] (30) to (32);
+		
+		\node (33) at (14,1.4) [draw]  {};
+		\node (34) at (13.6,0.8) [draw]  {};
+		\node (35) at (14.4,0.8) [draw]  {};
+		\node (36) at (14.1,0.2) [draw]  {};
+		\node (37) at (14.7,0.2) [draw]  {};
+		\node (38) at (14.1,-0.4) [draw]  {};
+		\draw[-] (33) to (34);
+		\draw[-] (33) to (35);
+		\draw[-] (35) to (36);
+		\draw[-] (35) to (37);
+		\draw[-] (36) to (38);
+		
+		\node (39) at (13.5,-1.2) [draw]  {};
+		\node (40) at (14.1,-1.2) [draw]  {};
+		\node (41) at (14.7,-0.8) [draw]  {};
+		\node (42) at (14.7,-1.6) [draw]  {};
+		\draw[-] (39) to (40);
+		\draw[-] (40) to (41);
+		\draw[-] (40) to (42);
+		
+		\node (43) at (15.4,1.3) [draw]  {};
+		\node (44) at (16.1,1.3) [draw]  {};
+		\draw[-] (43) to (44);
+		
+		\node (45) at (15.4,0.6) [draw]  {};
+		\node (46) at (16.1,0.6) [draw]  {};
+		\draw[-] (45) to (46);
+		
+		\node (47) at (15.4,-0.1) [draw]  {};
+		\node (48) at (16.1,-0.1) [draw]  {};
+		\draw[-] (47) to (48);
+		
+		\node (49) at (15.4,-0.8) [draw]  {};
+		\node (50) at (16.1,-0.8) [draw]  {};
+		\draw[-] (49) to (50);
+		
+		\node (51) at (15.4,-1.5) [draw]  {};
+		\node (52) at (16.1,-1.5) [draw]  {};
+		\draw[-] (51) to (52);
+		
+		\node (53) at (17.1,1.4) [draw]  {};
+		\node (54) at (17.9,1.4) [draw]  {};
+		\node (55) at (17.1,0.8) [draw]  {};
+		\node (56) at (17.9,0.8) [draw]  {};
+		\node (57) at (17.1,0.2) [draw]  {};
+		\node (58) at (17.9,0.2) [draw]  {};
+		\node (59) at (17.1,-0.4) [draw]  {};
+		\node (60) at (17.9,-0.4) [draw]  {};
+		\node (61) at (17.1,-1) [draw]  {};
+		\node (62) at (17.9,-1) [draw]  {};
+		\node (63) at (17.1,-1.6) [draw]  {};
+		\node (64) at (17.9,-1.6) [draw]  {};
+	\end{tikzpicture}
+	\caption{\lq Typical\rq\ structure of the random planar graph $P(n,m)$ when $m$ is as in \Cref{LSthm:main2,LSthm:main3,LSthm:main4}: The largest component consists of trees which are connected via a \lq small\rq\ graph of minimum degree at least two (with vertices marked by squares). The remaining part behaves similarly like the \ER\ random graph $G(n_U,n_U/2)$ for some $n_U=n_U(n)\in\N$.}
+	\label{LSfig:local_structure_planar}
+\end{figure}
+
+In order to make that more precise, we use the graph decomposition introduced in \Cref{LSsub:decomposition}. We recall that the complex part $Q=\complexpart{\planargraph}$ is the union of all components of $P$ that contain at least two cycles and the remaining part $\Restcomplex=\restcomplex{\planargraph}$ is called the non-complex part. Instead of dividing $\planargraph$ into $\Largestcomponent$ and $\RestLocal$, we actually consider $Q$ and $\Restcomplex$. Then we will use that \whp\ the largest component $\largestcomponent{Q}$ of $Q$ coincides with $\Largestcomponent$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure6}) and $\restLocal{Q}=Q\setminus\largestcomponent{Q}$ is \lq small\rq\ compared to $Q$ and $\Restcomplex$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure7} and \ref{LSthm:internal_structure8}). This implies $\contiguousLocal{\unbiased{\Largestcomponent}}{\unbiased{Q}}$ and $\contiguousLocal{\unbiased{\RestLocal}}{\unbiased{\Restcomplex}}$. In other words, it suffices to determine the local limits of $Q$ and $\Restcomplex$. 
+
+\subsection{Local structure of the complex part}\label{LSsub:strategy_complex}
+To determine the local structure of the complex part $Q$, we will use the concept of conditional random rooted graphs (see \Cref{LSsub:conditional_random_graphs}): For a given core $C$ and $q\in\N$, we consider $Q$ conditioned on the event that the core $\core{\planargraph}$ of $\planargraph$ is $C$ and that $\numberVertices{Q}=q$. Then $Q$ is distributed like $Q(C,q)$ as defined in \Cref{LSdef:random_complex}, which is a graph chosen uniformly at random from the class of all complex graphs with core $C$ and vertex set $[q]$. As \whp\ $\planargraph$ satisfies $\numberVertices{\core{\planargraph}}=\smallo{\numberVertices{\complexpart{\planargraph}}}$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure2}), it suffices to determine the local structure of $Q(C,q)$ for all $C$ and $q$ fulfilling $\numberVertices{C}=\smallo{q}$. We note that $Q(C,q)$ can be constructed by choosing a random forest $F=F(q, \numberVertices{C})$ on vertex set $[q]$ with $\numberVertices{C}$ tree components such that all vertices from $C$, i.e. vertices in $[\numberVertices{C}]$, lie in different tree components (cf. \Cref{LSdef:random_forest}). Then we obtain $Q(C,q)$ by replacing each vertex $v$ in $C$ by the tree component of $F$ which is rooted at $v$. Let $\root_Q$ be a vertex chosen uniformly at random from $\vertexSet{Q(C,q)}$, $T$ the tree component of $F$ containing $\root_Q$, and $\root_T$ the root of $T$, i.e. $\root_T$ is the unique vertex of $T$ lying in the core $C$. As $\numberVertices{C}=\smallo{q}$, the tree $T$ should be \lq large\rq, i.e. \whp\ $\numberVertices{T}=\smallomega{1}$. We will use this fact to show that then also \whp\ $\distance{T}{\root_Q}{\root_T}=\smallomega{1}$ (see \Cref{LSlem:limit_forest}\ref{LSlem:limit_forest2}). In other words, \whp\ there is no vertex from the core lying in the neighbourhood of radius $\radius$ around $\root_Q$. In particular, this shows that $\contiguousLocal{\unbiased{Q(C,q)}}{\unbiased{T}}$. Then we will use that $T$ \lq behaves\rq\ similarly like a random tree and therefore has the same local limit, which is known to be $\skeletonTree$ (see \Cref{LSthm:limit_tree1} and \Cref{LSlem:limit_forest}\ref{LSlem:limit_forest1}). Thus, we obtain $\distributionalLimit{\unbiased{Q(C,q)}}{\skeletonTree}$ (see \Cref{LSlem:local_random_complex}) and therefore also $\distributionalLimit{\unbiased{\complexpart{\planargraph}}}{\skeletonTree}$ (see \Cref{LSlem:local_complex}) and $\distributionalLimit{\unbiased{\Largestcomponent}}{\skeletonTree}$.
+
+\subsection{Local structure of the non-complex part}\label{LSsub:strategy_non_complex}
+Similarly, we determine the local structure of the non-complex part $\Restcomplex$. Conditioned on $\numberVertices{\Restcomplex}=n_U$ and $\numberEdges{\Restcomplex}=m_U$ for $n_U, m_U \in\N$, the non-complex part $\Restcomplex$ is distributed like a graph $U(n_U,m_U)$ chosen uniformly at random from the class of all graphs without complex components and $n_U$ vertices and $m_U$ edges as defined in \Cref{LSdef:random_non_complex}. It is known that \whp\ $\numberEdges{U}=\numberVertices{U}/2+\bigo{h\numberVertices{U}^{2/3}}$ for each function $h=h(n)=\smallomega{1}$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure5}). Thus, we can restrict our considerations to the case $m_U=n_U/2+\bigo{n_U^{2/3}}$. In this regime the probability that the \ER\ random graph $G=G(n_U,m_U)$ has no complex component is bounded away from zero (see \Cref{LSthm:non_complex}). Hence, each graph property that holds \whp\ in $G(n_U,m_U)$ is also true \whp\ in $U(n_U,m_U)$. We observe that this is not enough to deduce $\contiguousLocal{\unbiased{G(n_U,m_U)}}{\unbiased{U(n_U,m_U)}}$. However, we will use the first and second moment method to count the number of vertices $v$ in $G=G(n_U,m_U)$ satisfying $\ball{\radius}{G}{v}\isomorphic\detGraph$ for a fixed rooted graph $\detGraph$ and $\radius\in\N$. More precisely, we will show that \whp\ this number is $\left(1+\smallo{1}\right)\prob{\ballP{\radius}{\gwt{1}}\isomorphic\detGraph}\cdot n_U$ (see \Cref{LSlem:local_er}). In particular, this is also true for $U(n_U,m_U)$, which immediately implies $\distributionalLimit{\unbiased{U(n_U,m_U)}}{\gwt{1}}$ (see \Cref{LScoro:local_no_complex}). Hence, we obtain $\distributionalLimit{\unbiased{U}}{\gwt{1}}$ (see \Cref{LSlem:local_non_complex}) and $\distributionalLimit{\unbiased{\RestLocal}}{\gwt{1}}$.
+
+
+
+\section[Local structure of the \ER\ random graph and non-complex part]{Local structure of the \ER\ random graph and the non-complex part}\label{LSsec:local_er_non_complex}
+We start this section with a stronger statement than \Cref{LSthm:local_er} on the local structure of the \ER\ random graph $G(n,m)$, which will have two main applications. Firstly, we will use \Cref{LSlem:local_er} in the proof of \Cref{LSthm:main1}, where the random planar graph $\planargraph=\planargraph(n,m)$ \lq behaves\rq\ similarly like $G(n,m)$ (see \Cref{LSsub:strategy_er}). Secondly, later in this section \Cref{LSlem:local_er} will be the starting point of determining the local limit of the non-complex part $\restcomplex{\planargraph}$ of $\planargraph$ as described in \Cref{LSsub:strategy_non_complex}.
+\begin{lem}\label{LSlem:local_er}
+Let $m=m(n)=\alpha n/2$ where $\alpha=\alpha(n)$ tends to a constant $c\geq 0$, $\detGraph$ be a rooted graph, $\radius\in\N$, and $G=G(n,m)\ur\erClass(n,m)$. Then \whp
+\begin{align*}
+n^{-1}\cdot\Big|\setbuilderBig{v\in\vertexSet{G}}{\ball{\radius}{G}{v}\isomorphic\detGraph}\Big|=\left(1+\smallo{1}\right)\prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}.
+\end{align*}
+\end{lem}
+
+A version of \Cref{LSlem:local_er} for the binomial random graph $G(n,p)$ is well known and its proof can be found e.g. in {\cite[Chapter 2]{vanderHofstadAppear}}, but for the sake of completeness we provide a proof of \Cref{LSlem:local_er} in \Cref{LSapp:local_er}. In the next step, we transfer the statement of \Cref{LSlem:local_er} to the random graph $U(n,m)$, which is a graph chosen uniformly at random from the class $\nocomplexClass(n,m)$ of all graphs without complex components on vertex set $[n]$ with $m$ edges (cf. \Cref{LSdef:random_non_complex}). To that end, we use the following result of Britikov \cite{Britikov1989}.
+
+\begin{thm}[\hspace{1sp}\cite{Britikov1989}]\label{LSthm:non_complex}
+	Let $m=m(n)\leq n/2+\bigo{n^{2/3}}$ and $G=G(n,m)\ur \erClass(n,m)$ be the \ER\ random graph. Then 
+	\begin{align*}
+		\liminf_{n \to \infty}~ \prob{G \text{ has no complex component }}>0.
+	\end{align*}
+\end{thm}
+
+\Cref{LSthm:non_complex} implies that each graph property that holds \whp\ in $G(n,m)$ is also true \whp\ in $U(n,m)$ as long as $m\leq n/2+\bigo{n^{2/3}}$. In particular, we can combine it with \Cref{LSlem:local_er} to deduce the local limit of $U(n,m)$. 
+
+\begin{coro}\label{LScoro:local_no_complex}
+	Let $m=m(n)\leq n/2+\bigo{n^{2/3}}$ be such that $2m/n\to c\in[0,1]$ and $U=U(n,m)\ur\nocomplexClass(n,m)$. Then $\distributionalLimit{\unbiased{U}}{\gwt{c}}$.
+\end{coro}
+\begin{proof}
+Let $\detGraph$ be a rooted graph and $\radius\in\N$. To simplify notation we set 
+\begin{align*}
+\beta:=\prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}.    
+\end{align*}
+We consider the random variable
+\begin{align*}
+X:=\left|\setbuilder{v\in\vertexSet{U}}{\ball{\radius}{U}{v}\isomorphic\detGraph}\right|.
+\end{align*}
+By \Cref{LSlem:local_er} and \Cref{LSthm:non_complex} we have \whp\ $X=\left(1+\smallo{1}\right)\beta n$ and in particular $\expec{X}=\left(1+\smallo{1}\right)\beta n$. Hence, we obtain
+\begin{align*}
+\prob{\ballP{\radius}{\unbiased{U}}\isomorphic\detGraph}=n^{-1}\expec{X}=\left(1+\smallo{1}\right)\beta,
+\end{align*}
+which shows the statement.
+\end{proof}
+
+Finally, we use \Cref{LScoro:local_no_complex} to determine the local limit of the non-complex part $\restcomplex{\planargraph}$ of $\planargraph=\planargraph(n,m)$ under reasonable assumptions. Later we will see that in all considered cases $\planargraph$ satisfies these conditions.
+
+\begin{lem}\label{LSlem:local_non_complex}
+Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$ be the random planar graph and $\Restcomplex=\Restcomplex(\planargraph)$ the non-complex part of $\planargraph$ with  $\numberVerticesOutside=\numberVerticesOutside(\planargraph)$ vertices and $\numberEdgesOutside=\numberEdgesOutside(\planargraph)$ edges. Assume that $m=m(n)$ is such that \whp\ $n_U=\smallomega{1}$, $m_U\leq n_U/2+\bigo{hn_U^{2/3}}$ for each $h=h(n)=\smallomega{1}$, and $2m_U/n_U\to c\in [0,1]$. Then $\distributionalLimit{\planargraph_\Restcomplex}{\gwt{c}}$.
+\end{lem}
+\begin{proof}
+We will use \Cref{LSlem:conditional}. To that end, let $\cl(n)$ be the subclass of $\planarclass(n,m)$ that contains those graphs $H$ satisfying
+\begin{align*}
+\numberVerticesOutside(H)&=\smallomega{1},\\
+\numberEdgesOutside(H)&\leq \numberVerticesOutside(H)/2+\bigo{\numberVerticesOutside(H)^{2/3}},\\
+2\numberEdgesOutside(H)/\numberVerticesOutside(H)&=c+\smallo{1}.
+\end{align*}
+By assumption, we can choose the implicit constants in the equations above such that $\planargraph\in\cl:=\cup_n\cl(n)$ with a probability of at least $1-\delta$, so as to obtain for each rooted graph $\detGraph$ and $\radius\in\N$
+\begin{align}\label{LSeq:10}
+&\prob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}
+\nonumber
+\\[0.1cm]
+&~~~~~=\prob{P\in\cl}\condprob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}{P\in\cl}+\prob{P\notin\cl}\condprob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}{P\notin\cl}\nonumber
+\\[0.1cm]
+&~~~~~\leq
+\condprob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}{P\in\cl}+\delta,
+\end{align}
+for an arbitrary $\delta>0$. Let $A_U=A_U(n)$ be the random rooted graph such that $A=A(n)\ur\cl(n)$ and given the realisation $H$ of $A$, the root is chosen uniformly at random from $\vertexSet{\restcomplex{H}}$. We define the function $\func$ such that $\func(H)=\left(\numberVerticesOutside(H), \numberEdgesOutside(H)\right)$ for each $H\in\cl$ and let $\seqLocal=\left(\nu_n, \mu_n\right)_{n\in\N}$ be a sequence that is feasible for $(\cl, \func)$. We note that the local structure of $\condGraph{A_U}{\seqLocal}$ is distributed like that of $\unbiased{U\left(\nu_n, \mu_n\right)}$, i.e. for each rooted graph $\detGraph$ and $\radius\in\N$ we have 
+\begin{align*}
+\prob{\ballP{\radius}{\condGraph{A_U}{\seqLocal}}\isomorphic \detGraph}=\prob{\ballP{\radius}{\unbiased{U\left(\nu_n, \mu_n\right)}}\isomorphic \detGraph}.
+\end{align*}
+Thus, we obtain by \Cref{LScoro:local_no_complex} that $\distributionalLimit{\condGraph{A_U}{\seqLocal}}{\gwt{c}}$. Combining that with \Cref{LSlem:conditional} yields $\distributionalLimit{A_U}{\gwt{c}}$, i.e.
+\begin{align*}
+\prob{\ballP{\radius}{A_U}\isomorphic\detGraph}=\prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}+\smallo{1}.  
+\end{align*}
+Conditioned on $\planargraph\in\cl$, $\planargraph$ is distributed like $A$. Hence, we have 
+\begin{align*}
+\condprob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}{P\in\cl}=\prob{\ballP{\radius}{A_U}\isomorphic\detGraph}=\prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}+\smallo{1}    
+\end{align*}
+Plugging this in (\ref{LSeq:10}) yields
+\begin{align*}
+\prob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}
+\leq
+\prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}+\smallo{1}+\delta.
+\end{align*}
+As $\delta>0$ is arbitrary, we obtain $\prob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}\leq \prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}+\smallo{1}$. Analogously, we can show $\prob{\ballP{\radius}{\planargraph_U}\isomorphic\detGraph}\geq \prob{\ballP{\radius}{\gwt{c}}\isomorphic\detGraph}+\smallo{1}$. Thus, we have $\distributionalLimit{\planargraph_U}{\gwt{c}}$, as desired.
+\end{proof}
+
+\section{Local structure of the complex part}\label{LSsec:local_complex}
+In this section we determine the local structure of the complex part $\complexpart{\planargraph}$ of $\planargraph=\planargraph(n,m)$ as described in \Cref{LSsub:strategy_complex}. We recall that given a graph $H$, the complex part $\complexpart{H}$ is the union of all components of $H$ with at least two cycles. In \Cref{LSsub:strategy_complex} we saw that there is a close relation between the complex part and random forests. Therefore, we start with the known result that two randomly chosen vertices in a random tree are \lq far away\rq\ from each other.
+
+\begin{thm}[\hspace{1sp}\cite{MeirMoon1970}]\label{LSthm:limit_tree2}
+Let $T=T(n)$ be a random tree and $\root=\root(n), \root'=\root'(n)\ur\vertexSet{T}$ be chosen independently and uniformly at random from $\vertexSet{T}$. Then \whp\ $~\distance{T}{\root}{\root'}=\smallomega{n^{1/3}}$.
+\end{thm}
+In \cite{MeirMoon1970} a more general version than \Cref{LSthm:limit_tree2} is actually shown, namely that $\distance{T}{\root}{\root'}$ is concentrated around $n^{1/2}$. Next, we consider the random forest $\forest(n,\ntrees)$ defined as follows.
+\begin{definition}\label{LSdef:random_forest}
+	Given $n, \ntrees\in\N$, let $\forestClass(n,\ntrees)$ be the class of all forests on vertex set $[n]$ having $\ntrees$ trees as components such that the vertices $1, \ldots, \ntrees$ lie all in different tree components. We denote by $\forest(n,\ntrees)\ur\forestClass(n,\ntrees)$ a forest chosen uniformly at random from $\forestClass(n,\ntrees)$ and call the vertices $1, \ldots, \ntrees$ the {\em roots} of the tree components of $\forest(n,\ntrees)$.
+\end{definition}
+In our applications the number of tree components will always be \lq small\rq, in other words $t=\smallo{n}$. Thus, a randomly chosen vertex $r\ur\vertexSet{\forest}$ should lie in a \lq large\rq\ tree component, i.e. $\numberVertices{T'}=\smallomega{1}$, where $T'$ is the tree component of $\forest$ containing $r$. Therefore, we expect that the local structures of $T'$ and $\forest$ should be close to that of a random tree. In the following Lemma we will show that this is indeed true. In view of \Cref{LSthm:limit_tree2} we also expect that the distance between $r$ and the root of $T'$ should be $\smallomega{\numberVertices{T'}^{1/3}}$, so in particular tending to infinity.
+\begin{lem}\label{LSlem:limit_forest}
+Let $t=t(n)=\smallo{n}$ and $\forest=\forest(n,t)\ur\forestClass(n,t)$. Moreover, let $\root=\root(n)\ur\vertexSet{\forest}$ and $\root'=\root'(n)\in[t]$ be the root of the tree component in $\forest$ that contains $\root$. Then we have
+\begin{enumerate}[label=\normalfont(\roman*)]
+\item\label{LSlem:limit_forest1}
+$\distributionalLimit{\unbiased{\forest}}{\skeletonTree}$;
+\item\label{LSlem:limit_forest2}
+\whp\ $~\distance{\forest}{\root}{\root'}=\smallomega{1}$.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+Without loss of generality, we can assume $\unbiased{\forest}=\rootedGraph{\forest}{\root}$. Let $T'$ be the tree component of $F$ that contains $r$, $h=h(n):=n/t=\smallomega{1}$, and $T(k)$ be the random tree on $k\in \N$ vertices. Conditioned on the event $\numberVertices{T'}=k$, the random rooted tree $\rootedGraph{T'}{\root}$ is distributed like $\unbiased{T(k)}$. Thus, we obtain for each rooted graph $\detGraph$ and $\radius\in \N$
+\begin{align}\label{LSeq:11}
+\prob{\ball{\radius}{T'}{\root}\isomorphic\detGraph}&=
+\sum_{k=1}^{n}\prob{\numberVertices{T'}=k}\condprob{\ball{\radius}{T'}{\root}\isomorphic\detGraph}{\numberVertices{T'}=k}\nonumber
+\\
+&=
+\sum_{k=1}^{n}\prob{\numberVertices{T'}=k}\prob{\ballP{\radius}{\unbiased{T(k)}}\isomorphic\detGraph}\nonumber
+\\
+&=
+\sum_{k\leq \sqrt{h}}\prob{\numberVertices{T'}=k}\prob{\ballP{\radius}{\unbiased{T(k)}}\isomorphic\detGraph}
+\nonumber
+\\
+&\hspace{0.5cm}+
+\sum_{k>\sqrt{h}}\prob{\numberVertices{T'}=k}\prob{\ballP{\radius}{\unbiased{T(k)}}\isomorphic\detGraph}.
+\end{align}
+We note that $F$ has at least $n-t\sqrt{h}=\left(1-\smallo{1}\right)n$ vertices that lie in a tree component with more than $\sqrt{h}$ vertices. Hence, \whp\ $\numberVertices{T'}>\sqrt{h}$, which implies 
+\begin{align}\label{LSeq:12}
+\sum_{k\leq \sqrt{h}}\prob{\numberVertices{T'}=k}\prob{\ballP{\radius}{\unbiased{T(k)}}\isomorphic\detGraph}=\smallo{1}.
+\end{align}
+Due to \Cref{LSthm:limit_tree1} we have $\prob{\ballP{\radius}{\unbiased{T(k)}}\isomorphic\detGraph}=\prob{\ballP{\radius}{\skeletonTree}\isomorphic\detGraph}+\smallo{1}$ uniformly over all $k>\sqrt{h}$. Hence, we obtain
+\begin{align}\label{LSeq:13}
+\sum_{k>\sqrt{h}}\prob{\numberVertices{T'}=k}\prob{\ballP{\radius}{\unbiased{T(k)}}\isomorphic\detGraph}
+&=
+\big(\prob{\ballP{\radius}{\skeletonTree}\isomorphic\detGraph}+\smallo{1}\big)\sum_{k>\sqrt{h}}\prob{\numberVertices{T'}=k}\nonumber
+\\
+&=\big(\prob{\ballP{\radius}{\skeletonTree}\isomorphic\detGraph}+\smallo{1}\big)\prob{\numberVertices{T'}>\sqrt{h}}\nonumber
+\\
+&=
+\prob{\ballP{\radius}{\skeletonTree}\isomorphic\detGraph}+\smallo{1}.
+\end{align}
+Using (\ref{LSeq:12}) and (\ref{LSeq:13}) in equation (\ref{LSeq:11}) yields $\prob{\ball{\radius}{T'}{\root}\isomorphic\detGraph}=\prob{\ballP{\radius}{\skeletonTree}\isomorphic\detGraph}+\smallo{1}$. This shows statement \ref{LSlem:limit_forest1}, as the local structure of $\unbiased{\forest}=\rootedGraph{\forest}{\root}$ is that of $\rootedGraph{T'}{\root}$.
+
+Next, we prove statement \ref{LSlem:limit_forest2} in a similar way. Conditioned on $\left\{\numberVertices{T'}=k, \root\notin [\ntrees]\right\}$, the distance $\distance{F}{\root}{\root'}$ between $\root$ and the root $\root'$ of $T'$ is distributed like the distance between two randomly chosen distinct vertices in $T(k)$, which is \whp\ larger than $k^{1/3}$ due to \Cref{LSthm:limit_tree2}. Hence, we obtain uniformly over all $k>\sqrt{h}$
+\begin{align*}
+\condprob{\distance{F}{\root}{\root'}\geq h^{1/6}}{\numberVertices{T'}=k, \root\notin [\ntrees]}&
+\geq \condprob{\distance{F}{\root}{\root'}\geq k^{1/3}}{\numberVertices{T'}=k, \root\notin [\ntrees]}
+\\
+&=1-\smallo{1}.
+\end{align*}
+Using that yields
+\begin{align*}
+&\prob{\distance{F}{\root}{\root'}\geq h^{1/6}}
+\geq \prob{\distance{F}{\root}{\root'}\geq h^{1/6}, \root\notin [\ntrees]}
+\\
+&~~~~~=\sum_{k=1}^{n}\prob{\numberVertices{T'}=k, \root\notin [\ntrees]}\condprob{\distance{F}{\root}{\root'}\geq h^{1/6}}{\numberVertices{T'}=k, \root\notin [\ntrees]}
+\\
+&~~~~~\geq
+\sum_{k>\sqrt{h}}\prob{\numberVertices{T'}=k, \root\notin [\ntrees]}\condprob{\distance{F}{\root}{\root'}\geq h^{1/6}}{\numberVertices{T'}=k, \root\notin [\ntrees]}
+\\
+&~~~~~=
+\left(1-\smallo{1}\right)\prob{\numberVertices{T'}>\sqrt{h}, \root\notin [\ntrees]}
+\\
+&~~~~~=1-\smallo{1},
+\end{align*}
+where we used in the last equality that \whp\ $\numberVertices{T'}>\sqrt{h}$ and $\prob{\root\notin [\ntrees]}=\left(n-t\right)/n=1-\smallo{1}$.
+This proves statement \ref{LSlem:limit_forest2}.
+\end{proof}
+
+We recall that given a core $C$ and $q\in\N$, we denote by $Q=Q(C,q)$ a graph chosen uniformly at random from the class of all complex graphs with core $C$ and vertex set $[q]$. Furthermore, we can construct $Q$ by choosing a forest $\forest=\forest(q, \numberVertices{C})$ and replacing each vertex $v$ in $C$ by the tree component of $\forest$ which is rooted at $v$. Assuming $\numberVertices{C}=\smallo{q}$ we can use \Cref{LSlem:limit_forest}. Hence, a randomly chosen vertex $r\ur\vertexSet{Q}$ will typically lie \lq far away\rq\ from all vertices in $C$. Using that we will show that the local limit of $Q$ coincides with that of $\forest$.
+\begin{lem}\label{LSlem:local_random_complex}
+For each $n\in\N$, let $C=C(n)$ be a core, $q=q(n)\in\N$, and $Q=Q(C,q)$ be the random complex part with core $C$ and vertex set $[q]$. If $\numberVertices{C}=\smallo{q}$, then $\distributionalLimit{\unbiased{Q}}{\skeletonTree}$.
+\end{lem}
+\begin{proof}
+We assume that $\unbiased{Q}=\rootedGraph{Q}{r}$, i.e. $r\ur\vertexSet{Q}$, and that $Q$ can be constructed by choosing a random forest $\forest=\forest(q, \numberVertices{C})$ and replacing each vertex $v$ in $C$ by the tree component of $\forest$ rooted at $v$. Due to \Cref{LSlem:limit_forest}\ref{LSlem:limit_forest2} \whp\ the distance from $r$ to the root of the tree component in $F$ containing $r$ is larger than a fixed constant $\radius\in\N$. Thus, we get \whp\ $\ball{\radius}{Q}{\root}=\ball{\radius}{\forest}{\root}$, which implies $\contiguousLocal{\unbiased{Q}}{\unbiased{\forest}}$. Combining that with \Cref{LSlem:contiguous1} and \Cref{LSlem:limit_forest}\ref{LSlem:limit_forest1} yields the statement.
+\end{proof}	
+
+
+In all our applications the core $\core{\planargraph}$ will be \lq small\rq\ compared to the complex part $\complexpart{\planargraph}$, i.e. \whp\ $\numberVertices{\core{\planargraph}}=\smallo{\numberVertices{\complexpart{\planargraph}}}$. In such a case we can apply \Cref{LSlem:local_random_complex} to deduce the local structure of $\complexpart{\planargraph}$.
+\begin{lem}\label{LSlem:local_complex}
+Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$ be the random planar graph and $Q=\complexpart{\planargraph}$ the complex part of $\planargraph$. Assume that $m=m(n)$ is such that \whp\ $\numberVertices{\core{\planargraph}}=\smallo{\numberVertices{\complexpart{\planargraph}}}$. Then $\distributionalLimit{\planargraph_Q}{\skeletonTree}$.
+\end{lem}
+\begin{proof}
+We will use \Cref{LSlem:conditional}. Let $\cl(n)$ be the subclass of $\planarclass(n,m)$ containing those graphs $H$ satisfying $\numberVertices{\core{H}}=\smallo{\numberVertices{\complexpart{H}}}$. By assumption we have \whp\ $\planargraph\in \cl:=\cup_n\cl(n)$. Let $A_Q=A_Q(n)$ be the random rooted graph such that $A=A(n)\ur\cl(n)$ and given the realisation $H$ of $A$, the root is chosen uniformly at random from $\vertexSet{\complexpart{H}}$. We define the function $\func$ such that $\func(H)=\left(\core{H}, \numberVertices{\complexpart{H}}\right)$ for each $H\in\cl$ and let $\seqLocal=\left(C_n, q_n\right)_{n\in\N}$ be a sequence that is feasible for $\left(\cl, \func\right)$. The local structure of $\condGraph{A_Q}{\seqLocal}$ is distributed like that of $\unbiased{Q(C_n, q_n)}$, i.e. for each rooted graph $\detGraph$ and $\radius\in\N$ we have
+\begin{align*}
+	\prob{\ballP{\radius}{\condGraph{A_Q}{\seqLocal}}\isomorphic \detGraph}=\prob{\ballP{\radius}{\unbiased{Q\left(C_n, q_n\right)}}\isomorphic \detGraph}.
+\end{align*}
+Hence, we obtain $\distributionalLimit{\condGraph{A_Q}{\seqLocal}}{\skeletonTree}$ by \Cref{LSlem:local_random_complex}. Together with \Cref{LSlem:conditional} this implies $\distributionalLimit{A_Q}{\skeletonTree}$. Due to \Cref{LSlem:contiguous2}\ref{LSlem:contiguous2A} and the fact that \whp\ $\planargraph\in \cl$ we have $\contiguousLocal{\planargraph_Q}{A_Q}$. Thus, we get $\distributionalLimit{\planargraph_Q}{\skeletonTree}$ by \Cref{LSlem:contiguous1}, as desired.
+\end{proof}
+
+\section{Proofs of main results}\label{LSsec:proofs}
+Throughout this section, let $\planargraph=\planargraph(n,m)\ur \planarclass(n,m)$ be the random planar graph.
+\proofofN{Average degree at most one}{LSthm:main1}
+Let $G=G(n,m)\ur\erClass(n,m)$ be the \ER\ random graph. Due to \Cref{LSthm:non_complex} we have
+\begin{align*}
+	\liminf_{n \to \infty}~ \prob{G \text{ is planar }}>0.
+\end{align*}
+Thus, each graph property that holds \whp\ in $G$, is also true \whp\ in $P$. In particular, \Cref{LSlem:local_er} remains true if we replace $G$ by $P$, which proves the statement. \qed
+
+\subsection[Average degree between one and two]{Average degree between one and two: Proof of \Cref{LSthm:main2,LSthm:main3,LSthm:main4}}\label{LSsub:main_proofs}
+We prove \Cref{LSthm:main2,LSthm:main3,LSthm:main4} simultaneously. Let $\Largestcomponent=\largestcomponent{\planargraph}$ be the largest component of $P$ and $Q=\complexpart{\planargraph}$ the complex part of $\planargraph$. Using the notation from \Cref{LSdef:R_rooted} we can rewrite statements \ref{LSthm:main2A} and \ref{LSthm:main2B} to $\distributionalLimit{\planargraph_{\Largestcomponent}}{\skeletonTree}$ and $\distributionalLimit{\planargraph_{\RestLocal}}{\gwt{1}}$, respectively. Let $\largestcomponent{Q}$ be the largest component of $Q$ and let $\restLocal{Q}=Q\setminus\largestcomponent{Q}$. Due to \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure6} we have \whp\ $\Largestcomponent=\largestcomponent{Q}$. Hence, \whp\ $\symmetricDifference{\vertexSet{\Largestcomponent}}{\vertexSet{Q}}=\vertexSet{\restLocal{Q}}$. Combining that with \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure7} yields $\left|\symmetricDifference{\vertexSet{\Largestcomponent}}{\vertexSet{Q}}\right|=\smallo{\numberVertices{Q}}$. Thus, we obtain by \Cref{LSlem:contiguous2}\ref{LSlem:contiguous2B}
+\begin{align}\label{LSeq:4}
+\contiguousLocal{\planargraph_\Largestcomponent}{\planargraph_Q}.
+\end{align}
+Due to \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure2} we have \whp\ $\numberVertices{\core{\planargraph}}=\smallo{\numberVertices{\complexpart{\planargraph}}}$ and therefore we can apply \Cref{LSlem:local_complex} to get $\distributionalLimit{\planargraph_Q}{\skeletonTree}$. Together with (\ref{LSeq:4}) and \Cref{LSlem:contiguous1} this yields $\distributionalLimit{\planargraph_L}{\skeletonTree}$, which shows statement \ref{LSthm:main2A} of \Cref{LSthm:main2,LSthm:main3,LSthm:main4}.
+
+We prove \ref{LSthm:main2B} similarly. To that end, let $\Restcomplex=\restcomplex{\planargraph}=\planargraph\setminus Q$ be the non-complex part of $\planargraph$ and let $\RestLocal=\planargraph\setminus\Largestcomponent$. We have \whp\ $\symmetricDifference{\vertexSet{\RestLocal}}{\vertexSet{\Restcomplex}}=\vertexSet{\restLocal{Q}}$, as \whp\ $\vertexSet{\RestLocal}=\vertexSet{\Restcomplex}\cup\vertexSet{\restLocal{Q}}$ by \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure6}. Together with \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure8} this implies $\left|\symmetricDifference{\vertexSet{\RestLocal}}{\vertexSet{\Restcomplex}}\right|=\smallo{\numberVertices{\Restcomplex}}$. Hence, we have $\contiguousLocal{\planargraph_\RestLocal}{\planargraph_U}$ by \Cref{LSlem:contiguous2}\ref{LSlem:contiguous2B}. Next, we combine \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure4}, \ref{LSthm:internal_structure5} and \Cref{LSlem:local_non_complex} to get $\distributionalLimit{\planargraph_U}{\gwt{1}}$. Together with \Cref{LSlem:contiguous1} this implies $\distributionalLimit{\planargraph_\RestLocal}{\gwt{1}}$, which proves \ref{LSthm:main2B} of \Cref{LSthm:main2,LSthm:main3,LSthm:main4}.
+
+Due to \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure3} we have \whp\ $\numberVertices{\Largestcomponent}=\smallo{n}$, $\numberVertices{\Largestcomponent}=\left(c-1+\smallo{1}\right)n$, and $\numberVertices{\Largestcomponent}=\left(1-\smallo{1}\right)n$ if $m$ is as in \Cref{LSthm:main2}, \Cref{LSthm:main3}, and \Cref{LSthm:main4}, respectively. Thus, \ref{LSthm:main2C} of \Cref{LSthm:main2,LSthm:main3,LSthm:main4} follows by combining \Cref{LSlem:linear_combination} with statements \ref{LSthm:main2A} and \ref{LSthm:main2B}. \qed
+
+\section{Local structure of the core and kernel}\label{LSsec:local_core_kernel}
+Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$ be the random planar graph and we recall that the core $C=\core{\planargraph}$ of $\planargraph$ is the maximal subgraph of the complex part $\complexpart{\planargraph}$ of minimum degree at least two. Furthermore, we obtain the kernel $K=\kernel{\planargraph}$ of $\planargraph$ by replacing all maximal paths in $\core{\planargraph}$ having only internal vertices of degree two by an edge between the endpoints of the path. In this section we consider the local structure of $\planargraph$ around a root which is chosen uniformly at random from $\vertexSet{C}$ and $\vertexSet{K}$, respectively. More precisely, we determine the local limits of the random rooted graphs $\planargraph_C$ and $\planargraph_K$.
+
+If $m\leq n/2+\bigo{n^{2/3}}$, then $\liminf_{n \to \infty}\prob{\vertexSet{C}=\emptyset}=\liminf_{n \to \infty}\prob{\vertexSet{K}=\emptyset}>0$ by \Cref{LSthm:non_complex}. Hence, we will restrict our considerations to the cases where $m$ is as in \Cref{LSthm:main2,LSthm:main3,LSthm:main4}. We start with the following definition, which provides a generalised version of the Skeleton tree $\skeletonTree$.
+\begin{definition}
+For $k\in\N_0:=\N\cup\left\{0\right\}$ we denote by $\infinitepath{k}$ the rooted graph consisting of a root and $k$ infinite paths starting at the root, i.e. $\infinitepath{k}$ is the unique rooted tree such that the root has degree $k$ and all other vertices have degree two. Moreover, the {\em Skeleton tree with $k$ rays}, denoted by $\skeletonTreeRays{k}$, is the random rooted graph which is obtained by replacing each vertex of $\infinitepath{k}$ by an independent \GW\ tree $\gwt{1}$ with offspring distribution $\poisson{1}$.  
+\end{definition}
+\begin{figure}[t]
+\centering
+	\begin{tikzpicture}[scale=0.95, line width=0.4mm, every node/.style={circle,fill=gray, inner sep=0, minimum size=0.22cm}]
+		\node (0) at (0,0) [draw,rectangle]  {};
+	%	\node (l0) at (0,-0.4) [draw=none, fill=none]  {$\root_0$};
+		\node (11) at (-0.7,0.7) [draw]  {};
+	%	\node (l11) at (-0.7,0.3) [draw=none, fill=none]  {$\root_{1,1}$};
+		\node (12) at (-1.4,1.4) [draw]  {};
+	%	\node (l12) at (-1.85,1.4) [draw=none, fill=none]  {$\root_{1,2}$};
+		\node (13) at (-2.1,2.1) [draw]  {};
+	%	\node (l13) at (-1.65,2.1) [draw=none, fill=none]  {$\root_{1,3}$};
+		\node (14) at (-2.6,2.6) [draw=none, fill=none]  {};
+		\node (21) at (0,1) [draw]  {};
+	%	\node (l21) at (-0.35,1.2) [draw=none, fill=none]  {$\root_{2,1}$};
+		\node (22) at (0,2) [draw]  {};
+	%	\node (l22) at (-0.45,2) [draw=none, fill=none]  {$\root_{2,2}$};
+		\node (23) at (0,3) [draw]  {};
+	%	\node (l23) at (-0.45,3) [draw=none, fill=none]  {$\root_{2,3}$};
+		\node (24) at (0,3.8) [draw=none, fill=none]  {};
+		\node (31) at (0.7,0.7) [draw]  {};
+	%	\node (l31) at (0.6,1) [draw=none, fill=none]  {$\root_{3,1}$};
+		\node (32) at (1.4,1.4) [draw]  {};
+	%	\node (l32) at (1.3,1.7) [draw=none, fill=none]  {$\root_{3,2}$};
+		\node (33) at (2.1,2.1) [draw]  {};
+	%	\node (l33) at (2,2.4) [draw=none, fill=none]  {$\root_{3,3}$};
+		\node (34) at (2.6,2.6) [draw=none, fill=none]  {};		
+		\draw[-] (0) to (11);
+		\draw[-] (11) to (12);
+		\draw[-] (12) to (13);
+		\draw[->] (13) to (14);
+		\draw[-] (0) to (21);
+		\draw[-] (21) to (22);
+		\draw[-] (22) to (23);
+		\draw[->] (23) to (24);
+		\draw[-] (0) to (31);
+		\draw[-] (31) to (32);
+		\draw[-] (32) to (33);
+		\draw[->] (33) to (34);
+		
+		\node (0a) at (0.8,0) [draw,fill=none]  {};
+		\draw[-] (0) to (0a);
+		
+		\node (31a) at (1.3,0.2) [draw,fill=none]  {};
+		\node (31b) at (1.5,0.6) [draw,fill=none]  {};
+		\node (31c) at (1.4,1) [draw,fill=none]  {};
+		\node (31d) at (2.1,1.4) [draw,fill=none]  {};
+		\node (31e) at (2.1,0.9) [draw,fill=none]  {};
+		\node (31f) at (2.1,0.5) [draw,fill=none]  {};
+		\node (31g) at (2.1,0.1) [draw,fill=none]  {};
+		\node (31h) at (2.7,1.6) [draw,fill=none]  {};
+		\node (31i) at (2.7,1.2) [draw,fill=none]  {};
+		\node (31j) at (2.7,0.1) [draw,fill=none]  {};
+		\node (31k) at (3.3,1.5) [draw,fill=none]  {};
+		\node (31l) at (3.3,1.2) [draw,fill=none]  {};
+		\node (31m) at (3.3,0.9) [draw,fill=none]  {};
+		\node (31n) at (3.3,0.5) [draw,fill=none]  {};
+		\node (31o) at (3.3,0) [draw,fill=none]  {};
+		\node (31p) at (3.9,1.5) [draw,fill=none]  {};
+		\node (31q) at (3.9,1.2) [draw,fill=none]  {};
+		\node (31r) at (3.9,0.7) [draw,fill=none]  {};
+		\node (31s) at (3.9,0.3) [draw,fill=none]  {};
+		\node (31t) at (4.5,1.2) [draw,fill=none]  {};
+		\node (31u) at (4.5,0.3) [draw,fill=none]  {};
+		\node (31v) at (5.1,1.4) [draw,fill=none]  {};
+		\node (31w) at (5.1,1) [draw,fill=none]  {};
+		\node (31x) at (5.7,1) [draw,fill=none]  {};
+		\draw[-] (31) to (31a);
+		\draw[-] (31) to (31b);
+		\draw[-] (31) to (31c);
+		\draw[-] (31a) to (31g);
+		\draw[-] (31b) to (31f);
+		\draw[-] (31c) to (31d);
+		\draw[-] (31c) to (31e);
+		\draw[-] (31d) to (31h);
+		\draw[-] (31d) to (31i);
+		\draw[-] (31g) to (31j);
+		\draw[-] (31i) to (31k);
+		\draw[-] (31i) to (31l);
+		\draw[-] (31i) to (31m);
+		\draw[-] (31j) to (31n);
+		\draw[-] (31j) to (31o);
+		\draw[-] (31k) to (31p);
+		\draw[-] (31l) to (31q);
+		\draw[-] (31n) to (31r);
+		\draw[-] (31n) to (31s);
+		\draw[-] (31q) to (31t);
+		\draw[-] (31s) to (31u);
+		\draw[-] (31t) to (31v);
+		\draw[-] (31t) to (31w);
+		\draw[-] (31w) to (31x);
+		
+		\node (33a) at (2.7,2.2) [draw,fill=none]  {};
+		\node (33b) at (3.3,2.5) [draw,fill=none]  {};
+		\node (33c) at (3.3,2) [draw,fill=none]  {};
+		\node (33d) at (3.9,2.5) [draw,fill=none]  {};
+		\draw[-] (33) to (33a);	
+		\draw[-] (33a) to (33b);	
+		\draw[-] (33a) to (33c);	
+		\draw[-] (33b) to (33d);
+		
+		\node (22a) at (0.6,1.9) [draw,fill=none]  {};	
+		\node (22b) at (0.6,2.3) [draw,fill=none]  {};
+		\node (22c) at (1.2,2.3) [draw,fill=none]  {};
+		\draw[-] (22) to (22a);	
+		\draw[-] (22) to (22b);	
+		\draw[-] (22b) to (22c);
+		
+		\node (11a) at (-1.3,0.3) [draw,fill=none]  {};
+		\node (11b) at (-1.3,0.9) [draw,fill=none]  {};	
+		\node (11c) at (-1.9,0.1) [draw,fill=none]  {};	
+		\node (11d) at (-1.9,0.45) [draw,fill=none]  {};	
+		\node (11e) at (-1.9,0.9) [draw,fill=none]  {};	
+		\node (11f) at (-2.5,0.1) [draw,fill=none]  {};	
+		\node (11g) at (-2.5,0.9) [draw,fill=none]  {};	
+		\draw[-] (11) to (11a);
+		\draw[-] (11) to (11b);	
+		\draw[-] (11a) to (11c);
+		\draw[-] (11a) to (11d);	
+		\draw[-] (11b) to (11e);
+		\draw[-] (11c) to (11f);
+		\draw[-] (11e) to (11g);
+		
+		\node (13a) at (-2.7,2.1) [draw,fill=none]  {};	
+		\node (13b) at (-3.3,2.1) [draw,fill=none]  {};	
+		\node (13c) at (-3.9,1.8) [draw,fill=none]  {};	
+		\node (13d) at (-3.9,2.4) [draw,fill=none]  {};	
+		\node (13e) at (-4.5,2.4) [draw,fill=none]  {};	
+		\node (13f) at (-4.5,2) [draw,fill=none]  {};	
+		\node (13g) at (-4.5,1.6) [draw,fill=none]  {};	
+		\node (13h) at (-5.1,2.4) [draw,fill=none]  {};	
+		\node (13i) at (-5.1,1.6) [draw,fill=none]  {};	
+		\draw[-] (13) to (13a);
+		\draw[-] (13a) to (13b);
+		\draw[-] (13b) to (13c);
+		\draw[-] (13b) to (13d);
+		\draw[-] (13d) to (13e);
+		\draw[-] (13c) to (13f);
+		\draw[-] (13c) to (13g);
+		\draw[-] (13e) to (13h);
+		\draw[-] (13g) to (13i);
+		
+		\node (A) at (-8,0) [draw,rectangle]  {};
+		\node (B) at (-8,0.8) [draw]  {};
+		\node (C) at (-8,1.6) [draw]  {};
+		\node (D) at (-8,2.4) [draw]  {};
+		\node (E) at (-8.4,0.6) [draw]  {};
+		\node (F) at (-8.8,1.2) [draw]  {};
+		\node (G) at (-9.2,1.8) [draw]  {};
+		\node (H) at (-7.6,0.6) [draw]  {};
+		\node (I) at (-7.2,1.2) [draw]  {};
+		\node (J) at (-6.8,1.8) [draw]  {};
+		\node (K) at (-8,3.05) [draw=none,fill=none]  {};
+		\node (L) at (-9.525,2.2875) [draw=none,fill=none]  {};
+		\node (M) at (-6.475,2.2875) [draw=none,fill=none]  {};
+		
+		\draw[-] (A) to (B);
+		\draw[-] (B) to (C);
+		\draw[-] (C) to (D);
+		\draw[-] (A) to (E);
+		\draw[-] (E) to (F);
+		\draw[-] (F) to (G);
+		\draw[-] (A) to (H);
+		\draw[-] (H) to (I);
+		\draw[-] (I) to (J);
+		\draw[->] (D) to (K);
+		\draw[->] (G) to (L);
+		\draw[->] (J) to (M);					
+	\end{tikzpicture}
+	\caption{The rooted graph $\infinitepath{3}$ on the left-hand side and the Skeleton tree $\skeletonTreeRays{3}$ with $k=3$ rays on the right-hand side.}
+	\label{LSfig:skeleton_tree_rays}
+\end{figure}
+We refer to \Cref{LSfig:skeleton_tree_rays} for an illustration of $\infinitepath{3}$ and the Skeleton tree $\skeletonTreeRays{3}$ with $k=3$ rays. Now we can state the main result of this section.
+\begin{thm}\label{LSthm:local_core}
+Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$, $C=\core{\planargraph}$ be the core of $\planargraph$, and $K=\kernel{\planargraph}$ the kernel. Suppose that $m=m(n)$ lies in one of the three regimes where $m=n/2+s$ with $s=s(n)>0$ satisfying $s=o(n)$ and $s^3n^{-2}\to\infty$, $m=\alpha n/2$ with $\alpha=\alpha(n)$ tending to a constant in $(1,2)$, or $m=n+\smallo{n}$ with $m\leq n+\smallo{n\left(\log n\right)^{-2/3}}$. Then $\distributionalLimit{\planargraph_C}{\skeletonTreeRays{2}}$ and $\distributionalLimit{\planargraph_K}{\skeletonTreeRays{3}}$.
+\end{thm}
+Before providing a proof of \Cref{LSthm:local_core}, we relate this result to the local limits of the non-complex part $\Restcomplex=\restcomplex{\planargraph}$ of $\planargraph$ and the complex part $Q=\complexpart{\planargraph}$. In \Cref{LSsub:main_proofs} we showed $\distributionalLimit{\planargraph_U}{\gwt{1}}$ and  $\distributionalLimit{\planargraph_Q}{\skeletonTree}$. By definition, $\gwt{1}$ is distributed like $\skeletonTreeRays{0}$ and the Skeleton tree $\skeletonTree$ like $\skeletonTreeRays{1}$. Thus, we have the following \lq sequence\rq\ of local limits
+\begin{align*}
+\distributionalLimit{\planargraph_U}{\skeletonTreeRays{0}};\\
+\distributionalLimit{\planargraph_Q}{\skeletonTreeRays{1}};\\
+\distributionalLimit{\planargraph_C}{\skeletonTreeRays{2}};\\ \distributionalLimit{\planargraph_K}{\skeletonTreeRays{3}}.
+\end{align*}
+
+In the remaining part of this section we prove \Cref{LSthm:local_core}. We will restrict our considerations to the complex part $Q$, as the local limits of $\planargraph_C$ and $\planargraph_K$ are completely determined by $Q$. We recall that the complex part $Q$ can be obtained by replacing each vertex of the core $C$ by a rooted tree. This motivates to proceed in two proof steps, which mirror the definition of $\skeletonTreeRays{k}$ via $\infinitepath{k}$. More precisely, we will first consider only the core $C$ and will show that $\distributionalLimit{\unbiased{ C}}{\infinitepath{2}}$ and $\distributionalLimit{C_K}{\infinitepath{3}}$ (see \Cref{LSlem:core_local}). Then in the second step we will prove that the trees attached to the vertices in $C$ to obtain $Q$ behave asymptotically like independent \GW\ trees with common offspring distribution $\poisson{1}$ (see \Cref{LSlem:limit_trees_forest}). 
+
+Instead of directly analysing the local structure of $C$, we will first determine the local structure of a random core with a fixed kernel and a fixed number of vertices. To that end, we introduce the following definition. 
+
+\begin{definition}\label{LSdef:random_core}
+	Let $K$ be a kernel and $k\in\N$. The random core $C(K,k)$ is a graph chosen uniformly at random from the class of all cores having $K$ as its kernel and $\numberVertices{K}+k$ vertices. 
+\end{definition}
+
+We note that $C(K,k)$ can be obtained by randomly subdividing the edges of $K$ with $k$ additional vertices. In our applications the number of edges in $K$ will be much smaller than $k$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure1}). Therefore, we expect that an edge $e\in\edgeSet{K}$ will be subdivided by \lq many\rq\ vertices. In the following we make that more precise by introducing the subdivision number of an edge and showing that it is \lq large\rq.
+
+\begin{definition}
+Let $C$ be a given core with kernel $K=\kernel{C}$. To obtain $C$ from $K$ we have to subdivide each edge of $K$ with a certain number of vertices. For a fixed edge $e\in\edgeSet{K}$ we call this number of vertices the {\em subdivision number} $\subdivisionNumberLocal{C}{e}$.
+\end{definition}
+
+\begin{lem}\label{LSlem:subdivision_number}
+For each $n\in\N$, let $K=K(n)$ be a kernel, $k=k(n)\in\N$, $e=e(n)\in\edgeSet{K}$, and $C=C(n)=C(K,k)$ the random core as defined in \Cref{LSdef:random_core}. If $\numberEdges{K}=\smallo{k}$, then \whp\ $\subdivisionNumberLocal{C}{e}=\smallomega{1}$.
+\end{lem}
+\begin{proof}
+We denote by $\mathcal{C}$ the class of all cores having $K$ as its kernel and $\numberVertices{K}+k$ vertices, i.e. $C(K,k)$ is chosen uniformly at random from $\mathcal{C}$. Furthermore, for $i\in\N_0$ let $\mathcal{C}_i\subseteq\mathcal{C}$ be the subclass containing all cores $H\in \mathcal{C}$ for which $\subdivisionNumberLocal{H}{e}=i$. First we aim to find an upper bound for $\left|\mathcal{C}_i\right|/\left|\mathcal{C}_{i+1}\right|$ using a double counting argument. To that end, let $i\in\N_0$ and $H\in\mathcal{C}_i$ be given. Then we can build a graph $H'\in\mathcal{C}_{i+1}$ via the following construction. We start by picking a vertex $v\in\vertexSet{H}\setminus\vertexSet{K}$ which does not lie on $e$, but on an edge $f\in\edgeSet{K}$ with $\subdivisionNumberLocal{H}{f}\geq 3$. Then we choose an edge $e'\in\edgeSet{H}$ which is a \lq part\rq\ of $e$ and move the vertex $v$ to the edge $e'$ (see also \Cref{LSfig:double_counting}). We note that we have at least $\left(k-i-2\numberEdges{K}\right)$ different choices for $v$ and precisely $(i+1)$ for $e'$. Considering the reverse operation we obtain that for a fixed graph $H'\in\mathcal{C}_{i+1}$ there are at most $(i+1)\left(\numberEdges{K}+k-i-2\right)$ graphs $H\in\mathcal{C}_i$ which can be transformed to $H'$ via the above operation. Thus, we obtain
+\begin{align*}
+\frac{\left|\mathcal{C}_i\right|}{\left|\mathcal{C}_{i+1}\right|}\leq \frac{(i+1)\left(\numberEdges{K}+k-i-2\right)}{\left(k-i-2\numberEdges{K}\right)(i+1)}\leq 1+\frac{3\numberEdges{K}}{k-i-2\numberEdges{K}}\leq\exp\left(\frac{3\numberEdges{K}}{k-i-2\numberEdges{K}}\right).
+\end{align*}
+Combining that with the assumption $\numberEdges{K}=\smallo{k}$ we obtain for $n$ large enough and all $i\leq N=N(n):=\lfloor k/\numberEdges{K}\rfloor$
+\begin{align}\label{LSeq:22}
+\frac{\left|\mathcal{C}_i\right|}{\left|\mathcal{C}_{i+1}\right|}\leq\exp\left(\frac{8\numberEdges{K}}{k}\right).
+\end{align}
+For fixed $j\in\N_0$ inequality (\ref{LSeq:22}) implies that for all $i\in\N$ with $j\leq i\leq N$ we have
+\begin{align}\label{LSeq:23}
+\frac{\left|\mathcal{C}_j\right|}{\left|\mathcal{C}_i\right|}=\prod_{i'=j}^{i-1}\frac{\left|\mathcal{C}_{i'}\right|}{\left|\mathcal{C}_{i'+1}\right|}\leq \exp\left(\frac{8\numberEdges{K}(i-j)}{k}\right)\leq  \exp\left(\frac{8\numberEdges{K}N}{k}\right) \leq e^8,
+\end{align}
+where we used in the last inequality that $N=\lfloor k/\numberEdges{K}\rfloor$.
+Summing up (\ref{LSeq:23}) for all $i\in\N$ with $j\leq i\leq N$ yields  
+\begin{align*}
+	(N-j+1)\left|\mathcal{C}_j\right| \leq e^8\sum_{i=j}^{N}\left|\mathcal{C}_i\right|=\bigo{\left|\mathcal{C}\right|},
+\end{align*}
+as $\sum_{i=j}^{N}\left|\mathcal{C}_i\right|\leq \left|\mathcal{C}\right|$. Combining that with the fact $N-j+1=\smallomega{1}$, we obtain $\prob{\subdivisionNumberLocal{C}{e}=j}=\left|\mathcal{C}_j\right|/\left|\mathcal{C}\right|=\smallo{1}$. Thus, we have $\prob{\subdivisionNumberLocal{C}{e}\leq j}=\smallo{1}$ for each fixed $j\in \N_0$, which shows the statement.
+\end{proof}
+\begin{figure}[t]
+\centering
+	\begin{tikzpicture}[scale=0.92, line width=0.4mm, every node/.style={circle, fill=gray, inner sep=0, minimum size=0.22cm}, decoration=brace]
+		\clip (-0.3cm,-0.7cm) rectangle (15.6cm,2.2cm);
+		\node (1) at (0,0) [draw,rectangle]  {};
+		\node (2) at (3,0) [draw,rectangle]  {};
+		\node (3) at (4.8,0) [draw,rectangle]  {};
+		\node (4) at (1.5,2) [draw,rectangle]  {};
+		\node (5) at (1.5,0) [draw]  {};
+		\node (6) at (0.5,2/3) [draw]  {};
+		\node (7) at (1,4/3) [draw]  {};
+		\node (8) at (2.25,1) [draw]  {};
+		\node (9) at (1.875,1.5) [draw,fill=none]  {};
+		\node (9a) at (1.6,1.5) [draw=none,fill=none]  {$v$};
+		\node (10) at (2.625,0.5) [draw]  {};
+		\node (11) at (3.9,0) [draw]  {};
+		
+		\draw[-] (1) to (5);
+		\draw[-] (2) to (5);
+		\draw[-] (1) to (6);
+		\draw[-] (6) to (7);
+		\draw[-] (4) to (7);
+		\draw[-] (2) to (10);
+		\draw[-] (4) to (9);
+		\draw[-] (8) to (10);
+		\draw[-] (8) to (9);
+		\draw[-] (2) to (11);
+		\draw[-] (3) to (11);	
+		\draw [out=100,in=180,looseness=1](1) to  (4);
+		\node (12) at (-0.02,0.7) [draw]  {};
+		\node (13) at (0.225,1.325) [draw]  {};
+		\node (14) at (0.72,1.82) [draw]  {};
+		\draw [out=0,in=90,looseness=50](3) to  (3);
+		\node (15) at (5.8,0.11) [draw]  {};	
+		\node (16) at (6.63,0.8) [draw]  {};
+		\node (17) at (5.8,1.81) [draw]  {};
+		\node (18) at (4.9,1) [draw]  {};
+		\draw[decorate, yshift=-1.5ex] (3,0) -- node[below=1ex,draw=none,fill=none] {$e$} (0,0);
+		\draw[decorate, yshift=1ex]  (1.5,0) -- node[above=0.4ex,draw=none,fill=none] {$e'$}  (3,0);
+		\draw[decorate, yshift=1ex, xshift=1ex]  (1.5,2) -- node[right=0.6ex, draw=none,fill=none] {$f$}  (3,0);
+		\node (19) at (7.6,0.9) [circle, fill=none]  {\Huge $\rightarrow$};
+		
+		
+		\node (1A) at (8.8,0) [draw,rectangle]  {};
+		\node (2A) at (11.8,0) [draw,rectangle]  {};
+		\node (3A) at (13.6,0) [draw,rectangle]  {};
+		\node (4A) at (10.3,2) [draw,rectangle]  {};
+		\node (5A) at (10.3,0) [draw]  {};
+		\node (6A) at (9.3,2/3) [draw]  {};
+		\node (7A) at (9.8,4/3) [draw]  {};
+		\node (8A) at (11.05,1) [draw]  {};
+		\node (9A) at (11.05,0) [draw,fill=none]  {};
+		\node (9aA) at (11.05,-0.3) [draw=none,fill=none]  {$v$};
+		\node (10A) at (11.425,0.5) [draw]  {};
+		\node (11A) at (12.7,0) [draw]  {};
+		
+		\draw[-] (1A) to (5A);
+		\draw[-] (5A) to (9A);
+		\draw[-] (1A) to (6A);
+		\draw[-] (6A) to (7A);
+		\draw[-] (4A) to (7A);
+		\draw[-] (2A) to (10A);
+		\draw[-] (4A) to (8A);
+		\draw[-] (8A) to (10A);
+		\draw[-] (2A) to (9A);
+		\draw[-] (2A) to (11A);
+		\draw[-] (3A) to (11A);	
+		\draw [out=100,in=180,looseness=1](1A) to  (4A);
+		\node (12A) at (8.78,0.7) [draw]  {};
+		\node (13A) at (9.025,1.325) [draw]  {};
+		\node (14A) at (9.52,1.82) [draw]  {};
+		\draw [out=0,in=90,looseness=50](3A) to  (3A);
+		\node (15A) at (14.6,0.11) [draw]  {};	
+		\node (16A) at (15.43,0.8) [draw]  {};
+		\node (17A) at (14.6,1.81) [draw]  {};
+		\node (18A) at (13.7,1) [draw]  {};	
+	\end{tikzpicture}
+	\caption{The construction used in the double counting argument in the proof of \Cref{LSlem:subdivision_number}. The vertices lying in the kernel are marked by a square, the others by a circle.}
+	\label{LSfig:double_counting}
+\end{figure}
+In our applications a vertex $v\in\vertexSet{K}$ will typically have degree three in $K$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure9}). Then in the process of obtaining $C(K,k)$ the three edges of $K$ incident to $v$ will be subdivided by \lq many\rq\ vertices due to \Cref{LSlem:subdivision_number}. Hence, the local limit of $C(K,k)$ around $v$ should be $\infinitepath{3}$. Moreover, $K$ will typically be quite \lq small\rq\ compared to $k$ (see \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure1}). Thus, \lq most\rq\ of the vertices in $C(K,k)$ have degree two, which will imply that the local limit of $C(K,k)$ around a randomly chosen vertex is $\infinitepath{2}$.
+\begin{lem}\label{LSlem:random_core_local}
+	For each $n\in\N$, let $K=K(n)$ be a kernel, $k=k(n)\in\N$, and $C=C(K,k)$ the random core as defined in \Cref{LSdef:random_core}. If $\numberEdges{K}=\smallo{k}$ and $\numberEdges{K}=\left(3/2+\smallo{1}\right)\numberVertices{K}$, then $\distributionalLimit{\unbiased{C}}{\infinitepath{2}}$ and $\distributionalLimit{C_K}{\infinitepath{3}}$.
+\end{lem}
+\begin{proof}
+We assume that $\unbiased{C}=\rootedGraph{C}{r_C}$, i.e. $r_C\ur\vertexSet{C}$, and let $\radius\in\N$. We note that the core $C$ arises from the kernel $K$ by subdividing edges. Thus, there are at most $2\radius\numberEdges{K}$ vertices $v\in\vertexSet{C}\setminus\vertexSet{K}$ such that $\vertexSet{\ball{\radius}{C}{v}}\cap\vertexSet{K} \neq\emptyset$. Hence,
+\begin{align*}
+	\prob{\vertexSet{\ball{\radius}{C}{r_C}}\cap\vertexSet{K}\neq \emptyset}\leq\frac{\numberVertices{K}+2\radius\numberEdges{K}}{\numberVertices{C}}=\smallo{1},
+\end{align*}
+as $\numberEdges{K}=\smallo{\numberVertices{C}}$ and $\numberEdges{K}=\left(3/2+\smallo{1}\right)\numberVertices{K}$.
+This shows $\distributionalLimit{\unbiased{C}}{\infinitepath{2}}$.
+
+Next, we suppose that $C_K=\rootedGraph{C}{r_K}$, i.e. $r_K\ur\vertexSet{K}$. As each realisation of $C$ has $K$ as its kernel, we can assume that we first pick $r_K$ and then independently choose the realisation of $C$. We note that \whp\ the degree of $r_K$ in $K$ is three, since $\numberEdges{K}=\left(3/2+\smallo{1}\right)\numberVertices{K}$ and the minimum degree of $K$ is at least three. Furthermore, for each edge $e\in \edgeSet{K}$ we have \whp\ $\subdivisionNumberLocal{C}{e}=\smallomega{1}$ by \Cref{LSlem:subdivision_number}. In particular, this is true for all edges that are incident to $r_K$. Hence, we obtain $\distributionalLimit{C_K}{\infinitepath{3}}$, which finishes the proof.
+\end{proof}
+
+Next, we will transfer the results of \Cref{LSlem:random_core_local} to the core $\core{\planargraph}$ of the random planar graph $\planargraph$ by using the concept of conditional random rooted graphs and \Cref{LSlem:conditional}.
+\begin{lem}\label{LSlem:core_local}
+	Let $\planargraph=\planargraph(n,m)\ur\planarclass(n,m)$, $C=\core{\planargraph}$ be the core of $\planargraph$, and $K=\kernel{\planargraph}$ the kernel. Suppose that $m=m(n)$ lies in one of the three regimes of \Cref{LSthm:main2,LSthm:main3,LSthm:main4}. Then $\distributionalLimit{\unbiased{C}}{\infinitepath{2}}$ and $\distributionalLimit{C_K}{\infinitepath{3}}$.
+\end{lem}
+\begin{proof}
+We will use \Cref{LSlem:conditional}. To that end, let $\cl(n)$ be the subclass of $\planarclass(n,m)$ containing those graphs $H$ satisfying
+\begin{align*}
+\numberEdges{\kernel{H}}&=\smallo{\numberVertices{\core{H}}} ~~~~~~~\text{and}\\
+\numberEdges{\kernel{H}}&=\left(3/2+\smallo{1}\right)\numberVertices{\kernel{H}}.
+\end{align*}
+By \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure1} and \ref{LSthm:internal_structure9} we have \whp\ $\planargraph\in \cl:=\cup_n\cl(n)$. Let $A=A(n)\ur\cl(n)$ and we define the function $\func$ such that $\func(H)=\big(\kernel{H}, \numberVertices{\core{H}}-\numberVertices{\kernel{H}}\big)$ for each $H\in\cl$. Let $\seqLocal=\left(K_n, k_n\right)_{n\in\N}$ be a sequence that is feasible for $\left(\cl, \func\right)$. Moreover, let $\core{A}_C$ and $\core{A}_K$ be the random rooted graphs where we first pick the realisation of $\core{A}$ and then independently choose the root uniformly at random from $\vertexSet{\core{A}}$ and $\vertexSet{\kernel{A}}$, respectively. The local structures of $\condGraph{\core{A}_C}{\seqLocal}$ and $\condGraph{\core{A}_K}{\seqLocal}$ are distributed like that of $\unbiased{C(K_n, k_n)}$ and $C(K_n, k_n)_K$, respectively. Thus, we obtain by \Cref{LSlem:random_core_local,LSlem:conditional} that $\distributionalLimit{\unbiased{\core{A}}}{\infinitepath{2}}$ and $\distributionalLimit{\core{A}_K}{\infinitepath{3}}$. Using \Cref{LSlem:contiguous2}\ref{LSlem:contiguous2A} and the fact that \whp\ $\planargraph\in \cl$ we obtain $\contiguousLocal{\unbiased{C}}{\unbiased{\core{A}}}$ and $\contiguousLocal{C_K}{\core{A}_K}$. Thus, the statement follows by \Cref{LSlem:contiguous1}.
+\end{proof}
+
+In the second main part of the proof of \Cref{LSthm:local_core} we consider the trees which we attach to the vertices of the core $\core{\planargraph}$ to obtain the complex part $\complexpart{\planargraph}$. More precisely, we analyse the components of the random forest $\forest(n,\ntrees)$, which is a graph chosen uniformly at random from the class $\forestClass(n,\ntrees)$ of all forests on vertex set $[n]$ having $\ntrees$ trees as components such that the vertices $1, \ldots, \ntrees$ lie all in different tree components (cf. \Cref{LSdef:random_forest}). We will show that if we consider only a fixed number of tree components of $\forest(n,\ntrees)$, then these trees behave asymptotically like independent \GW\ trees with common offspring distribution $\poisson{1}$ (see \Cref{LSlem:limit_trees_forest}). To that end, we start by proving that these trees have the \lq right\rq\ number of vertices, which is given by \Cref{LSthm:total_progeny}.
+\begin{lem}\label{LSlem:number_vertices_gwt}
+Let $\ntrees=\ntrees(n)=\smallo{n}$ be such that $t=\smallomega{1}$, $N\in\N$, $k_1, \ldots, k_N\in\N$, and $\forest=\forest(n,\ntrees)\ur\forestClass(n,\ntrees)$. For $i\in[\ntrees]$ we denote by $F_i$ the tree component of $\forest$ containing vertex $i$. Then we have
+\begin{align*}
+\prob{\forall i\in[N]:\numberVertices{F_i}=k_i }=\left(1+\smallo{1}\right)\prod_{i=1}^{N}e^{-k_i}k_i^{k_i-1}/k_i!.
+\end{align*}
+\end{lem}
+\begin{proof}
+Every realisation of $\forest$ such that $\numberVertices{F_i}=k_i$ for each $i\in[N]$ can be constructed as follows. First we choose pairwise disjoint subsets $S_1, \ldots, S_N\subseteq [n]\setminus[t]$ such that $\left|S_i\right|=k_i-1$ for all $i\in[N]$. Then we pick a tree on vertex set $S_i\cup \left\{i\right\}$ for each $i\in[N]$. Finally, we add a forest on vertex set $[n]\setminus\left(\bigcup_{i\in[N]}S_i\cup\left\{i\right\}\right)$ with $(\ntrees-N)$ tree components such that the vertices $N+1, \ldots, t$ lie all in different tree components. Thus, we obtain with $K_i:=\sum_{j=1}^{i}k_j$
+\begin{align*}
+&\prob{\forall i\in[N]:\numberVertices{F_i}=k_i}
+\\
+&~~~~~~=\left(\prod_{i=1}^{N}\binom{n-\ntrees-K_{i-1}}{k_i-1}k_i^{k_i-2}\right)\cdot (\ntrees-N)\left(n-K_N\right)^{n-K_N-\ntrees+N-1}/\left(\ntrees n^{n-t-1}\right)
+\\
+&~~~~~~=\left(1+\smallo{1}\right)\left(\prod_{i=1}^{N}n^{k_i-1}/\left(k_i-1\right)!\cdot  k_i^{k_i-2}\right)n^{n-K_N-\ntrees+N-1}e^{-K_N}/n^{n-\ntrees-1}
+\\
+&~~~~~~=\left(1+\smallo{1}\right)\prod_{i=1}^{N}e^{-k_i}k_i^{k_i-1}/k_i!,
+\end{align*}
+as desired.
+\end{proof}
+In the proof of \Cref{LSlem:limit_trees_forest} we will use the following two known facts.
+\begin{thm}[{\hspace{1sp}\cite[Theorem 3.16]{vanderHofstad2017}}]\label{LSthm:total_progeny}
+Let $\gwt{1}$ be a \GW\ tree with offspring distribution $\poisson{1}$. Then for each $k\in\N$
+\begin{align*}
+	\prob{\numberVertices{\gwt{1}}=k}=e^{-k}k^{k-1}/k!.
+\end{align*}
+\end{thm}
+
+\begin{thm}[\hspace{1sp}\cite{Aldous1991b}]\label{LSthm:cayley_gwt_tree}
+Let $k\in\N$ be fixed, $T=T(k)$ the random tree on vertex set $[k]$, and $\gwt{1}$ the \GW\ tree with offspring distribution $\poisson{1}$. Then for each rooted graph $\detGraph$
+\begin{align*}
+\prob{\unbiased{T}\isomorphic\detGraph}=\condprob{\gwt{1}\isomorphic\detGraph}{\numberVertices{\gwt{1}}=k}.
+\end{align*} 
+\end{thm}
+\Cref{LSthm:cayley_gwt_tree} says that $T(k)$, considered as a rooted graph, is distributed like a \GW\ tree $\gwt{1}$ conditioned on the event that $\gwt{1}$ has $k$ vertices. Now we can determine the asymptotic behaviour of the components of the random forest $F(n,\ntrees)$.
+\begin{lem}\label{LSlem:limit_trees_forest}
+Let $\ntrees=\ntrees(n)=\smallo{n}$ be such that $t=\smallomega{1}$, $N\in\N$, $\detGraph_1, \ldots, \detGraph_N$ rooted graphs, and $\forest=\forest(n,\ntrees)\ur\forestClass(n,\ntrees)$. For $i\in[\ntrees]$ we denote by $F_i$ the tree component of $\forest$ containing vertex $i$. Then we have
+\begin{align*}
+	\prob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i }=\left(1+\smallo{1}\right)\prod_{i=1}^{N}\prob{\gwt{1}\isomorphic\detGraph_i}.
+\end{align*}
+\end{lem}
+\begin{proof}
+Let $k_1, \ldots, k_N$ be the number of vertices in the rooted graphs $\detGraph_1, \ldots, \detGraph_N$, respectively. Using \Cref{LSlem:number_vertices_gwt} we obtain
+\begin{align}\label{LSeq:20}
+&\prob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i}
+\nonumber
+\\[0.1cm]
+&~~~=\prob{\forall i\in[N]:\numberVertices{F_i}=k_i}~\condprob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i}{\forall i\in[N]:\numberVertices{F_i}=k_i}\nonumber
+\\
+&~~~=\left(1+\smallo{1}\right)\left(\prod_{i=1}^{N}e^{-k_i}k_i^{k_i-1}/k_i!\right)~\condprob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i}{\forall i\in[N]:\numberVertices{F_i}=k_i}.
+\end{align}
+Conditioned on the event $\left\{\forall i\in[N]:\numberVertices{F_i}=k_i\right\}$ the tree components $F_1, \ldots, F_N$ are independent and distributed like random trees $T(k_1), \ldots, T(k_N)$, respectively. Thus, we obtain by \Cref{LSthm:cayley_gwt_tree}
+\begin{align}\label{LSeq:19}
+&\condprob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i}{\forall i\in[N]:\numberVertices{F_i}=k_i}=\prod_{i=1}^{N}\prob{\unbiased{T(k_i)}\isomorphic \detGraph_i}\nonumber
+\\
+&~~~~~~~=\prod_{i=1}^{N}\condprob{\gwt{1}\isomorphic\detGraph_i}{\numberVertices{\gwt{1}}=k_i}\nonumber
+\\
+&~~~~~~~=\prod_{i=1}^{N}\prob{\gwt{1}\isomorphic\detGraph_i}/\prob{\numberVertices{\gwt{1}}=k_i}.
+\end{align}
+Using \Cref{LSthm:total_progeny} in (\ref{LSeq:19}) we obtain
+\begin{align*}
+\condprob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i}{\forall i\in[N]:\numberVertices{F_i}=k_i}=\prod_{i=1}^{N}\prob{\gwt{1}\isomorphic\detGraph_i}e^{k_i}k_i^{-k_i+1}k_i!.
+\end{align*}
+Plugging in that in (\ref{LSeq:20}) yields
+\begin{align*}
+&\prob{\forall i\in[N]:\rootedGraph{F_i}{i}\isomorphic \detGraph_i}
+\\
+&~~~=\left(1+\smallo{1}\right)\left(\prod_{i=1}^{N}e^{-k_i}k_i^{k_i-1}/k_i!\right)~\left(\prod_{i=1}^{N}\prob{\gwt{1}\isomorphic\detGraph_i}e^{k_i}k_i^{-k_i+1}k_i!\right)\\
+&~~~=\left(1+\smallo{1}\right)\prod_{i=1}^{N}\prob{\gwt{1}\isomorphic\detGraph_i},
+\end{align*}
+which finishes the proof.
+\end{proof}
+
+In \Cref{LSlem:core_local} we obtained the local structure of the core $\core{\planargraph}$ and in \Cref{LSlem:limit_trees_forest} the asymptotic behaviour of the trees which we attach to $\core{\planargraph}$. Combining these two statements we can prove \Cref{LSthm:local_core} by first considering the random complex part $Q(C,q)$ as defined in \Cref{LSdef:random_complex} and then using the concept of conditional random rooted graphs.
+\begin{lem}\label{LSlem:local_core_complex}
+	For each $n\in\N$, let $C=C(n)$ be a core with kernel $K=\kernel{C}$, $q=q(n)\in\N$, and $Q=Q(C,q)$ be the random complex part with core $C$ and vertex set $[q]$. Suppose that $\numberEdges{K}=\smallo{\numberVertices{C}}$, $\numberVertices{C}=\smallo{q}$, $\distributionalLimit{\unbiased{C}}{\infinitepath{2}}$, and $\distributionalLimit{C_K}{\infinitepath{3}}$. Then we have $\distributionalLimit{Q_C}{\skeletonTreeRays{2}}$ and $\distributionalLimit{Q_K}{\skeletonTreeRays{3}}$.
+\end{lem}
+\begin{proof}
+We assume that $Q_C=\rootedGraph{Q}{r_C}$, i.e. $r_C\ur\vertexSet{C}$, and let $\radius\in\N$. We recall that $Q$ can be constructed by choosing a random forest $\forest=\forest(q, \numberVertices{C})$ and replacing each vertex $v$ in $C$ by the tree component of $\forest$ rooted at $v$. We can assume that we first pick the root $\root_C$ and then independently the forest $F$. Then $\ball{\radius}{Q}{\root_C}$ depends only on those trees of $F$ which are attached to vertices in $\ball{\radius}{C}{\root_C}$. Due to the assumption $\distributionalLimit{Q_C}{\skeletonTreeRays{2}}$ \whp\ $\ball{\radius}{C}{\root_C}$ is a graph consisting of two paths of length $\radius$ starting at $\root_C$. If this is the case, then $\numberVertices{\ball{\radius}{C}{\root_C}}=2\radius+1$ and we can apply \Cref{LSlem:limit_trees_forest} to the $2\radius+1$ trees attached to the vertices in 
+$\vertexSet{\ball{\radius}{C}{\root_C}}$, since $\numberVertices{C}=\smallo{q}$ and the assumption $\numberEdges{\kernel{C}}=\smallo{\numberVertices{C}}$ implies $\numberVertices{C}=\smallomega{1}$. Hence, these trees behave asymptotically like independent \GW\ trees $\gwt{1}$ with offspring distribution $\poisson{1}$, which implies $\distributionalLimit{Q_C}{\skeletonTreeRays{2}}$. The second statement $\distributionalLimit{Q_K}{\skeletonTreeRays{3}}$ follows analogously.
+\end{proof}
+
+\proofofW{LSthm:local_core}
+To use \Cref{LSlem:conditional}, let $\cl(n)$ be the subclass of $\planarclass(n,m)$ containing those graphs $H$ satisfying $\numberEdges{\kernel{H}}=\smallo{\numberVertices{\core{H}}}$, $\numberVertices{\core{H}}=\smallo{\numberVertices{\complexpart{H}}}$, and $\distributionalLimit{\unbiased{\core{H}}}{\infinitepath{2}}$. Due to \Cref{LSthm:internal_structure}\ref{LSthm:internal_structure1}, \ref{LSthm:internal_structure2} and \Cref{LSlem:core_local} we have \whp\ $\planargraph\in \cl:=\cup_n\cl(n)$. Let $A_C=A_C(n)$ be the random rooted graph where we first pick $A=A(n)\ur\cl(n)$ and given the realisation $H$ of $A$, the root is chosen uniformly at random from the vertex set of the core $\core{H}$. We define the function $\func$ such that $\func(H)=\left(\core{H}, \numberVertices{\complexpart{H}}\right)$ for each $H\in\cl$ and let $\seqLocal=\left(C_n, q_n\right)_{n\in\N}$ be a sequence that is feasible for $\left(\cl, \func\right)$. The local structure of $\condGraph{A_C}{\seqLocal}$ is distributed like that of $Q(C_n, q_n)_{C_n}$, which is the graph $Q(C_n, q_n)$, as defined in \Cref{LSdef:random_complex}, rooted at a randomly chosen vertex from the core $C_n$. Hence, we obtain $\distributionalLimit{\condGraph{A_C}{\seqLocal}}{\skeletonTreeRays{2}}$ by \Cref{LSlem:local_core_complex}, which implies  $\distributionalLimit{A_C}{\skeletonTreeRays{2}}$ due to \Cref{LSlem:conditional}. Using \Cref{LSlem:contiguous2}\ref{LSlem:contiguous2A} and the fact that \whp\ $\planargraph\in \cl$ we obtain $\contiguousLocal{\planargraph_C}{A_C}$. Thus, we have $\distributionalLimit{\planargraph_C}{\skeletonTreeRays{2}}$ by \Cref{LSlem:contiguous1}. The assertion $\distributionalLimit{\planargraph_K}{\skeletonTreeRays{3}}$ can be shown analogously. \qed
+
+\section[Local structure of the \ER\ random graph]{Local structure of the \ER\ random graph: Proof of \Cref{LSlem:local_er}}\label{LSapp:local_er}
+In order to show \Cref{LSlem:local_er} we will consider plane trees, i.e. rooted unlabelled trees in which the children of each vertex are distinguishable. For instance, we can think that such a tree is embedded in the plane and the children of a vertex are ordered from \lq left\rq\ to \lq right\rq. We note that a rooted labelled tree $\rootedGraph{H}{\root}$ corresponds to a plane tree $\planeTree$ in a canonical way: The root of $\planeTree$ is $\root$ and the children of a vertex are ordered according to their labels in $\rootedGraph{H}{\root}$, e.g. in ascending order. Finally, we \lq forget\rq\ the labels in $H$ to obtain $\planeTree$. We refer to \Cref{LSfig:plane_tree} for an illustration of connecting a rooted labelled tree to a plane tree. Given a plane tree $\planeTree$, a rooted graph $\rootedGraph{H}{\root}$, and $\radius\in\N$, we will write in the following $\ball{\radius}{H}{\root}=\planeTree$ to express that $\ball{\radius}{H}{\root}$ is a tree and the corresponding plane tree equals $\planeTree$. 
+
+\begin{figure}[t]
+	\centering
+	\begin{tikzpicture}[thick, every node/.style={circle, inner sep=0, minimum size=0.4cm}, scale=0.8]
+		
+		\node (A) at (0,0) [draw,rectangle]  {3};
+		\node (B) at (-1.3,-1.2) [draw]  {5};
+		\node (C) at (0,-1.2) [draw]  {9};
+		\node (D) at (1.3,-1.2) [draw]  {2};
+		\node (E) at (-0.7,-2.4) [draw]  {8};
+		\node (F) at (0.5,-2.4) [draw]  {7};
+		\node (G) at (1.5,-2.4) [draw]  {4};
+		\node (H) at (-0.7,-3.6) [draw]  {10};
+		\node (I) at (0.1,-3.6) [draw]  {1};
+		\node (J) at (1,-3.6) [draw]  {6};
+		\draw[-] (A) to (B);
+		\draw[-] (A) to (C);
+		\draw[-] (A) to (D);
+		\draw[-] (C) to (E);
+		\draw[-] (C) to (F);
+		\draw[-] (D) to (G);
+		\draw[-] (E) to (H);
+		\draw[-] (F) to (I);
+		\draw[-] (F) to (J);
+				
+		\node (A1) at (4.5,0) [draw,rectangle]  {3};
+		\node (B1) at (4.5,-1.2) [draw]  {5};
+		\node (C1) at (5.8,-1.2) [draw]  {9};
+		\node (D1) at (3.2,-1.2) [draw]  {2};
+		\node (E1) at (6.3,-2.4) [draw]  {8};
+		\node (F1) at (5.3,-2.4) [draw]  {7};
+		\node (G1) at (3.2,-2.4) [draw]  {4};
+		\node (H1) at (6.5,-3.6) [draw]  {10};
+		\node (I1) at (4.8,-3.6) [draw]  {1};
+		\node (J1) at (5.8,-3.6) [draw]  {6};
+		\draw[-] (A1) to (B1);
+		\draw[-] (A1) to (C1);
+		\draw[-] (A1) to (D1);
+		\draw[-] (C1) to (E1);
+		\draw[-] (C1) to (F1);
+		\draw[-] (D1) to (G1);
+		\draw[-] (E1) to (H1);
+		\draw[-] (F1) to (I1);
+		\draw[-] (F1) to (J1);
+		
+		\node (A2) at (9.3,0) [draw,fill=gray,rectangle]  {};
+		\node (B2) at (9.3,-1.2) [draw,fill=gray]  {};
+		\node (C2) at (10.6,-1.2) [draw,fill=gray]  {};
+		\node (D2) at (8,-1.2) [draw,fill=gray]  {};
+		\node (E2) at (11.1,-2.4) [draw,fill=gray]  {};
+		\node (F2) at (10.1,-2.4) [draw,fill=gray]  {};
+		\node (G2) at (8,-2.4) [draw,fill=gray]  {};
+		\node (H2) at (11.3,-3.6) [draw,fill=gray]  {};
+		\node (I2) at (9.6,-3.6) [draw,fill=gray]  {};
+		\node (J2) at (10.6,-3.6) [draw,fill=gray]  {};
+		\draw[-] (A2) to (B2);
+		\draw[-] (A2) to (C2);
+		\draw[-] (A2) to (D2);
+		\draw[-] (C2) to (E2);
+		\draw[-] (C2) to (F2);
+		\draw[-] (D2) to (G2);
+		\draw[-] (E2) to (H2);
+		\draw[-] (F2) to (I2);
+		\draw[-] (F2) to (J2);
+	\end{tikzpicture} 
+	\caption{A rooted labelled tree $H$ with root $3$ on the left-hand side together with the corresponding plane tree on the right-hand side. The tree in the middle reflects $H$ after ordering the children of each vertex according to their labels.}
+	\label{LSfig:plane_tree}
+\end{figure}
+
+A \GW\ tree $\gwt{c}$ with offspring distribution $\poisson{c}$ can also be considered as a plane tree if we build $\gwt{c}$ via a branching process: We start by revealing the number of children of the root $v_0$ by drawing a random variable $X_0$ according to the $\poisson{c}$-distribution. Then we let $v_1, \ldots, v_{X_0}$ be the children of $v_0$ and determine the number of children of $v_1, \ldots, v_{X_0}$ one after another by drawing i.i.d. $\poisson{c}$-distributed random variables. Next, we sequentially choose the number of children of these new vertices and so on. Now it suffices to show the following modified version of \Cref{LSlem:local_er}. Roughly speaking, it is easier to show \Cref{LSlem:local_er2} than proving \Cref{LSlem:local_er} directly, because considering plane trees breaks some possible symmetries in a rooted unlabelled tree. 
+\begin{lem}\label{LSlem:local_er2}
+	Let $m=m(n)=\alpha n/2$ where $\alpha=\alpha(n)$ tends to a constant $c\geq 0$, $\planeTree$ be a plane tree, $\radius\in\N$, and $G=G(n,m)\ur\erClass(n,m)$. Then \whp
+	\begin{align*}
+		n^{-1}\cdot\Big|\setbuilderBig{v\in\vertexSet{G}}{\ball{\radius}{G}{v}=\planeTree}\Big|=\left(1+\smallo{1}\right)\prob{\ballP{\radius}{\gwt{c}}=\planeTree},
+	\end{align*}
+where the \GW\ tree $\gwt{c}$ is considered as a plane tree.
+\end{lem}
+\begin{proof}
+	To simplify notation, we set for $v\in\vertexSet{G}$
+\begin{align*}
+X_v:=
+\begin{cases}
+	1  & \text{~~if~~} \ball{\radius}{G}{v}=\planeTree,\\
+	0  & \text{~~otherwise~~}.
+\end{cases}	
+\end{align*}
+We also define $X:=\sum_{v}X_v$ and $\gamma:=\prob{\ballP{\radius}{\gwt{c}}=\planeTree}$. Using these notations we can rewrite the statement as \whp\ $X=\left(1+\smallo{1}\right)\gamma n$. Let $v_1, \ldots, v_{\numberVertices{\planeTree}}$ be the vertices of $\planeTree$ in the order they are found by a breadth-first algorithm which starts at the root of $\planeTree$ and chooses the order of the children according to their order in $\planeTree$. If $\distance{\planeTree}{v_1}{v_{\numberVertices{\planeTree}}}>\radius$, then we obviously have $X=\gamma=0$. Thus, we can restrict our considerations to the case $\distance{\planeTree}{v_1}{v_{\numberVertices{\planeTree}}}\leq\radius$. Now let $k\in[{\numberVertices{\planeTree}}]$ be such that $\distance{\planeTree}{v_1}{v_i}<\radius$ for all $i\leq k$ and $\distance{\planeTree}{v_1}{v_i}=\radius$ if $i>k$. For each $i\in[k]$ we denote by $d_i$ the number of children of $v_i$ in $\planeTree$, i.e. $d_1=\degree{v_1}{\planeTree}$ and $d_i=\degree{v_i}{\planeTree}-1$ for $i\geq 2$, where $\degree{v_i}{\planeTree}$ is the degree of $v_i$ in $\planeTree$. By revealing the number of children of each vertex in the \GW\ tree $\gwt{c}$ sequentially, we obtain
+\begin{align}\label{LSeq:16}
+\gamma=\prod_{i=1}^{k}\frac{e^{-c}c^{d_i}}{d_i!}=e^{-ck}c^{\numberVertices{\planeTree}-1}\prod_{i=1}^{k}\frac{1}{d_i!},
+\end{align}
+where we used in the last equality that $\sum_{i=1}^{k}d_i=\numberVertices{\planeTree}-1$.
+
+In the next step, we show \whp\ $X=\left(1+\smallo{1}\right)\gamma n$ by the first and second moment method. To that end, it suffices to prove $\prob{X_v=1}=\left(1+\smallo{1}\right)\gamma$ for each $v\in\vertexSet{G}$ and $\prob{X_v=X_w=1}=\left(1+\smallo{1}\right)\gamma^2$ for all $v\neq w$. For the former one we fix a vertex $v\in[\vertexSet{G}]$ and estimate the number of graphs $H\in \mathcal{G}(n,m)$ with $\ball{\radius}{H}{v}=\planeTree$. Each such graph can be constructed by first creating $\ball{\radius}{H}{v}$ and then choosing the edges outside $\ball{\radius}{H}{v}$. To obtain $\ball{\radius}{H}{v}$ we choose sets of neighbours one after another. More precisely, we start by picking a subset $S_1\subseteq[n]\setminus\left\{v\right\}$ of size $d_1$ for the neighbourhood of $v$. Then we choose $S_2\subseteq[n]\setminus\left(\left\{v\right\}\cup S_1\right)$ of size $d_2$ for the neighbours of the next vertex and so on. We note that given the set of neighbours for a vertex the ordering of them in the plane tree $\ball{\radius}{H}{v}$ is already determined by the labels of the neighbours. Hence, the number of different ways of choosing the sets $S_1, \ldots, S_k$ of neighbours and thereby building $\ball{\radius}{H}{v}$ such that $\ball{\radius}{H}{v}=\planeTree$ is
+\begin{align}\label{LSeq:14}
+\prod_{i=1}^{k} \binom{n-1-D_{i-1}}{d_i}=\left(1+\smallo{1}\right)n^{\numberVertices{\planeTree}-1}\prod_{i=1}^{k}\frac{1}{d_i!},
+\end{align}
+where $D_i:=\sum_{j=1}^{i}d_{j}$ and $D_k=\numberVertices{\planeTree}-1$. Now we assume that $B=\ball{\radius}{H}{v}$ is already built and we want to choose the set $E$ of edges outside $B$. Let $B'$ be the set of vertices $w\in\vertexSet{B}$ with $\distance{B}{v}{w}<\radius$. We note that $|B'|=k$ and the endpoints of the edges in $E$ lie in $[n]\setminus B'$ but not both endpoints of an edge can lie in $\vertexSet{B}\setminus B'$.  
+Thus, the number of possible choices of $E$ is
+\begin{align}\label{LSeq:15}
+\binom{\binom{n-k}{2}-\binom{\numberVertices{\planeTree}-k}{2}}{m-\numberVertices{\planeTree}+1}=\left(1+\smallo{1}\right)e^{-ck}\left(c/n\right)^{\numberVertices{\planeTree}-1}\binom{\binom{n}{2}}{m},
+\end{align}
+where the equality follows by a standard asymptotic computation. Combining (\ref{LSeq:14}) and (\ref{LSeq:15}) yields
+\begin{align}
+\Big|\setbuilder{H\in\mathcal{G}(n,m)}{\ball{\radius}{H}{v}=\planeTree}\Big|=\left(1+\smallo{1}\right)e^{-ck}c^{\numberVertices{\planeTree}-1}\binom{\binom{n}{2}}{m}\prod_{i=1}^{k}\frac{1}{d_i!}.
+\end{align}
+Together with (\ref{LSeq:16}) this implies
+\begin{align}\label{LSeq:17}
+\prob{X_v=1}=\frac{\left|\setbuilder{H\in\mathcal{G}(n,m)}{\ball{\radius}{H}{v}=\planeTree}\right|}{\left|\mathcal{G}(n,m)\right|}=\left(1+\smallo{1}\right)\gamma.
+\end{align}
+
+In the next step, we show $\prob{X_v=X_w=1}=\left(1+\smallo{1}\right)\gamma^2$ for all $v\neq w$. To that end, we start by estimating the number of graphs $H\in\mathcal{G}(n,m)$ which satisfy $\ball{\radius}{H}{v}=\ball{\radius}{H}{w}=\planeTree$ and $\ball{\radius}{H}{v}\cap\ball{\radius}{H}{w}=\emptyset$, i.e. $\ball{\radius}{H}{v}$ and $\ball{\radius}{H}{w}$ share no vertex and considered as plane trees they coincide both with $\planeTree$. Each such graph can be constructed by choosing sequentially $\ball{\radius}{H}{v}$, $\ball{\radius}{H}{w}$, and then the remaining edges. Analogously to (\ref{LSeq:14}) and (\ref{LSeq:15}), the possible number of doing that is
+\begin{align}\label{LSeq:18}
+&\Big|\setbuilder{H\in\mathcal{G}(n,m)}{\ball{\radius}{H}{v}=\ball{\radius}{H}{w}=\planeTree, \ball{\radius}{H}{v}\cap\ball{\radius}{H}{w}=\emptyset}\Big|\nonumber
+\\&=\prod_{i=1}^{k} \binom{n-2-D_{i-1}}{d_i}\cdot \prod_{i=1}^{k} \binom{n-1-\numberVertices{\planeTree}-D_{i-1}}{d_i}\cdot\binom{\binom{n-2k}{2}-2\binom{\numberVertices{\planeTree}-k}{2}}{m-2\numberVertices{\planeTree}+2}\nonumber
+\\
+&=\left(1+\smallo{1}\right)\gamma^2\binom{\binom{n}{2}}{m}.
+\end{align}
+Next, we prove that the number of graphs $H\in\mathcal{G}(n,m)$ with $\ball{\radius}{H}{v}\cap\ball{\radius}{H}{w}\neq\emptyset$ is \lq small\rq, which will imply together with (\ref{LSeq:18}) that $\prob{X_v=X_w=1}=\left(1+\smallo{1}\right)\gamma^2$. To that end, let $i\in\N$ be fixed. Each graph $H\in\mathcal{G}(n,m)$ with $\distance{H}{v}{w}=i$ can be constructed (not necessarily in a unique way) by choosing first a path of length $i$ from $v$ to $w$ and then picking the $m-i$ remaining edges. Hence, we obtain
+\begin{align*}
+\Big|\setbuilder{H\in\mathcal{G}(n,m)}{\distance{H}{v}{w}=i}\Big|&\leq (n-2)(n-3)\ldots(n-i)\binom{\binom{n}{2}-i+1}{m-i}
+\\&=\bigo{n^{-1}}\binom{\binom{n}{2}}{m}.
+\end{align*}
+In particular, this implies
+\begin{align*}
+	\Big|\setbuilder{H\in\mathcal{G}(n,m)}{\ball{\radius}{H}{v}\cap\ball{\radius}{H}{w}\neq\emptyset}\Big|=\bigo{n^{-1}}\binom{\binom{n}{2}}{m}.
+\end{align*}
+Combining that with (\ref{LSeq:18}) yields
+\begin{align*}
+\Big|\setbuilder{H\in\mathcal{G}(n,m)}{\ball{\radius}{H}{v}=\ball{\radius}{H}{w}=\planeTree}\Big|=\left(1+\smallo{1}\right)\gamma^2\binom{\binom{n}{2}}{m}.
+\end{align*}
+Finally, this implies
+\begin{align}\label{LSeq:1}
+\prob{X_v=X_w=1}=
+\frac{\left|\setbuilder{H\in\mathcal{G}(n,m)}{\ball{\radius}{H}{v}=\ball{\radius}{H}{w}=\planeTree}\right|}{\left|\mathcal{G}(n,m)\right|}=\left(1+\smallo{1}\right)\gamma^2.
+\end{align}
+Hence, the statement follows by (\ref{LSeq:17}), (\ref{LSeq:1}), and the first and second moment method.
+\end{proof}
+
+\section{Discussion}\label{LSsec:discussion}
+The only properties of $\planargraph(n,m)$ used in our proofs are the statements on the internal structure from \Cref{LSthm:internal_structure}. Kang, Moßhammer, and Sprüssel \cite{KangMosshammerSpruessel2020} proved that \Cref{LSthm:internal_structure} holds also for many other graph classes, including cactus graphs, series-parallel graphs, and graphs embeddable on an orientable surface of genus $g\in\N_0$ (see also \cite[Section 4]{KangMissethan2021}). Combining the generalised version of \Cref{LSthm:internal_structure} and analogous proofs of \Cref{LSthm:main1,LSthm:main2,LSthm:main3,LSthm:main4,LSthm:local_core}, one can show the following result, which answers a question of Kang, Moßhammer, and Sprüssel \cite[Question 8.7]{KangMosshammerSpruessel2020}.
+\begin{thm}\label{LSthm:general}
+	\Cref{LSthm:main1,LSthm:main2,LSthm:main3,LSthm:main4,LSthm:local_core} are also true for the class of cactus graphs, the class of series-parallel graphs, and the class of graphs embeddable on an orientable surface of genus $g\in \N_0$.
+\end{thm}

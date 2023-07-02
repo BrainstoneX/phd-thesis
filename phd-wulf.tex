@@ -1,0 +1,116 @@
+\documentclass[twoside,openright,bibliography=totoc]{scrreprt}
+%\documentclass[report,mono,twoside,openright]{tugrazbooklet}
+%\documentclass[a4paper]{book}
+
+\usepackage[phd]{tugrazthesis}
+% options:
+%   - msc (for Master's thesis/Masterarbeit) OR
+%     diplom (for Diploma thesis/Diplomarbeit) OR
+%     phd (for Doctoral thesis/Dissertation)
+%   - nawi (for NAWI curricula)
+%   - individual (for Individuelles Masterstudium)
+
+\usepackage[ngerman,english]{babel}  % uncomment to switch to German
+
+%\usepackage{filecontents}  % for the integrated bibliography file (backwards compatibility)
+%\usepackage[backend=backend,style=numeric-comp]{biblatex}  % to generate the bibliography
+%\addbibresource{phd-missethan.bib}  % name of the bib-file
+
+\input{packages}
+
+%\makeatletter
+%\renewcommand{\@pnumwidth}{3em} 
+%\renewcommand{\@tocrmarg}{4em}
+%\makeatother
+
+\overfullrule=3mm
+
+\input{macros}
+
+\begin{document}
+%--- INFORMATION FOR TITLEPAGE -------------------------------------------------
+
+% Your name including previous academic degrees (optional argument sets a different \author{}):
+\thesisauthor[Lasse Wulf]{Lasse Wulf, B.Sc. M.Sc. M.Sc.}
+
+% Title of your thesis (optional argument sets a different \title{}):
+\thesistitle[Random planar graphs]{On generalizations of some classical combinatorial optimization problems.\\ Multi-stage robustness, higher-order cost functions, and nonpreemption.}
+
+% Date of completion (optional argument sets a different \date{})
+\thesisdate[ ]{July 2023}
+
+% Supervisor headline (select male/female/plural version)
+\supervisortitle{\germanenglish{Betreuerin}{Supervisor}}
+
+% Supervisor info
+\supervisor{%
+  Univ.-Prof. Bettina Klinz, Ph.D.
+\\[0.7cm]
+  Institute of Discrete Mathematics
+
+  %optional extra information (second advisor, name of faculty, etc.)\\
+  %up to 2 lines
+}
+
+% Academic degree achieved with this thesis, according to your curriculum (check curriculum and select male/female version):
+\academicdegree{Doktor der technischen Wissenschaften} % phd
+
+
+%--- FRONT MATTER --------------------------------------------------------------
+\pagenumbering{gobble}
+
+
+% Insert title page and affidavit
+
+\printthesistitle
+
+\printaffidavit
+
+% Other front matter you may want to include
+
+\pagenumbering{roman}
+
+\chapter*{Abstract}
+
+English Abstract
+
+\begin{otherlanguage}{ngerman}
+\chapter*{Kurzfassung}
+Deutscher Abstract
+\end{otherlanguage}
+
+
+
+% You will typically include *both a German and an English abstract*.
+% The rest of the document will be either in German or in English.
+
+\cleardoublepage
+
+\chapter*{\germanenglish{Danksagung}{Acknowledgements}}
+
+Acknowledgements.
+
+\cleardoublepage
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+
+
+%--- MAIN CONTENT --------------------------------------------------------------
+
+%\pagenumbering{arabic}
+
+\input{introduction}
+
+\input{chapter-1-recov-select}
+
+
+%--- BIBLIOGRAPHY --------------------------------------------------------------
+
+% Print bibliography and include it in the table of contents:
+%\printbibliography[heading=bibintoc]
+\bibliographystyle{abbrv}
+\bibliography{phd-wulf-literature}
+
+\end{document}

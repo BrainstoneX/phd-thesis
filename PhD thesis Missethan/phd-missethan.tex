@@ -1,0 +1,183 @@
+\documentclass[twoside,openright,bibliography=totoc]{scrreprt}
+%\documentclass[report,mono,twoside,openright]{tugrazbooklet}
+%\documentclass[a4paper]{book}
+
+\usepackage[phd]{tugrazthesis}
+% options:
+%   - msc (for Master's thesis/Masterarbeit) OR
+%     diplom (for Diploma thesis/Diplomarbeit) OR
+%     phd (for Doctoral thesis/Dissertation)
+%   - nawi (for NAWI curricula)
+%   - individual (for Individuelles Masterstudium)
+
+\usepackage[ngerman,british]{babel}  % uncomment to switch to German
+
+%\usepackage{filecontents}  % for the integrated bibliography file (backwards compatibility)
+%\usepackage[backend=backend,style=numeric-comp]{biblatex}  % to generate the bibliography
+%\addbibresource{phd-missethan.bib}  % name of the bib-file
+
+\input{packages}
+
+\makeatletter
+\renewcommand{\@pnumwidth}{3em} 
+\renewcommand{\@tocrmarg}{4em}
+\makeatother
+
+\overfullrule=3mm
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{coro}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conjecture}[thm]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[thm]{Definition}
+
+\crefname{thm}{theorem}{theorems}
+\crefname{prop}{proposition}{propositions}
+\crefname{coro}{corollary}{corollaries}
+\crefname{lem}{lemma}{lemmas}
+\crefname{definition}{definition}{definitions}
+\crefname{conjecture}{conjecture}{conjectures}
+
+\renewcommand{\theenumi}{\normalfont(\roman{enumi})}
+\renewcommand{\labelenumi}{\theenumi}
+
+
+\newtheoremstyle{claim}%name
+{}%Space above
+{}%Space below
+{\itshape}%Body font
+{}%Indent amount
+{\bfseries}%Theorem head font
+{.}%Punctuation after theorem head
+{0.5em}%Space after theorem head
+{}%Theorem head spec(can be left empty, meaning ‘normal’)
+\theoremstyle{claim}
+\newtheorem{claim}{Claim}
+
+\crefname{claim}{claim}{claims}
+
+\input{macros}
+
+
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+
+\begin{document}
+%--- INFORMATION FOR TITLEPAGE -------------------------------------------------
+
+% Your name including previous academic degrees (optional argument sets a different \author{}):
+\thesisauthor[Michael Missethan]{Dipl.-Ing. Michael Missethan, BSc}
+
+% Title of your thesis (optional argument sets a different \title{}):
+\thesistitle[Random planar graphs]{Global and local properties\\of random planar graphs}
+
+% Date of completion (optional argument sets a different \date{})
+\thesisdate[ ]{February 2022}
+
+% Supervisor headline (select male/female/plural version)
+\supervisortitle{\germanenglish{Betreuerin/Betreuer}{Supervisor}}
+
+% Supervisor info
+\supervisor{%
+  Univ.-Prof. Mihyun Kang, Ph.D.
+\\[0.7cm]
+  Institute of Discrete Mathematics
+
+  %optional extra information (second advisor, name of faculty, etc.)\\
+  %up to 2 lines
+}
+
+% Academic degree achieved with this thesis, according to your curriculum (check curriculum and select male/female version):
+\academicdegree{Doktor der technischen Wissenschaften} % phd
+
+
+%--- FRONT MATTER --------------------------------------------------------------
+\pagenumbering{gobble}
+
+
+% Insert title page and affidavit
+
+\printthesistitle
+
+\printaffidavit
+
+% Other front matter you may want to include
+
+\pagenumbering{roman}
+
+\chapter*{Abstract}
+
+In this thesis we study the asymptotic behaviour of the {\em uniform random planar graph}, which is a graph chosen uniformly at random from the class of all planar graphs with given number of vertices and edges. We mainly focus on the sparse regime when the average degree is at most two where it is known that many global and local structures and graph parameters of a uniform random planar graph undergo sudden changes, such as the component structure and the order of the largest component.
+
+We provide various results on the {\em global structure} of a uniform random planar graph, such as asymptotic bounds on the length of the longest and shortest cycle and the number of vertices in its largest block. We also determine the asymptotic number of cut vertices in a uniform random planar graph and show that its maximum degree takes quite likely only one of two values. Furthermore, we describe the typical {\em local structure} of a uniform random planar graph around a randomly chosen vertex. In comparison to the classical \ER\ random graph, our results show that a uniform random planar graph exhibits very different behaviour in global and local properties and graph parameters studied in this thesis.
+
+The key proof methods include combinatorial counting techniques, such as the so-called {\em core-kernel approach}, and probabilistic approaches, such as the P\'olya urn model and the second moment method. The core-kernel approach is based on a piecewise construction of graphs via substructures, called kernels and cores. Using it, we find useful relations between a uniform random planar graph and very classical random experiments, such as the balls-into-bins model.
+
+Apart from a uniform random planar graph, we investigate the {\em random planar graph process}, in which we check edges one after another, accept an edge only if its addition to the current graph keeps the planarity of the resulting graph, and discard it otherwise. We derive the asymptotic number of accepted edges and the number of vertices in the largest component in the random planar graph process.
+
+We also extend our results to a much more general class of graphs than planar graphs, including series-parallel graphs and graphs on a surface.
+
+
+\begin{otherlanguage}{ngerman}
+\chapter*{Kurzfassung}
+In dieser Arbeit behandeln wir das asymptotische Verhalten des {\em planaren Zufallsgraphen}, welcher gleichverteilt auf der Klasse aller planaren Graphen mit gegebener Anzahl an Knoten und Kanten ist. Der Schwerpunkt liegt dabei auf dem so genannten dünn besetzten Bereich, in welchem der durchschnittliche Knotengrad höchstens zwei ist. Es ist allgemein bekannt, dass sich in diesem Bereich viele globale und lokale Eigenschaften des planaren Zufallsgraphen abrupt ändern, wie zum Beispiel die Struktur der Zusammenhangskomponenten oder die Anzahl der Knoten in der größten Zusammenhangskomponente. 
+
+Wir betrachten zahlreiche weitere {\em globale Eigenschaften} des planaren Zufallsgraphen und erarbeiten asymptotische Schranken für die Länge des längsten und kürzesten Kreises sowie für die Anzahl der Knoten im größten Block. Darüber hinaus bestimmen wir die asymptotische Anzahl an Gelenkpunkten im planaren Zufallsgraphen und zeigen, dass der maximale Knotengrad üblicherweise einen von nur zwei möglichen Werten annimmt. Des Weiteren beschreiben wir die {\em lokale Struktur} des planaren Zufallsgraphen in der Nähe eines zufällig gewählten Knotens. Unsere Resultate zeigen sehr deutlich, wie sich das Verhalten des planaren Zufallsgraphen von jenem des klassischen \ER\ Zufallsgraphen unterscheidet. 
+
+Unsere Beweisführung basiert auf kombinatorischen Abzählargumenten, wie zum Beispiel der so genannten {\em Core-Kernel-Methode}, und probabilistischen Ansätzen, wie zum Beispiel P\'olyas Urne und der Momenten-Methode. Bei der Core-Kernel-Methode werden Graphen mit Hilfe von Unterstrukturen, welche auch Cores und Kernels genannt werden, stückweise konstruiert. Unter Verwendung dieser finden wir nützliche Zusammenhänge zwischen dem planaren Zufallsgraphen und klassischen Zufallsexperimenten, wie zum Beispiel die zufällige Aufteilung von Bällen auf Fächer.
+
+Neben dem planaren Zufallsgraphen betrachten wir auch den {\em planaren Zufallsgraphen-Prozess}, bei welchem wir mit einem Graphen ohne Kanten starten. Danach wählen wir in jedem Schritt zufällig eine mögliche Kante aus und fügen sie hinzu, wenn der Graph planar bleibt. Andernfalls verwerfen wir die Kante und betrachten sie danach nicht mehr. Wir bestimmen die asymptotische Anzahl der akzeptierten Kanten sowie die Anzahl der Knoten in der größten Zusammenhangskomponente im Laufe des planaren Zufallsgraphen-Prozesses.
+
+Wir verallgemeinern unsere Resultate auch auf zahlreiche weitere Klassen von Graphen, unter anderem seriell-parallele Graphen und Graphen auf Oberflächen.
+\end{otherlanguage}
+
+
+
+% You will typically include *both a German and an English abstract*.
+% The rest of the document will be either in German or in English.
+
+\cleardoublepage
+
+\chapter*{\germanenglish{Danksagung}{Acknowledgements}}
+
+I would like to thank my supervisor Mihyun Kang for her constant support and discussions
+throughout my Ph.D. studies and many helpful comments and suggestions for my thesis. She introduced me to the world of random graphs and her enthusiasm for this field impressed me time and again. I also thank my colleagues at the Institute of Discrete Mathematics for having been kind and friendly companions. Moreover, I thank the doctoral program \lq Discrete Mathematics\rq\ and the TU Graz, which represented a fruitful learning environment.
+
+Most importantly, I am deeply grateful to my family and friends for incessantly supporting and motivating me throughout the production of this thesis.
+
+\cleardoublepage
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+
+
+%--- MAIN CONTENT --------------------------------------------------------------
+
+%\pagenumbering{arabic}
+
+\input{introduction}
+
+\input{cycles_blocks}
+
+\input{cutvertices}
+
+\input{maximum-degree}
+
+\input{local-structure}
+
+\input{planar-process}
+
+
+%--- BIBLIOGRAPHY --------------------------------------------------------------
+
+% Print bibliography and include it in the table of contents:
+%\printbibliography[heading=bibintoc]
+\bibliographystyle{abbrv}
+\bibliography{phd-missethan}
+
+\end{document}
