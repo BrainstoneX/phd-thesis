@@ -1,0 +1,329 @@
+\section{A linear time algorithm for the \textsc{Lin}SPP$_d$}\label{algo:sec}
+%%%%%%%%%%%%%%%%%
+In this section, we describe an algorithm which solves the linearization problem for SPP$_d$ (\textsc{Lin}SPP$_d$) in  $\bigO(m^d)$ time, i.e., in linear time.
+The algorithm uses the relationship between the \textsc{Lin}SPP$_d$ and the  \emph{All-Paths-Equal-Cost Problem (APECP)} which we introduce in  Section~\ref{APEC:ssec}.  
+In \cref{subsection:alg} we describe the SPP$_d$ algorithm and discuss
+its running time.
+
+ \subsection{The All Paths Equal Cost Problem of Order-$d$ (APECP$_d$)}
+\label{APEC:ssec}
+
+The All Paths  Equal Cost Problem of Order-$d$ (APECP$_d$) is defined as follows.
+\begin{center}
+%%%%%%%%%%%%%%%%%
+\boxxx{\textbf{Problem:}  ALL PATHS EQUAL COST of Order-$d$ (APECP$_d$)
+\\[1.0ex]
+\textbf{Instance:} An acyclic $\Pst$-covered directed graph $G=(V,A)$ with a source vertex $s$ and a sink vertex $t$, an  integer $d \geq 1$;
+an order-$d$   cost function $q_d\colon  \set{B \subseteq A : |B| \leq d} \to \R$.
+\\[1.0ex]
+\textbf{Question:} Do all $s$-$t$-paths  have the same cost, i.e.\ is there some $\beta \in \R$ such that $\text{SPP}_d(P,q_d) = \beta$ for every path $P$ in $\Pst$?}
+%%%%%%%%%%%%%%%%%
+\end{center}
+
+In the following we establish a connection between the \textsc{Lin}SPP$_d$ and the APECP$_{d-1}$ for $d\ge 2$. More precisely, we show in Lemma~\ref{lemma:corresponding-instance}  that    an   instance $(G,s,t,q_d)$ of the  \textsc{Lin}SPP$_d$ with an acyclic  $\Pst$-covered digraph $G=(V,A)$ can  be reduced  to $\bigO(m)$ instances of APECP$_{d-1}$, each of them corresponding to exactly one strongly basic arc with respect to some fixed system of nonbasic arcs (see Definitions~\ref{nonbasic:def} and \ref{stronglybasic:def}).  The  APECP$_{d-1}$ instance corresponding to a strongly basic arc  $a = (u, v)$ is defined as follows.
+\begin{definition}
+\label{def:corresponding-instance}
+    %Let an instance of the degree-$d$ linearization problem with $d \geq 2$ be given by a $\Pst$-covered acyclic graph $G = (V,A)$ and $s,t \in V$ and degree-$d$ interaction costs $q$.
+    %Consider a fixed system $N \subseteq A$ of nonbasic arcs. 
+  The instance $I^{(a)}$ of the APECP$_{d-1}$ corresponding to the strongly basic arc $a=(u,v)$ takes as input   the digraph $G^{(a)} = (V_u, E_u)$ with  source vertex $s' = s$,  sink vertex $t' = u$, where 
+ $V_u$ is the set of vertices in $V$ lying on at least one $s$-$u$-path and $A_u$  is the set of arcs in $A$ lying on at least one $s$-$u$-path.
+  The  order-$(d-1)$  cost function   $q_{d-1}^{(a)}\colon \{ B \subseteq A_u\colon  |B| \leq d-1\} \to \rz$ is given by
+    \begin{equation} \label{eq:definition_q_e}
+        q_{d-1}^{(a)}(B) := \left(\sum_{\substack{C \subseteq N_u\\ |C| \leq d - |B|}}q_d(B \cup C) \right) - \left( \sum_{\substack{C \subseteq a \cdot N_v\\ |C| \leq d - |B|}}q_d(B \cup C) \right). 
+    \end{equation}
+\end{definition}
+
+\begin{lemma}
+\label{lemma:corresponding-instance}
+Let $d \geq 2$ and let  $(G, s,t, q_d)$ be an instance of the \textsc{Lin}SPP$_d$ with a fixed system of nonbasic arcs  $N$. 
+The APECP$_{d-1}$ instance $I^{(a)}$ corresponding to some strongly basic arc $a$ is a \textsc{YES}-instance iff the arc $a$ has the property $(\pi)$ with respect to $f\colon \Pst\to\rz$ given by $f(P)=SPP_d(P,q_d)$ for $P\in \Pst$. In this case, $\xval(a) = \beta_a$, where $\beta_a$ is the common cost of all paths in the APECP$_{d-1}$ instance $I^{(a)}$.
+\end{lemma}
+\begin{proof}
+Let $a = (u,v) \in A$ be a strongly basic arc and let $P$ be some $s$-$u$-path in $G$. Then $P$ is  contained in the graph $G^{(a)} = (V_u, A_u)$. 
+Let $f^{(a)}(P)=SPP_{d-1}(P,q^{(a)}_{d-1})$ for any $s$-$u$-path $P$ in $G$. We have that
+\begin{align*}
+    &\quad \xval(a, P) = f_q(P \cdot N_u) - f_q(P \cdot a \cdot N_v) \\
+    &= \sum_{\substack{F \subseteq P \cdot N_u\\ |F| \leq d}}q_d(F) - \sum_{\substack{F \subseteq P \cdot a \cdot N_v\\ |F| \leq d}}q_d(F)\\
+    &= \sum_{k=0}^d \sum_{\substack{B \subseteq P\\ |B| = k}}\sum_{\substack{C \subseteq N_u\\ |C| \leq d - k}}q_d(B \cup C) - \sum_{k=0}^d \sum_{\substack{B \subseteq P\\ |B| = k}}\sum_{\substack{C \subseteq a \cdot N_v\\ |C| \leq d - k}}q_d(B \cup C)\\
+    &= \sum_{k=0}^{d-1} \sum_{\substack{B \subseteq P\\ |B| = k}}\sum_{\substack{C \subseteq N_u\\ |C| \leq d - k}}q_d(B \cup C) - \sum_{k=0}^{d-1} \sum_{\substack{B \subseteq P\\ |B| = k}}\sum_{\substack{C \subseteq a \cdot N_v\\ |C| \leq d - k}}q_d(B \cup C) \quad +  (1 - 1)\sum_{\substack{B \subseteq P\\ |B| = d}}q_d(B)\\
+     &= \sum_{k=0}^{d-1} \sum_{\substack{B \subseteq P\\ |B| = k}}\left(\sum_{\substack{C \subseteq N_u\\ |C| \leq d - k}}q_d(B \cup C) - \sum_{\substack{C \subseteq a \cdot N_v\\ |C| \leq d - k}}q_d(B \cup C)
+     \right)\\
+     &= \sum_{\substack{B \subseteq P\\ |B| \leq d-1}}q^{(a)}_{d-1}(B) = f^{(a)}(P).
+\end{align*}
+We conclude that the value $\xval(a, P)$ is independent of $P$, if and only if for every path the quantity $f^{(a)}(P)$ does not depend on $P$. The latter condition is equivalent to  $I^{(a)}$  being a \textsc{YES}-instance of the APECP$_{d-1}$. Furthermore, if this is the case, then $\xval(a) = f^{(a)}(P)$ for any $s$-$u$-path $P$.
+\qed
+\end{proof}
+\cref{lemma:property-pi,lemma:corresponding-instance} imply that an instance $(G,s,t,q_d)$ of the SPP$_d$ with an acyclic digraph $G$ is linearizable  iff each  instance $I^{(a)}$ of the APECP$_{d-1}$ corresponding to some strongly basic arc $a$   (with respect to some fixed system of nonbasic arcs)  is a YES-instance. Furthermore, the same lemmas imply that in this case a linearizing cost function in reduced form is obtained by letting $c(a) = \beta_a$ for all strongly basic arcs, $c(a) = 0$ for all nonbasic arcs, and $c(a) = \text{SPP}_d(a \cdot N_v)$ for all arcs $a = (s,v)$ incident to the source.
+
+
+Thus, we have shown that an instance of the  \textsc{Lin}SPP$_d$ can be reduced to $\bigO(m)$ instances  of the APECP$_{d-1}$.  
+Next, in Lemma~\ref{lemma:reduction-APEC} we show that each instance of the APECP$_{d-1}$  can  be reduced to an instance of  the \textsc{Lin}SPP$_{d-1}$.
+%
+First, we define a specific cost function as follows. 
+Let $G = (V, A)$ be a $\Pst$-covered acyclic digraph and $\beta \in \R$. The function $\const_\beta : A \rightarrow \R$  assigns cost $\beta$ to every arc incident to the source $s$, and $0$ to all other arcs.
+
+\begin{lemma}
+\label{lemma:reduction-APEC}
+    Let $G = (V, A)$ be a $\Pst$-covered acyclic digraph with source vertex $s$ and sink vertex $t$ and let  $N \subseteq A$ a fixed system of nonbasic arcs. Let $q_d$ be an order-$d$  cost function. The instance $(G,s,t,q_d)$ of the APECP$_d$ problem is a YES-instance iff the instance $(G,s,t, q_d)$ of SPP$_d$ is linearizable and $\const_\beta$ is its unique linearizing function in reduced form (with respect to $N$).
+\end{lemma}
+\begin{proof}
+    Clearly,  $\const_\beta$ is a linearizing function iff   all paths have the same cost $\beta$. % Further, if all paths have the same cost $\beta$, then  $\const_\beta$ is a linearizing function. 
+    Furthermore, observe that all  arcs incident to the source do not belong to $N$. Therefore $\const_\beta$ is in reduced form with respect to $N$. In fact, by \cref{lemma:nonbasic-arcs}  $\const_\beta$ is the unique linearizing  functions in reduced form, and $\red(c') = \const_\beta$ for all other linearizing functions $c'$.
+\qed
+\end{proof}
+
+
+Finally, we show in \cref{lemma:reduction-APEC} how the APECP$_1$ can be computed directly.
+\begin{lemma}
+\label{lemma:apec-1}
+    The APECP$_1$ can be solved in linear time $\bigO(m)$.
+\end{lemma}
+\begin{proof}
+    This is an easy exercise in dynamic programming. The algorithm uses the fact that in a $\Pst$-covered acyclic digraph all $s$-$t$-paths have the same cost if and only for every vertex $w$ all $s$-$w$-paths have the same cost. Hence we can introduce a variable $y_w \in \R$ for every vertex $w$. We let $y_s = 0$ and then check in topological vertex order for every vertex $w$, whether the value $y_u + q_1(\set{(u,w)})$ is the same for every incoming edge $(u, w)$. Finally, if this is the case, the returned common cost of all paths is given by $y_t + q_1(\emptyset)$.
+    
+    (We remark that attention to the case $q_1(\emptyset) \neq 0$ is crucial. This is because by definition, the term $q_1(\emptyset)$ is always included in SPP$_1(P, q_1)$ for every possible path $P$. Indeed, \cref{eq:definition_q_e} may produce instances with the property $q_1(\emptyset) \neq 0$.)
+    \qed
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The linear time \textsc{Lin}SPP$_d$ algorithm}
+\label{subsection:alg}
+Our \textsc{Lin}SPP$_d$ algorithm ${\cal A}$ works as follows.
+Consider an instance $(G,s,t,q_d)$ of the \textsc{Lin}SPP$_d$ with an acyclic $\Pst$-covered digraph $G$, with source vertex $s$, sink vertex $t$ and order-$d$ cost function $q_d$. We first fix some system of nonbasic arcs $N$ and construct the instance $I^{(a)}$ of the  APECP$_{d-1}$ problem given in \cref{def:corresponding-instance} for each strongly basic arc $a$. 
+Then,  we  check each instance  $I^{(a)}$ for being a  \textsc{YES}-instance and
+do this by reducing  $I^{(a)}$  to  an instance of \textsc{Lin}SPP$_{d-1}$ according to \cref{lemma:reduction-APEC}.
+By iterating this process we eventually end up with APECP problems of order $1$ that can be easily solved by  dynamic programming, as demonstrated in \cref{lemma:apec-1}. A summary in pseudocode is provided in Algorithm~\ref{alg}. The correctness of the algorithm follows from \cref{lemma:property-pi,lemma:corresponding-instance,lemma:reduction-APEC,lemma:apec-1}.
+
+\begin{algorithm}[htpb]
+    \SetKwFunction{FLinearizable}{Linearizable}
+    \SetKwFunction{FAPEC}{APECP}
+    \SetKwProg{Fn}{Function}{:}{}
+ \Fn{\FLinearizable{$G$,$q$,$d$}}{
+ \KwIn{acylic $\Pst$-covered $G$; integer $d \geq 2$; order-$d$ interaction costs $q_d$.}
+ \KwOut{$\False$ if $(G, q_d)$ is not linearizable, otherwise a tuple $(\True, c)$ such that $c$ is a linearizing cost function in reduced form.}
+ $N \gets$ some system of nonbasic arcs\;
+ Calculate $\set{(G^{(a)}, q^{(a)}_{d-1}) : a \text{ strongly basic}}$ \tcp*{using \cref{lemma:faster-reduction}.} \label{alg:linenumber:3}
+ \eIf{\FAPEC{$G^{(a)}$, $q^{(a)}_{d-1}$, $d-1$} = {\False} for some strongly basic $a$}{
+    \KwRet \False\;
+ }{
+  We have \FAPEC{$G^{(a)}$, $q^{(a)}_{d-1}$, $d-1$} = $(\True, \beta_a)$ for all strongly basic $a$\\
+    $c(a) \gets
+    \begin{cases}
+        \beta_a; & \text{$a$ strongly basic. }\\
+        f_q(a \cdot N_v) & \text{$a = (u,v)$ incident to source} \label{alg:linenumber:f_q} \tcp*{using \cref{lemma:faster-reduction}.}\\
+        0; &  \text{$a$ nonbasic.}
+    \end{cases}$\;
+    \KwRet $(\True, c)$\;
+ }
+ }
+ 
+ \Fn{\FAPEC{$G$,$q$,$d$}}{
+  \KwIn{acylic $\Pst$-covered $G$; integer $d \geq 1$; order-$d$ interaction costs $q_d$.}
+ \KwOut{$\False$ if not all source-sink paths in $(G, q_d)$ have same cost, otherwise a tuple $(\True, \beta)$ such that all paths have cost $\beta$.}
+ \uIf{$d=1$}{
+    solve directly\;
+ }
+ \uElseIf{\FLinearizable{$G$,$q_d$,$d$} = \False}{
+    \KwRet \False\;
+ }
+ \uElse{
+    We have \FLinearizable{$G$,$q_d$,$d$} = $(\True, c)$ for some $c$\;
+    \eIf{$c = \const_\beta$ for some $\beta$}{
+        \KwRet $(\True, \beta)$\;
+    }{
+        \KwRet \False\;
+    }
+ }
+ }
+ \caption{An algorithm to solve the \textsc{Lin}SPP$_d$.}
+ \label{alg}
+\end{algorithm}
+
+
+\label{subsection:alg-runtime}
+It is not hard to implement the algorithm described above
+in $\bigO(d^2m^{d+1})$ time. However, we can do better. With a careful implementation it is possible to achieve a better result.
+
+\begin{theorem}
+\label{thm:alg-linear-time}
+The \textsc{Lin}SPP$_d$ on acyclic digraphs can be solved in $\bigO(d^2m^d)$ time.
+\end{theorem}
+
+Note that  the input size required to encode the cost function $q_d$ equals $\sum_{k=0}^d \binom{m}{k} \geq m^d / d!$. Thus, $\bigO(d^2m^d)$ is linear in the input size and hence  optimal if  $d$ is considered a constant, like for example in the QSPP.
+The remainder of the section is devoted to prove \cref{thm:alg-linear-time}. The main bottleneck we have to get rid of is the computation of the instances $I^{(a)}$ corresponding to the strongly basic arcs $a$ in line~\ref{alg:linenumber:3} of Algorithm~\ref{alg}. If one simply uses the definition of $q^{(a)}_{d-1}$ from \cref{eq:definition_q_e}, then one can see that for each $a$ one can compute $q^{(a)}_{d-1}$ in $\bigO(dm^d)$ time. As this needs to be repeated for each strongly basic arc $a$, in total this would take $\bigO(dm^{d+1})$ time. A similar bottleneck arises in line~\ref{alg:linenumber:f_q} when computing $f_q(a \cdot N_v)$. We get rid of these two bottlenecks by calculating some \emph{helper values}.
+
+For all sets $B \subseteq A$ of arcs with $|B| \leq d-1$ and all vertices $x \in V \setminus \set{s}$, we define the helper value
+\begin{equation}
+    \gamma(B, x) := \sum_{\substack{C \subseteq N_x\\ |C| \leq d - |B|}}q_d(B \cup C). \label{eq:helper-values}
+\end{equation}
+
+
+ 
+\begin{lemma}
+\label{lemma:faster-reduction}
+The line~\ref{alg:linenumber:3} and the line~\ref{alg:linenumber:f_q} of Algorithm~\ref{alg} can be implemented such that their execution takes at most $c d m^d$ steps for some constant $c \geq 0$. This constant is independent of both $n$ and $d$.
+\end{lemma}
+\begin{proof}
+    Consider the helper values $\gamma(B,x)$ from \cref{eq:helper-values}.
+    We show how to precompute all the values of $\gamma$ for $B \subseteq A, |B| \leq d-1, x \in V \setminus \set{s}$ in $\bigO(dm^d)$ time. We begin by showing for some fixed set $B \subseteq A$ with $|B| \leq d-1$, how to compute the value $\gamma(B, x)$ for all vertices $x \in V\setminus\set{s}$. Let $k = |B|$ be the size of $B$, we have $k \in \fromto{0}{d-1}$. Assume that there is some nonbasic arc $a = (u, v) \in N$ such that we already computed $\gamma(B, v)$ and now want to compute $\gamma(B,u)$. Note that $N_u = a \cdot N_v$, because $a \in N$. We have the recursive formula
+    \begin{align}
+        \gamma(B, u) &= \sum_{\substack{C \subseteq a \cdot N_v\\ |C| \leq d - |B|}}q_d(B \cup C) \nonumber\\
+        &=  \sum_{\substack{C \subseteq N_v\\ |C| \leq d - |B| - 1}}q_d(B \cup \set{a} \cup C) + \sum_{\substack{C \subseteq N_v\\ |C| \leq d - |B|}}q_d(B \cup C)\nonumber\\
+        &=  \gamma(B, v) + \sum_{\substack{C \subseteq N_v\\ |C| \leq d - |B| - 1}}q_d(B \cup \set{a} \cup C). \label{eq:recursive-gammma}
+    \end{align}
+    This formula can be evaluated in $\binom{m}{{d - k - 1}}$ time. We can now traverse the tree of nonbasic arcs, starting at the root $t$, where $\gamma(B, t) = q(B)$, and iteratively apply the formula until we obtained all the values $\gamma(B, x)$ for the vertices $x \in V \setminus \set{s}$.
+    In total, it takes $n\binom{m}{{d - k - 1}}$ time to compute all values $\gamma(B, x)$ for a fixed set $B$ of size $k$. For each $k = 0,\dots,d-1$, there are $\binom{m}{k}$ subsets of size $k$. Therefore, the total time to compute all values of $\gamma$ is
+    \begin{align*}
+        \sum_{k=0}^{d-1} n\binom{m}{d - k - 1}\binom{m}{k} \leq \sum_{k=0}^d n\frac{m^{d-k-1}}{(d-k-1)!} \frac{m^k}{k!} \leq (d+1) nm^{d-1}.
+    \end{align*}
+    Here we used the very rough estimate $t! \geq 1$. We conclude that at most $c_1dm^d$ steps are necessary to precompute the values of $\gamma$ for some constant $c_1 \geq 0$.
+    
+    Now assume that all the values $\gamma(B, x)$ have been precomputed. For every strongly basic arc $a = (u, v)$, and each set $B \subseteq A_u$ with $|B| \leq d-1$, the interaction cost of $B$ in the corresponding APECP$_{d-1}$ instance is given by
+    \begin{align*}
+        q_{d-1}^{(a)}(B) = \gamma(B,u) - \gamma(B, v) - \sum_{\substack{C \subseteq N_v\\ |C| \leq d - |B| - 1}}q_d(B \cup \set{a} \cup C).
+    \end{align*}
+    This can be seen by plugging the definition of $\gamma$ into \cref{eq:definition_q_e}. This equation can be evaluated in $\binom{m}{d - k -1}$ time if $k=0,\dots,d-1$ is the size of $B$. In order to obtain all the desired values for $q^{(a)}_{d-1}(B)$ for all the APECP$_{d-1}$ instances, we need to consider every choice of the set $B$ (again there are at most $\binom{m}{k}$ sets of size $k$) and every of the at most $\bigO(m)$ choices of the arc $a$. 
+    The same analysis as before shows that given the precomputed $\gamma$-values, all required values of $q^{(a)}_{d-1}(B)$ can be computed in at most $c_3dm^d$ steps for some constant $c_3 \geq 0$. Finally, computing the vertex set $V_u$ and arc set $A_u$ of the APECP$_{d-1}$ instance clearly can be done in linear time $\bigO(m)$ for each strongly basic arc $a = (u,v)$. We conclude that computing the set $\set{(G^{(a)}, q^{(a)}_{d-1}) : a \text{ strongly basic })}$ of all APECP$_{d-1}$ instances can be done in at most $c_4dm^d$ steps for some constant $c_4 \geq 0$.
+
+    
+    Finally consider line~\ref{alg:linenumber:f_q} of Algorithm~\ref{alg} and assume that all helper values $\gamma(B,x)$ have been precomputed. Let $a = (s,v)$ be an arc incident to the source. We have that
+    \begin{align*}
+        f_q(a \cdot N_v) = \gamma(\emptyset, v) + \sum_{\substack{C \subseteq N_v\\ |C| \leq d - 1}}q(\set{a} \cup C).
+    \end{align*}
+    This formula can be evaluated in $\bigO(m^{d-1})$ time for each arc $a$. We conclude that the set of all values $f_q(a \cdot N_v)$ in line~\ref{alg:linenumber:f_q} of Algorithm~\ref{alg} can be computed in at most $c_5m^d$ steps for some constant $c_5 \geq 0$.
+    \qed
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:alg-linear-time}]
+It follows from \cref{lemma:property-pi,lemma:corresponding-instance,lemma:reduction-APEC,lemma:apec-1} that Algorithm~\ref{alg} correctly solves the \textsc{Lin}SPP$_d$. It follows from \cref{lemma:faster-reduction} that lines \ref{alg:linenumber:3} and \ref{alg:linenumber:f_q} can be implemented to take at most $c_0dm^d$ steps each for some constant $c_0 \geq 0$. The running time of all the remaining lines is asymptotically dominated by $m^d$. Now let $f(m, d)$ denote the worst-case running time of $\FLinearizable{}$ when input a digraph on $m$ arcs and degree-$d$ interaction cost. Let $g(m, d)$ be the corresponding function for $\FAPEC{}$. By the preceding arguments, there exists a constant $c \geq 0$ such that the following inequalities hold:
+\begin{align*}
+    f(m ,d) &\leq cdm^d + mg(m, d-1); & d \geq 2\\
+    g(m, d) &\leq cm + f(m, d); & d \geq 2\\
+    g(m, 1) &\leq cm.
+\end{align*}
+We show by induction over $d$ that $f(m, d) \leq cd(2d - 2)m^d$ and $g(m, d) \leq cd(2d - 1)m^d$. Indeed, in the base case $d = 1$ we have $g(m, 1) \leq cm$. For $d \geq 2$ we have 
+\begin{align*}
+    f(m, d) &\leq cdm^d + mc(d-1)(2d - 3)m^{d-1} \leq cd(2d - 2)m^d \\
+    g(m, d) &\leq cm + cd(2d - 2)m^d \leq cd(2d -1)m^d. 
+\end{align*}
+This implies that $f = \bigO(d^2m^d)$, which was to show.
+\qed
+\end{proof}
+
+\section{The subspace of linearizable instances}
+\label{sec:subspace}
+
+Let $d\in \nz$, $d\ge 2$, and a $\Pst$-covered acyclic digraph  $G = (V, A)$ with source vertex $s$ and sink vertex $t$  be  fixed. 
+Let $H^{(d)} := \set{B \subseteq H \mid |B| \leq d}$ be the set of all subsets of at most $d$ arcs in arc set $H\subseteq A$.
+Every order-$d$ cost function $q_d\colon A^{(d)}\to \rz$ can be uniquely represented by a vector $x \in \R^{A^{(d)}}$ with $q_d(F)=x_F$ for all $F\in A^{(d)}$, and vice-versa. Thus, each instance $(G,s,t,q_d)$ can be identified with the corresponding vector $x\in \rz^{A^{(d)}}$ and we will say that $x\in \R^{A^{(d)}}$ is an instance of the SPP$_d$. 
+It is straightforward to see that if $x,y \in \R^{A^{(d)}}$ are linearizable instances of the SPP$_d$, then $\mu x + \nu y$ is also a linearizable instance, for all scalars $\mu,\nu \in \R$.
+Therefore, the set of linearizable instances of the SPP$_d$ on the fixed digraph  $G$ form a linear subspace ${\cal L}_d$ of $\R^{A^{(d)}}$. 
+
+Methods to compute this subspace 
+are useful in
+B\&B algorithms 
+for the SPP$_d$ as they can be applied to compute
+better lower bounds along the lines of what Hu and Sotirov~\cite{huSo2021} did for general quadratic binary programs.
+Hu and Sotirov showed that for $d = 2$ a basis of ${\cal L}_d$ can be computed in polynomial time \cite[Prop. 5]{huSo2021}.
+We extend their result 
+to the case  $d > 2$.
+\begin{theorem}
+\label{thm:subspaces}
+Let $G = (V, A)$ be  a $\Pst$-covered, acyclic digraph with source vertex $s$ and sink vertex $t$ and let   $d \in \N$ be a constant.  A basis of the subspace ${\cal L}_d$  of the  linearizable instances of the SPP$_d$  can be computed in polynomial time.  
+\end{theorem}
+
+
+The goal of this setion is to prove \cref{thm:subspaces}. We first explain the main idea of the proof. The idea is to specify  a  $k\in \nz$ and  a  matrix $M$ of 
+polynomially bounded dimensions, 
+such that for  $f: \R^{A^{(d)}} \rightarrow \R^k$ with  $f(x)=Mx$,  we have:
+$f(x) = 0$ 
+iff
+$x$ is  a linearizable instance of the SPP$_d$. Thus,  the linearizable instances $x$ of the SPP$_d$ 
+form the kernel of $M$, which can be efficiently computed.
+
+This function $f$ will be composed of smaller building blocks, mimicking the way that our algorithm from \cref{subsection:alg} reduces the SPP$_d$ to smaller instances of the APECP$_{d-1}$, which in turn is reduced to the SPP$_{d-1}$. Formally, let for a vertex $u$ be the vertex set $V_u$ and the arc set $A_u$ be the set of vertices (arcs) which lie on at least one $s$-$u$-path, as specified in \cref{def:corresponding-instance}. An instance of the SPP$_{d}$ on the smaller digraph $(V_u, A_u)$ can be interpreted as a vector $x \in \R^{A_u^{(d)}}$. Likewise, an instance of the APECP$_{d}$ on the smaller digraph $(V_u, A_u)$ can be interpreted as a vector $x \in \R^{A_u^{(d)}}$. In the following, we show that for all vertices $u \in V$ and every $d \in \N, d\geq 2$ there exists some polynomially bounded $k \in \N$ and a linear function
+\[
+f_{u,d} : \R^{A_u^{(d)}} \rightarrow \R^k
+\]
+such that $f_{u,d}(x) = 0$ if and only if $x$ is a YES-instance of the \textsc{lin}SPP$_d$ on the digraph $(V_u, A_u)$. Likewise, we show that for all vertices $u \in V$ and every $d \in \N, d\geq 1$ there exists some polynomially bounded $k \in \N$ and a linear function
+\[
+g_{u,d} : \R^{A_u^{(d)}} \rightarrow \R^k
+\]
+such that $g_{u,d}(x) = 0$ if and only if $x$ is a YES-instance of the APECP$_{d}$ on the digraph $(V_u, A_u)$. 
+
+We show these two claims by induction. The base case of the induction is concerned with the APECP$_1$. For the remainder of this section, we consider a fixed $\Pst$-covered digraph $G = (V, A)$ with source vertex $s$ and sink vertex $t$ on $n$ vertices and $m$ arcs.
+
+\begin{lemma}
+\label{lemma:subspaces-apec-1}
+    Let $u \in V$ be a vertex and consider the APECP$_1$ on the digraph $(V_u, A_u)$. Then the following holds:
+    \begin{enumerate}[(i)]
+        \item There exists $k \in \N$ and a linear function $g_{u,1} : \R^{A_u^{(1)}} \rightarrow \R^k$, such that $k = \bigO(m)$ and such that $g_{u,1}(x) = 0$ iff $x$ is a YES-instance of the APECP$_1$.
+        \item There exists a linear function $g'_{u,1} : \R^{A_u^{(1)}} \rightarrow \R$, such that for all $x$ with $g_{u,1}(x) = 0$, we have that $g'_{u,1}(x)$ is the common cost of the paths in the APECP$_1$ instance $x$.
+        \item There is an algorithm computing the functions $g_{u,1}, g'_{u,1}$ in $\bigO(m)$ time.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Assume we are given an instance $x \in \R^{A_u^{(1)}}$. The vector $x$ represents a function $x : A_u^{(1)} \rightarrow \R$. We write $x(F)$ instead of $x_F$ for ease of notation.
+    We consider the same dynamic program as in \cref{lemma:apec-1}. For every vertex $w \in V_u$, we fix some arbitrary $s$-$w$-path $P_w$.
+    We introduce a helper variable $y_w$ for every vertex $w \in V_u$ by making use of $P_w$.
+    \[ y_w := \sum_{a \in P_w}x(\set{a}).\]
+    Note that $y_w$ depends only linearly on $x$. Note furthermore that by the same argumentation as in \cref{lemma:apec-1}, the dynamic program correctly concludes that the APECP$_1$ instance is a YES-instance iff
+    \[\forall a = (w,z) \in A_u : y_z = y_w + x(\set{a}). \]
+    Furthermore, if $x$ is indeed a YES-instance, then the common ocst of all paths equals exactly $y_u + x(\emptyset)$. (Note that indeed the case $x(\emptyset) \neq 0$ can appear.)
+
+    For this reason, we can construct the functions $g_{u,1}, g'_{u,1}$ the following way: The function $g_{u,1}$ maps to $\R^k$ with $k = |A_u|$ and is given by
+    \[ g_{u,1}(x) = ( y_w + x(\set{a}) - y_z)_{a = (w,z) \in A_u}.\]
+    The function $g'_{u,1}$ is given by $g'_{u,1}(x) = y_u + x(\emptyset)$.
+
+    Note that indeed the two provided functions are linear. By construction we have properties (i) and (ii). Finally, it is straightforward to see that given an input $x \in \R^{A_u^{(1)}}$, the vector $g_{u,1}(x)$ can be computed in $\bigO(m^2)$ time and the value $g'_{u,1}(x)$ can be computed in $\bigO(m)$ time. However, note that we have freedom to choose the paths $P_w$. If we choose the paths $P_w$ cleverly, so that they form an out-tree rooted at $s$, then one can also compute the vector $g_{u,1}(x)$ in $\bigO(m)$ time.  \qed
+\end{proof}
+
+
+\begin{lemma}
+\label{lemma:subspaces-induction}
+    Let $d \geq 2$, let $u \in V$ be a vertex and consider the  SPP$_d$ and the APECP$_{d}$ on the digraph $(V_u, A_u)$. Then the following holds:
+    \begin{enumerate}[(i)]
+        \item There exists $k \in \N$ and a linear function $f_{u,d} : \R^{A_u^{(d)}} \rightarrow \R^k$, such that $k = \bigO(m^{d})$ and such that $f_{u,d}(x) = 0$ iff $x$ is a linearizable instance of the SPP$_{d}$.
+        \item There exists a linear function $f'_{u,d} : \R^{A_u^{(d)}} \rightarrow \R^{A_u}$, such that for all $x$ with $f_{u,d}(x) = 0$, we have that $f'_{u,d}(x) \in \R^{A_u}$ is a linearizing cost function in reduced form of the SPP$_d$ instance $x$.
+        \item There exists $k \in \N$ and a linear function $g_{u,d} : \R^{A_u^{(d)}} \rightarrow \R^k$, such that $k = \bigO(m^{d})$ and such that $g_{u,d}(x) = 0$ iff $x$ is a YES-instance of the APECP$_{d}$.
+        \item There exists a linear function $g'_{u,d} : \R^{A_u^{(d)}} \rightarrow \R$, such that for all $x$ with $g_{u,d}(x) = 0$, we have that $g'_{u,d}(x)$ is the common cost of the paths in the APECP$_{d}$ instance $x$.
+        \item There is an algorithm computing the functions $f_{u,d}, f'_{u,d}, g_{u,d}, g'_{u,d}$ in $\bigO(m^d)$ time.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We prove the lemma using induction. The base case of the induction is provided by \cref{lemma:subspaces-apec-1}, which proves items (iii) and (iv) in the case $d = 1$. For the inductive step, assume that for some value of $d - 1$ with  $d \geq 2$ we have proven (iii) and (iv), that is we have assured the existence of $g_{u,d-1}$ and $g'_{u,d-1}$. We now proceed to show that items (i) -- (iv) hold for the value $d$, that is, we construct the functions $f_{u,d}, f'_{u,d}, g_{u,d}, g'_{u,d}$.
+
+    In order to construct $f_{u,d}$, consider an instance $q_d \in \R^{A_u^{(d)}}$ of the SPP$_d$ on the graph $(V_u, A_u)$. Fix some system $N \subseteq A_u$ of nonbasic arcs with respect to that graph $(V_u, A_u)$. Let $F \subseteq A_u$ be the set of strongly basic arcs with respect to $N$, and let $F'$ be the set of arcs which are incident to the source (hence $A_u = N \cup F \cup F'$ is a partition by the definition of basic/strongly basic arcs). Now, by \cref{lemma:property-pi,lemma:corresponding-instance} we have that the instance $q_d$ is a YES-instance of \textsc{Lin}SPP$_d$ iff for every arc $a = (w,z) \in F$, we have that $q^{(a)}_{d-1}$ is a YES-instane of APECP$_{d-1}$. By the inductive assumption, the latter is the case iff  $g_{w,d-1}(q^{(a)}_{d-1}) = 0$. Observe that the function which maps $q_d \in \R^{A_u^{(d)}}$ to $q^{(a)}_{d-1} \in \R^{A_w^{(d-1)}}$ is a linear function (this follows from the definition, i.e.\ \cref{eq:definition_q_e}). Hence the composition $g_{w,d-1} \circ\ q^{(a)}_{d-1}$ is again a linear function. Therefore, if we define
+    \begin{align*}
+        f_{u,d}(q_d) = (g_{w,d-1}(q^{(a)}_{d-1}))_{a = (w,z) \in F}, \\
+    \end{align*}
+    then $f_{u,d}$ is a linear function and maps to $\R^k$ with $k = \bigO(m \cdot m^{d-1}) = \bigO(m^d)$. By the arguments above, property (i) is satisfied. Furthermore, if we define
+    \begin{align*}
+        (f'_{u,d}(q_d))(a) = \begin{cases}
+            g'_{w,d-1}(q^{(a)}_{d-1}); & a = (w,z) \in F\\
+            0; & a \in N\\
+            \text{SPP}_d(a \cdot N_z, q_d); & a = (w,z) \in F',
+        \end{cases} \\
+    \end{align*}
+    then $f'_{u,d}(q_d) : A_u \rightarrow \R$ is a linearizing cost function whenever $f_{u,d}(q_d) = 0$. Furthermore this function is in reduced form. This follows from the arguments in \cref{lemma:property-pi,lemma:corresponding-instance} and the inductive assumption on $g'_{w,d-1}$. 
+    The function $f'_{u,d}$ is linear. 
+    It follows from the speedup technique from \cref{subsection:alg} that given $q_d$, one can compute the sequence of values $(q^{(a)}_{d-1})_{a \in F}$, as well as the sequence $(\text{SPP}_d(a \cdot N_z; q_d))_{a\in F}$ in $\bigO(m^d)$ time. 
+    Combined with the inductive assumption that both $g_{w,d-1}, g'_{w,d-1}$ can be computed in $\bigO(m^{d-1})$ time for each vertex $w$, we obtain that both $f_{u,d}, f'_{u,d}$ can be computed in $\bigO(m^d)$ time. Hence we have shown (i) and (ii).
+
+    Secondly, assuming that (i) and (ii) hold, we show how to construct $g_{u,d}, g'_{u,d}$. Let $q_d \in \R^{A_u^{(d)}}$ be an instance of the APECP$_d$. It follows by the arguments from \cref{lemma:reduction-APEC} that $q_d$ is a YES-instance where all paths have cost $\beta$ iff $q_d$ is linearizable and for the linearizing function $c$ it holds that $\red(c) = \const_\beta$. By the inductive assumption and the uniqueness of the reduced form, this is the case iff 
+    \begin{align*}
+        &f_{u,d}(q_d) = 0 \\
+        \text{ and } &\forall a,a' \in F':  (f'_{u,d}(q_d))(a) = (f'_{u,d}(q_d))(a') \\
+        \text{ and } &\forall a \in A_u \setminus F': (f'_{u,d}(q_d))(a) = 0. 
+    \end{align*}
+    Similarly to the argument above, we can construct a linear function $g_{u,d}$ which maps to $\R^k$ for some $k = \bigO(m^d)$ such that $g_{u,d} = 0$ iff all three of the above conditions are satisfied. By choosing an arbitrary arc $a \in F'$ we can define $g'_{u,d}(q_d) := (f'_{u,d}(q_d))(a)$. Finally, by the inductive assumption, we can compute $f_{u,d}(q_d), f'_{u,d}(q_d)$ in $\bigO(m^d)$ time. It follows that the functions $g_{u,d}(q_d), g'_{u,d}(q_d)$ can be computed in $\bigO(m^d)$ time. Hence we have shown (iii), (iv) and (v). \qed
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:subspaces}]
+    Consider the sink vertex $t$. By \cref{lemma:subspaces-induction}, the function $f_{t,d}$ has the property that some instance $q_d \in \R^{A_u^{(d)}}$ is linearizable iff $f_{t,d}(q_d) = 0$. 
+    We show how to compute a matrix representation $M$ of this function, such that $f_{t,d}(x) = Mx$ for all $x$. Hence $\mathcal{L}_d$ is equal to the kernel of $M$.
+    Consider the set $e_1,\dots, e_k$ of all standard basis vectors of $\R^{A_u^{(d)}}$, where $k = \bigO(m^d)$. By \cref{lemma:subspaces-induction}, we can compute the vector $f_{t,d}(e_j)$ in $\bigO(m^d)$ time for every $j=1,\dots,k$. Basic linear algebra tells us that these vectors constitute the columns of $M$. We can hence compute the matrix $M$ and a basis of its kernel in polynomial time. We have therefore obtained a basis of $\mathcal{L}_d$. \qed
+\end{proof}
+
+\noindent \textbf{ Acknowledgement.} This research has been supported by the Austrian Science Fund (FWF): W1230.

@@ -1,14 +1,17 @@
 %---Macros-Universal---------------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\fromto}[2]{\set{#1, \ldots, #2}}
+
+\newcommand{\rz}{\mathbb{R}}
+\newcommand{\nz}{\mathbb{Z}}
 
 
-
-
-
-
-
-
-
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\dotunion}{\mathbin{\dot{\cup}}}
+\newcommand{\powerset}{\mathcal{P}}
 
 
 
@@ -88,3 +91,65 @@
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+
+%------------ chapter 3. Interval Interdiction
+
+\newcommand{\True}{\textsc{True}}
+\newcommand{\False}{\textsc{False}}
+
+%\newcommand{\comment}[1]{\textcolor{red}{(#1)}}
+
+\newcommand{\las}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\hun}[1]{\textcolor{blue}{#1}}
+
+\DeclareMathOperator{\ac}{\text{A}}
+%\DeclareMathOperator{\val}{\text{value}}
+\DeclareMathOperator{\dist}{\text{dist}}
+\DeclareMathOperator{\rel}{\text{rel}}
+\DeclareMathOperator{\betw}{\text{betw}}
+\DeclareMathOperator{\valid}{\text{valid}}
+\DeclareMathOperator{\cost}{\text{cost}}
+
+
+
+%Special short commands for interval interdiction notation
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\F}{\mathcal{F}}
+\DeclareMathOperator{\graph}{G}
+
+\newcommand{\claimqed}{\hfill\scriptsize$\blacksquare$\normalsize}
+
+%---------------- Chapter 5. Linearization 2
+
+
+\newcommand{\const}{\textsf{source}}
+%\newcommand{\ren}[1]{{\color{magenta}{#1}}}
+
+\newcommand{\Pst}{\mathcal{P}_{st}}
+\newcommand{\Nscript}{N}
+
+\newcommand{\boxxx}[1]
+ {\fbox{\begin{minipage}{11.80cm}\begin{center}\bigskip\begin{minipage}{11.30cm}
+  #1\end{minipage}\end{center}~\end{minipage}}}
+
+\DeclareMathOperator{\red}{\textsf{reduced}}
+\DeclareMathOperator{\xval}{val}
+
+%----------------------- Chapter 6. NTP
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+%\newcommand{\comment}[1]{\textcolor{red}{(L: #1)}}
+
+\newcommand{\xxxNTP}{\textsc{N-TreePack}}
+\newcommand{\xxxHAM}{\textsc{Hamilton-3-reg}}
+\DeclareMathOperator{\ntp}{\textsf{ntp}}
+\newcommand{\greedy}{\textsf{Greedy}}
+
+%\newcommand{\lasse}[1]{\textcolor{blue}{#1}}
+%\newcommand{\lasse}[1]{#1}

@@ -1,0 +1,47 @@
+\section{Notations  and preliminaries}\label{defi:sec}
+
+ Given a digraph $G=(V,A)$, a simple directed $s$-$t$-path $P$ in $G$ is specified as a sequence of
+arcs $P=(a_1,a_2,\ldots,a_p)$ such that  $a_1$ starts at $s$, $a_p$
+ends at $t$, nonconsecutive arcs do not share a vertex and  the end vertex of $a_{i}$ coincides with  the start vertex of $a_{i+1}$ for any $i\in \{1,\ldots,p-1\}$. The number
+$p$ of arcs in $P$ is called the length of the path. We sometimes use the same notation for a path $P$ and the  set of its arcs. 
+%Alternatively, a simple directed $s$-$t$-path $P$ of length $p$ in $G$  is specified as a sequence of pairwise disjoint vertices $(u_0,u_1,\dots,u_p)$, 
+%where $x_0=s$, $u_p=t$ and $(u_i,u_{i+1})\in A$ for all $i\in\{0,\dots,p\}$. Thus  $a_i=(u_{i-1},u_i)$, for $i\in \{1,\dots,p\}$. 
+We  consider a single arc $(x, y)$ as an $x$-$y$-path of length $1$  and a single vertex $x$ as a  trivial $x$-$x$-path of length $0$. Given an  $x$-$y$-path $P_1$ and a  $y$-$z$-path $P_2$, we denote the \emph{concatenation} of $P_1$ and $P_2$ by $P_1 \cdot P_2$. We also consider concatenations of paths and arcs, that is, terms of the form $P \cdot a$ for some $x$-$y$-path $P$ and some arc $a = (y, z)$.
+ 
+In the linearization problem, we are concerned with acyclic digraphs $G =(V, A)$ with a source vertex $s$ and a sink vertex $t$. 
+We denote by  $\Pst$ the set of all simple directed $s$-$t$-paths.
+We often assume that $G$ is \emph{$\Pst$-covered}, that is, every arc in $G$ is traversed by at least one path in $\Pst$. 
+Note that we can make this assumption without loss of generality: If some arc is not traversed by at least one $s$-$t$-path, then it has no effect on the linearizability of the instance, and so we can delete that arc.
+
+Let $d \geq 2$ be a natural number. The \emph{Order-$d$ interaction costs} are given by a mapping $q_d\colon \set{B \subseteq A : |B| \leq d}\to \rz$, assigning a (potentially negative) interaction cost to every subset of at most $d$ arcs.
+The cost $\text{SPP}_d(P,q_d)$ of some path $P$ under interaction costs $q_d$ is defined as in equation (\ref{dSPP:obj}).
+If $d$ is unambiguously clear form the context, we use the  more compact notation $f_q(P): = \text{SPP}_d(P,q_d)$.
+ In this paper we explicitly allow the case $q(\emptyset) \neq 0$, because this simplifies the calculations.  
+The \emph{linearization problem for the Order-$d$ Shortest Path Problem} (\textsc{Lin}SPP$_d$)
+is formally defined as follows.
+\begin{center}
+%%%%%%%%%%%%%%%%%
+\boxxx{\textbf{Problem:} The  linearization problem for the SPP$_d$ (\textsc{Lin}SPP$_d$)
+\\[1.0ex]
+\textbf{Instance:} A $\Pst$-covered directed graph $G=(V,A)$ with $s,t\in V$, $s\neq t$; an integer $d \geq 2$;
+an order-$d$ arc interaction cost function $q_d: \set{B \subseteq A \colon |B| \leq d} \to \R$.
+\\[1.0ex]
+\textbf{Question:} Find a \emph{linearizing cost function}  $c\colon A\to\R$  such that $\text{SPP}_d(P,q_d) = \text{SPP}(P,c)$ for all $P \in \Pst$ or decide that such a linearizing  cost function does not exist.}
+%%%%%%%%%%%%%%%%%
+\end{center}
+%%%%%%%%%%%%
+In the special case $d = 2$, we obtain the    linearization problem for the QSPP (\textsc{Lin}QSPP).
+\smallskip
+
+Finally, let us consider the \emph{Generic Shortest Path Problem} (GSPP) which takes as input  a digraph $G=(V,A)$ with a source vertex $s$, a sink vertex $t$, $s\neq t$, and a generic cost function $f\colon \Pst \to \rz$  assigning  a cost $f(P)$ to every path $P\in \Pst$\footnote{We assume that $f$ is specified by an oracle.}. We assume w.l.o.g.\ that $G$ is $\Pst$-covered. The goal is to find an $s$-$t$-path  which minimizes the objective function $f(P)$ over $\Pst$. 
+A linearizable instance of  the GSPP and the linearization problem for the GSPP (\textsc{Lin}GSPP) are  defined analogously as in the respective definitions for SPP$_d$.
+
+
+
+We note that in our \cref{def:linearizable} we allowed the case that the linearizing function $c : A \to \R$ can take negative values. This could be a problem, since if a digraph contains negative cycles, the shortest path problem is NP-hard in general. However, as we are only concerned with acyclic digraphs in this paper, this is not a problem. In fact, the following lemma shows that for acyclic digraphs it is a more difficult problem to decide if there is a linearizing function $c : A \to \R$ than the problem to decide if there is a linearizing function $c': A \to \R_+$. Hence, we consider only the first problem for the rest of the paper.
+\begin{lemma}
+If $(G,s,t,f)$ is an instance of the GSPP such that $G  = (V,A)$ is an acyclic digraph, then there is a nonnegative linearizing function $c' : A \to \R_+$ if and only if there is a linearizing function $c : A \to \R$ and $f(P) \geq 0$ for all $s$-$t$-paths $P$.
+\end{lemma}
+\begin{proof}
+If there is no linearizing function $c : A \to \R$, then in particular there is also no linearizing function $c' : A \to \R_+$. On the other hand, if there is a linearizing function $c : A \to \R$, then we distinguish two cases. If there is an $s$-$t$-path $P$ with $f(P) < 0$, then clearly there cannot exist a linearizing cost function  $c' : A \to \R_+$, because $P$ would receive the incorrect costs $c'(P) \geq 0$. On the other hand, if $f(P) \geq 0$ for all $s$-$t$-paths, we claim that we can find nonnegative $c'$ as desired. Indeed, for all vertices $v \in V$, we let $\pi(v)$ be the cost of a shortest $s$-$v$-path with respect to $c$. Since $G$ has no cycles, in particular no negative cycles we have that for all arcs $(u,v) \in A$ the inequality $\pi(v) \leq \pi(u) + c(u,v)$ holds. We define the adjusted costs $c_\pi(u,v) := \pi(u) - \pi(c) + c(u,v)$ for all arcs $(u,v) \in A$. By the previous inequality we have $c_\pi(u,v) \geq 0$. By a telescope argument we have $c_\pi(P) = c(P) + \pi(s) - \pi(t) = c(P) - \pi(t)$ for all $s$-$t$-paths $P$. Finally, we define $c'$ by letting $c'(a) := c_\pi (a) + \pi(t)$ for all arcs incident to the source and $c'(a) := c_\pi(a)$ otherwise. Note that $\pi(t) \geq 0$ due to the assumption $f(P) \geq 0$ for all $P \in \Pst$. Since $c_\pi$ and $\pi(t)$ are both nonnegative, $c'$ is also nonnegative. By construction we have $c'(P) = f(P)$ for all $s$-$t$-paths $P$, so $c'$ is a nonnegative linearizing function. 
+\end{proof}

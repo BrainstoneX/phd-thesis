@@ -1,0 +1,220 @@
+\section{A characterization of linearizable instances of  the GSPP on acyclic digraphs}\label{charact:sec}
+ %%%%%%%%%%%%%%%
+ The main result of this section is \cref{thm_linearization_characterization}, our novel characterization of  linearizable instances of the GSPP on acyclic digraphs defined as in Section~\ref{defi:sec}. 
+ %%%%%%%%%%%%
+\begin{definition}
+Let $G=(V,A)$ be a $\Pst$-covered acyclic digraph. For some vertex $v$, let $P_1, P_2$ be two $s$-$v$-paths, and let $Q_1, Q_2$ be two $v$-$t$-paths. The 5-tuple $(v,P_1,P_2,Q_1,Q_2)$ is called a \emph{two-path system} contained in $G$. The system is called \emph{linearizable} with respect to the function $f : \Pst \rightarrow \R$, if there exists a cost function $c : A \rightarrow \R$ such that for all four paths $P \in \set{P_1 \cdot Q_1, P_1 \cdot Q_2, P_2 \cdot Q_1, P_2 \cdot Q_2}$ we have $f(P) = SPP(P,c)$. Such a $c$ is called  a {\emph linearizing cost function} for  $(v,P_1,P_2,Q_1,Q_2)$ with respect to $f$. 
+\end{definition}
+
+%--------------------------------------------------------------------
+%Create custom tikz style for directed edges with arrow in the middle
+\tikzset{->-/.style={
+	decoration={
+ 		markings,
+  		mark=at position #1 with {\arrow[scale=2,>=stealth]{>}}
+  		},
+  	postaction={decorate}
+  },
+  ->-/.default=0.5
+}%--------------------------------------------------------------------
+\tikzstyle{vertex}=[draw,circle,fill=black, minimum size=4pt,inner sep=0pt]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\begin{figure}[bth]
+\centering
+\begin{tikzpicture}[scale=1.0, auto,swap]
+
+    \node[vertex] (s) at (0,0) {};
+    \node[vertex] (v) at (4,0) {};
+    \node[vertex] (t) at (8,0) {};
+
+    \node[above] at (s) {$s$};
+    \node[above] at (t) {$t$};
+    \node[above] at (v) {$v$};
+    
+    \draw[->-=0.6,pos=0.4] (s) to[bend left] node[above]{$P_1$} (v);
+    \draw[->-=0.6,pos=0.4] (s) to[bend right] node[above]{$P_2$} (v);
+    \draw[->-=0.6,pos=0.4] (v) to[bend left] node[above]{$Q_1$} (t);
+    \draw[->-=0.6,pos=0.4] (v) to[bend right] node[above]{$Q_2$} (t);
+\end{tikzpicture}
+\caption{A two-path system.}
+ \label{fig:two-path-system}
+\end{figure}
+
+See \cref{fig:two-path-system} for an illustration of a two-path system. 
+Note that $P_1$ and $P_2$ (as well as $Q_1$ and $Q_2$) can have common inner vertices and that the cases $P_1=P_2$, $Q_1=Q_2$, $v = s$ and $v = t$ are allowed. 
+However, due to the acyclicity of $G$, the paths $P_i$ and $Q_j$ have only the vertex $v$ in common for $i,j \in\{1,2\}$. Further, observe that the linearizability of a two-path system 
+is a local property, in the sense  that it only   depends on the four paths $P_1 \cdot Q_1, P_1 \cdot Q_2, P_2 \cdot Q_1$ and $P_2 \cdot Q_2$. Indeed,  the following simple characterization holds. 
+
+\begin{proposition}
+\label{obs:linearizability-two-paths}
+A two-path system $(v,P_1,P_2,Q_1,Q_2)$ is linearizable with respect to some function $f\colon \Pst\to \rz$ iff
+\begin{equation}
+f(P_1 \cdot Q_1) + f(P_2 \cdot Q_2) = f(P_1 \cdot Q_2) + f(P_2 \cdot Q_1).    \label{eq:two-path-lin}
+\end{equation}
+\end{proposition}
+\begin{proof}
+    First, assume that $(v,P_1,P_2,Q_1,Q_2)$ is linearizable and let $c$ be the corresponding  linearizing cost function.  Let $M_1$ ($M_2$) be the multiset  resulting from   the union of the sets of the arcs of the paths $P_1\cdot Q_1$ and $P_2\cdot Q_2$  ($P_1\cdot Q_2$ and $P_2 \cdot Q_1$). Since $M_1$ and $M_2$ coincide we get   $c(P_1 \cdot Q_1) + c(P_2 \cdot Q_2) =\sum_{a\in M_1} c(a)= \sum_{a\in M_2} c(a)=c(P_1 \cdot Q_2) + c(P_2 \cdot Q_1)$. Then,   (\ref{eq:two-path-lin}) follows from the definition of the linearizability of   $(v,P_1,P_2,Q_1,Q_2)$.
+    
+    Assume now  that \cref{eq:two-path-lin} is true. We  show the linearizability of  the two-path system with respect to $f$ by constructing a linearizing cost function $c$.   It is easy to find a suitable  $c$ if $P_1=P_2$ or $Q_1=Q_2$. So let us consider  the more general case  where $P_1\neq P_2$ and $Q_1\neq Q_2$.  In this case, for   each  $P\in \{P_1,P_2,Q_1,Q_2\}$ there exists a (not necessarily unique) \emph{representative arc} $a\in P$ such that $a$  is not contained in any other path  $Q\in \{P_1,P_2,Q_1,Q_2\}$, $Q \neq P$. Let $a_1$, $a_2$, $e_1$, $e_2$ be the representative arcs of $P_1$, $P_2$, $Q_1$ and $Q_2$, respectively.  Consider now a cost function $c : A \rightarrow \R$, such that $c(a) = 0$ if  $a\not\in \{a_1, a_2, e_1, e_2\}$, and $c(a_1)$, $c(a_2)$, $c(e_1)$, 
+$c(e_2)$ fulfill the following linear equations:
+    \begin{equation*}
+        \begin{array}{llcllcl}
+        c(a_1) & & + & c(e_1) & & = f(P_1Q_1) \\
+        c(a_1) & & + & & c(e_2) &= f(P_1Q_2) \\
+        &c(a_2) & + & c(e_1) & &= f(P_2Q_1) \\
+        &c(a_2) & + & & c(e_2) &= f(P_2Q_2) 
+    \end{array}
+    \end{equation*}
+    Using basic linear algebra, one can see that this system indeed has a solution whenever  \cref{eq:two-path-lin} holds (there is even a solution with $c(e_2) = 0$). Thus, $c$ constructed as above is a linearizing  cost function for $(v,P_1,P_2,Q_1,Q_2)$ with respect to $f$. 
+    \qed
+\end{proof}
+
+Now, consider an instance of the GSPP with a $\Pst$-covered acyclic digraph $G$, with a  source vertex $s$, a sink vertex $t$ and a generic cost function $f\colon \Pst\to \rz$. When is this instance $(G,s,t,f)$ linearizable? Obviously, if $G$ contains a two-path system which is not linearizable with respect to $f$, then the instance $(G,s,t,f)$ as a whole is also not linearizable. Interestingly, this necessary condition turns out to be also sufficient.
+
+\begin{theorem}
+\label{thm_linearization_characterization}
+Let $G$ be a $\mathcal{P}_{st}$-covered acyclic digraph with a source vertex $s$ and a sink vertex $t$ and  let $f : \Pst \rightarrow \R$ be a generic cost function. Then the instance $(G,s,t,f)$ of the GSPP  is linearizable if and only if every two-path system contained in $G$ is linearizable with respect to $f$.
+\end{theorem}
+
+ Before proving the theorem, we need some preparation. Let $G = (V,A)$ be a $\Pst$-covered acyclic digraph with source vertex $s$ and sink vertex $t$. First we introduce a \emph{topological arc order} as a total 
+  order $\preceq$ on $A$ such that for any pair of  arcs $a$, $a'$ in $A$ the following holds:   if there  exists a path $P$  containing both $a$ and $a'$ such that $a$ comes before $a'$ in $P$, then $a\preceq a'$.  It is easy to see  that any acyclic digraph has a (in general non-unique)  topological arc order. Moreover, a topological arc order  can be obtained from a topological vertex order. 
+ 
+ Further, we recall the definition of a \emph{system of nonbasic arcs}  introduced by  Sotirov and Hu~\cite{huSo2021}.  
+ \begin{definition}\label{nonbasic:def}
+ Let $G$ be a $\mathcal{P}_{st}$-covered acyclic digraph with a source vertex $s$ and a sink vertex $t$. A set $\Nscript \subseteq A$ is called a \emph{system of nonbasic arcs}, iff for every vertex $v \in V \setminus \set{s,t}$ exactly one of the arcs starting at $v$ is contained in $\Nscript$. The latter  arc is called the \emph{nonbasic arc of $v$}. An arc $a \in A \setminus N$ is called \emph{basic}.
+ \end{definition}
+ Obviously, the system of nonbasic arcs is not unique.  Any such system  forms an in-tree rooted at $t$ containing   all the vertices in $V$ except for $s$. For some system of nonbasic arcs $\Nscript$ and some vertex $v \in V \setminus \set{s}$, we let $N_v$ denote the unique $v$-$t$-path consisting  of nonbasic arcs (where $N_t$ is the trivial path).  A  cost function $c\colon A \rightarrow \R$ is called \emph{in reduced form} with respect to $\Nscript$, if $c(a) = 0$ for all nonbasic arcs $a \in \Nscript$. The following lemma is an easy adaption from \cite{huSo2021}, where an analogous statement was proven for the less general case of the QSPP instead of the GSPP.
+
+
+\begin{lemma}[adapted from {\cite[Prop. 4]{huSo2021}}]
+\label{lemma:nonbasic-arcs}
+Let $G$ be a $\Pst$-covered acyclic digraph with a source vertex $s$ and a sink vertex $t$. Let  $f\colon  \Pst \rightarrow \R$ be a generic cost function and  let $\Nscript \subseteq A$ be a fixed system of nonbasic arcs. If  $(G,s,t,f)$ is a linearizable instance of the GSPP, then there exists one and only one linear cost function $c\colon A \rightarrow \R$ which is both a linearizing cost function  and in reduced form.
+\end{lemma}
+\begin{proof}
+    We have to prove both existence and uniqueness. For the existence, by assumption we have that $(G,s,t,f)$ is a linearizable instance. Hence there exists a linearizing function $c : A \rightarrow \R$, not necessarily in reduced form. Consider some vertex $v \in V \setminus \set{s,t}$ and its nonbasic arc $a_v$. Consider the following modification of the function $c$: Let $\beta = c(a_v)$, then reduce the cost of each outgoing arc of $v$ by $\beta$, and increase the cost of each incoming arc of $v$ by $\beta$. This operation sets the cost of $a_v$ to $0$ and does not change the linear cost of any $s$-$t$-path. Now let $v_1,\dots,v_n$ be a topological vertex order with $v_1 = s$ and $v_n = t$. We repeat the described operation for every vertex $v_{n-1}, v_{n-2}, \dots, v_2$  in this order. It is easily verified that the obtained cost function is a linearization of $(G, f)$ and is in reduced form.
+    
+    For the uniqueness, assume that there are two distinct linearizing functions $c, c' : A \rightarrow \R$ with the property that all nonbasic arcs have value 0. Consider some topological arc order $\preceq$ and let $a = (u,v)$ be the first arc in the order such that $c(a) \neq c'(a)$. There exists an $s$-$u$-path $P$, because $G$ is $\Pst$-covered. The path $R := P \cdot a \cdot N_v$ is an $s$-$t$-path. By assumption, we have $c(P) = c'(P)$ and $c(N_v) = c'(N_v) = 0$. But then $c(R) \neq c'(R)$, a contradiction. 
+    \qed
+\end{proof}
+
+
+Let $(G,s,t,f)$ be a linearizable  instance of the GSPP with $G=(V,A)$ and $\Nscript\subseteq A$ be a fixed system of nonbasic arcs. For a  linearizing cost function $c \colon A \rightarrow \R$, we denote by $\red(c)$ the unique linearizing cost function  in reduced form (which exists due to \cref{lemma:nonbasic-arcs}). 
+It follows from the arguments in the proof of  \cref{lemma:nonbasic-arcs} that for given $c$ one can compute $\red(c)$ in $\bigO(n +m)$ time. We are now ready to prove our main theorem.
+\begin{proof}[Proof of \cref{thm_linearization_characterization}]
+The necessity of the conditions for linearizability is trivial.
+Now we prove the sufficiency.
+Thus we  assume that every two-path system is linearizable with respect to $f$ and show that $(G,s,t,f)$ is linearizable. Let $\Nscript$ be a system of nonbasic arcs. 
+    We consider a topological arc order $\preceq$ on the set  $A$ of arcs in $G$ and inductively define a linearizing cost function $c \colon A \rightarrow \R$ as follows. 
+    For any arc $a = (u,v)$ consider some arbitrary $s$-$u$-path and set
+        \begin{equation}\label{lincost:equ} c(a) := \begin{cases}
+        f(P \cdot a \cdot N_v) - \sum_{a' \in P}c(a'); 
+        & a \not\in \Nscript \\
+        0%
+        ; & a \in \Nscript
+        \end{cases}
+        \end{equation}
+   \smallskip
+
+   The main idea behind this definition is the following: Due to \cref{lemma:nonbasic-arcs}, whenever we look for a linearizing function, we can w.l.o.g. look for one in reduced form. So imagine we have a linearizing function $c'$ such that already $c'(a) =  0$ for all nonbasic arcs. It is not hard to see that \cref{lincost:equ} is a necessary condition on $c'$ that must be true for every $s$-$u$-path $P$ (since all arcs after $a$ on the path $P \cdot a \cdot N_v$ have cost 0). This gives us an initial idea to define $c$. Now consider the following claim.
+   
+   \textbf{Claim:} If all two-path systems in $G$ are linearizable with respect to $f$, then 
+   \begin{enumerate}[(i)]
+       \item Function $c$ in Equation~(\ref{lincost:equ}) is well-defined and independent of the concrete choice of $P$.
+       \item The following equation holds for all arcs $(u,v) \in A$ and all $s$-$u$-paths $P$:
+    \begin{equation}\label{claim2:equ} f(P \cdot a \cdot N_v)=c(a)+\sum_{a' \in P} c(a') = c(P \cdot a \cdot N_v)\end{equation}
+   \end{enumerate}
+    
+     Observe that  the claim immediately implies  that $(G,s,t, f)$ is linearizable. Indeed, let $c$ be the  cost function defined in \cref{lincost:equ} and  let $Q$ be some $s$-$t$-path. Choose $a = (x,t)$ to be the  last arc on $Q$. Then $N_t$ is the trivial path from $t$ to $t$, so by  applying \cref{claim2:equ} to the arc $a$, we have $f(Q) = c(Q)$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[bth]
+\centering
+\begin{tikzpicture}[scale=1.0, auto,swap]
+    \node[vertex] (s) at (0,0) {};
+    \node[vertex] (u) at (4,0) {};
+    \node[vertex] (t) at (9,0) {};
+    \node[vertex] (uQ) at (3,0.5) {};
+    \node[vertex] (uP) at (3,-0.5) {};
+    \node[vertex] (v) at (5.3,0) {};
+
+    \node[above] at (s) {$s$};
+    \node[above] at (t) {$t$};
+    \node[above] at (u) {$u$};
+    \node[above] at (v) {$v$};
+    \node[above] at (uQ) {$u_Q$};
+    \node[above] at (uP) {$u_P$};
+    
+    \draw[->-=0.6,pos=0.4,dashed] (s) to[bend right] node[above]{$P$} (uP);
+    \draw[->-=0.6,pos=0.4,dashed] (s) to[bend left] node[above]{$Q$} (uQ);
+    \draw[->-=0.6,pos=0.4,dashed] (u) to[bend left] node[above]{$N_u$} (t);
+    \draw[->-=0.6,pos=0.4,dashed] (v) to node[above]{$N_v$} (t);
+    \draw[->-=0.6,pos=0.4] (u) to node[below]{$a$} (v);
+    \draw[->-=0.7] (uP) to (u);
+    \draw[->-=0.7] (uQ) to (u);
+    
+\end{tikzpicture}
+\caption{Situation in the proof of \cref{thm_linearization_characterization}. The dashed lines represent paths. The arc $(u,v)$ and the two-path system $(u,P,Q,N_u, a\cdot N_v)$ play a vital role.}
+ \label{fig:specific-system}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \textit{Proof of the claim.} We use induction over $\preceq$. For each arc $a = (u, v)$ in $A$, we distinguish between three cases. A sketch of the situation is provided in \cref{fig:specific-system}.
+    
+    \textbf{Case 1: $u = s$.} This is the base case of the induction. If $a$ is incident to the source vertex, then item (i) holds, because the only $s$-$u$-path is the trivial path. Item (ii) holds by the definition of $c(a)$, and because all nonbasic arcs $a'$ have $c(a') = 0$.
+    
+    \textbf{Case 2: $u \neq s$ and $a \not\in N$.} Let $a$ be basic and not incident to the source. By the induction hypothesis, $c(a')$ is well-defined for all arcs $a'$ preceding $a$. Hence for the proof of item (i), it remains to show that $c(a)$ is independent of the choice of $P$. Let $Q$ be a second $s$-$u$-path besides $P$, we have to show that 
+    \[
+    f(P \cdot a \cdot N_v) - \sum_{a' \in P}c(a') = f(Q \cdot a \cdot N_v) - \sum_{a' \in Q}c(a').
+    \]
+    To see this, let $(u_P, u)$ be the last arc on the path $P$, and let $(u_Q, u)$ be the last arc on the path $Q$ (we use here that $u \neq s$). By the induction hypothesis (ii) applied to $(u_P, u)$, we have that $f(P \cdot N_u) = c(P \cdot N_u) = c(P)$, analogously we have $f(Q \cdot N_u) = c(Q \cdot N_u) = c(Q)$. Furthermore, because the two-path system $(u, P, Q, N_u, a \cdot N_v)$ is linearizable, we have by \cref{obs:linearizability-two-paths}, that $f(P \cdot N_u) + f(Q \cdot a \cdot N_v) = f(P \cdot a \cdot N_v) + f(Q \cdot N_u)$. Putting everything together, we have
+    \begin{align*}
+         f(P \cdot a \cdot N_v) - c(P) &= f(Q \cdot a \cdot N_v) + f(P \cdot N_u) - f(Q \cdot N_u) - c(P)\\
+         &= f(Q \cdot a \cdot N_v) + c(P) - c(Q) - c(P)\\
+         &= f(Q \cdot a \cdot N_v) - c(Q),
+    \end{align*}
+    which was to show. This proves item (i). Item (ii) immediately follows from (i), the definition of $c(a)$ and the fact that all nonbasic arcs $a'$ have cost $c(a') = 0$.
+    
+    \textbf{Case 3: $u \neq s$ and $a \in N$.} Finally, if $e$ is nonbasic, then (i) is trivial. Furthermore, let $(u_P, u)$ be the last arc on the path $P$ and let $P'$ be the subpath of $P$ without the last arc. Because $a \in \Nscript$, the two paths $P' \cdot (u_P, u) \cdot N_u$ and $P \cdot a \cdot N_v$ are equal, so (ii) follows by induction applied to the arc $(u_P, u)$.
+    \qed
+\end{proof}
+
+Since in general a graph contains exponentially many different two-path systems,   \cref{thm_linearization_characterization} does not seem to lead to  an  efficient algorithm for  the linearization problem \textsc{Lin}GSPP at a first glance. However, we show in the next section that this is indeed the case. The arguments  are based on a more technical version of \cref{thm_linearization_characterization} and involve the concept of  so-called \emph{strongly basic arcs} and their property $(\pi)$ defined below.
+
+\begin{definition}\label{stronglybasic:def}
+    Let $G = (V, A)$ be an acyclic $\Pst$-covered digraph with source vertex $s$ and sink vertex $t$.  Let $f \colon  \Pst \rightarrow \R$ be a generic cost function and let $N \subseteq A$ be a system of nonbasic arcs in $G$. A basic arc $(u, v)$ is called \emph{strongly basic}, if it is not incident to the source vertex, that is if $u \neq s$.
+    
+  \noindent  A strongly basic arc $a = (u,v)$ has the \emph{property $(\pi)$}, if for 
+    any $s$-$u$-paths $P$ the value $ \val(a, P) :=  f(P \cdot a \cdot N_v) - f(P \cdot N_u)$ does not depend  on the choice of $P$. 
+    \end{definition}
+    
+    Thus, if a strongly basic arc $a = (u,v)$ has the property $(\pi)$,   we have  $\val(a, P) = \val(a, Q)$ for any two  $s$-$u$-paths $P, Q$ and this implies the existence of a value   $\val(a) := \val(a, P)$ for each  $s$-$u$-path $P$ and $\val(a)$ is well defined for each strongly basic arc. Finally, note that by definition, the arc set $A$ is partitioned into the three disjoint sets of strongly basic arcs, nonbasic arcs, and arcs incident to $s$. 
+
+
+\begin{lemma}
+\label{lemma:property-pi}
+    Let $G = (V, A)$ be an acyclic $\Pst$-covered digraph with source vertex $s$ and sink vertex $t$. Let $f \colon \Pst \rightarrow \R$ be a generic cost function and let $N \subseteq A$ be a system of nonbasic arcs in $G$. Then $(G, s,t,f)$ is linearizable if and only if every strongly basic arc has the property $(\pi)$. In this case, the mapping   $c \colon  A \rightarrow \R$ given by
+    \[
+    c(a) = \begin{cases}
+    \xval(a); & a \text{ is strongly basic }\\
+    f(a \cdot N_v); & a = (s,v) \text{ is incident to }s\\
+    0; & a \text{ is nonbasic}
+    \end{cases}
+    \]
+    is a  linearizing cost function  in reduced form.
+\end{lemma}
+
+\begin{proof}
+    Let $a = (u, v)$ be a strongly basic arc. We claim that $a$ has the property $(\pi)$ iff for any two  $s$-$u$-paths $P$, $Q$  the two-path system $(u,P,Q,N_u,a \cdot N_v)$ is linearizable with respect to $f$. Indeed, note that by \cref{obs:linearizability-two-paths}, the   two-path system above is linearizable with respect to $f$  iff $f(P \cdot a \cdot N_v) + f(Q \cdot N_u) = f(P \cdot N_u) + f(Q \cdot a \cdot N_v)$. The latter equation is equivalent to $\xval(a,Q) = \xval(a,P)$. Recalling that  the latter equality  
+     holds for every pair of $P, Q$ iff $a$ has the property $(\pi)$ completes the proof of the claim.
+    
+    Now, assume that some strongly basic arc $(u,v)$ does not have the property $(\pi)$. Then, the corresponding two-path system $(u,P,Q,N_u,a \cdot N_v)$ is not linearizable with respect to $f$ and therefore,  $(G,s,t,f)$ is  not linearizable.
+    
+    Finally, assume that every strongly basic arc has the property $(\pi)$. 
+  In the proof of \cref{thm_linearization_characterization}
+    we  use the linearizability assumption   only for  specific two-path systems  of the  form $(u, P, Q, N_u, a \cdot N_v)$,  where   $a = (u, v)$ is some strongly basic arc. Thus,  if the property $(\pi)$ holds for all strongly basic arcs, then  each such specific two-path system is linearizable with respect to $f$ and the linearizability of $(G,s,t,f)$ follows. Furthermore, the value $c(a)$ of the linearizing cost function in \cref{lincost:equ}   equals  $\xval(a)$ for  any arc $a$ which is  strongly basic, equals $f(a \cdot N_v)$ for any arc $(s,v)$ incident to $s$, and equals $0$ for any   nonbasic arc $a$. 
+    %This completes the proof of the lemma.
+    \qed
+\end{proof}
+

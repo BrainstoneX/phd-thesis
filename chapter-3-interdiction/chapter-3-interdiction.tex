@@ -1,0 +1,675 @@
+
+
+
+
+
+\chapter{Assistance and Interdiction Problems on Interval Graphs}
+
+
+\section{Introduction}
+
+%\cite{bazgan2019more}
+
+\emph{Network interdiction} \cite{NetworkInterdictProblemsBookChapter} is a vibrant and fast-growing area of research. 
+A network interdiction problem is a min–max or max–min problem 
+involving a graph parameter $\pi$ and two opposing players: 
+The goal of the second player, the \emph{network owner}, is to optimize $\pi$, while the goal of the first player, the \emph{interdictor}, 
+is to alter the network in such a way to maximally impair the owner's objective. 
+Interdiction problems are fundamental problems in network 
+analysis, because they tell us, which parts of a network are most susceptible 
+to failure or attack \cite{criticalNodeDetectionSurvey}. 
+One important type of network interdiction problems
+is the \emph{most vital nodes problem} with respect to different graph parameters $\pi$. 
+Here, we are given a graph, and some natural number $k$ called the \emph{budget}. The interdictor is allowed to delete up to $k$ vertices from the graph in order to impair $\pi$. For example, if the parameter $\pi = \alpha$ is the independence number, then the interdictor seeks to delete up to $k$ vertices from the graph, such that the size of the largest independent set in the remaining graph is minimized. The problem is to compute which vertices to select.
+
+The most vital nodes problem has been considered for many different parameters, and many different special graph classes. (See e.g.\ \cite{baier2010length,complexityOfFindingMostVitalNodesShortestPath,mostVitalNodesWrtIndSet,mostVitalLinksNodes1982,mahdavi2014minimum}.) Diner et al. \cite{diner2018contractionDeletionBlockers} initiated the investigation of the most vital nodes problem on interval graphs. 
+With respect to the clique number, they proved that a simple greedy-algorithm 
+solves the most vital nodes problem on interval graphs. However, with respect to the independence number $\alpha$, they could not determine the complexity of the most vital nodes problem on interval graphs and left it as an open question~\cite[(Q2)]{diner2018contractionDeletionBlockers}.
+
+In this paper, we positively answer (Q2): On interval graphs, the most vital nodes problem with respect to $\alpha$ can be solved in polynomial time.  Moreover, we extend this result to a much more general framework. For many graph parameters, the most vital nodes problem is a special case of the framework.
+
+\subsection{The Shrink-Expand Framework} 
+We propose a new framework, the \emph{shrink-expand framework}, for interdiction problems specifically 
+for interval graphs. It revolves around \emph{shrinking} and \emph{expanding} intervals. Here, one is given two intervals $I$ and $I'$, such that either $I' \subseteq I$, or $I' \supseteq I$. The interval $I$ is called the \emph{original interval}, and the interval $I'$ is called the \emph{replacement interval} .
+\begin{itemize}
+\item If $I' \subseteq I$, then the operation of substituting the original interval $I$ with the smaller interval $I'$ is called \emph{shrinking the interval.}
+\item  If $I' \supseteq I$, then the operation of substituting the original interval $I$ with the bigger interval $I'$ is called \emph{expanding the interval.}
+\end{itemize}
+ 
+We study interdiction problems with respect to shrinking and expanding intervals. As an input, we are given a fixed list $I_1,\dots,I_n$ of original intervals, and a fixed list $I'_1,\dots,I'_n$ of replacement intervals. For each $j=1,\dots,n$, the interval $I'_j$ is the replacement of the interval $I_j$, and we have $I'_j \subseteq I_j$ or $I'_j \supseteq I_j$.
+Furthermore, we are given a budget $k \geq 0$. We start with the interval graph on the original intervals $I_1,\dots,I_n$.
+In order to impair $\pi$, the interdictor can then choose a set of at most $k$ intervals and shrink (expand) the chosen intervals.
+The question for the interdictor is now, which intervals to select in order to maximally impair $\pi$. For all the graph parameters considered in this paper, only one of shrinking or expanding makes sense. For example, in the clique number interdiction problem, the network owner seeks to find a clique of maximal size, and the interdictor impairs this objective by shrinking intervals. In the next section, we will list for each problem considered, whether one has shrinking or expanding intervals.
+
+For many graph parameters, the shrink-expand framework contains the most vital nodes problem as a special case for the following reason: Consider a pair of original interval $I_j$ and its replacement interval $I'_j$, such that the replacement interval $I'_j = \emptyset$ is empty. The act of shrinking $I_j$ down to $I'_j$ corresponds to removing all edges from the corresponding vertex $v$ in the interval graph. For the graph parameters of  clique number and shortest path, it is easily seen that removing all incident edges from a vertex is equivalent to deleting it from the graph. Therefore, if every single replacement interval is empty, we have exactly the most vital nodes problem. For the graph parameter of independent set, an analogous observation holds. (Here, one chooses the replacement interval so large, that it intersects every other interval.)
+
+
+While interdiction problems are min-max or max-min type of problems, the shrink-expand framework allows us to also consider \emph{assistance problems}, which are min-min or max-max type of problems. An assistance problem is a two-player problem, where the first player selects at most $k$ intervals to shrink (expand), and the second player optimizes some graph parameter $\pi$. But this time, the two players have a shared objective, instead of a conflicting one. For example, in the assistance problem for the clique number, one has expanding intervals, and the question is which intervals to expand in order to get an interval graph with maximum possible clique number.
+If the interdiction problem has shrinking intervals, the assistance problem has expanding intervals, and vice versa. Assistance problems are interesting to consider, as they are the natural counterpart to interdiction problems. 
+
+In this paper, we consider the interdiction and assistance problem for the following 
+four classical graph parameters: 
+Independence number $\alpha$, maximum clique size $\omega$, shortest path, 
+and the scattering number (a graph parameter determining the Hamiltonicity property of interval graphs). 
+
+\subsection{Related Work}
+The area of interdiction problems on graphs has gained significant attention in 
+the computer science literature (see eg.~\cite{NetworkInterdictProblemsBookChapter}).
+The \emph{most vital nodes} problem for graph parameter $\pi$ is the problem where the interdictor is given a budget of $k$ vertex deletions and wants to maximally impair $\pi$. (In the earlier literature, the name only refers to the case $\pi =$  shortest path \cite{mostVitalLinksNodes1982}.)  In the very closely related \emph{vertex blocker} problem, the interdictor is given a threshold $t < \pi(G)$, and we wish to compute the required budget $k$ to reduce $\pi(G)$ down to $t$ \cite{shortPathsInterdictionTotalAndNodeWise}. In this paper, the difference is of no concern: We consider $k, t$ as part of the input, and in this case it is clear that if one problem is in $P$, so is the other. Many different parameters $\pi$ have been considered for both problems, see e.g.\ Nasirian et al. for a short summary \cite{nasirian2019exact}.
+It is easy to see that the most vital nodes problem can be modeled as a special case of the interdiction problem in the shrink-expand framework.
+Lewis and Yannakakis proved that for every hereditary and nontrivial graph parameter $\pi$, 
+the most vital node problem is NP-complete in general graphs \cite{metaTheoremHereditary}.
+ 
+%We give a solution to (Q2) in (ref) and also show in the appendix how to solve their question (Q1) with the same method.
+The most vital nodes problem for parameters $\alpha$ and $\omega$ are well studied, 
+even for special graph classes~\cite{mostVitalNodesWrtIndSet,costa2011minimum},
+but interval graphs have not yet been investigated. Also, the most vital nodes 
+problem for shortest paths has a long history~\cite{baier2010length,complexityOfFindingMostVitalNodesShortestPath,mostVitalLinksNodes1982,shortPathsInterdictionTotalAndNodeWise}.
+When considering the most vital \emph{edges}, instead of the most vital nodes, there are results for interval graphs with respect to the parameter of shortest path. Bazgan et al.\ conjectured this problem to be polynomially solvable for unit interval graphs \cite{bazgan2019more} and Bentert et al.\ proved this conjecture \cite{bentert2019lengthboundedcuts}.
+
+
+%For the replacement intervals, we allow the cases $a_i' = b_i'$ or $a_i'=-\infty$, 
+%$b_i'=\infty$ and make the (slightly unusual) definition $[x,x] := \emptyset$. 
+%Depending on $\pi$, this has the following consequence: 
+%If interdiction is achieved by shrinking (for example if $\pi$ = max.\ clique size),
+%then the case $a_i' = b_i'$ corresponds to the deletion of a vertex. 
+%If interdiction is achieved by expanding (for example if $\pi$ = max.\ independent set size), 
+%then the case $a_i' =-\infty, b_i=\infty$ corresponds to the deletion of a vertex. 
+%Therefore, the shrink-expand framework includes the most vital nodes problem as a special case.
+
+%Additionally, regarding a conjecture about the most vital edge problem by Bazgan et al.\ \cite{bazgan2019more}, our results show that this conjecture is true when one considers the most vital nodes instead of the most vital edges  (compare \cref{sec:related_work}).
+
+\subsection{Our Contribution} 
+We introduce a novel framework of graph modifications  
+specific to interval graphs. The most vital nodes problem for interval graphs can be reduced to  this framework for all the graph parameters studied in this work. We observe that under this model not only interdiction but also the 
+notion of an assistance problem can be defined. 
+We study these two problem types for the four graph parameters $\alpha$, $\omega$, shortest path, and scattering number. The scattering number of an interval graph is related to its hamiltonian properties. In particular, we look at the \emph{interdiction problem with respect to Hamiltonicity}. Here, we are given an interval graph, which is hamiltonian, and the interdictor wishes to modify the graph such that it is not hamiltonian anymore.
+We also obtain similar results for the related parameters of the path cover number, and graph toughness.
+
+Even though the framework is general, we obtain polynomial-time algorithms
+for 6 of the 8 studied problems. We obtain these results using (in some cases technically challenging) dynamic programs. 
+
+\begin{theorem}
+The following problems can be solved in polynomial time:
+\begin{itemize}
+\item The interdiction problem in the shrink-expand framework, for the parameters $\alpha$,  shortest path and Hamiltonicity.
+\item The assistance problem in the shrink-expand framework, for the parameters $\omega$, $\alpha$, shortest path, and scattering number.
+\item The most vital nodes problem on interval graphs, for the parameters $\alpha$, shortest path, and Hamiltonicity.
+\end{itemize}
+\end{theorem}
+
+The interdiction problem in the shrink-expand framework for the parameter $\omega$ is shown to be NP-complete and $W[1]$-hard. \cref{tab:result-overview} provides an overview of our results. 
+Our results for the independence number answer the question (Q2) stated by Diner et al. \cite[(Q2)]{diner2018contractionDeletionBlockers}. Additionally, in Appendix~\ref{app:contraction}, we show how to modify our proof to also answer their question (Q1), regarding edge contraction blockers on interval graphs~\cite[(Q1)]{diner2018contractionDeletionBlockers}.
+
+\begin{table}
+\centering
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{r|rrr}
+$\pi$ & assistance & interdiction & most vital nodes\\
+\hline
+%connectedness & $\bigO(n)$ & $\bigO(n)$ \\
+$\omega(G)$ & $\bigO(n)$ & \ NP-complete, W[1]-hard & $\bigO(n)$ \cite{diner2018contractionDeletionBlockers} \\
+$\alpha(G)$ & $\bigO(kn)$ & $\bigO(kn^2)$ & $\bigO(k n^2)$\\
+%min dominating set & $\bigO(kn^2)$ & ?\\
+%ham-path & ? & $\bigO(kn^3)$ \\
+Hamiltonicity & ? & $\bigO(kn^3)$ & $\bigO(k n^3)$\\
+%ham-cycle & ? & ? \\
+shortest path & $O(kn)$ & $O(n^4)$ & $\bigO(n^4)$
+\end{tabular}
+\caption{Overview of the results}
+\label{tab:result-overview}
+\end{table}
+
+
+
+%[[Last, but not least, we remark that a second motivation for the shrink-expand framework is given by the area of \emph{fixed interval scheduling}. Kovalyov, Ng and Cheng write in their survey \cite{fixedIntervalSchedulingSurvey}, that \enquote{the defining characteristic of fixed interval scheduling problems is that each job has a finite number of fixed processing
+%intervals. A job can be processed only in one of its intervals on one of the available machines, or is not processed at all.}
+%%A decision has to be made about a subset of the jobs to be processed and their assignment to the processing intervals such that the intervals on the same machine do not intersect.
+%
+%Furthermore, they write that \enquote{these problems arise naturally in different real-life operations planning
+%situations, including the assignment of transports to loading/unloading terminals, work planning for personnel, computer
+%wiring, bandwidth allocation of communication channels, printed circuit board manufacturing, gene identification
+%and examining computer memory structures.} 
+%
+%Specifically, many authors considered the \emph{Job Interval Selection Problem
+%with $k$ intervals per job} (JISP$k$) \cite{nakajima1982complexity,spieksma1999approximability,chuzhoy2006approximation,erlebach2003interval}. Here, each job has exactly $k$ intervals attached to it, and the goal is to schedule as many jobs as possible on a single machine. Equivalently, we have to find an independent set of maximum size in an interval graph, which uses at most one interval in each predescribed $k$-tuple of intervals. It is known that already JISP2 is NP-complete and has no PTAS \cite{spieksma1999approximability}. The difference from JISP2 to the shrink-expand framework is, that in the shrink-expand framework we require for each job, that the two intervals attached to it are nested. We further require that at most $k$ of the \enquote{small} intervals may be selected (otherwise the problem becomes trivial). Our results show that in this case, JISP2 and other related scheduling problems are computable in polynomial time.]]\comment{paragraph [[...]] can be cut from the paper maybe}
+
+\section{Preliminaries}
+\label{sec:prelim}
+Let $[n] = \fromto{1}{n}$ denote the set of the first $n$ positive natural numbers and $\mathbb{N}_0 = \mathbb{N} \cup \{ 0 \}$ denote the set of nonnegative integers. We use standard notation and terminology from graph theory to denote 
+the common graph parameters studied in this work. 
+Given a graph $G = (V,E)$ a  subset $S$ of $V$ is called a \emph{clique} if 
+for each pair of distinct vertices $u,v \in S$, it holds that $\{u,v\} \in E$.
+Analogously, a subset $S$ of $V$ is called an \emph{independent set} if for each pair 
+of distinct vertices $u,v \in S$, it holds that $\{u,v\} \notin E$.  We denote by $\omega(G)$ the size of a maximum 
+clique in $G$ and by $\alpha(G)$ the size of a maximum independent set in $G$.
+A sequence $P = (v_0, v_1, \dots, v_{\ell})$ of pairwise distinct vertices of $G$ is called a \emph{path} in $G$ 
+if each consecutive pair of vertices is connected by an edge.
+We say $P$ starts in $v_0$ and ends in $v_{\ell}$. The number $\ell$ is called the length of the path. Given two vertices $s$ and $t$, 
+the shortest path from $s$ to $t$ is a path starting in $s$, ending in $t$, and
+of minimum length.
+A sequence $C = (v_0, v_1, \dots, v_{\ell})$ of pairwise distinct vertices of $G$
+is called a \emph{cycle} if, in addition to each consecutive pair of vertices being connected by an edge, 
+also $\{v_{\ell}, v_0\} \in E$. A \emph{Hamilton path} in $G$ is a path consisting of all vertices of $G$
+and a \emph{Hamilton cycle} in $G$ is a cycle consisting of all vertices of $G$. We 
+call a graph $G$ \emph{hamiltonian} if there exists a Hamilton cycle in $G$.
+A \emph{path cover} of $G$ is a set of vertex-disjoint paths $P_1, \dots, P_k$ 
+such that each vertex of $G$ is contained in at least one path. The number $k$ of 
+such paths is called the size of the path cover. Note that a path cover of size $1$ 
+is a Hamilton path. If $S \subseteq V$ is a set of vertices, we denote by $G-S$ the graph obtained from $G$
+by deleting the vertices in $S$ (and their incident edges) from $G$.
+
+For $a < b$, the \emph{closed interval} $[a, b]$ is defined as $\set{x \in \R \mid a \leq x \leq b}$. It has \emph{startpoint} $a$ and \emph{endpoint} $b$. We furthermore define $[a, a] := \emptyset$. Note that this is non-standard, but it will turn out convenient to use. We only consider closed intervals in this paper. If $\mathcal{J} =  (J_1, \dots, J_n)$ is a sequence of intervals (possibly containing duplicates), then we denote by $\graph(\mathcal{J}) = (V,E)$ the corresponding \emph{interval graph}
+where $V = [n]$ and for any $u,v \in V$, it holds that $\{u,v\} \in E$ if and only if 
+$J_u \cap J_v \neq \emptyset$. Note that in the whole work, we identify the set of 
+vertices of the graph with the integers from $1$ to $n$. Given a subset of vertices $X \subseteq [n]$, we denote by 
+$\J[X] = \{ J_i \colon i \in X \}$ the set of corresponding intervals.
+The sequence $\mathcal{J}$ is called an \emph{interval representation} of the graph $\graph(\mathcal{J})$. It is folklore that if $\mathcal{J}$ contains two intervals which have a common start- or endpoint, one can easily obtain a representation $\mathcal{J}'$ such that no two intervals have a common start- or endpoint and $\graph(\mathcal{J}') = \graph(\mathcal{J})$. We will therefore assume this property whenever it is convenient.
+
+
+
+\begin{table}
+\centering
+\begin{tabular}{r|rr}
+$\pi$ & assistance & interdiction\\
+\hline
+$\omega(G)$ & expand & shrink\\
+$\alpha(G)$ & shrink & expand \\
+Hamiltonicity & expand & shrink \\
+shortest path & expand & shrink \\
+scattering number & shrink & expand
+\end{tabular}
+\caption{Problems in the shrink-expand framework have either shrinking or expanding intervals.}
+\label{tab:shrink-expand-overview}
+\end{table}
+A problem in the shrink-expand framework is defined by an input $(\I, \I', n, k)$. Here, $n$ is the number of vertices, $k \geq 0$ is the budget, $\I = (I_1, \dots, I_n)$ is the sequence of original intervals, and $\I' = (I'_1, \dots, I'_n)$ is the sequence of replacement intervals. The interval $I'_j$ is the replacement interval of the original interval $I_j$ for $j \in [n]$.  We have either $I'_j \subseteq I_j$ for all $j$ (\emph{shrinking} case), or $I'_j \supseteq I_j$ for all $j$ (\emph{expanding} case). \cref{tab:shrink-expand-overview} explains for all problems in the shrink-expand framework, whether we are in the shrinking case or the expanding case. Throughout the paper, we always use the letters $a$ and $b$ for start- and endpoints of $I_j$ and $I'_j$, that is $I_j = [a_j, b_j]$, and $I'_j = [a'_j, b'_j]$.
+
+For a set $X \subseteq [n]$ of indices, we denote by $\I_X$ the sequence of intervals that is obtained from \las{the sequence} $\I$ after shrinking (expanding) the intervals with indices in $X$. Formally, 
+\[(\I_X)_j = \begin{cases} I'_j & \text{if }j \in X \\
+I_j & \text{if } j \not\in X. \end{cases}\]
+When it is convenient, we can assume that each of $\I, \I', \I_X$ contains no duplicates and treat them as sets instead of sequences. We define $G_X := \graph(\I_X)$. We are interested in problems of the form 
+\[ \max_{X \subseteq [n], |X| \leq k} \pi(G_X) \ \text{ or } \min_{X \subseteq [n], |X| \leq k} \pi(G_X)\]
+where $\pi$ is some graph parameter. The problem is an \emph{interdiction problem} if it is a problem of max-min or min-max type. The problem is an \emph{assistance problem} if it is a problem of min-min or max-max type.
+
+\section{Shortest Path}
+
+In the shortest path interdiction problem, we are given a graph, and two specified vertices $v_s, v_t$. The interdictor wishes to maximize the length of a shortest path connecting $v_s$ and $v_t$. For interval graphs, we consider the following equivalent problem formulation: 
+Given a set $Z$ of intervals and two numbers $s, t \in \R$, define $\dist_Z(s, t)$ to be the minimum number of intervals from $Z$, which one needs to \enquote{walk} from $s$ to $t$. (Here, by a walk, we mean a sequence $(X_1, \dots, X_d)$ of intervals, such that $s \in X_1$, $t \in X_d$, and $X_i$ intersects $X_{i+1}$ for $i \in \fromto{1}{d-1}$. For example, in \cref{fig:shortest_path_ex1}, we have $\dist_Z(0, y) = 3$ with the corresponding walk $(I_1,I_3,I_4)$.) 
+For the interdiction problem, 
+the input consists of the set $\I = \{ [a_1,b_1], \dots, [a_n, b_n] \}$ of original intervals, the set 
+$\I' = \{ \las{[a'_1,b'_1]}, \dots, [a'_n, b'_n] \}$ of replacement intervals, two numbers $s, t \in \R$, and a budget $k \in \N_0$. We are in the shrinking case and want to determine 
+\[\max\set{\dist_{\I_X}(s, t) : X \subseteq [n], |X| \leq k}.\] This problem variant is clearly equivalent to the problem described above. Furthermore, without loss of generality, we can assume that $s = 0 < t$, and that for all intervals $F \in \I \cup \I'$ one has $F \subseteq [0, t]$. (This is because it is never beneficial to walk to the left of $s$ or to right of $t$, so if some $F \in \I \cup \I'$ is not contained in $[s, t]$, we can replace $F$ by $F \cap [s, t]$ and still obtain an equivalent problem instance.) 
+
+In the assistance problem, we are analogously given expanding intervals $\I, \I'$ and want to minimize the distance between $s$ and $t$ by expanding at most $k$ intervals. We show in this section that both problems can be solved in polynomial time.
+
+\subsection{Assistance Problem}
+As explained above, we are given expanding intervals $\I, \I'$ and want to determine 
+\[ \min \{ \dist_{\I_X}(s, t) \colon X \subseteq [n], |X| \leq k \}. \]
+There is a nice analogy for this problem: Suppose we are located on the real number line at point $s$ and want to get to point $t$. Furthermore, an interval $[a_i, b_i] \in \I$ is a road from $a_i$ to $b_i$ which we can use for this cause without paying a fee. Likewise, an interval $[a_i', b_i'] \in \I'$ is a road from $a'_i$ to $b_i'$, but it costs us a fee of one dollar to use. The assistance problem asks for the lowest amount of roads needed to travel from $s$ to $t$ while paying at most $k$ dollars. This can be solved using dynamic programming. 
+\begin{theorem}
+
+The assistance problem of shortest path in the shrink-expand framework can be solved in polynomial time. The algorithm can be implemented in $\bigO(kn)$ time, if we are given the list of all intervals sorted both with respect to startpoints and endpoints.
+\end{theorem}
+
+
+\begin{proof}
+Consider the set $\mathcal{P} := \bigcup_{i=1}^n \set{a_i, b_i, a'_i, b'_i}$ consisting of all the start- and endpoints of intervals $F \in \I \cup \I'$. For each point $p \in \mathcal{P}$, let $\alpha(p)$ be the rightmost point one can reach from $p$ by using a single interval from $\I$. Formally, $\alpha(p) := \max\set{x \in \mathcal{P} \mid \las{x \neq p \text{ and }} \exists I \in \I: p, x \in I}$ or $\alpha(p) = -\infty$ if the set is empty. Likewise, let $\alpha'(p)$ be the rightmost point one can reach from $p$ by using a single interval from $\I'$, i.e.\ $\alpha'(p) := \max\set{x \in \mathcal{P} \mid \las{x \neq p \text{ and }} \exists I' \in \I': p, x \in I'}$ or $\alpha'(p) = -\infty$ if the set is empty. We claim that the set of all values $\alpha(p), \alpha'(p)$ for $p \in \mathcal{P}$ can be precomputed in linear time using a sweep line algorithm, provided that we already have the intervals sorted with respect to both the start- and endpoints. 
+
+Indeed, \las{let $\mathcal{Q} := \bigcup_{i=1}^n \set{a_i,b_i}$.} Consider a sweep line starting at $-\infty$ going to $\infty$ \las{and stopping at every point in $\mathcal{Q}$ in increasing order. The algorithm has a variable $x$ which is initially $-\infty$. Whenever we encounter some point $a_i$, we update $x \gets \max\set{x, b_i}$. Whenever we encounter some point $b_j$, if currently $x = b_j$, then we update $x \gets -\infty$. It is easily proven by induction, that the variable $x$ always contains the correct value of $\alpha(p)$. The values $\alpha'(p)$ are computed analogously, only substituting $a_i, b_j$ by $a'_i, b'_j$ and $\mathcal{Q}$ by $\mathcal{Q}' := \bigcup_{i=1}^n \set{a'_i,b'_i}$. We have therefore shown how to compute all values of $\alpha(p), \alpha'(p)$ in $\bigO(n)$ time.}
+ %(Note that we require a sorting of the intervals with respect to the startpoints, as well as with respect to the endpoints, as we need to iterate over $p \in \mathcal{P}$.)
+
+Finally, consider the digraph $G$ on vertex set $\mathcal{P} \cup \set{-\infty}$ and the following arc set: For every $p \in \mathcal{P}$, it has one arc $e = (p, \alpha(p))$ and one arc $e' = (p, \alpha'(p))$. We call $e'$ an \emph{expensive} arc. Observe that $G$ is acyclic and has $\bigO(n)$ arcs. Furthermore, the solution to the assistance problem is given by the shortest path in $G$ from $s$ to $t$, which uses at most $k$ expensive arcs. But such a path can be computed using dynamic programming in $\bigO(kn)$ time, via the recursion formula
+\begin{align*}
+f(p, k') = \min\set{\min\set{f(p',k')+1 \mid (p',p) \text{ not expensive}},\\ \min\set{f(p',k'-1)+1 \mid (p',p) \text{ expensive}}} 
+\end{align*}
+with starting conditions $f(s, k') = 0$ for all $k' \in \fromto{1}{k}$ and $f(p, -1) = \infty$ for all $p \in \mathcal{P}$.
+It is easy to show via induction that $f(p,k')$ is the length of the shortest path from $s$ to $p$
+using at most $k'$ expensive arcs. At the end $f(t,k)$ is the optimal objective value for the given assistance problem.
+\qed\end{proof}
+
+\subsection{Interdiction Problem}
+In this section, we prove: 
+
+\begin{theorem}
+\label{thm:shortest_path_interdiction}
+The interdiction problem for shortest path in the shrink-expand framework can be solved in time $\bigO(n^4)$.
+\end{theorem}
+
+In order to enhance the readability of the proof, we employ the following strategy: First, we show that it suffices to solve the most vital nodes problem instead. Then we prove that the most vital nodes problem can be solved in polynomial time. Finally, we give an argument how the runtime can be improved.
+
+\begin{lemma}
+\label{lemma:shortest_path_reduction}
+The interdiction problem for shortest path in the shrink-expand framework can be reduced to the most vital nodes problem for shortest path \las{on interval graphs}.
+\end{lemma}
+\begin{proof} 
+Let $(\I, \I', k, s,t)$ be an instance of the interdiction problem, where $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$, $\I' = \fromto{[a'_1, b'_1]}{[a'_n, b'_n]}$, and $[a'_j, b'_j] \supseteq [a_j, b_j]$ for all $j \in \fromto{1}{n}$. Furthermore, $k \in \N_0$ is the budget, and $s, t \in \R$. We construct an equivalent instance of the most vital nodes problem. This instance is described by $(M, k, s, t)$, where $k, s, t$ stay the same as before, and $M$ is the following multi-set of intervals: $M$ contains one copy of $\I$ and $k+1$ copies of $\I'$, i.e.\ it has cardinality $n(k+2)$. More formally, for each $i \in \fromto{1}{n}$, let $N(i, k)$ be the multi-set, consisting of $k+1$ copies of $[a_i', b_i']$. The multi-set $M$ is then given by
+\[M = \I \cup \bigcup_{i=1}^n N(i, k). \]
+%that is, $M$ contains $n(k+2)$ elements.
+
+We now claim that the interdiction problem for $\I, \I'$ has the same solution as the most vital nodes problem for $M$. In other words, we have the equality
+\[\las{\max}_{X \subseteq [n], |X| \leq k} \dist_{\I_X}(s, t) = \las{\max}_{Y \subseteq M, |Y| \leq k} \dist_{M \setminus Y}(s, t). \]
+In fact, to see \enquote{$\geq$}, whenever we have on the left-hand side a set $X \subseteq [n]$ describing the indices of intervals which are \las{shrunk} by the interdictor, 
+we can also delete the same intervals in $M$ to get an equivalent term on the right-hand side. 
+To see \enquote{$\leq$}, assume we have a multi-set $Y \subseteq M$ on the right-hand side. 
+Observe that there is no $i \in \fromto{1}{n}$ such that $N(i, k) \subseteq Y$, simply because $|N(i, k)| = k+1$, 
+but $|Y| \leq k$. But %if $|N(i, k) \cap X| \leq |N(i, k)|$, 
+then the deletion of $N(i, k) \cap Y$ has no effect on the distance between $s$ and $t$. 
+We can therefore assume that $Y \cap N(i,k) = \emptyset$ for all $i$, which implies $Y \subseteq \I$. 
+Hence, the interdictor can also shrink the same intervals in $\I$ to get an equivalent term on the left-hand side. This completes the proof.
+\qed\end{proof}
+
+Certainly, the reduction described by the previous proof will increase the size of the instance by a factor of roughly $k$. We show at the end of this section how to overcome this problem.
+
+\begin{figure}
+\centering
+\includegraphics[scale=1,page=2]{chapter-3-interdiction/figure_shortest_path}
+\caption{\las{Let $Z := \fromto{I_1}{I_6}$. We have $\dist_Z(0,y)= 3$. The point $x$ is 2-critical with respect to $Z$. We have $\rel(x) = \fromto{I_1}{I_4}$ and $\betw(x,y) = \set{I_5}$.}}
+\label{fig:shortest_path_ex1}
+\end{figure}
+%------------------------------
+%-----------------------------
+\begin{figure}
+\centering
+\includegraphics[scale=1,page=3]{chapter-3-interdiction/figure_shortest_path}
+\caption{\las{The set $\set{I_2, I_3}$ is in state $(v,x,2)$, but not in state $(v,w,2)$, since the interval $I_3$ goes beyond $w$.}}
+\label{fig:shortest_path_ex2}
+\end{figure}
+%------------------------------
+%-----------------------------
+\begin{figure}
+\centering
+\includegraphics[scale=1,page=4]{chapter-3-interdiction/figure_shortest_path}
+\caption{\las{If $Z := \set{I_1, I_3, I_4}$, then $Z \subseteq \rel(x)$ is in state $(x,y,3)$. The set $Z$ is partitioned into $Z \cap \rel(w) = \set{I_1, I_3}$ and $Z \cap \betw(x,y) = \set{I_4}$. 
+The point $w$ has the properties as described in \cref{lemma:shortest_path_bellmann_principle}.}}
+\label{fig:shortest_path_ex3}
+\end{figure}
+%------------------------------
+%-----------------------------
+In order to solve the most vital nodes problem, we introduce some concepts. If $Z$ is a set of intervals, $x \in \R_{\geq0}$, and $d \in \N_0$, we say that $x$ is \emph{$d$-critical} with respect to $Z$, if \las{$x$ is the rightmost point with $\dist_Z(0,x) = d$.} Formally, $\dist_Z(0, x) = d$, and $\dist_Z(0, x') > d$ for all $x' > x$ (\las{including the case} where $\dist_Z(0, x') = \infty$). \las{There is always a unique $d$-critical point.} \las{An example is depicted in \cref{fig:shortest_path_ex1}.} 
+
+The rough idea of the algorithm is to apply dynamic programming with respect to the rightmost two critical points. To make this more precise, we define the following concepts: If $\I$ is a set of intervals forming an instance for the most vital nodes problem in interval graphs, and if $x, y \in \R_{\geq 0}$, $x < y$, then we call $\rel(x) := \set{[a_i, b_i] \in \I : a_i \leq x}$ the \emph{relevant intervals} of $x$ and we call $\betw(x, y) := \set{[a_i, b_i] \in \I : x < a_i \leq y}$ the intervals \emph{between} $x$ and $y$. 
+\las{An example is depicted again in \cref{fig:shortest_path_ex1}}. 
+Finally, if $Z \subseteq \rel(x)$, we say that $Z$ is in state $(x, y, d)$, if with respect to $Z$, we have that $x$ is $(d-1)$-critical and $y$ is $d$-critical. 
+Observe that if a set $Z$ is in state $(x, y, d)$, it does not contain any interval that goes beyond $y$, even though $\rel(x)$ may contain intervals that go beyond $y$. 
+\las{An example of this concept is depicted in \cref{fig:shortest_path_ex2}}. We now prove the following central lemma for our algorithm.
+\las{(An illustration of the lemmas statement can be seen in \cref{fig:shortest_path_ex3}.)}
+
+\begin{lemma}
+\label{lemma:shortest_path_bellmann_principle}
+Let $x, y \in \R_{\geq 0}, x < y$ and $d \geq 2$. A set $Z \subseteq \rel(x)$ is in state $(x, y, d)$ if and only if there exists $w < x$ such that both 
+\begin{itemize}
+\item $Z \cap \rel(w)$ is in state $(w, x, d-1)$
+\item $Z \cap \betw(w, x)$ contains no interval $[a_i, b_i]$ with $b_i > y$ and at least one interval $[a_i, b_i]$ with $b_i = y$.
+\end{itemize} 
+\end{lemma}
+\begin{proof}
+Note that $(Z \cap \rel(w)) \dotunion (Z \cap \betw(w, x))$ is a partition of $Z$ into two disjoint parts. For the first direction of the proof, if there exists $w$ such that these two parts have the two described properties, it is easy to see that $Z$ is indeed in state $(x, y, d)$. For the other direction, let $Z$ be in state $(x, y, d)$ and let $w < x$ be the unique point on the real line which is $(d-2)$-critical with respect to $Z$. Because $w$ is $(d-2)$-critical, and $x$ is $(d-1)$-critical, and $y$ is $d$-critical, one can check that both the required properties hold.
+\qed\end{proof}
+
+\begin{theorem}
+\label{thm_MVN_shortest_path}
+The most vital nodes problem for shortest path on interval graphs \las{on $n$ vertices} can be solved in time $\bigO(n^4)$.
+\end{theorem}
+\begin{proof}
+Let $(\I, k, s, t)$ be an instance of the most vital nodes problem with budget $k$, such that $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$ and $s = 0$ and $t \in \R_{> 0}$. Let $\mathcal{P} := \set{a_i \mid i \in \fromto{1}{n}} \cup \set{b_i \mid i \in  \fromto{1}{n}} 
+$ be the set of their start- and endpoints.
+% and an additional pseudo-point at infinity. 
+We can assume $\min\mathcal{P} = 0$ and $\max\mathcal{P} = t$.
+%$\max(\mathcal{P}\setminus\set{\infty}) = t$. 
+We can also assume that the interdictor cannot disconnect 0 and $t$, as this can be checked easily.
+
+ For $x, y \in \mathcal{P}$, $x < y$, and $d \in \fromto{1}{n}$, we define
+\[f(x,y,d) := \max\set{|Z| : Z \subseteq \rel(x), Z \text{ is in state } (x,y,d)}. 
+\]
+
+\textbf{Claim.} \emph{If a table of all values $f(x,y,d)$ for $x,y \in \mathcal{P}, x < y$ and $d \in \fromto{1}{n}$ is given, then the solution to the most vital nodes problem \las{on interval graphs} can be computed in time $\bigO(n^2)$.}
+
+\emph{Proof of the claim.} \las{Let $d_\text{opt}$ be the solution of the most vital nodes problem, i.e.\ $d_\text{opt} := \max_{X \subseteq [n], |X| \leq k} \dist_{\I \setminus X}(0, t)$. Furthermore, let $X \subseteq [n],|X| \leq k$ be a set that achieves the maximum in this equation, i.e.} we have $\las{d_\text{opt}} = \dist_{\I \setminus X}(0, t)$.
+We assume \las{w.l.o.g.} that $X$ has the minimum size among all such sets. 
+Let $Z := \I \setminus X$ be the remaining intervals. Then with respect to $Z$, there exists a unique $(\las{d_\text{opt}} - 1)$-critical point $x \in \mathcal{P}$. 
+In other words, we have that the set $Z \cap \rel(x)$ is in state $(x, t, \las{d_\text{opt}})$. 
+Furthermore, because $x$ is already $(\las{d_\text{opt}} - 1)$-critical, the interdictor does not need to delete any intervals in $\betw(x, t)$. 
+Combined with the assumption that $X$ has the smallest cardinality among the optimal choices, this implies $\betw(x, t) \subseteq Z$. In total, \las{for the number $d' := d_\text{opt}$} we have the three properties 
+\begin{itemize}
+\item[(i)] $Z = (Z \cap \rel(x)) \dotunion \betw(x, t)$,
+\item[(ii)] $(Z \cap \rel(x))$ is in state $(x, t, d')$, and
+\item[(iii)] $|Z| \geq n - k$.
+\end{itemize}
+On the other hand, if one has a point $x \in \mathcal{P}$ and a set $Z \subseteq \I$ and some number $d'$, such that properties (i) - (iii) hold, then it is not hard to see that \las{$\dist_{Z}(0, t) \geq d'$, i.e.} the \las{set} $\las{X'} := \I \setminus Z$ is a solution of \las{objective} value at least $d'$. We therefore conclude that the optimal solution to the most vital nodes problem is given by
+\[
+d_{\text{opt}} =  \max\set{d' \in \N : \exists x \in \mathcal{P} \text{ s.t.\ } f(x,t,d') + |\betw(x, t)| \geq n - k}.
+\]
+With this formula, $d_{\text{opt}}$ can be computed in $\bigO(n^2)$ time \las{simply by iterating over all $0 \leq d' \leq n$ and $x \in \mathcal{P}$ and checking whether the condition is satisfied}. 
+Note that the values $|\betw(x,t)|$ can be precomputed in $\bigO(n^2)$ time.
+This completes the proof of the claim.
+\claimqed
+
+
+%In order to achieve distance $d$ from 0 to $t$, the smallest number of intervals the interdictor needs to delete is $n - \max\set{f(x,t,d) + |\betw(x, t)| : x \in \mathcal{P}, x < t} =: g(d)$.
+%Hence, the maximum distance that can be achieved is $\max\set{d : g(d) \leq k}$.
+%The value $n - f(t,\infty,d)$ tells us how many intervals need to be deleted from $\rel(t) = \I$ until some $Z$ in state $(t,\infty,d)$ exists. Therefore, the maximum value the interdictor can achieve in the most vital node problem is $1 + \max\set{d : n - f(t,\infty,d) \leq k}$.
+
+We now show how to compute $f$ using dynamic programming. By \cref{lemma:shortest_path_bellmann_principle}, in order to compute $f(x,y,d)$, one can guess $w \in \mathcal{P}, w < x$ and solve independently the maximization problems for $Z \cap \rel(w)$ and $Z \cap \betw(w,x)$. Formally, for $w,x,y \in \mathcal{P}$, where $w < x < y$, we define two helper functions: First, $\valid(w,x,y) := \True$ if and only if there exists $[a_i, b_i] \in \betw(w,x)$ with $b_i = y$. Second, $\beta(w,x,y) := |\set{[a_i, b_i] \in \betw(w,x) : b_i \leq y}|$. The values of all helper functions can be precomputed in time $\bigO(n^3)$, using $\bigO(n^2)$ iterations of a sweep line algorithm in $\bigO(n)$ time.
+We then have the following recursion formula for $d \geq 2$:
+\[f(x,y,d) = \max\set{f(w,x,d-1) + \beta(w,x,y) : w \in \mathcal{P}, w < x, \valid(w,x,y) = \True}.
+\]
+The formula is correct, because for a set $Z$ in state $(x, y, d)$, and a point $w$ as described above, $f(w, x, d-1)$ and $\beta(w, x, y)$ are respectively the maximum size of the two disjoint sets $Z \cap \rel(w)$ and $Z \cap \betw(w, x)$.
+Hence the correctness follows from \cref{lemma:shortest_path_bellmann_principle}.
+For $d = 1$, the values $f(0, y, 1)$ can be easily computed. (Note that $f(x,y,1) = -\infty$ for $x \neq 0$.) In total, for each of the $\bigO(n^3)$ many choices of $(x, y, d)$, we need $\bigO(n)$ computation time, so the total required time is $\bigO(n^4)$. This completes the proof.
+\qed\end{proof}
+
+\las{It is now clear how to combine \cref{lemma:shortest_path_reduction,thm_MVN_shortest_path}: Given an instance of the interdiction problem in the shrink-expand framework with $n$ interval pairs and budget $k$, we can apply \cref{lemma:shortest_path_reduction} to obtain an equivalent instance of the most vital nodes problem with $N = \Theta(kn)$ vertices. Due to \cref{lemma:shortest_path_reduction}, we can solve this new problem in $\bigO(N^4)$ time. In total, we have solved the original problem in $\bigO(k^4n^4)$ time.}  
+\las{The last part of this section shows how to avoid the additional factor of $k^4$ and solve the original problem in the shrink-expand framework in $\bigO(n^4)$ time, hence proving \cref{thm:shortest_path_interdiction}.}
+
+%\begin{proof}[Proof of \cref{thm:shortest_path_interdiction}]
+\paragraph*{Proof of \cref{thm:shortest_path_interdiction}.}
+Just like in \cref{lemma:shortest_path_reduction}, let $(\I, \I', k, s,t)$ be an instance of the interdiction problem, and let $M$ be the multi-set described in the reduction from the lemma. Then $|M| = n(k+2)$. We know that if we solve the most vital \las{nodes} problem for $M$, i.e.\ if we apply the dynamic program from \cref{thm_MVN_shortest_path}, then we solve the interdiction problem. In particular, if we consider $M$ as an input to the dynamic program from \cref{thm_MVN_shortest_path}, we have 
+\begin{align*}
+\rel(x) &= \set{[a_i, b_i] \in M : a_i \leq x}\\
+\betw(x, y) &= \set{[a_i, b_i] \in M : x < a_i \leq y}\\
+f(x,y,d) &= \max\set{|Z| : Z \subseteq \rel(x), Z \text{ is in state } (x,y,d)}\\
+d_{\text{opt}} &=  \max\set{d \in \N : \exists x \in \mathcal{P} \text{ s.t.\ } f(x,t,d) + |\betw(x, t)| \geq |M| - k}\\
+\beta(w,x,y) &= |\set{[a_i, b_i] \in \betw(w,x) : b_i \leq y}|.
+\end{align*}
+Now, we observe that the crucial components required to recursively compute the values $f(x,y,d)$ can be also expressed in terms of $\I, \I'$ instead of in terms of $M$. Using this reformulation, they can be computed faster. In fact, the three terms
+\begin{align*}
+|\betw(x, y)| &= |\set{[a_i, b_i] \in \I : x < a_i \leq y}| + (k+1)|\set{[a'_i, b'_i] \in \I' : x < a'_i \leq y}|\\
+d_{\text{opt}} &=  \max\set{d \in \N : \exists x \in \mathcal{P} \text{ s.t.\ } f(x,t,d) + |\betw(x, t)| \geq n(k+2) - k}\\
+\beta(w,x,y) &= |\set{[a_i, b_i] \in \betw(w,x)\cap \I : b_i \leq y}| + \\
+&\qquad (k+1)|\set{[a'_i, b'_i] \in \betw(w,x)\cap \I' : b'_i \leq y}|
+\end{align*}
+are sufficient. The set of all values for these terms can be precomputed in $\bigO(n^3)$ time each, using sweep-line algorithms. The rest of the proof is identical to \cref{thm_MVN_shortest_path}.
+\qed
+%\end{proof}
+
+Note that the most vital nodes problem can also be reduced to the interdiction  problem  for  shortest  path in the shrink-expand framework.
+Observe that by setting $a'=b'$ for any interval the reduction operation 
+on this interval implies that the corresponding vertex becomes isolated \las{(recall from \cref{sec:prelim} that we made the special definition $[a',b'] = \emptyset$.)}. 
+In the case of shortest path interdiction isolating a vertex is equivalent to vertex deletion.
+
+\section{Independence Number}
+
+\las{This section is concerned with the assistance and interdiction problems arising from the independence number $\alpha(G)$. In the interdiction problem, we have expanding intervals and the interdictor wants to expand $k$ intervals such that for the resulting graph, the independence number $\alpha$ becomes as small as possible. This question is addressed in \cref{sec:independence-interdiction}. In the assistance problem, we have shrinking intervals, and the goal is to shrink $k$ intervals such that $\alpha$ becomes as large as possible. This question is addressed in \cref{subsec:ind-assistance}.}
+
+For interval graphs, it is well known that the independence number $\alpha(G)$ is 
+equal to the so-called clique cover number $\kappa(G)$ which is defined as follows.
+Given a graph $G=(V,E)$ a partition $V_1, \dots, V_\ell$ of the vertex set $V$ is called a 
+\emph{clique cover} of $G$ if the sets $V_i$ are pairwise disjoint and the graphs $G[V_i]$ induced by $V_i$
+form cliques for each $i=1,\dots,\ell$. We call $\ell$ the size of the clique cover 
+and denote by $\kappa(G)$ the minimum size of a clique cover of $G$, the clique cover number of $G$.
+On general graphs, computing $\kappa(G)$ is NP-hard.
+If $G$ is an interval graph, it is a well-known result that $\kappa(G) = \alpha(G)$ and both 
+can be computed in polynomial time~\cite{golumbic2004algorithmic}.
+\las{In the \emph{assistance problem for clique cover}, we have expanding intervals, and the goal is to expand $k$ intervals, such that for the resulting graph, its clique cover number $\kappa$ is as small as possible. By the arguments above, this problem is equivalent to the interdiction problem for the independence number.}
+
+In the following section we will heavily use the following observation.
+
+\begin{proposition}\label{prop:cliquecover}
+    Let $\I = (I_1, \dots, I_n)$ be a list of intervals, $G = G(\I)$ an interval graph,
+     $C(x) = \{\hun{j} \in V : x \in I_{\hun{j}}\}$ and $(V_1, \dots, V_{r})$ a clique cover of $G$.
+    Then for every $i \in [r]$ there exists a point $x_{i} \in \mathbb{R}$
+    such that $V_{i} \subseteq C(x_i)$, \hun{i.e.,~a point $x_i$ contained in all intervals of the clique~$V_i$}.
+     Additionally, we can assume that $x_i$ is an endpoint of an interval in $\I$.
+\end{proposition}
+
+\subsection{Interdiction Problem}
+\label{sec:independence-interdiction}
+In this section, we obtain a polynomial time algorithm based on dynamic programming for the independence number interdiction problem,  $\min_{|X| \leq k} \alpha(G_X)$,
+on interval graphs. Note that for this problem, we consider the case of expanding intervals.
+
+\las{For} interval graphs $\alpha(G) = \kappa(G)$, it holds that 
+\[ \min_{X \subseteq [n] \colon |X| \leq k } \alpha(G_X) = \min_{X \subseteq [n] \colon |X| \leq k} \kappa(G_X). \]
+Therefore, we can focus on solving the clique cover number assistance problem.
+Let $\F := \I \cup \I' = \fromto{F_1}{F_{2n}}$ and $F_j = [c_j, d_j]$\hun{, for $j \in [2n]$}. Without loss of generality, we assume that the elements of $\F$ are ordered by endpoints, i.e.\ we have $d_1 < d_2 < \dots < d_{2n}$. 
+Due to \cref{prop:cliquecover}, we can assume that in an optimal solution $X \subseteq [n]$, the clique cover $(V_1, \dots, V_r)$ of $G_X$ is in one-to-one correspondance to a  subset of cardinality $r$ of the
+positions $d_1, \dots, d_{2n}$.
+
+We define $c(i,j)$ 
+as the minimum number of intervals that we need to expand such that there lie no 
+intervals strictly between $d_i$ and $d_j$ for all $0 \leq i < j \leq 2n+1$, where $d_0=-\infty$ and $d_{2n+1} = \infty$.
+Note that if there exists an \hun{$t \in [n]$} for which the expanded interval $I'_{\hun{t}}$ lies strictly between $d_i$ and $d_j$, 
+we set $c(i,j) = \infty$. Formally,
+\[ c(i,j) = \begin{cases} \infty & \text{if } \exists t \in [n] \colon d_i < a'_t \leq b'_t < d_j\\ |\{ t \in [n] \colon d_i < a_t \leq b_t < d_j \}| & \text{otherwise}. \end{cases} \]
+The main idea for defining $c(i,j)$ is that if in a clique cover of $G_X$ no 
+endpoint $d_{\ell}$ for $i<\ell<j$ is selected, then $X$ contains at least $c(i,j)$ original intervals that lie strictly in between $d_i$ and $d_j$.
+
+\hun{Recall that $\I[X]$ denotes the set $\{ I_i : i \in X \}$.}
+\hun{For $j \in [2n]$,} define $\F_j := \{F_1, \dots, F_j\}$.
+\hun{Further, for $k' \in \{0, \dots, k\}$,} let $F(j,k')$ be the minimum size of a clique cover of $G(\I_X \cap \F_j)$ subject to 
+$|\I[X] \cap \F_j| \leq k'$ and $d_j$ is part of the clique cover. Note that if such a clique cover does not exist, 
+we define $F(j,k')=\infty$. 
+It is easy to see that
+    \[ F(j,k') = \min \{ 1 + F(i, k'-c(i,j)) \colon 0 \leq i < j\text{ and } c(i,j) \leq k' \}. \]
+Our dynamic programming algorithm is based on this equality.
+%Our dynamic progrmaming algorithm is based on the following equality.
+%\begin{lemma}
+%It holds that
+%    \[ F(j,k') = \min \{ 1 + F(j', k'-c(i,j)) \colon i' < j \}. \]
+%\end{lemma}
+%\begin{proof}
+%    TODO or skip
+%\qed\end{proof}
+
+
+Based on this result we can precompute the values $c(i,j)$ in $O(n^2)$ time and 
+then run a dynamic program to compute all values $F(j,k')$ for $j=0,\dots,n+1$ and 
+$k'=0,\dots,k$. Then it holds that $F(2n+1,k) = \min_{X \subseteq [n] \colon |X| \leq k} \kappa(G_X) + 1$
+and we obtain the following result.
+
+\begin{theorem}\label{thm:ind-int}
+    The independence number interdiction and the clique cover number assistance problem on interval graphs can be solved in $O(k n^2)$ time.
+\end{theorem}
+
+Note that for $a'_i = -M$ and $b'_i = M$ for all $i=1,\dots,n$ and some large constant $M$, our 
+problem is equivalent to the most vital nodes problem for independent set which was studied 
+under the name \hun{\emph{deletion blocker problem} with respect to the independence number}
+by Diner et al.~\cite{diner2018contractionDeletionBlockers}. They left the complexity 
+of this problem as an open question. By Theorem~\ref{thm:ind-int}, there exists 
+a polynomial time algorithm for this problem.
+\begin{corollary}
+    The most vital nodes problem for independence number \las{on interval graphs} can be solved in $O(k n^2)$ time.
+\end{corollary}
+
+\subsection{Assistance Problem}
+\label{subsec:ind-assistance}
+
+The independence number assistance problem, $\max_{|X| \leq k} \alpha(G_X)$,
+is equivalent to finding an independent set $\J \subseteq \I \cup \I'$ such that 
+$ |\J \cap \I'| \leq k$ of maximum size. Note that for this problem we consider the 
+case of shrinking intervals. We solve this problem in 
+polynomial time by giving \hun{the following reduction} to the longest path problem on a directed acyclic graph (DAG) $D$
+(see \cref{figure:indendent_set_assistance} for an illustration).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{chapter-3-interdiction/figure_independent_set_assistance}
+\caption{Illustration of the digraph used to solve the assistance problem for independent set. We have $n=3$ and $k=2$. 
+The blue arcs correspond to the decision to add an interval from $\I$ to the solution and 
+the red arcs correspond to the decision to add an interval from $\I'$ to the solution. To increase 
+readability, all arcs of the form $(v_i^{\ell}, v_i^{\ell+1})$ are not drawn in the illustration.
+The dotted edges correspond to an optimal solution for the given instance, where 
+intervals $1$ and $2$ are \las{shrunk} and interval $3$ is selected without shrinking.}
+\label{figure:indendent_set_assistance}
+\end{figure}
+
+The vertex set of $D$ consists of $k+1$ layers $L_0, \dots, L_k$. For each start- and endpoint $x \in \mathbb{R}$ of the intervals in $\I$ and $\I'$, we add $k+1$ vertices to $D$,
+one in each layer $L_0$ up to $L_k$. For each such vertex $v$, we denote by $p(v) = x$ its corresponding point.
+Let $v_1^{\ell}, \dots, v_{2n}^{\ell}$ be the vertices of layer $\ell$ ordered increasingly with respect to 
+their corresponding point $p(v_i^{\ell})$ for all $i=1,\dots,2n$ and $\ell=0,\dots,k$.
+We add arcs $(v_i^{\ell}, v_i^{\ell+1})$ of length zero to $D$ for all $\ell=0,\dots,k-1$ \hun{(omitted in \cref{figure:indendent_set_assistance} for readability)}.
+We also add arcs $(v_i^{\ell}, v_{i+1}^{\ell})$ of length zero to $D$ for all $i=1,\dots,2n-1$ \hun{(black arcs in \cref{figure:indendent_set_assistance})}.
+For each $i=1,\dots,n$ \hun{and for $i', j' \in [2n]$ such that} $p(v_{i'}^{\ell}) = a_i$ and $p(v_{j'}^{\ell})=b_i$, we add arcs 
+$(v_{i'}^{\ell}, v_{j'}^{\ell})$ of length $1$ for all $\ell=0,\dots, k$ to $D$ (blue arcs in \cref{figure:indendent_set_assistance}). Note that traversing these arcs corresponds 
+to adding $I_i$ to the solution. Also, for each $i=1,\dots,n$ \hun{and for $i', j' \in [2n]$ such that} $p(v_{i'}^{\ell}) = a'_i$ and $p(v_{j'}^{\ell})=b'_i$, we add arcs 
+$(v_{i'}^{\ell}, v_{j'}^{\ell+1})$ of length $1$ for all $\ell=0,\dots,k-1$ to $D$ (red arcs in \cref{figure:indendent_set_assistance}). Note that traversing these arcs corresponds 
+to adding $I'_i$ to the solution. In this DAG, we are now looking for a longest path from 
+$s=v_1^1$ to $t=v_{2n}^k$. Given an $s$-$t$-path $P$ in $D$ we denote by $\I(P)$ 
+the set of intervals corresponding to length-1 arcs selected.
+Note that for each interval $F \in \I \cup \I'$ 
+only one of the length-1 arcs corresponding to adding $F$ to the solution can be 
+contained in an $s$-$t$-path, hence $\I(P)$ is well defined.
+
+\begin{lemma}
+    There exists an independent set $\J \subseteq \I \cup \I'$ such that 
+    $ |\J \cap \I'| \leq k$ if and only if there exists an $s$-$t$-path $P$ 
+    in $D$ such that $\I(P) = \J$ of length $|\J|$.
+\end{lemma}
+\begin{proof}
+    All arcs of $D$ go from a vertex corresponding to a point $p$ 
+    to a vertex corresponding to a point $p'$ where $p < p'$. In addition,
+    all arcs of length $1$ go from the startpoint to the endpoint of the 
+    interval that is added to $\I(P)$ if $P$ traverses the arc. Hence, given an
+    $s$-$t$-path $P$ the length $1$ arcs traversed by $P$ correspond to 
+    pairwise disjoint intervals from left to right, so the intervals $\I(P)$ form an 
+    independent set. Also, observe that the number of intervals in $\I(P)$ that 
+    are contained in $\I'$ is bounded by $k$, since every $s$-$t$-path can only 
+    move from level $\ell$ to level $\ell+1$ once for all $\ell=0,\dots,k-1$.
+
+    It is now easy to see that every independent set $\J \subseteq \I \cup \I'$ such that 
+$ |\J \cap \I'| \leq k$ can also be converted into an $s$-$t$-path $P$ such that $\I(P) = \J$.
+\qed\end{proof}
+
+Based on this lemma, it holds that computing a longest path in $D$ is 
+equivalent to solving the independence number \hun{interdiction} problem. By similar 
+arguments as in the subsection above, the same algorithm can also be used to 
+solve the clique cover number \hun{assistance} problem.
+\hun{In addition, the longest path problem on an $n'$-vertex $m'$-edge directed acyclic graph can be solved in $O(m'+n')$ time~\cite{sedgewick2011algorithms}. 
+It is easy to see that $D$ in the reduction above contains $O(kn)$ vertices and $O(kn)$ edges.}
+In summary, we obtain the following result.
+
+\begin{theorem}
+    The independence number \las{assistance} and clique cover \las{interdiction} problem \las{in the shrink-expand framework} can 
+    be solved in polynomial time.
+    The algorithm can be implemented in $O(kn)$ time if we are given the lists of 
+    intervals both sorted with respect to startpoints and endpoints.
+\end{theorem}
+
+\section{Maximum Clique Size}
+In this section we consider the parameter $\omega$,
+the maximum clique size of a graph. Note that for an interval graph $G$ it holds
+that $\omega(G) = \chi(G)$, where $\chi(G)$ is the chromatic number of $G$.
+The interdiction problem for $\omega$, which is equivalent to the assistance problem 
+for $\chi$, has shrinking intervals, 
+and the goal is to compute $\min_{|X| \leq k} \omega(G_X)$. 
+The assistance problem for $\omega$, which is equivalent to the interdiction problem for $\chi$,
+has expanding intervals, and the goal is to compute $\max_{|X| \leq k} \omega(G_X)$.
+
+\subsection{Assistance problem}
+
+\begin{theorem}\label{thm:clique:assistance}
+    The maximum clique size assistance problem and the chromatic number interdiction problem \las{in the shrink-expand framework} can be solved in $\bigO(n)$ time, given the list of all intervals sorted with respect to endpoints. 
+\end{theorem}
+\begin{proof}
+The problem is a highly local problem, since the maximum clique size is achieved at a point 
+$x \in \mathbb{R}$ that is included in a maximum number of intervals.
+Let $\fromto{p_1}{p_{2n}}$ be the set of all start- and endpoints of intervals in $\I \cup \I'$. For each $i \in [2n]$, let $\alpha_i$ be the number of intervals in $\I$ that contain $p_i$. Let $\beta_i := |\set{j \in [n] : p_i \not\in I_j, p_i \in I'_j}|$. The value $\beta_i$ is the maximum possible value by which $\alpha_i$ could increase by expanding some intervals. The set of all values $\alpha_i, \beta_i$ can be computed using a single sweep line algorithm. The solution to the assistance problem is then given by $\max_{i=1,\dots,2n} (\alpha_i + \min\set{\beta_i,k})$.
+\qed\end{proof}
+
+
+
+%We observe that for the case of maximum clique size and the chromatic number the operation of vertex deletion 
+%can be modelled as a special case of the expansion operation in the shrink-expand framework, hence \autoref{thm:clique:assistance} 
+%can be used to solve an assistance problem for chromatic number using the node deletion operation in polynomial time.
+%\comment{Still doesn't make sense? Chromatic number assistance by vertex deletion = clique number interdiction by vertex deletion, was already handled by Diner et al.}
+%\begin{corollary}
+%    The assistance problem for the chromatic number on interval graphs with the node deletion operation can be solved in $\bigO(n)$ time.
+%\end{corollary}
+%\begin{proof}
+%By setting $a'_i = -M, b'_i = M$ for all $i$ and a large enough constant $M$ 
+%it holds that the expansion operation corresponds to connecting vertex $i$ to 
+%all other vertices. Hence if $X \subseteq [n]$ and $|X|=k'$ it holds that 
+%$\chi(G_X) = \chi(G-X) + k'$. Hence, by solving the interdiction problem for $k' = 0, \dots, k$ 
+%one can obtain the solution to the most vital nodes problem for $\chi$.
+%\todo{Shouldn't $k'$ be exactly $k$ here?}
+%
+%Note, that by modifying the proof of \autoref{thm:clique:assistance} 
+%one can circumvent the need to to solve $k$ instances and obtain the linear running time.
+%\qed\end{proof}
+
+\subsection{Interdiction problem}
+
+Diner et al.\ \cite{diner2018contractionDeletionBlockers} proved that the most vital nodes problem for maximum clique size on interval graphs can be solved in $\bigO(n)$ time with a simple greedy algorithm \cite{diner2018contractionDeletionBlockers}. 
+Note that the most vital nodes problem for maximum clique size is a special case of the interdiction problem for maximum clique size in the shrink-expand framework 
+by setting $a'_i = b'_i$ for all $i$. Observe that in this case the shrinking operation corresponds 
+to the operation of removing all incident edges of a vertex, i.e. transforming it into a singleton. For 
+the maximum clique size parameter this is equivalent to vertex deletion, except for the special case where $k=n$, which can be trivially handled.
+In the general case (where we allow $a'_i \neq b'_i$), this problem becomes much harder. To show this, we reduce from the problem $\textsc{1-fold 2-interval cover}$. In this problem, we are given an integer $t \in \N$ and $n$ objects $O_1,\dots,O_n$, where every object $O_i = [x_{i1},x_{i2}] \cup [x_{i3}, x_{i4}]$ is a disjoint union of two intervals (a so-called \emph{2-interval}), such that $0 \leq x_{i1} < x_{i2} < x_{i3} < x_{i4} \leq t$. The goal is to decide whether there exists a selection of at most $k$ objects such that every $p \in \fromto{0}{t}$ is contained in at least one object of the selection. $\textsc{1-fold 2-interval cover}$ is NP-complete \cite{ding2011onefold} and W[1]-hard \cite{approximability-c-interval}.
+
+\begin{theorem}
+The maximum clique size interdiction problem and the chromatic number assistance problem in the shrink-expand framework is NP-complete. The problems are even W[1]-hard with respect to the parameter $k$.
+\end{theorem}
+\begin{proof}
+Given an instance $(t, O_1, \dots, O_n)$ of $\textsc{1-fold 2-interval cover}$, we construct an instance of the maximum clique size interdiction problem. For each object $O_i$, we introduce a shrinking interval pair $[a_i, b_i] = [x_{i1}, x_{i4}]$ and $[a'_i, b'_i] = [x_{i2},x_{i3}]$. Let $\I := \fromto{[a_1, b_1]}{[a_n, b_n]}$ be the set of all $[a_i, b_i]$ introduced so far and let $M := \omega(\graph(\I))$ be the clique number of the corresponding interval graph. \hun{Then for each $p \in \fromto{0}{t}$, we iteratively} add additional \enquote{non-shrinkable} pairs $[a_{\hun{j}}, b_{\hun{j}}] = [a'_{\hun{j}}, b'_{\hun{j}}] = [p- \epsilon, p + \epsilon]$ for a small $\epsilon > 0$ \hun{and an unused index $j$}, until $p$ is contained in exactly $M + 1$ intervals. For this newly constructed instance, we have that the interdictor can reduce the clique number from $M + 1$ down to $M$ with a budget of $k$, if and only if there is a 1-fold 2-interval cover of $\fromto{0}{t}$ with at most $k$ objects.
+\qed\end{proof}
+
+\input{chapter-3-interdiction/hamilton4}
+
+\section{Conclusion}
+We have introduced a new framework of interdiction and assistance problems for interval graphs based on the shrinking and expanding operations.
+In this framework, we have provided algorithms and classified the computational complexity of these problems for many classical parameters, including the shortest path, independence number, and clique number.
+Except for the interdiction problem for the clique number which is NP-hard, the others are in P.
+We have also formulated a polynomial-time algorithm for the assistance problem for the scattering number, which can be used to solve the interdiction problems for Hamiltonicity.
+The interdiction problem for the scattering number, however, remains open.
+We also noted that the most vital nodes problems of the above parameters are either special cases of the shrink-expand framework or can be easily solved by relevant problems in the framework. 
+In particular, this has resolved an open problem posed by Diner et al.~\cite[(Q2)]{diner2018contractionDeletionBlockers}.
+
+Finally, we note that our polynomial-time results do not generalize to superclasses of interval graphs: For the parameters $\alpha$ and $\omega$, Diner et al. proved that the most vital nodes problem is NP-complete on chordal graphs \cite{diner2018contractionDeletionBlockers}. It is also NP-complete to decide whether a chordal and bipartite graph has a Hamilton cycle \cite{muller1996hamiltonian}, so the most vital nodes problem is NP-complete too in this case. Finally, with respect to shortest path, the most vital nodes problem is NP-complete on general graphs \cite{complexityOfFindingMostVitalNodesShortestPath}, and the complexity on chordal graphs (to the best of our knowledge) is currently unknown. 
+
+\section{Answer to question (Q1) by Diner et al.\cite{diner2018contractionDeletionBlockers}}
+\label{app:contraction}
+
+Let $G = (V, E)$ be a graph. For a set $X \subseteq E$, we denote by $G/X$ the graph obtained from $G$ by repeatedly contracting an edge from $X$, until no such edge remains. In \cref{sec:independence-interdiction}, we answered the open question (Q2) by Diner et al.\ \cite{diner2018contractionDeletionBlockers}. To do this, we used duality of the parameters of the independence number and the clique cover number. We show that using the same technique and a modification of the proof, we can also positively answer their question (Q1). The question is whether the \emph{contraction blocker} problem on interval graphs for parameter $\pi = \alpha$ can be solved in polynomial time. In this problem, one is given an interval graph $G = (V, E)$ and a threshold $t$, and wishes to find the minimum budget $k$, such that there exists $X \subseteq E$ of size $|X| \leq k$, such that $\alpha(G/X) \leq t$. By standard arguments, it suffices to solve the following problem instead: Given some budget $k \in \N$, compute
+\begin{equation}
+\min_{X \subseteq E, |X| \leq k}\alpha(G/X). \label{eq:contraction-problem}
+\end{equation}  
+We first show how to compute expression (\ref{eq:contraction-problem}) for connected interval graphs and then extend the answer to disconnected graphs. Like in \cref{sec:independence-interdiction}, let $\kappa(G)$ denote the clique-cover number of $G$. We also use the following notation in this section: We denote by $G = (V, E)$ some interval graph on $n$ vertices, with interval represention $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$. The set $\mathcal{B} =  \fromto{b_1}{b_n}$ is the set of all endpoints of intervals. Let $B \subseteq \mathcal{B}$. We call an interval $I \in \I$ \emph{disjoint from $B$}, if $I \cap B = \emptyset$. The following lemma establishes a connection between intervals disjoint to $B$ and problem (\ref{eq:contraction-problem}). Note that if $k = n$,  problem (\ref{eq:contraction-problem}) becomes trivial, so we can assume without loss of generality, that $k < n$.
+
+\begin{lemma}
+\label{lemma:contraction}
+Let $G$ be a connected interval graph on $n$ vertices. If $k < n$, then
+\begin{align*}
+&\min_{X \subseteq E, |X| \leq k}\alpha(G/X) \\
+= &\min\set{|B| : B \subseteq \mathcal{B}, \text{ at most $k$ intervals from $\I$ are disjoint from $B$}}.
+\end{align*} 
+\end{lemma}
+\begin{proof}
+\enquote{$\leq$}: Suppose there is a set $B$ such that at most $k$ intervals are disjoint from $B$. Note that not all intervals are disjoint from $B$, because $k < n$. So there exists at least one interval intersecting $B$ and at most $k$ intervals disjoint from $B$. We describe an edge contraction, which reduces the number of intervals disjoint from $B$: Assume there exists at least one interval disjoint from $B$. Then there exists also a pair of an interval $I$ disjoint from $B$ and an interval $J$ intersecting $B$, such that $I \cap J \neq \emptyset$. Otherwise the set of  intervals disjoint from $B$ and the set of intervals intersecting $B$ induce at least two connected components; a contradiction. Because $I \cap J \neq \emptyset$, there is a corresponding edge in $G$. Contracting this edge yields a new interval graph with interval representation $\I' := \I \setminus \set{I, J} \cup \set{I \cup J}$. Note that the number of intervals disjoint from $B$ in $\I'$ is one less than the number of intervals disjoint from $B$ in $\I$. Therefore, we can repeat this procedure at most $k$ times, to obtain an edge set $X \subseteq E$ of size $|X| \leq k$, and an interval representation $\I''$, such that no interval in $\I''$ is disjoint from $B$ and $G/X = \graph(\I'')$. Using duality of $\alpha$ and the clique cover number $\kappa$, and the fact that no interval in $\I''$ is disjoint from $B$, we have
+\[\alpha(G/X) = \kappa(G/X) = \kappa(\graph(\I'')) \leq |B|.  \]
+
+\enquote{$\geq$}: Let $X \subseteq E$ with $|X| \leq k$, and let $\alpha(G/X) = t$. Then also $\kappa(G/X) = t$, so there exists a clique cover with $t$ cliques $C_1, \dots, C_t$. By \cref{prop:cliquecover}, each of the $t$ cliques is equal to (or contained in) the set $C(b)  \las{ := } \set{I \in \I : b \in I}$ for some $b \in \mathcal{B}$. Let $b'_1, \dots, b'_t$ be the corresponding $t$ points, such that $C_i \subseteq C(b'_i)$ for all $i = 1,\dots,t$. Let $B := \fromto{b'_1}{b'_t}$. We can now reverse the edge contractions, going from $G/X$ to $G$, and observe that each decontraction adds at most one interval disjoint to $B$. Hence, $B$ is a set of size $t$, such that at most $k$ intervals in $\I$ are disjoint to $B$. \qed
+\end{proof}
+
+\begin{theorem}
+\label{thm:contraction-blocker}
+Given an interval graph $G$ on $n$ vertices and $k \in \N$, problem (\ref{eq:contraction-problem}) can be computed in $\bigO(kn^2)$ time.
+\end{theorem}
+\begin{proof}
+We distinguish three cases:
+
+\textbf{Case 1:} $G$ is connected, and $k \geq n$. Then \cref{eq:contraction-problem} evaluates to 1.
+
+\textbf{Case 2:} $G$ is connected, and $k < n$. Let $\mathcal{B} = \fromto{b_1}{b_n}$ be the set of endpoints, such that w.l.o.g.\ $b_1 < b_2 < \dots < b_n$. Additionally, let $b_0 := -\infty$ and $b_{n+1} := \infty$. For $i,j \in \fromto{0}{n+1}$ and $i < j$, let 
+\[c(i, j) = |\set{k \in [n] : b_i < a_k < b_k < b_j}|. \]
+Note that $c(i, j)$ is the number of intervals between $b_i$ and $b_j$ disjoint to $\set{b_i, b_j}$. It is easy to see that the set of all values $c(i,j)$ can be computed in $\bigO(n^2)$ time.
+
+
+We define for $j \in \fromto{1}{n+1}$ and $k' \in \fromto{0}{k}$:
+$F(j, k')$ is the minimum size of a set $\las{B} \subseteq \fromto{b_1}{b_j}$ subject to $b_j \in B$, and at most $k'$ intervals in $\fromto{[a_1,b_1]}{[a_j, b_j]}$ are disjoint to $B$. Furthermore, define $F(0, k') = 0$ for all $k'$. It is then easy to see that 
+\begin{equation}
+F(j,k') = \min \{ 1 + F(i, k'-c(i,j)) \colon 0 \leq i < j\text{ and } c(i,j) \leq k' \}.
+\end{equation}  
+Finally, due to \cref{lemma:contraction}, we have that 
+\[\min_{X \subseteq E, |X| \leq k}\alpha(G/X) = F(n+1, k) - 1. \]
+(Note that the $-1$ comes from the fact that $F(n+1, k)$ counts the point $b_{n+1}$.)
+
+\textbf{Case 3:} $G$ is disconnected. Assume $G$ consists of \las{connected} components $C_1, \dots, C_{\ell}$, where component $C_i$ has $n_i$ vertices. The interdictor needs to distribute the budget $k = k_1 + \dots + k_{\ell}$ to the $\ell$ components. By the above argument, we can precompute in time $\bigO(kn_i^2)$ a table of all the values $\min_{|X| \leq k_i} \alpha(C_i/X)$ for $k_i \in \fromto{1}{k}$. The interdictor now needs to solve 
+\[ \min_{k = k_1 + \dots + k_{\ell}} \sum_{i=1}^{\ell} \min_{|X| \leq k_i} \alpha(C_i/X). \]
+It is an easy exercise to prove that this formula can be evaluated in time $\bigO(k\ell)$ using dynamic programming. In total, we have a running time of $\bigO(\sum_i kn_i^2 + k\ell) = \bigO(kn^2)$. \qed
+\end{proof}
+
+\begin{corollary}
+The contraction blocker problem on interval graphs for parameter $\pi = \alpha$ can be solved in time $\bigO(n^3)$.
+\end{corollary}
+\begin{proof}
+Running the algorithm in \cref{thm:contraction-blocker} for $k = n$, we obtain a dynamic programming table containing for each $k' \in \fromto{1}{n}$ the maximum possible effect the interdictor can achieve with a budget of $k'$. Using binary search, we can find the minimum budget $k'$ necessary to reduce $\alpha$ down to the threshold $t$.
+\end{proof}

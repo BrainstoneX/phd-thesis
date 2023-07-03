@@ -26,8 +26,24 @@
 
 *.pdf
 
-## Include all files in the img/ folder, ignoring the previous rules
+## Except all of the following images:
+
+!*figure_ham_path.pdf
+!*figure_independent_set_assistance.pdf
+!*figure_shortest_path.pdf
+!*act-hamilton-cycle-a.pdf
+!*act-hamilton-cycle-b.pdf
+!*act-hamilton-cycle-b-simplified.pdf
+!*act-hamilton-cycle-c.pdf
+!*hamilton-prime.pdf
+!*K_2_l.pdf
+!*stp-example.pdf
+!*bandwidth_2.pdf
+
+## Likewise, do NOT ignore all files in the img/ folder
 !/img/*
+
+
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
