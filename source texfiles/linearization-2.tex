@@ -1,21 +1,104 @@
-\chapter{Linearizable special cases of the quadratic shortest path problem}
+% Version 1.0   Aug  4, 2020   by GJ Woeginger
+% Version 2.0   Aug 13, 2020   by GJ Woeginger
+% Version 2.1   Aug 17, 2020   by GJ Woeginger
+% Version 2.2   Sep  1, 2020   by GJ Woeginger
 
-%\sloppy
-%\newtheorem{axiom}{Axiom}[section]
-%\newtheorem{conjecture}[axiom]{Conjecture}
-%\newtheorem{corollary}[axiom]{Corollary}
-%\newtheorem{definition}[axiom]{Definition}
-%\newtheorem{example}[axiom]{Example}
-%\newtheorem{fact}[axiom]{Fact}
-%\newtheorem{lemma}[axiom]{Lemma}
-%\newtheorem{observation}[axiom]{Observation}
-%\newtheorem{proposition}[axiom]{Proposition}
-%\newtheorem{theorem}[axiom]{Theorem}
+\documentclass[11pt,fleqn]{article}
 
-%\renewcommand{\topfraction}{1.0}
-%\renewcommand{\bottomfraction}{1.0}
+\usepackage{amsmath,amssymb,graphicx}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz,tikzsymbols}
+\usetikzlibrary{shapes,patterns,positioning}
+\usetikzlibrary{arrows,decorations.markings}
+\usetikzlibrary{calc}
+
+\textheight=21.20truecm
+\textwidth=14.70truecm
+\hoffset=-1.20truecm
+\voffset=-1.10truecm
+
+\begin{document}
+\sloppy
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{conjecture}[axiom]{Conjecture}
+\newtheorem{corollary}[axiom]{Corollary}
+\newtheorem{definition}[axiom]{Definition}
+\newtheorem{example}[axiom]{Example}
+\newtheorem{fact}[axiom]{Fact}
+\newtheorem{lemma}[axiom]{Lemma}
+\newtheorem{observation}[axiom]{Observation}
+\newtheorem{proposition}[axiom]{Proposition}
+\newtheorem{theorem}[axiom]{Theorem}
+
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  GJW: macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\proof}{\emph{Proof.}\ \ }
+\newcommand{\qed}{~~$\Box$}
+\newcommand{\RRR}{{\mathbb{R}_{\ge0}}}
+
+\newcommand{\spp}{\text{SPP}}
+\newcommand{\qspp}{\text{QSPP}}
+\newcommand{\ppp}{{\cal P}_{st}}
+\newcommand{\pppx}{{\cal P}^+}
+\newcommand{\pppy}{{\cal P}^-}
+
+\newcommand{\boxxx}[1]
+ {\fbox{\begin{minipage}{13.00cm}\begin{center}\bigskip\begin{minipage}{12.30cm}
+  #1\end{minipage}\end{center}~\end{minipage}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{{\bf Linearizable special cases of\\the quadratic shortest path problem}}
+\author{
+\sc Eranda \c{C}ela\thanks{{\tt cela@math.tugraz.at}.
+Institute of Discrete Mathematics, TU Graz, Austria.}
+\and
+\sc ~~Bettina Klinz\thanks{{\tt klinz@opt.math.tugraz.at}.
+Institute of Discrete Mathematics, TU Graz, Austria.}
+\and
+\sc ~Stefan Lendl\thanks{{\tt lendl@math.tugraz.at}.
+Institute of Discrete Mathematics, TU Graz, Austria.}
+\and
+\sc James B. Orlin\thanks{{\tt jorlin@mit.edu}.
+Sloan School of Management, M.I.T., Cambridge, USA.}
+\and
+\sc Gerhard J. Woeginger\thanks{{\tt woeginger@algo.rwth-aachen.de}.
+Department of Computer Science, RWTH Aachen, Germany.}
+\and
+\sc Lasse Wulf\thanks{{\tt wulf@math.tugraz.at}.
+Institute of Discrete Mathematics, TU Graz, Austria.}
+}
+\date{}
+\maketitle
+
+\begin{abstract}
+The quadratic shortest path problem (QSPP) in a directed graph asks for a directed path 
+from a given source vertex to a given sink vertex, so that the sum of the interaction 
+costs over all pairs of arcs on the path is minimized.
+We consider special cases of the QSPP that are linearizable as a shortest path problem
+in the sense of Bookhold.
+If the QSPP on a directed graph is linearizable under all possible choices of the arc 
+interaction costs, the graph is called universally linearizable.
+
+We provide various combinatorial characterizations of universally linearizable graphs that 
+are centered around the structure of source-to-sink paths and around certain forbidden subgraphs.
+Our characterizations lead to fast and simple recognition algorithms for universally 
+linearizable graphs.
+Furthermore, we establish the intractability of deciding whether a concrete instance of 
+the QSPP (with a given graph and given arc interaction costs) is linearizable.
+
+\bigskip\noindent\emph{Keywords:}
+discrete optimization; shortest path problem; computational complexity.
+\end{abstract}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The \emph{Shortest Path Problem} (SPP) is a well-known and fundamental problem in 
@@ -46,8 +129,8 @@ The goal in the SPP and in the QSPP is to determine a simple directed $s$-$t$-pa
 minimizes the respective objective values (\ref{eq:SPP}) and (\ref{eq:QSPP}).
 The SPP is polynomially solvable; see for instance Cormen, Leiserson, Rivest \& Stein \cite{CLRS}.
 The QSPP is NP-hard and extremely difficult to solve;
-see for instance Rostami, Malucelli, Frey~\& Buchheim~\cite{rostami2015},
-Rostami \& al~\cite{rostami2018}, and Hu \& Sotirov~\cite{huSo2018,huSo2021,huSo2020}.
+see for instance Rostami, Malucelli, Frey~\& Buchheim~\cite{Rostami-1},
+Rostami \& al~\cite{Rostami-2}, and Hu \& Sotirov~\cite{HuSo2018a,HuSo2018b,HuSo2020}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[b]
@@ -95,28 +178,28 @@ for the SPP on the same directed graph $G$ such that
 %%%%%%%%%%%%%%%%
 If we manage to find a linearization of a QSPP instance, we can of course solve the QSPP instance
 by simply solving the linearized instance of the SPP instead.
-Hu \& Sotirov \cite{huSo2018,huSo2021} were the first to study linearizations of the QSPP.
-Among other results, they show in \cite{huSo2021} that for an \emph{acyclic} directed graph $G$
+Hu \& Sotirov \cite{HuSo2018a,HuSo2018b} were the first to study linearizations of the QSPP.
+Among other results, they show in \cite{HuSo2018b} that for an \emph{acyclic} directed graph $G$
 with given arc interaction costs, linearizability of the instance can be decided in polynomial time.
-Furthermore \cite{huSo2018} proves that on the grid $G_{2,n}$ the QSPP is \emph{always} linearizable,
+Furthermore \cite{HuSo2018a} proves that on the grid $G_{2,n}$ the QSPP is \emph{always} linearizable,
 independently of the concrete arc interaction costs in the instance;
 see Figure~\ref{fig:grid} for an illustration.
 
 Linearizations of non-linear problems form a widely used standard tool in continuous 
 optimization and numerical analysis.
 On the discrete side, the linearization of hard combinatorial optimization problems by easy 
-combinatorial optimization problems goes back to the seminal work of Bookhold \cite{bookhold1990contribution}, 
+combinatorial optimization problems goes back to the seminal work of Bookhold \cite{Bo1990}, 
 who linearized the NP-hard Quadratic Assignment Problem (QAP) via the polynomially solvable 
 linear assignment problem.
-Kabadi \& Punnen \cite{kabadi2011n,punnen2013linear} gave a polynomial time algorithm for recognizing 
+Kabadi \& Punnen \cite{KaPu2011,PuKa2013} gave a polynomial time algorithm for recognizing 
 linearizable instances of the QAP in Koopmans-Beckmann form.
-Furthermore, \cite{punnen2013linear} presented a purely combinatorial characterization of all linearizable
+Furthermore, \cite{PuKa2013} presented a purely combinatorial characterization of all linearizable
 QAP instances with symmetric cost matrices.
 Further results on linearizations of the QAP have been derived by
 Erdo\u{g}an \cite{Erdogan2006}, Erdo\u{g}an \& Tansel \cite{ErTa2007,ErTa2011}, and 
 \c{C}ela, Deineko \& Woeginger \cite{CeDeWo2016}.
-{\'C}usti{\'c} \& Punnen \cite{CuPu2018} investigate linearizable instances of the quadratic minimum spanning tree problem,
-Punnen, Walter \& Woods \cite{PuWaWo2017} study linearizable instances of the quadratic travelling salesman problem, and
+{\'C}usti{\'c} \& Punnen \cite{CuPu2016} investigate linearizable instances of the quadratic minimum spanning tree problem,
+Punnen, Walter \& Woods \cite{PuWaWo2013} study linearizable instances of the quadratic travelling salesman problem, and
 De Meijer \& Sotirov \cite{deMeSo2020} analyze linearizations of the quadratic cycle cover problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -168,7 +251,7 @@ De Meijer \& Sotirov \cite{deMeSo2020} analyze linearizations of the quadratic c
 We call a directed graph $G$ \emph{universally linearizable} (with respect to the QSPP), 
 if every instance of the QSPP on the input graph $G$ is linearizable, for every choice 
 of arc interaction costs $q$.
-This concept is motivated by the work of Hu \& Sotirov \cite{huSo2018}, who showed that 
+This concept is motivated by the work of Hu \& Sotirov \cite{HuSo2018a}, who showed that 
 the grid $G_{2,n}$ depicted in Figure~\ref{fig:grid} is universally linearizable.
 We provide two further examples, a positive one and a negative one: 
 The graph in Figure~\ref{fig:example2} is universally linearizable.
@@ -190,17 +273,17 @@ Section~\ref{sec:algo} uses our characterizations to construct fast and simple p
 recognition algorithms for universally linearizable graphs, and an even faster and even simpler
 linear time recognition algorithms for \emph{acyclic} universally linearizable graphs
 
-Section~\ref{sec:hardness-chapter-4} discusses two closely related decision problems.
+Section~\ref{sec:hardness} discusses two closely related decision problems.
 Problem LINEARIZABLE-QSPP asks whether a given instance of the QSPP (specified by the 
 graph $G$ and the arc interaction costs $q$) is linearizable.
 Problem VALID-LINEARIZATION asks whether a given weight function $w$ forms a linearization
 of a given instance of the QSPP. 
-Hu \& Sotirov \cite{huSo2021} have shown that both problems are polynomially solvable 
+Hu \& Sotirov \cite{HuSo2018b} have shown that both problems are polynomially solvable 
 in the special case where the underlying directed graph $G$ is acyclic.
 We show that both problems are coNP-complete in the general case with arbitrary directed 
 graphs that are allowed to contain directed cycles.
 The coNP-certificate for LINEARIZABLE-QSPP is not straightforward to get.
-Section~\ref{sec:conclusion-chapter-4} completes the paper with some concluding remarks.
+Section~\ref{sec:conclusion} completes the paper with some concluding remarks.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -685,7 +768,7 @@ and of several arcs that connect the out-tree to the in-tree.
 In this section we present fast, polynomial time recognition algorithms for
 universally linearizable graphs.
 Since the algorithmic side of $\ppp$-covered graphs is not well-understood 
-(see Section~\ref{sec:conclusion-chapter-4} for a discussion of this issue), we will not a priori 
+(see Section~\ref{sec:conclusion} for a discussion of this issue), we will not a priori 
 assume that the graphs considered in this section are $\ppp$-covered.
 
 %%%%%%%%%%%%%%%%%
@@ -736,16 +819,16 @@ a private arc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \section{The recognition of linearizable QSPP instances}
-\label{sec:hardness-chapter-4}
+\label{sec:hardness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 While the preceding sections investigated the structure of graphs for the QSPP, 
 the current section will analyze full QSPP instances (that do specify both, the 
 graph and the arc interaction costs).
-Hu \& Sotirov \cite{huSo2021} have shown that the decision problems VALID-LI\-NEARI\-ZA\-TION
+Hu \& Sotirov \cite{HuSo2018b} have shown that the decision problems VALID-LI\-NEARI\-ZA\-TION
 and LI\-NEA\-RIZABLE-QSPP in Figure~\ref{fig:problems} both are polynomially solvable, 
 if the underlying directed graph $G$ is acyclic.
 The following (purely combinatorial) proposition can be extracted and deduced from the algorithmic
-arguments in \cite{huSo2021}, by combining them with the techniques of our Section~\ref{sec:forbidden}.
+arguments in \cite{HuSo2018b}, by combining them with the techniques of our Section~\ref{sec:forbidden}.
 For subsets $S,T\subseteq A$ of the arc set we denote $q(S,T)=\sum_{s\in S}\sum_{t\in T}q(s,t)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -772,7 +855,7 @@ arc interaction costs $q:A\times A\to\RRR$.
 Question: Does there exist a linearization $w:A\to\RRR$ for this QSPP instance?}
 %%%%%%%%%%%%%%%%%
 \end{center}
-\caption{The decision problems discussed in Section~\protect{\ref{sec:hardness-chapter-4}}.}
+\caption{The decision problems discussed in Section~\protect{\ref{sec:hardness}}.}
 \label{fig:problems}
 \medskip
 \hrule\hrule
@@ -1072,7 +1155,7 @@ Lemmas~\ref{le:hard.1} and~\ref{le:hard.2} yield the correctness of both reducti
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \section{Conclusion}
-\label{sec:conclusion-chapter-4}
+\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 We have provided a number of characterizations of universally linearizable graphs for the QSPP.
 In particular, we have shown that such graphs can be recognized in polynomial time,
@@ -1080,7 +1163,7 @@ and that a $\ppp$-covered universally linearizable graph must be acyclic.
 There seems to be a close connection between the QSPP on acyclic graphs and 12121-subgraphs,
 as illustrated by Theorem~\ref{th:acyclic} and Proposition~\ref{pr:HS}.
 As a rule of thumb, problems around the linearization of the QSPP (as for instance 
-the problems LINEARIZABLE-QSPP and VALID-LINEARIZATION in Section~\ref{sec:hardness-chapter-4}) 
+the problems LINEARIZABLE-QSPP and VALID-LINEARIZATION in Section~\ref{sec:hardness}) 
 are well-behaved and tractable in acyclic graphs, whereas they appear to be shambolic 
 and intractable in the general case.
 
@@ -1096,7 +1179,7 @@ in the following algorithmic problem:
 The arguments in Fortune, Hopcroft \& Wyllie \cite{FoHoWy1980} imply that this algorithmic
 problem is NP-complete; we remark that this NP-completeness result is not stated explicitly in
 \cite{FoHoWy1980}, but can be extracted and deduced from the arguments.
-We stress that our hardness results in Section~\ref{sec:hardness-chapter-4} are not corollaries to the 
+We stress that our hardness results in Section~\ref{sec:hardness} are not corollaries to the 
 intractability of recognizing $\ppp$-covered graphs: LINEARIZABLE-QSPP and VALID-LINEARIZATION 
 are intractable even in $\ppp$-covered graphs, and they remain intractable even if for every 
 arc in $A$ a corresponding covering path is specified as part of the input.
@@ -1108,3 +1191,124 @@ statement does not apply to all cyclic graphs, we feel that it should be true fo
 perhaps it is possible to get a clean and simple characterization of the graphs for which the
 statement is false.
 
+\medskip
+\paragraph{Acknowledgements.}
+This research has been supported 
+by the Austrian Science Fund (FWF): W1230, Doctoral Program ``Discrete Mathematics'',
+and by the DFG RTG 2236 ``UnRAVeL''.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+\begin{thebibliography}{18}
+
+\bibitem{Bo1990}
+{\sc I. Bookhold} (1990).
+A contribution to quadratic assignment problems.
+\emph{Optimization 21}, 933--943.
+
+\bibitem{CeDeWo2016}
+{\sc E. \c{C}ela, V.G. Deineko, and G.J. Woeginger} (2016).
+Linearizable special cases of the {QAP}.
+\emph{Journal of Combinatorial Optimization 31}, 1269--1279.
+
+\bibitem{CLRS}
+{\sc T.H. Cormen, C.E. Leiserson, R.L. Rivest, and C. Stein} (2001).
+\emph{Introduction to Algorithms}.
+MIT Press.
+
+\bibitem{CuPu2016}
+{\sc A. {\'C}usti{\'c} and A.P. Punnen} (2018).
+A characterization of linearizable instances of the quadratic minimum spanning tree problem.
+\emph{Journal of Combinatorial Optimization 35}, 436--453.
+
+\bibitem{deMeSo2020}
+{\sc F. de Meijer and R. Sotirov} (2020).
+The quadratic cycle cover problem: special cases and efficient bounds.
+\emph{Journal of Combinatorial Optimization 39}, 1096--1128.
+
+\bibitem{Erdogan2006}
+{\sc G. Erdo\u{g}an} (2006).
+Quadratic assignment problem: linearizations and polynomial time solvable cases.
+PhD Thesis, Department of Industrial Engineering, Bilkent University.
+
+\bibitem{ErTa2007}
+{\sc G. Erdo\u{g}an and B.C. Tansel} (2007).
+A branch-and-cut algorithm for quadratic assignment problems based on linearizations.
+\emph{Computers and Operations Research 34}, 1085--1106.
+
+\bibitem{ErTa2011}
+{\sc G. Erdo\u{g}an and B.C. Tansel} (2011).
+Two classes of quadratic assignment problems that are solvable as linear assignment problems.
+\emph{Discrete Optimization 8}, 446--451.
+
+\bibitem{Farkas1902}
+{\sc J. Farkas} (1902).
+Theorie der einfachen {U}ngleichungen.
+\emph{Journal f\"ur die Reine und Angewandte Mathematik 124}, 1--27.
+
+\bibitem{FoHoWy1980}
+{\sc S. Fortune, J. Hopcroft, and J. Wyllie} (1980).
+The directed subgraph homeomorphism problem.
+\emph{Theoretical Computer Science 10}, 111--121.
+
+\bibitem{Helly1923}
+{\sc E. Helly} (1923).
+\"Uber {M}engen konvexer {K}\"orper mit gemeinschaftlichen {P}unkten.
+\emph{Jahresbericht der {D}eutschen {M}athematiker-{V}ereinigung 32}, 175--176.
+
+\bibitem{HuSo2018a}
+{\sc H. Hu and R. Sotirov} (2018).
+Special cases of the quadratic shortest path problem.
+\emph{Journal of Combinatorial Optimization 35}, 754--777.
+
+\bibitem{HuSo2018b}
+{\sc H. Hu and R. Sotirov} (2018).
+The linearization problem of a binary quadratic problem and its applications.
+Working paper, {\tt arXiv:1802.02426} [math.OC].
+
+\bibitem{HuSo2020}
+{\sc H. Hu and R. Sotirov} (2020).
+On solving the quadratic shortest path problem.
+\emph{INFORMS Journal on Computing 32}, 219--233.
+
+\bibitem{KaPu2011}
+{\sc S.N. Kabadi and A.P. Punnen} (2011).
+An $O(n^4)$ algorithm for the {QAP} linearization problem.
+\emph{Mathematics of Operations Research 36}, 754--761.
+
+\bibitem{PuKa2013}
+{\sc A.P. Punnen and S.N. Kabadi} (2013).
+A linear time algorithm for the Koopmans-Beckmann {QAP} linearization and related problems.
+\emph{Discrete Optimization 10}, 200--209.
+
+\bibitem{PuWaWo2013}
+{\sc A.P. Punnen, M. Walter, and B. Woods} (2017).
+A characterization of linearizable instances of the quadratic travelling salesman problem.
+Working paper, {\tt arXiv:1708.07217} [cs.DM].
+
+\bibitem{ReTa1975}
+{\sc R.C. Read and R.E. Tarjan} (1975).
+Bounds on backtrack algorithms for listing cycles, paths, and spanning trees.
+\emph{Networks 5}, 237--252.
+
+\bibitem{Rostami-1}
+{\sc B. Rostami, F. Malucelli, D. Frey, and C. Buchheim} (2015).
+On the quadratic shortest path problem.
+\emph{Proceedings of the 14th International Symposium on Experimental Algorithms (SEA'2015)},
+Springer LNCS 9125, 379--390.
+
+\bibitem{Rostami-2}
+{\sc B. Rostami, A. Chassein, M. Hopf, D. Frey, C. Buchheim, F. Malucelli, and M. Goerigk} (2018).
+The quadratic shortest path problem: complexity, approximability, and solution methods.
+\emph{European Journal of Operational Research 268}, 473--485.
+
+\bibitem{Schrijver2012}
+{\sc A. Schrijver} (2012).
+On the history of the shortest path problem.
+\emph{Documenta Mathematica (Extra Volume: Optimization Stories)}, 155--167.
+
+\end{thebibliography}
+
+\end{document}

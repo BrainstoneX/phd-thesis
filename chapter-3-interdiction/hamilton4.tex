@@ -160,11 +160,11 @@ Our second lemma (\cref{lem:ham_path}) states that $\beta_\text{max}$ can be com
 \lIf {$\gamma < 2$}{$\beta \gets -\infty$}
 \KwRet{$\beta$}
  \caption{The non-deterministic process $P$.}
- \label{alg}
+ \label{alg-chapter-4}
 \color{black}
 \end{algorithm}
 %%%%%%%%%%%%----------------------
-\las{Consider Algorithm~\ref{alg}, which provides a complete description of $P$ in pseudo-code. Before we proceed with the formal proof of our main lemmas, we explain in this paragraph the ideas behind process $P$ and its components.}
+\las{Consider Algorithm~\ref{alg-chapter-4}, which provides a complete description of $P$ in pseudo-code. Before we proceed with the formal proof of our main lemmas, we explain in this paragraph the ideas behind process $P$ and its components.}
 
 \las{Process $P$ receives as input an integer $k \geq 0$ and sequences of intervals $\I = (I_1,\dots,I_n) = ([a_1,b_1], \dots, [a_n,b_n])$ and $\I' = (I'_1,\dots,I'_n) = ([a'_1,b'_1], \dots, [a'_n,b'_n])$, such that for all $i \in \set{1,\dots,n}$ we have $a_i \leq a'_i \leq b'_i \leq b_i$. We can assume w.l.o.g.\ that $a_i < b_i$ for all $i=1,\dots,n$. However, a special case that we cannot avoid is that for some indices $i$ it could be the case that $a'_i = b'_i$. Recall that we defined in the introduction that in this case we have $[a'_i, b'_i] = \emptyset$. (This definition may seem a bit unorthodox. However, it is crucial to correctly model the most vital nodes problem later in \cref{subsection:ham_mvn}.)
 }
