@@ -1,9 +1,5 @@
 
 
-\documentclass[a4paper,abstracton]{scrartcl}
-\pdfminorversion=5
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{observation}[theorem]{Observation}
@@ -20,53 +16,7 @@
 
 
 
-
-%\renewcommand\Affilfont{\small}
-
-\allowdisplaybreaks
-
-\begin{document}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%  Macros
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \title{Two-Stage Robust Optimization Problems with Post-Decision Uncertainty}
-% \title{On the Complexity of Robust Multi-Stage Problems in the Polynomial Hierarchy}
-\title{\new{On the Complexity of Robust Multi-Stage Problems with Discrete Recourse}}
-
-\author[1]{Marc Goerigk\footnote{Corresponding author. Email: marc.goerigk@uni-passau.de}}
-\author[2,3]{Stefan Lendl}
-\author[2]{Lasse Wulf}
-
-\affil[1]{Business Decisions and Data Science, University of Passau,\authorcr Dr.-Hans-Kapfinger-Straße 30, 94032 Passau, Germany}
-\affil[2]{Institute of Discrete Mathematics, Graz University of Technology,\authorcr Steyrergasse 30/II, 8010 Graz, Austria}
-\affil[3]{Institute of Operations and Information Systems, University of Graz,\authorcr Universit\"atsstra{\ss}e 15, 8010 Graz, Austria}
-
-    
-\date{}
-
-\maketitle
-
-
-
-\begin{abstract}
-We study the computational complexity of multi-stage robust optimization problems.
-Such problems are formulated with alternating min/max quantifiers and therefore naturally fall into a higher stage of the polynomial hierarchy. Despite this, almost no hardness results with respect to the polynomial hierarchy are known. 
-
-In this work, we examine the hardness of robust two-stage adjustable and robust recoverable optimization with budgeted uncertainty sets. Our main technical contribution is the introduction of a technique tailored to  prove $\Sigma^p_3$-hardness of such problems. We highlight a difference between continuous and discrete budgeted uncertainty: In the discrete case, indeed a wide range of problems becomes complete for the third stage of the polynomial hierarchy; in particular, this applies to the TSP, independent set, and vertex cover problems. However, in the continuous case this does not happen and problems remain in the first stage of the hierarchy. Finally, if we allow the uncertainty to not only affect the objective, but also multiple constraints, then this distinction disappears and even in the continuous case we encounter hardness for the third stage of the hierarchy. This shows that even robust problems which are already NP-complete can still exhibit a significant \new{difference in computational complexity} between column-wise and row-wise uncertainty.
-\end{abstract}
-
-\noindent\textbf{Keywords:} robust optimization; multi-stage optimization; robust adjustable optimization; robust recoverable optimization; polynomial hierarchy; combinatorial optimization
-
-\noindent\textbf{Acknowledgements:} Supported by the Deutsche Forschungsgemeinschaft (DFG) through grant GO 2069/1-1 \new{and the Austrian Science Fund (FWF): W1230}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{On the Complexity of Multi-Stage Robust Optimization with Discrete Recourse with respect to the Polynomial Hierarchy}
 
 
 \section{Introduction}
@@ -147,7 +97,7 @@ We also show that the $K$-stage problem is $\Sigma_{2K-1}^p$-complete for fixed 
 \item Finally, we show that for fixed $K$, the $K$-stage independent set problem with discrete uncertainty is $\Sigma_{2K-1}^p$-hard. If $K$ is part of the input, then the problem becomes PSPACE-hard (see Section~\ref{subsec:multistage}).
 \end{itemize}
 
-We close with a summary of results and further research questions in Section~\ref{sec:conclusions}. A brief overview to the $\Sigma^p_3$-hardness results from this paper is given in Table~\ref{tab:overview}. Columns ''cont. b.u.'' and ''disc. b.u.'' correspond to continuous and discrete budgeted uncertainty, respectively. The case of right-hand side budgeted uncertainty in combinatorial problems is omitted, as the setting is not well-defined.
+We close with a summary of results and further research questions in Section~\ref{sec:conclusions-chapter-2}. A brief overview to the $\Sigma^p_3$-hardness results from this paper is given in Table~\ref{tab:overview}. Columns ''cont. b.u.'' and ''disc. b.u.'' correspond to continuous and discrete budgeted uncertainty, respectively. The case of right-hand side budgeted uncertainty in combinatorial problems is omitted, as the setting is not well-defined.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -363,9 +313,9 @@ Using Carath\'eodory's theorem and the minimax theorem, we conclude the followin
 \end{align*}
 \end{proof}
 
-\begin{cor}\label{cor4}
+\begin{corollary}\label{cor4}
 Under the assumptions of Theorem~\ref{th1}, two-stage and recoverable robust problems with continuous budgeted uncertainty are in NP.
-\end{cor}
+\end{corollary}
 \begin{proof}
 As $f(\pmb{x},\pmb{y},\pmb{\zeta})$ is concave in $\pmb{\zeta}$, the function $\min_{i\in[n+1]} f(\pmb{x},\pmb{y}^{(i)},\pmb{\zeta})$ remains concave in $\pmb{\zeta}$. Hence, the adversary problem is to maximize a concave function over a compact convex set. As it is possible to separate continuous budgeted uncertainty sets, the adversary problem can be solved in polynomial time \cite{grotschel1981ellipsoid}. Hence, it is possible to give a certificate of polynomial size that can be checked in polynomial time, which means that the two-stage problem is in NP. As the recoverable problem can be framed as a special case (compare Theorem~\ref{th1} with the result in \cite{bold2020}), this result also holds in this case.
 \end{proof}
@@ -1060,7 +1010,7 @@ We make use of the fact that $K$-stage {\radj} is $\Sigma_{2K-1}^p$-complete for
 
 
 \section{Conclusions}
-\label{sec:conclusions}
+\label{sec:conclusions-chapter-2}
 
 Multi-stage (adjustable) robust optimization is a natural extension of static, one-stage approaches to model a more dynamic decision making environment. By giving an opportunity to react to adversarial choices, it is possible to reach better objective values and thus to reduce the conservatism of robust optimization. The benefits, however, come with increased computational difficulties.
 
@@ -1078,11 +1028,4 @@ From the intuition we gained in this paper, we can say as much: Intuitively, we 
 
 Such a meta-theorem would show that in fact a lot more problems than just TSP, independent set and vertex cover possess the properties showcased in \cref{sec:discbudgeted}. As our methods are quite general, we deem it likely for such a meta-theorem to exist. 
 
-
-\bibliographystyle{alpha} 
-\bibliography{references}
-
-
-
-\end{document}
 
