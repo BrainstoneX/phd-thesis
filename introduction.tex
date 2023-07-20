@@ -1,19 +1,92 @@
 \pagenumbering{arabic}
 \chapter{Introduction}
-Less than 80 years after the invention of the first computer, today we are surrounded by digital technology at every step we make. 
-Computers influence and control a huge amount of aspects of modern life. 
-We have grown so accustomed to computers, that we take many of their wonderous abilities for granted. 
-One of these magical abilities is to find the optimal solution to a problem out of an incredibly large amount of possibilities.
-For example, suppose you wanted to go from Paris to Berlin by car. There is an almost infinite amount of different paths from Paris to Berlin. Yet, a clever computer algorithm can select the single unique path which is the fastest among all of them.
+Less than 80 years after the invention of the first computer, today we are surrounded by digital technology at every step we take. 
+Computers influence and control countless aspects of modern life. 
+We have grown so accustomed to digital machines, that we take many of their wonderous abilities for granted. 
+One of these magical abilities is the following: Computers are able to find the optimal solution to a problem out of an incredibly large amount of possibilities.
+For example, suppose you wanted to travel from Paris to Berlin by car. There is an almost infinite amount of different paths from Paris to Berlin. Yet, a clever computer algorithm can select the single unique path which is the fastest among all of them.
 
-This ability of computers to find the optimal solution for a given problem is used in many areas of today's live: Computers are used to find the cheapest flight schedule for an airline, to find the best investment scheme for a portfolio, to decide which taxis from a taxi company should pick up which customer, to design optimal communication networks, and many, many more problems. Application areas range from Economics, Logistics, Operations Research, Computer Science, Healthcare, Biology, and many other disciplines.
+This ability of computers to find the optimal solution for a given problem is used in countless areas of modern live: Computers are used to find the cheapest flight schedule for an airline, to find the best investment scheme for a portfolio, to decide which taxis from a taxi company should pick up which customer, to design optimal communication networks, and many, many more problems. Application areas range from Economics, Logistics, Operations Research, Computer Science, Healthcare, Biology, and many other disciplines.
 
 It is important to state that computers do not come with this ability a priori. Instead, specific programs and algorithms need to be developed, to be able to handle the huge amount of possibilities. 
 \emph{Combinatorial Optimization} is the scientific field concerned with the question: How do we pick the optimal solution out of a huge (but still finite) amount of possibilities? 
-In particular, Combinatorial Optimization tries to understand, what all the previously listed problems have in common, and tries to develop a mathematical theory of these problems and the tools to solve them. Classically, Combinatorial Optimization tries to classify problems as either being intractable (NP-hard) or tractable (polynomial-time solvable). For the intractable problems, it tries to understand what exactly makes them intractable, and whether we can find at least approximate, almost-optimal solutions.
+In particular, Combinatorial Optimization tries to understand, what all the previously listed problems have in common, and tries to develop a mathematical theory of these problems and the tools to solve them. Classically, Combinatorial Optimization tries to classify problems as either being tractable (polynomial-time solvable) or intractable (NP-hard). For the intractable problems, it tries to understand what exactly makes them intractable, and whether we can find at least approximate, almost-optimal solutions.
 
 The area of Combinatorial Optimization lies in the intersection between discrete mathematics and theoretical computer science. 
-Just like the computer, it is a relatively new scientific field (at least compared to other ares of mathematics). In this thesis, we are concerned 
+It is a relatively young area of mathematics, which started to appear and take shape approximately in the 1950s. 
+As a conseuqence, even today, still many new aspects and facets of this rich field of study are being researched and discovered. Every of this new developments comes with a re-interpretation or a new perspective of the classical problems in the field. In other words, \emph{generalizations} of the classically important problems are created and analyzed.
 
-\section{Motivation and background}
-Very motivating.
+\section{Overview of the Thesis}
+
+This thesis deals with three kind of generalizations of classic problems from Combinatorial Optimization. 
+The three generalizations reflect on current research trends and sub-areas of Combinatorial Optimization. 
+The thesis is roughly split into three parts, corresponding to the three different directions of generalizations that are considered.
+
+\begin{itemize}
+\item Part 1: \emph{Robust Optimization} (\cref{ch:recov-selection,ch:multistage-complexity,ch:interdiction}). In Robust Optimization, one is concerned with finding good quality solutions, 
+which still stay maintain their good quality even if the input parameters of the problem are slightly disturbed. Such solutions are called \emph{robust}.
+This is motivated by the fact that in real life, data upon which decisions rely is often observed to be uncertain: 
+Measurement errors, uncertainty about the future, or uncertainty about the data collection process itself lead to the conclusion, that the available data might only be an approximate, but not an exact description of reality. Thus, the need of finding robust solutions arises. Robust optimization problems are formulated as min-max expressions. Modern research sees a trend towards investigating \emph{Multi-Stage Robust Optimization}, which solves min-max-min or even more complicated expressions. We also consider \emph{Network Interdiction} to be a part of Robust Optimization. Network interdiction is concerned with identifying the parts of a network, which are most vulnerable to attack or failure, thus aiding in the design of robust networks.
+
+\item Part 2: \emph{Quadratic Problems and their Linearization}  (\cref{ch:linearization-1,ch:linearization-2}). 
+A quadratic problem is an optimization problem whose objective can be written as a quadratic function. 
+In contrast to their linear counterpart, quadratic problems are often times intractable. 
+This has led researchers to aks the question for special solvable cases of quadratic problems. One of these special cases is the so-called \emph{lienarizable} case. 
+An instance of a quadratic optimization problem is called linearizable, if it can be re-written so that it is equivalent to a linear problem. Linearizations can also help in the design of general Branch \& Bound algorithms. 
+
+\item Part 3: \emph{Non-Preemptiveness} (\cref{ch:ntp}). In part 3 of the thesis, we are concerned with keeping a network connected as long as possible, by scheduling its edges in a non-preemptive fashion.
+This can be seen as a non-preemptive generalization of the problem of \emph{spanning tree packing}, which is a classic problem posed first by Nash-Williams to pack as many spanning trees as possible into a given graph. We are the first to consider a constraint of this kind. The result is an interesting mixture of a scheduling problem and a structurally rich graph-theoretic problem.
+\end{itemize}
+
+We provide a short overview of the single chapters in this thesis and their respective main results. After the short overview, further background information and motivation is given in \cref{sec:motivation-background}. In the subsequent  \cref{sec:thesis-results}, the main results of the thesis are explained in more detail.
+
+\paragraph*{Part 1: Robust Optimization}
+\begin{itemize}
+\item In \cref{ch:recov-selection}, we consider so-called \emph{Recoverable Robust Optimization} (a kind of multi-stage robust optimization) in conjunction with the so-called representative selection problem and so-called discrete budgeted uncertainty. 
+This is a problem which is trivial without the presence of any robustness, but the addition of robustness makes it challenging. 
+Determining the computational hardness of the specific variant that we consider has been an open question since 2012 [cite], which we now resolve by showing NP-completeness. 
+We also show that the corresponding adversarial problem can be solved in polynomial time.
+
+\item   In \cref{ch:multistage-complexity}, we consider multi-stage robust optimization. We make a compelling case that the natural complexity class for many problems studied in the literature is the class $\Sigma^p_3$ from the polynomial hierarchy. Despite this, very few $\Sigma^p_3$-completeness results are known. We make a first step by showing several results of this kind.
+
+\item In \cref{ch:interdiction}, we consider network interdiction problems specifically with respect to interval graphs. We introduce a framework for interdiction on interval graphs, which allows one to shrink or expand intervals. We show that the well-known \emph{most vital nodes} problem is a special case of the framework. Even though network interdiction problems are often times NP-complete or even harder, in our case we obtain polynomial-time algorithms for 6 of the 8 cases studied. This is done employing technically challenging dynamic programs. One of our results answers an open question by Diner et al. [cite].
+\end{itemize}
+
+\paragraph*{Part 2: Linearization}
+\begin{itemize}
+\item In \cref{ch:linearization-1}, we consider linearization of the quadratic shortest path problem. In an earlier paper, Sotirov and Hu gave an example of a certain directed graph with a peculiar property, which we call unviersally linearizable. Motivated by this example, we give a complete characterization of the class of universally linearizable directed graphs. 
+
+\item In \cref{ch:linearization-2}, we continue the work started in \cref{ch:linearization-1}. 
+We describe an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
+There is also a trivial lower bound of $O(m^2)$, making our algorithm linear-time. 
+In contrast, the fastest previous algorithm had a running time of $O(nm^3)$ [cite]. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than $d$, where we also obtain a linear-time algorithm.
+\end{itemize}
+
+\paragraph*{Part 3: Non-preemptiveness}
+\begin{itemize}
+\item In \cref{ch:ntp}, we consider the problem of keeping a graph connected for a maximal amount of time, by scheduling its edges in a non-preemptive way. 
+%Specifically, every edge $e$ has a weight $w(e)$ attached to it, and can be scheduled during a non-interrupted interval of length $w(e)$. The goal is to maximize the time during which the scheduled edges span all the vertices. 
+We show that the problem is an interesting mixture between a scheduling and a structural graph-theoretic problem. We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. Therefore, the only open cases that remain are the cases of $\set{4,5,6}$.
+\end{itemize}
+
+
+\section{Motivation and Background}
+\label{sec:motivation-background}
+
+\paragraph*{Combinatorial Optimization Problem}
+
+\paragraph*{Robust Optimization}
+
+\paragraph*{Multi-Stage Robust Optimization}
+
+\paragraph*{Quadratic Shortest Path}
+
+\paragraph*{Linearization}
+
+\paragraph*{Spanning Tree Packing}
+
+\section{Results of the Thesis}
+\label{sec:thesis-results}
+
+\section{Highlights of the Thesis}
+\label{sec:thesis-highlights}

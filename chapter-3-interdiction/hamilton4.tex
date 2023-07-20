@@ -157,8 +157,8 @@ Our second lemma (\cref{lem:ham_path}) states that $\beta_\text{max}$ can be com
 		}
 	}
 }
-\lIf {$\gamma < 2$}{$\beta \gets -\infty$}
-\KwRet{$\beta$}
+\leIf {$\gamma < 2$}{\KwRet{$- \infty$}}{\KwRet{$\beta$}}
+
  \caption{The non-deterministic process $P$.}
  \label{alg-chapter-4}
 \color{black}
