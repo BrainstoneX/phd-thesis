@@ -25,8 +25,9 @@ The thesis is roughly split into three parts, corresponding to the three differe
 \begin{itemize}
 \item Part 1: \emph{Robust Optimization} (\cref{ch:recov-selection,ch:multistage-complexity,ch:interdiction}). In Robust Optimization, one is concerned with finding good quality solutions, 
 which still stay maintain their good quality even if the input parameters of the problem are slightly disturbed. Such solutions are called \emph{robust}.
-This is motivated by the fact that in real life, data upon which decisions rely is often observed to be uncertain: 
-Measurement errors, uncertainty about the future, or uncertainty about the data collection process itself lead to the conclusion, that the available data might only be an approximate, but not an exact description of reality. Thus, the need of finding robust solutions arises. Robust optimization problems are formulated as min-max expressions. Modern research sees a trend towards investigating \emph{Multi-Stage Robust Optimization}, which solves min-max-min or even more complicated expressions. We also consider \emph{Network Interdiction} to be a part of Robust Optimization. Network interdiction is concerned with identifying the parts of a network, which are most vulnerable to attack or failure, thus aiding in the design of robust networks.
+%This is motivated by the fact that in real life, data upon which decisions rely is often observed to be uncertain: 
+%Measurement errors, uncertainty about the future, or other sources of uncertainty lead to the conclusion, that the available data might only be an approximate, but not an exact description of reality. Thus, the need of finding robust solutions arises. 
+Robust optimization problems are formulated as min-max expressions. Modern research sees a trend towards investigating \emph{Multi-Stage Robust Optimization}, which solves min-max-min or even more complicated expressions. We also consider \emph{Network Interdiction} to be a part of Robust Optimization. Network interdiction is concerned with identifying the parts of a network, which are most vulnerable to attack or failure, thus aiding in the design of robust networks. 
 
 \item Part 2: \emph{Quadratic Problems and their Linearization}  (\cref{ch:linearization-1,ch:linearization-2}). 
 A quadratic problem is an optimization problem whose objective can be written as a quadratic function. 
@@ -74,8 +75,62 @@ We show that the problem is an interesting mixture between a scheduling and a st
 \label{sec:motivation-background}
 
 \paragraph*{Combinatorial Optimization Problem}
+Given some ground set $E = \fromto{e_1}{e_n}$, we let $\X \subseteq \set{0,1}^n$ denote the set of \emph{feasible solutions}. 
+We assume here that the feasible solutions are encoded as $0$-$1$-vectors (i.e.\ $x_i = 1$ corresponds to element $e_i$ being part of the feasible solution, and $x_i=0$ corresponds to $e_i$ not being part of the feasible solution). 
+For example, $\X$ could encode the set of all spanning trees of a graph, the set of all paths between two vertices, of the set of all traveling salesman tours, etc\dots If there is some \emph{objective function} (also called \emph{cost function}) $f : \set{0,1}^n \to \R$, then the problem
+\[
+\min_{x \in \X} f(x)
+\]
+is referred to as a \emph{Combinatorial Optimization problem}. The cost function $f$ is called \emph{linear} if there exists some vector $c \in \R^n$ such that $f(x) = c^tx$ for all $x \in \set{0,1}^n$. This means that the cost of element $e_i$ is given by $c_i$.
+
+In some chapters, we use the set-theoretic notation for linear cost functions instead. In this case, we consider a cost function $c : E \to \R$, which assigns a cost to every single element. The cost of a subset $E' \subseteq E$ is then given by
+\[ c(E') := \sum_{e \in E'}c(e). \]
+
+We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knwoledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
 
 \paragraph*{Robust Optimization}
+
+In real-world applications, decision-makers are faced with the problem that the data upon which they base their decision on is uncertain. For example, some uncertainty may be subject to measurement errors of the measurement device. Some of the data entries may depend on the future, and can only be roughly predicted, hence they are subject to prediction errors. Some of the data entries may describe properties of real-world procedures, which can not be executed with perfect mathematical precision, hence they are subject to implementation errors.
+
+These errors may have substantial effect on the quality of the solution. For example, in a study performed by Ben-Tal and Nemirovski \cite{ben2000robust}, the case of linear programming was considered: 
+Taking a linear program (abbreviated LP) from the well-known NETLIB library, they disturbed the coefficients of the LP by 0.1\%. 
+The authors solved the disturbed LP (which represents the data known to the decision maker) to optimality and compared the solution quality to the original LP (which represents the true data, unknown to the decision maker). 
+In one case, the optimal solution to the disturbed LP was infeasible for the orgininal LP by a relative constraint violation of 450\%. 
+Similar results are reported in the average case. This schowcases the need for robust solutions. The idea is that possibly one can sacrifice a small amount of optimality in the solution, in order to compute a solution which is not necessarily the best for the known data, but in exchange is stable against disturbations of the input data. Such a solution is called \emph{robust}.
+
+
+
+Mathematically, the robust optimization approach to problems of this type is to formulate an \textit{uncertainty set} $\mathcal{U}$. This set contains all the \enquote{reasonable-to-expect} cost functions, which one wants to prepare against. One then takes a worst case approach and computes the \emph{robust problem}
+
+\[
+	\min_{x \in \X} \max_{c \in \cU} c(x).
+\]
+
+The different cost functions $c \in \cU$ are also called \emph{scenarios}. By changing the size of the set $\cU$, we can influence for how many scenarios we want to prepare against, and thus control the amount of robustness of the solution (for the price of a worse objective value).
+
+Note that we protect ourselves against \emph{all} possible scenarios equally, by assuming that the worst-case scenario will arise. This conservative approach has the advantage that no prior probability distribution needs to be assumed about the data (agnostic approach), that it often leads to algorithmically tractable problems, and that theoretical analysis is often possible. This stands in contrast to so-called \emph{stochastic programming} \cite{birge2011introduction}, where a probability distribution is assumed, and the solution is optimized for e.g.\ the expected value. Both methods have advantages and drawbacks. 
+ 
+Since its inception in the early 2000s, the field of robust optimization has developed so rapidly, that it is impossible to give a complete overview here. We refer the reader to the book by Ben-Tal, El Ghaoui, and Nemirovski~\cite{ben2009robust} and the survey by Bertsimas, Brown and Caramaras~\cite{bertsimas2011theory}.
+
+\paragraph*{Budgeted Uncertainty Sets.}
+The choice of uncertainty set $\cU$ is crucial for robust optimization. Many different choices have been suggested. In this thesis, we mainly consider \emph{budgeted uncertainty}. This is a type of uncertainty which allows up $\Gamma$ parameters to deviate from their nominal value for some parameter $\Gamma \in \N$. Budgeted uncertainty is also called \emph{$\Gamma$-uncertainty} in the literature. We distinguish between \emph{discrete} budgeted uncertainty and \emph{continuous} budgeted uncertainty.
+
+Formally, for given constants $\underline{c}_i \geq 0$ and $d_i \in \R$ for all $i \in \fromto{1}{n}$ and some integer $\Gamma \geq 0$, the set $\cU^d_\Gamma$ of \emph{discrete budgeted uncertainty} is defined as
+\[
+\cU^d_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in \set{0,1}\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
+\]
+In other words, $\cU_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$ as the deviated $i$-th value. We can also consider the case, where the deviation is not binary, but can be split partially between different coeeficients. Formally, \emph{continuous budgeted uncertainty} is defined as
+\[
+\cU^c_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in [0,1]\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
+\]
+Note that the only difference between the two formulations is the range of $\delta_i$.
+
+Budgeted uncertainty sets were introduced by Bertsimas and Sim \cite{bertsimas2003robust,bertsimas2004price}. 
+The high citation count on these two papers shows that discrete budgeted uncertainty has become very successful in the robust optimization literature. 
+A famous result shown by Bertsimas and Sim in the same paper is that when using budgeted uncertainty (discrete or continuous), the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems, hence it is compuationally very tractable.
+It is impossible to list all the use cases here. Just listing some, budgeted uncertainty sets are used in [todo]. Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
+
+Further history of budgeted uncertainty sets, as well as some of its generalizations can be found in [todo]
 
 \paragraph*{Multi-Stage Robust Optimization}
 
