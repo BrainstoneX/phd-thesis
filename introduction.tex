@@ -3,7 +3,7 @@
 Less than 80 years after the invention of the first computer, today we are surrounded by digital technology at every step we take. 
 Computers influence and control countless aspects of modern life. 
 We have grown so accustomed to digital machines, that we take many of their wonderous abilities for granted. 
-One of these magical abilities is the following: Computers are able to find the optimal solution to a problem out of an incredibly large amount of possibilities.
+One of these wonderous abilities is the following: Computers are able to find the optimal solution to a problem out of an incredibly large amount of possibilities.
 For example, suppose you wanted to travel from Paris to Berlin by car. There is an almost infinite amount of different paths from Paris to Berlin. Yet, a clever computer algorithm can select the single unique path which is the fastest among all of them.
 
 This ability of computers to find the optimal solution for a given problem is used in countless areas of modern live: Computers are used to find the cheapest flight schedule for an airline, to find the best investment scheme for a portfolio, to decide which taxis from a taxi company should pick up which customer, to design optimal communication networks, and many, many more problems. Application areas range from Economics, Logistics, Operations Research, Computer Science, Healthcare, Biology, and many other disciplines.
@@ -59,8 +59,8 @@ We also show that the corresponding adversarial problem can be solved in polynom
 
 \item In \cref{ch:linearization-2}, we continue the work started in \cref{ch:linearization-1}. 
 We describe an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
-There is also a trivial lower bound of $O(m^2)$, making our algorithm linear-time. 
-In contrast, the fastest previous algorithm had a running time of $O(nm^3)$ [cite]. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than $d$, where we also obtain a linear-time algorithm.
+There is also a trivial tight lower bound of $\Omega(m^2)$, making our algorithm linear-time. 
+In contrast, the fastest previous algorithm had a running time of $O(nm^3)$ [cite], hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than $d$, where we also obtain a linear-time algorithm.
 \end{itemize}
 
 \paragraph*{Part 3: Non-preemptiveness}
@@ -74,6 +74,8 @@ We show that the problem is an interesting mixture between a scheduling and a st
 \section{Motivation and Background}
 \label{sec:motivation-background}
 
+We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knwoledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
+
 \paragraph*{Combinatorial Optimization Problem}
 Given some ground set $E = \fromto{e_1}{e_n}$, we let $\X \subseteq \set{0,1}^n$ denote the set of \emph{feasible solutions}. 
 We assume here that the feasible solutions are encoded as $0$-$1$-vectors (i.e.\ $x_i = 1$ corresponds to element $e_i$ being part of the feasible solution, and $x_i=0$ corresponds to $e_i$ not being part of the feasible solution). 
@@ -86,7 +88,7 @@ is referred to as a \emph{Combinatorial Optimization problem}. The cost function
 In some chapters, we use the set-theoretic notation for linear cost functions instead. In this case, we consider a cost function $c : E \to \R$, which assigns a cost to every single element. The cost of a subset $E' \subseteq E$ is then given by
 \[ c(E') := \sum_{e \in E'}c(e). \]
 
-We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knwoledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
+
 
 \paragraph*{Robust Optimization}
 
@@ -108,18 +110,18 @@ Mathematically, the robust optimization approach to problems of this type is to 
 
 The different cost functions $c \in \cU$ are also called \emph{scenarios}. By changing the size of the set $\cU$, we can influence for how many scenarios we want to prepare against, and thus control the amount of robustness of the solution (for the price of a worse objective value).
 
-Note that we protect ourselves against \emph{all} possible scenarios equally, by assuming that the worst-case scenario will arise. This conservative approach has the advantage that no prior probability distribution needs to be assumed about the data (agnostic approach), that it often leads to algorithmically tractable problems, and that theoretical analysis is often possible. This stands in contrast to so-called \emph{stochastic programming} \cite{birge2011introduction}, where a probability distribution is assumed, and the solution is optimized for e.g.\ the expected value. Both methods have advantages and drawbacks. 
+Note that we protect ourselves against \emph{all} possible scenarios equally, by assuming that the worst-case scenario will arise. This conservative approach has the advantage that no prior probability distribution needs to be assumed about the data (agnostic approach), that it often leads to algorithmically tractable problems, and that theoretical analysis is often possible. This stands in contrast to so-called \emph{stochastic programming} \cite{birge2011introduction}, where a probability distribution is assumed, and the solution is optimized for e.g.\ the expected value. Both methods have advantages and drawbacks (compare \cite{ben2009robust} for a detailed discussion).  
  
 Since its inception in the early 2000s, the field of robust optimization has developed so rapidly, that it is impossible to give a complete overview here. We refer the reader to the book by Ben-Tal, El Ghaoui, and Nemirovski~\cite{ben2009robust} and the survey by Bertsimas, Brown and Caramaras~\cite{bertsimas2011theory}.
 
 \paragraph*{Budgeted Uncertainty Sets.}
-The choice of uncertainty set $\cU$ is crucial for robust optimization. Many different choices have been suggested. In this thesis, we mainly consider \emph{budgeted uncertainty}. This is a type of uncertainty which allows up $\Gamma$ parameters to deviate from their nominal value for some parameter $\Gamma \in \N$. Budgeted uncertainty is also called \emph{$\Gamma$-uncertainty} in the literature. We distinguish between \emph{discrete} budgeted uncertainty and \emph{continuous} budgeted uncertainty.
+The choice of uncertainty set $\cU$ is crucial for robust optimization. Many different choices have been suggested [todo]. In this thesis, we mainly consider \emph{budgeted uncertainty}. This is a type of uncertainty which allows up $\Gamma$ parameters to deviate from their nominal value for some parameter $\Gamma \in \N$. Budgeted uncertainty is also called \emph{$\Gamma$-uncertainty} in the literature. We distinguish between \emph{discrete} budgeted uncertainty and \emph{continuous} budgeted uncertainty.
 
 Formally, for given constants $\underline{c}_i \geq 0$ and $d_i \in \R$ for all $i \in \fromto{1}{n}$ and some integer $\Gamma \geq 0$, the set $\cU^d_\Gamma$ of \emph{discrete budgeted uncertainty} is defined as
 \[
 \cU^d_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in \set{0,1}\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
-In other words, $\cU_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$ as the deviated $i$-th value. We can also consider the case, where the deviation is not binary, but can be split partially between different coeeficients. Formally, \emph{continuous budgeted uncertainty} is defined as
+In other words, $\cU^d_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$ as the deviated $i$-th value. We can also consider the case, where the deviation is not binary, but can be split partially between different coeeficients. Formally, \emph{continuous budgeted uncertainty} is defined as
 \[
 \cU^c_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in [0,1]\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
@@ -128,17 +130,61 @@ Note that the only difference between the two formulations is the range of $\del
 Budgeted uncertainty sets were introduced by Bertsimas and Sim \cite{bertsimas2003robust,bertsimas2004price}. 
 The high citation count on these two papers shows that discrete budgeted uncertainty has become very successful in the robust optimization literature. 
 A famous result shown by Bertsimas and Sim in the same paper is that when using budgeted uncertainty (discrete or continuous), the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems, hence it is compuationally very tractable.
-It is impossible to list all the use cases here. Just listing some, budgeted uncertainty sets are used in [todo]. Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
+
+Just listing some of its use cases, budgeted uncertainty sets are used in [todo]. Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
 
 Further history of budgeted uncertainty sets, as well as some of its generalizations can be found in [todo]
 
 \paragraph*{Multi-Stage Robust Optimization}
+The conservative approach of robust optimization can be considered a drawback. One possible way to address this drawback is by considering \emph{multi-stage robust optimization}. 
+These are problems which enable the decision maker to undertake a partial corrective action after the uncertainty has been revealed. They are formulated as min-max-min equations.
+As classical robust optimization has been well researched and is generally understood quite well, multistage robust optimization has gained some attention in recent years [todo: cite] In this thesis, we focus on two different kinds of multi-stage robust optimization:  \emph{two-stage adjustabele} and \emph{recoverable} robust optimization.
 
-\paragraph*{Quadratic Shortest Path}
+In two-stage adjustable robust optimization \cite{ben2004adjustable}, we distinguish between two types of variables. The values of here-and-now (first-stage) variables need to be decided beforehand. We then receive the information which scenario from the uncertainty set has been realized, before we decide on the value of wait-and-see (second-stage) variables. 
+This models a natural two-stage decision process, where in the first stage important decisions need to be made without full knowledge of the future, and in the second stage some decisions can be made to adjust to the encountered scenario.
+ A recent survey on adjustable robust optimization can be found in \cite{yanikouglu2019survey}.
+There are different models of two-stage adjustable robust optimization. In this thesis, we consider a model which is also used by other authors in the context of combinatorial optimization [todo: cite]. 
+We assume that there is some set of feasible solutions $\X \subseteq \set{0,1}^n$, and that the first-stage variables $x \in \set{0,1}^n$ together with the second-stage variables $y \in \set{0,1}^n$ must combine to a feasible solution. This is expressed by the constraint $x + y \in \X$. 
+We let $\X'$ be the set of permissible first-stage decisions and we let $\X(x) := \set{y \in \set{0,1}^n : x + y \in \X}$ be the set of possible ways the first-stage decision $x$ can be completed to a feasible solution. 
+To address the fact where a first-stage solution $x$ is chosen which can not be completed (i.e.\ $\X(x) = \emptyset$), we define $\min \emptyset := \infty$. This means that such a choice of $x$ should be avoided. Formally, for some objective function $f(x,y,c)$, the two-stage adjustable robust problem is given by
 
-\paragraph*{Linearization}
+\[\min_{x \in \X'} \max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c).\]
 
-\paragraph*{Spanning Tree Packing}
+Two-stage adjustable robust optimization has been considered for many combinatorial problems, including [todo]. 
+
+A variant of this approach is recoverable robust optimization \cite{liebchen2009concept}. Here, the idea is that we have to propose some initial solution $x$, which should already resemble a feasible solution. 
+After the reveal of the uncertain cost function $c$, we are allowed to react to the new information by proposing a new solution $y$, but we must make sure that $x$ is similar to $y$. Formally, for some abstract distance function $\dist(\cdot)$ and parameter $k \in \N$, we make sure that $\dist(x,y) \leq k$. This approach is motivated by train scheduling problems: The actual train schedule $y$ can deviate from the initially planned schedule $x$ to accomodate for delays, but $x$ and $y$ should not be too dissimilar, in order to satisfy customers \cite{liebchen2009concept}. Formally, for a set $\X \subseteq \set{0,1}^n$ of feasible solutions, and $\X(x) := \set{y \in \X : \dist(x,y) \leq k}$ we consider
+
+\[\min_{x \in \X} \max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c).\]
+
+Recoverable robust optimization has been considered for many combinatorial problems, including [todo]. 
+
+\paragraph*{Quadratic Shortest Path Problem.}
+A combinatorial optimization problem is \emph{quadratic}, if its cost function $f : \set{0,1}^n \to \R$ can be written as $f(x) = x^tQx$ for some $n \times n$ matrix $Q$. The \emph{quadratic shortest path problem (QSPP)} takes as input a directed graph, two vertices $s,t$, and a matrix $Q \in \R^{m \times m}$, where $m$ denotes the number of edges in $G$. It asks for the path from $s$ to $t$ of smallest quadratic cost $f(x)$ (where $x \in \R^m$ is the incidence vector of the edges of the path). 
+
+The QSPP arises 
+in network optimization  problems where costs are associated with both single arcs and pairs of arcs.
+This includes 
+variants of stochastic and time-dependent route planing  problems  
+\cite{nie2009reliable,sen2001mean,sivakumar1994variance}
+and network design problems 
+\cite{murakami1997restoration,gamvros2006satellite}. 
+For an overview on applications of the QSPP see \cite{huSo2020,rostami2018}.
+The QSPP is NP-hard~\cite{rostami2018}.
+It is also difficult from the practical point of view~\cite{huSo2020}.
+
+\paragraph*{Linearization.}
+Since quadratic problems are often times intractable, researchers look for special solvable cases. One of these cases is the linearizable case. An instance $(G,s,t,Q)$ of the QSPP is \emph{linearizable} in the sense of Bookhold \cite{bookhold1990contribution}, if there exists a vector $c \in \R^m$ such that for all $s$-$t$-paths $P$ with incidence vector $x = x_P$ we have the equation 
+\[x^tQx = c^tx. \]
+In other words, the instance can be expressed equivalently as a linear optimization problem.
+
+Linearizations may appear quite exotic at first, but they arise naturally as special cases of the QSPP with restricted cost matrix~\cite{huSo2018}. They also have applications in understanding and designing lower bounds in general branch \& bound algorithms for quadratic optimization problems \cite{huSo2021}. 
+
+For this reason, linearizability has been studied for many quadratic problems, including the quadratic assignment problem
+ \cite{CeDeWo2016,Erdogan2006,ErTa2007,ErTa2011,kabadi2011n,punnen2013linear,waddellcharacterizing}, 
+ the quadratic minimum spanning tree problem \cite{CuPu2018,sotirov2021quadratic},   the quadratic TSP \cite{PuWaWo2017}, and  the quadratic cycle cover problem \cite{deMeSo2020}.  
+
+%\paragraph*{Spanning Tree Packing}
 
 \section{Results of the Thesis}
 \label{sec:thesis-results}
