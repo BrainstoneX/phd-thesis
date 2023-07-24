@@ -45,7 +45,7 @@ We provide a short overview of the single chapters in this thesis and their resp
 \begin{itemize}
 \item In \cref{ch:recov-selection}, we consider so-called \emph{Recoverable Robust Optimization} (a kind of multi-stage robust optimization) in conjunction with the so-called representative selection problem and so-called discrete budgeted uncertainty. 
 This is a problem which is trivial without the presence of any robustness, but the addition of robustness makes it challenging. 
-Determining the computational hardness of the specific variant that we consider has been an open question since 2012 [cite], which we now resolve by showing NP-completeness. 
+Determining the computational hardness of the specific variant that we consider has been an open question since 2011 [cite], which we now resolve by showing NP-completeness. 
 We also show that the corresponding adversarial problem can be solved in polynomial time.
 
 \item   In \cref{ch:multistage-complexity}, we consider multi-stage robust optimization. We make a compelling case that the natural complexity class for many problems studied in the literature is the class $\Sigma^p_3$ from the polynomial hierarchy. Despite this, very few $\Sigma^p_3$-completeness results are known. We make a first step by showing several results of this kind.
@@ -74,7 +74,7 @@ We show that the problem is an interesting mixture between a scheduling and a st
 \section{Motivation and Background}
 \label{sec:motivation-background}
 
-We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knwoledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
+We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knowledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
 
 \paragraph*{Combinatorial Optimization Problem}
 Given some ground set $E = \fromto{e_1}{e_n}$, we let $\X \subseteq \set{0,1}^n$ denote the set of \emph{feasible solutions}. 
@@ -108,7 +108,7 @@ Mathematically, the robust optimization approach to problems of this type is to 
 	\min_{x \in \X} \max_{c \in \cU} c(x).
 \]
 
-The different cost functions $c \in \cU$ are also called \emph{scenarios}. By changing the size of the set $\cU$, we can influence for how many scenarios we want to prepare against, and thus control the amount of robustness of the solution (for the price of a worse objective value).
+The different cost functions $c \in \cU$ are also called \emph{scenarios}. By changing the size of the set $\cU$, we can influence for how many scenarios we want to prepare against, and thus control the amount of robustness of the solution (for the price of a worse objective value). The original (non-robust) problem to find $\min_{x \in \X} c(x)$ is called \emph{nominal problem}.
 
 Note that we protect ourselves against \emph{all} possible scenarios equally, by assuming that the worst-case scenario will arise. This conservative approach has the advantage that no prior probability distribution needs to be assumed about the data (agnostic approach), that it often leads to algorithmically tractable problems, and that theoretical analysis is often possible. This stands in contrast to so-called \emph{stochastic programming} \cite{birge2011introduction}, where a probability distribution is assumed, and the solution is optimized for e.g.\ the expected value. Both methods have advantages and drawbacks (compare \cite{ben2009robust} for a detailed discussion).  
  
@@ -159,6 +159,9 @@ After the reveal of the uncertain cost function $c$, we are allowed to react to 
 
 Recoverable robust optimization has been considered for many combinatorial problems, including [todo]. 
 
+For both variants, the sub-problem to compute for a given first-stage solution $x$ the quantity $\max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c)$ is called the \emph{adversarial problem} $\textsc{Adv}(x)$. 
+This is inspired by the fact that robust optimization can be interpreted as a game between two players: The first player finds a minimizing $x$, while the second player, also called the adversary, has the opposite goal and selects a cost function $c \in \cU$.
+
 \paragraph*{Quadratic Shortest Path Problem.}
 A combinatorial optimization problem is \emph{quadratic}, if its cost function $f : \set{0,1}^n \to \R$ can be written as $f(x) = x^tQx$ for some $n \times n$ matrix $Q$. The \emph{quadratic shortest path problem (QSPP)} takes as input a directed graph, two vertices $s,t$, and a matrix $Q \in \R^{m \times m}$, where $m$ denotes the number of edges in $G$. It asks for the path from $s$ to $t$ of smallest quadratic cost $f(x)$ (where $x \in \R^m$ is the incidence vector of the edges of the path). 
 
@@ -189,5 +192,44 @@ For this reason, linearizability has been studied for many quadratic problems, i
 \section{Results of the Thesis}
 \label{sec:thesis-results}
 
-\section{Highlights of the Thesis}
-\label{sec:thesis-highlights}
+\paragraph*{Recoverable representative selection.}
+In \cref{ch:recov-selection}, we consider recoverable robust optimization in combination with the \emph{selection problem} and the \emph{(multi-)representative selection problem}. 
+These are two simple combinatorial optimization problems, which are trivial to solve without robustness, but may become challenging with the introduction of robustness. 
+The selection problem is defined by having the set of feasible solutions $\X = \set{x \in \set{0,1}^n : \sum_{i=1}^n x_i = p}$ for some $p \in \N$ (i.e.\ a single knapsack constraint). 
+The multi-representative selection problem is defined for a partition $T_1 \dotunion \dots \dotunion T_K$ by the set of feasible solutions $\X = \set{ \pmb{x}\in \{0,1\}^n : \sum_{i\in T_j} x_i = p_j\ \forall j \in [K] }$ for some numbers $p_1,\dots,p_K \in \N$. If $p_j = 1$ for all $j \in [K]$, then the multi-representative selection problem is called the \emph{representative selection} problem (it can be thought of the problem as selecting the representative of each part).
+
+These two problems are special cases of many well-known problems, for example the spanning tree problem or the shortest path problem in series-parallel graphs. Hence a hardness or inapproximability proof immediately propagates to these harder problems. For this reason, the selection problem is a popular toy problem in robust optimization to test the properties of proposed models \cite{averbakh2001complexity,conde2004improved,dolgui2012min,deineko2013complexity,goerigk2019robust} 
+.
+
+In \cref{ch:recov-selection}, we consider the above problems in combination with recoverable robust optimization with discrete budgeted uncertainty $\cU^d_\Gamma$. 
+This was first considered for the representative selection problem in 2011 in the PhD thesis of Büsing \cite{busing2011phd}, but its complexity was left as an open case. 
+This was revisited again in 2018 for the selection problem by Chassein et al.\ \cite{chassein2018recoverable}, but again no complexity results could be derived. 
+
+We are able to settle the open question by showing NP-completeness of both the robust selection and robust representative selection problem. We also show the two analogous results for two-stage adjustable instead of recoverable optimization.
+The hardness proof is based on a careful balancing of two strategies. We furthermore show that the adversarial problem of recoverable representative multi-selection can be solved in polynomial time. This is based on a technically challenging argument involving LP duality, kink points of piecewise linear functions, and dynamic programming.
+We show that we can solve recoverable representative selection in polynomial time in the very special case that $k=1$, where $k$ is the recoverability parameter. It is an open question whether this result extends to $k = O(1)$. Finally, some computational experiments are performed.
+ 
+\paragraph*{$\Sigma^p_k$-hardness of multi-stage robust optimization.}
+In \cref{ch:multistage-complexity}, we are concerned with the computational complexity of multi-stage robust optimization problems. Since such problems are formulated with alternating min/max qunatifiers, they naturally fall into a higher stage of the polynomial hierarchy by Stockmeyer \cite{stockmeyer1976polynomial}. Despite this, almost no hardness results with respect to the polynomial hierarchy are known for such problems. In this work, we examine the hardness of robust two-stage adjustable and robust recoverable optimization with budgeted uncertainty sets. Our main technical contribution is the introduction of a technique tailored to prove $\Sigma^p_k$-hardness of such problems. We highlight a difference between continuous ($\cU^c_\Gamma$) and discrete ($\cU^d_\Gamma$) budgeted uncertainty: In the discrete case, indeed a wide range of problems becomes complete for the third stage of the polynomial hierarchy. We highlight the TSP, independent set, and vertex cover problems as examples of this behavior. However, in the continuous case this does not happen and all problems remain in the first stage of the hierarchy. Finally, if we allow the uncertainty to not only affect the objective, but also multiple constraints, then this distinction disappears and even in the continuous case we encounter hardness for the third stage of the hierarchy. This shows that even robust problems which are already NP-complete can still exhibit a significant computational difference between column-wise and row-wise uncertainty.
+
+\paragraph*{Network interdiction on interval graphs.}
+\emph{Network Interdiction} \cite{NetworkInterdictProblemsBookChapter} is the study of figuring out which parts of a network are most vulnerable to attack or failure. The area of network interdiction has grown tremendously in recent years \cite{criticalNodeDetectionSurvey}. 
+We consider network interdiction as closely related to robust optimization, since both disciplines involve solving min-max equations. One popular type of network interdiction is the \emph{most vital nodes problem} [todo:cite]. Here, the goal is to inhibit some graph parameter $\pi$ by a maximal amount by deleting only few nodes of a graph (for example, destroy all large cliques of a graph by deleting only few nodes). Diner et al. \cite{diner2018contractionDeletionBlockers} considered the most vital nodes problem for $H$-free and perfect graphs and obtained many different results. For interval graphs and parameter $\pi = \alpha$, they were unable to settle the complexity and left it as an open question \cite[(Q2)]{diner2018contractionDeletionBlockers}.
+
+In \cref{ch:interdiction}, we introduce a novel framework of graph modifications specific to interval graphs. We study interdiction problems with respect to these graph modifications. 
+Given a list of original intervals, each interval has a replacement interval such that either the replacement contains the original, or the original contains the replacement. 
+The interdictor is allowed to replace up to $k$ original intervals with their replacements. 
+Using this framework we also study the contrary of interdiction problems which we call assistance problems. We study these problems for the independence number, the clique number, shortest paths, and the scattering number. 
+We obtain polynomial time algorithms for most of the studied problems. Via easy reductions, it follows that on interval graphs, the most vital nodes problem with respect to shortest path, independence number and Hamiltonicity can be solved in polynomial time.
+
+Our results are based on in some cases very technically challenging dynamic programs. As a special case, we answer both questions (Q1) and (Q2) from \cite{diner2018contractionDeletionBlockers}. We want to highlight in particular the result from \cref{sec:hamiltonicity}. 
+Here it is shown that restricted to interval graphs the \emph{most vital nodes problem for Hamiltonicity} can be solved in polynomial time. 
+In this problem, we are given an interval graph with the promise that it contains a Hamiltonian cycle. The question is, for some given $k$, whether we can delete $k$ vertices such that after the deletion there is no Hamiltonian cycle anymore. 
+
+We find it surprising that this problem can be solved in polynomial time, since in general graphs the Hamiltonian cycle problem is already NP-complete, and the most vital nodes variant often times makes a problem much harder. Our proof is based on the characterization of Hamiltonicity of an interval graph using the scattering number by Jung \cite{jung1978scat}, and the dynamic programming formulation of a certain non-deterministic process. Our result actually holds in a much larger generality in the framework which we introduce.
+
+\paragraph*{Linearization I.}
+
+\paragraph*{Linearization II.}
+
+\paragraph*{Non-preemptive spanning tree packing.}
