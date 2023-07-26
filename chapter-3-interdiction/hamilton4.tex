@@ -104,7 +104,6 @@ Our second lemma (\cref{lem:ham_path}) states that $\beta_\text{max}$ can be com
 \SetKwBlock{KwBeginBB}{2b.)}{end}
 \SetKwBlock{KwBeginBC}{2c.)}{end}
 \begin{algorithm}[htpb]
-\color{blue}
  \KwIn{Sequences $\I = ([a_1,b_1], \dots, [a_n,b_n])$ and $\I' = ([a'_1,b'_1], \dots, [a'_n,b'_n])$ s.t.\ $\forall i \in \set{1,\dots,n}: a_i \leq a'_i \leq b'_i \leq b_i \ $. Integer $k \geq 0$.}
  \KwOut{A non-deterministically chosen value $\beta$.}
  $\mathcal{F} = \I \cup \I' = \fromto{[c_1,d_1]}{[c_{2n},d_{2n}]}$ ordered by endpoint, i.e.\ $d_1 < d_2 < \dots < d_{2n}$ (w.l.o.g. $d_i \neq d_j$ for $i \neq j$). Let $F_i := [c_i, d_i]$ for $i \in \fromto{1}{2n}$.\;
@@ -161,7 +160,6 @@ Our second lemma (\cref{lem:ham_path}) states that $\beta_\text{max}$ can be com
 
  \caption{The non-deterministic process $P$.}
  \label{alg-chapter-4}
-\color{black}
 \end{algorithm}
 %%%%%%%%%%%%----------------------
 \las{Consider Algorithm~\ref{alg-chapter-4}, which provides a complete description of $P$ in pseudo-code. Before we proceed with the formal proof of our main lemmas, we explain in this paragraph the ideas behind process $P$ and its components.}
@@ -201,7 +199,6 @@ At the beginning, where $L = \emptyset$, we use the convention $\ell = r = \inft
 \begin{figure}
 \centering
 \includegraphics[scale=1]{chapter-3-interdiction/figure_ham_path}
-\color{blue}
 \begin{tabular}{cl|ccccc}
     && \multicolumn{5}{c}{memstate after action}\\
     $i$ & \ action & $\ell$ & $r$ & $k'$ & $\gamma$ & $\beta$ \\ 
@@ -217,7 +214,6 @@ At the beginning, where $L = \emptyset$, we use the convention $\ell = r = \inft
     2 & \ 2a.) $\textsc{lock}(F_3)$, $\textsc{discard}(F_2)$ & $c_3$ & $d_5$ & 0 & 2 & 2\\
     1 & \ 2b.) $\textsc{delete}(F_4)$, $\textsc{discard}(F_1)$ & $c_3$ & $d_5$ & 0 & 2 & 1\\
 \end{tabular}
-\color{black}
 \caption{An example execution of process $P$: The top half shows the intervals, where each pair of enveloping intervals represents an original interval and its corresponding replacement. The locked, shrunken, and deleted intervals are listed on the left. The \las{table} shows the memory states \las{$(i,\ell,r,k',\gamma,\beta)$} throughout the process.}
 \label{fig:ham_path}
 \end{figure}

@@ -275,7 +275,7 @@ where we use the notation $[x]_+ = \max\{x,0\}$ for the positive part of a value
 \end{subequations}
 By analyzing the structure of $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$ we can show 
 that the problem can be decomposed into a polynomial number of selection problems. 
-\textcolor{red}{A key property is that we can enumerate a set of values of variables $\alpha_j$, independent of the choice of $\pmb{x}$ and $\pmb{d}$, which contain an optimal solution to problem~(\ref{eq:a}). Recall that for some optimization problem over a set of feasible solutions $X$, we do not change the optimal objective value if we restrict the optimization to some set $X'\subseteq X$, if it contains at least one optimal solution.}
+A key property is that we can enumerate a set of values of variables $\alpha_j$, independent of the choice of $\pmb{x}$ and $\pmb{d}$, which contain an optimal solution to problem~(\ref{eq:a}). Recall that for some optimization problem over a set of feasible solutions $X$, we do not change the optimal objective value if we restrict the optimization to some set $X'\subseteq X$, if it contains at least one optimal solution.
 \begin{lemma}
 \label{lemma:alpha_j_discrete}
   Given $\beta \in \rr$, let
@@ -310,7 +310,7 @@ that the problem can be decomposed into a polynomial number of selection problem
    \textsc{Adv}_j(\pmb{x},\beta,\Gamma_j, \cdot, \pmb{\delta}) &= \max_{\alpha_j \in K_j(\pmb{x}, \beta, \pmb{\delta})} \textsc{Adv}_j(\pmb{x},\beta,\Gamma_j,\alpha_j, \pmb{\delta}).
 \end{align*}
   Observe that for any $\pmb{x}, \beta, \pmb{\delta}$ it holds that $K_j(\pmb{x}, \beta, \pmb{\delta}) \subseteq A_j(\beta)$. 
-  Since all $\alpha_j \in A_j(\beta)$ \textcolor{red}{are feasible for $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j, \cdot, \pmb{\delta})$ (problem~(\ref{eq:a}) does not pose any restrictions on variable $\alpha_j$)}
+  Since all $\alpha_j \in A_j(\beta)$ are feasible for $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j, \cdot, \pmb{\delta})$ (problem~(\ref{eq:a}) does not pose any restrictions on variable $\alpha_j$)
   independent of 
   $\pmb{x}, \pmb{\delta}$ we have that 
   \[ \textsc{Adv}_j(\pmb{x},\beta,\Gamma_j, \cdot, \pmb{\delta}) = \max_{\alpha_j \in A_j(\beta)} \textsc{Adv}_j(\pmb{x},\beta,\Gamma_j,\alpha_j, \pmb{\delta}). \]

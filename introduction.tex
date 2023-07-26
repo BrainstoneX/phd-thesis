@@ -27,70 +27,64 @@ The thesis is roughly split into three parts, corresponding to the three differe
 which still stay maintain their good quality even if the input parameters of the problem are slightly disturbed. Such solutions are called \emph{robust}.
 %This is motivated by the fact that in real life, data upon which decisions rely is often observed to be uncertain: 
 %Measurement errors, uncertainty about the future, or other sources of uncertainty lead to the conclusion, that the available data might only be an approximate, but not an exact description of reality. Thus, the need of finding robust solutions arises. 
-Robust optimization problems are formulated as min-max expressions. Modern research sees a trend towards investigating \emph{Multi-Stage Robust Optimization}, which solves min-max-min or even more complicated expressions. We also consider \emph{Network Interdiction} to be a part of Robust Optimization. Network interdiction is concerned with identifying the parts of a network, which are most vulnerable to attack or failure, thus aiding in the design of robust networks. 
+Robust optimization problems are formulated as min-max expressions. Modern research sees a trend towards investigating \emph{Multi-Stage Robust Optimization}, which solves min-max-min or even more complicated expressions.
+ We also consider \emph{Network Interdiction} to be a part of Robust Optimization. 
+Network interdiction is concerned with identifying the parts of a network, which are most vulnerable to attack or failure, thus aiding in the design of robust networks. 
+In part 1 of the thesis, we consider the following topics in robust optimization: The so-called recoverable representative selection problem in \cref{ch:recov-selection}. The question of $\Sigma^p_k$-hardness of multi-stage robust optimization in \cref{ch:multistage-complexity}. 
+Network interdiction problems restricted to interval graphs in \cref{ch:interdiction}.
 
 \item Part 2: \emph{Quadratic Problems and their Linearization}  (\cref{ch:linearization-1,ch:linearization-2}). 
 A quadratic problem is an optimization problem whose objective can be written as a quadratic function. 
 In contrast to their linear counterpart, quadratic problems are often times intractable. 
 This has led researchers to aks the question for special solvable cases of quadratic problems. One of these special cases is the so-called \emph{linearizable} case \cite{bookhold1990contribution}. 
-An instance of a quadratic optimization problem is called linearizable, if it can be re-written so that it is equivalent to a linear problem. Linearizations can also help in the design of general Branch \& Bound algorithms. 
+An instance of a quadratic optimization problem is called linearizable, if it can be re-written so that it is equivalent to a linear problem. Linearizations can also help in the design of general Branch \& Bound algorithms. Part 2 of the thesis is concerned with the linearization of the quadratic shortest path problem (QSPP). In \cref{ch:linearization-1}, we present a characterization of the class of universally linearizable directed graphs. In \cref{ch:linearization-2}, we present a novel algorithm for recognizing linearizable instances of the QSPP. Our algorithm runs significantly faster than the current state-of-the-art.
 
 \item Part 3: \emph{Non-Preemptiveness} (\cref{ch:ntp}). In part 3 of the thesis, we are concerned with keeping a network connected as long as possible, by scheduling its edges in a non-preemptive fashion.
 This can be seen as a non-preemptive generalization of the problem of \emph{spanning tree packing}, which is a classic problem posed first by Nash-Williams \cite{Nash-Williams1961} to pack as many spanning trees as possible into a given graph. We are the first to consider a constraint of this kind. The result is an interesting mixture of a scheduling problem and a structurally rich graph-theoretic problem.
 \end{itemize}
 
-We provide a short overview of the single chapters in this thesis and their respective main results. After the short overview, further background information and motivation is given in \cref{sec:motivation-background}. In the subsequent  \cref{sec:thesis-results}, the main results of the thesis are explained in more detail.
+This thesis is based on the following research papers:
 
-\paragraph*{Part 1: Robust Optimization}
-\begin{itemize}
-\item In \cref{ch:recov-selection}, we consider so-called \emph{Recoverable Robust Optimization} (a kind of multi-stage robust optimization) in conjunction with the so-called representative selection problem and so-called discrete budgeted uncertainty. 
-This is a problem which is trivial without the presence of any robustness, but the addition of robustness makes it challenging. 
-Determining the computational hardness of the specific variant that we consider has been an open question since 2011 [cite], which we now resolve by showing NP-completeness. 
-We also show that the corresponding adversarial problem can be solved in polynomial time.
+\begin{enumerate}[(i)]
+\item M. Goerigk, S. Lendl, and L. Wulf. \textit{Recoverable robust representatives selection problems with discrete budgeted uncertainty.} European Journal of Operational Research 303(2), 567--580, 2022. \cite{goerigk2022recoverable}
 
-\item   In \cref{ch:multistage-complexity}, we consider multi-stage robust optimization. We make a compelling case that the natural complexity class for many problems studied in the literature is the class $\Sigma^p_3$ from the polynomial hierarchy. Despite this, very few $\Sigma^p_3$-completeness results are known. We make a first step by showing several results of this kind.
+\item M. Goerigk, S. Lendl, and L. Wulf. \textit{On the Complexity of Robust Multi-Stage Problems in the Polynomial Hierarchy.} arXiv preprint, 2022 \cite{goerigk2022complexity}.
 
-\item In \cref{ch:interdiction}, we consider network interdiction problems specifically with respect to interval graphs. We introduce a framework for interdiction on interval graphs, which allows one to shrink or expand intervals. We show that the well-known \emph{most vital nodes} problem is a special case of the framework. Even though network interdiction problems are often times NP-complete or even harder, in our case we obtain polynomial-time algorithms for 6 of the 8 cases studied. This is done employing technically challenging dynamic programs. One of our results answers an open question by Diner et al. \cite{diner2018contractionDeletionBlockers}.
-\end{itemize}
+\item H. P. Hoang, S. Lendl, and L. Wulf.  \textit{Assistance and Interdiction Problems on Interval Graphs.} arXiv preprint, 2021 \cite{hoang2021assistance}. To appear in: Discrete Applied Mathematics.
 
-\paragraph*{Part 2: Linearization}
-\begin{itemize}
-\item In \cref{ch:linearization-1}, we consider linearization of the quadratic shortest path problem. In an earlier paper, Sotirov and Hu gave an example of a certain directed graph with a peculiar property, which we call unviersally linearizable. Motivated by this example, we give a complete characterization of the class of universally linearizable directed graphs. 
+\item E. Çela, B. Klinz, S. Lendl, J. B. Orlin, G. J. Woeginger, and L. Wulf. \textit{Linearizable
+special cases of the quadratic shortest path problem.} In Graph-Theoretic Concepts in Computer Science -- 47th
+International Workshop, WG 2021, Warsaw, Poland \cite{cela2021linearizable}.
 
-\item In \cref{ch:linearization-2}, we continue the work started in \cref{ch:linearization-1}. 
-We describe an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
-There is also a trivial tight lower bound of $\Omega(m^2)$, making our algorithm linear-time. 
-In contrast, the fastest previous algorithm had a running time of $O(nm^3)$ [cite], hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than $d$, where we also obtain a linear-time algorithm.
-\end{itemize}
+\item E. Çela, B. Klinz, S. Lendl, G. J. Woeginger, and L. Wulf. \textit{A linear time algorithm
+for linearizing quadratic and higher-order shortest path problems.} In Integer Programming and Combinatorial Optimization -- 24th
+International Conference, IPCO 2023, Madison, WI, USA \cite{cela2023linear}.
 
-\paragraph*{Part 3: Non-preemptiveness}
-\begin{itemize}
-\item In \cref{ch:ntp}, we consider the problem of keeping a graph connected for a maximal amount of time, by scheduling its edges in a non-preemptive way. 
-%Specifically, every edge $e$ has a weight $w(e)$ attached to it, and can be scheduled during a non-interrupted interval of length $w(e)$. The goal is to maximize the time during which the scheduled edges span all the vertices. 
-We show that the problem is an interesting mixture between a scheduling and a structural graph-theoretic problem. We derive a variety of complexity results for the problem.
-\end{itemize}
+\item S. Lendl, G. J. Woeginger, and L. Wulf. \textit{Non-preemptive tree packing.} Algorithmica, 85(3), 783-804, 2023 \cite{lendl2023nonpreemptive}. A conference version appeared in the 32nd Workshop on Combinatorial Algorithms, IWOCA 2021. The conference version received the best student paper award.
+ \end{enumerate}
 
+The rest of the introduction proceeds as follows: Background information and motivation is given in \cref{sec:motivation-background}. In the subsequent  \cref{sec:thesis-results}, the main results of the thesis are explained in detail.
 
 \section{Motivation and Background}
 \label{sec:motivation-background}
 
 We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knowledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
 
-\paragraph*{Combinatorial Optimization Problem}
+\paragraph*{Combinatorial Optimization Problem.}
 Given some ground set $E = \fromto{e_1}{e_n}$, we let $\X \subseteq \set{0,1}^n$ denote the set of \emph{feasible solutions}. 
 We assume here that the feasible solutions are encoded as $0$-$1$-vectors (i.e.\ $x_i = 1$ corresponds to element $e_i$ being part of the feasible solution, and $x_i=0$ corresponds to $e_i$ not being part of the feasible solution). 
 For example, $\X$ could encode the set of all spanning trees of a graph, the set of all paths between two vertices, of the set of all traveling salesman tours, etc\dots If there is some \emph{objective function} (also called \emph{cost function}) $f : \set{0,1}^n \to \R$, then the problem
 \[
 \min_{x \in \X} f(x)
 \]
-is referred to as a \emph{Combinatorial Optimization problem}. The cost function $f$ is called \emph{linear} if there exists some vector $c \in \R^n$ such that $f(x) = c^tx$ for all $x \in \set{0,1}^n$. This means that the cost of element $e_i$ is given by $c_i$.
+is referred to as a \emph{combinatorial optimization problem}. The cost function $f$ is called \emph{linear} if there exists some vector $c \in \R^n$ such that $f(x) = c^tx$ for all $x \in \set{0,1}^n$. This means that the cost of element $e_i$ is given by $c_i$.
 
 In some chapters, we use the set-theoretic notation for linear cost functions instead. In this case, we consider a cost function $c : E \to \R$, which assigns a cost to every single element. The cost of a subset $E' \subseteq E$ is then given by
 \[ c(E') := \sum_{e \in E'}c(e). \]
 
 
 
-\paragraph*{Robust Optimization}
+\paragraph*{Robust Optimization.}
 
 In real-world applications, decision-makers are faced with the problem that the data upon which they base their decision on is uncertain. For example, some uncertainty may be subject to measurement errors of the measurement device. Some of the data entries may depend on the future, and can only be roughly predicted, hence they are subject to prediction errors. Some of the data entries may describe properties of real-world procedures, which can not be executed with perfect mathematical precision, hence they are subject to implementation errors.
 
@@ -129,23 +123,23 @@ Note that the only difference between the two formulations is the range of $\del
 
 Budgeted uncertainty sets were introduced by Bertsimas and Sim \cite{bertsimas2003robust,bertsimas2004price}. 
 The high citation count on these two papers shows that discrete budgeted uncertainty has become very successful in the robust optimization literature. 
-A famous result shown by Bertsimas and Sim in the same paper is that when using budgeted uncertainty (discrete or continuous), the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems, hence it is compuationally very tractable.
+A famous result shown by Bertsimas and Sim in the same paper is that when using budgeted uncertainty (discrete or continuous), the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems, hence it is compuationally tractable.
 
 Just listing some of its use cases, budgeted uncertainty sets are used in [todo]. Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
 
 Further history of budgeted uncertainty sets, as well as some of its generalizations can be found in [todo]
 
-\paragraph*{Multi-Stage Robust Optimization}
+\paragraph*{Multi-Stage Robust Optimization.}
 The conservative approach of robust optimization can be considered a drawback. One possible way to address this drawback is by considering \emph{multi-stage robust optimization}. 
 These are problems which enable the decision maker to undertake a partial corrective action after the uncertainty has been revealed. They are formulated as min-max-min equations.
-As classical robust optimization has been well researched and is generally understood quite well, multistage robust optimization has gained some attention in recent years [todo: cite] In this thesis, we focus on two different kinds of multi-stage robust optimization:  \emph{two-stage adjustabele} and \emph{recoverable} robust optimization.
+As classical robust optimization has been well researched and is generally understood quite well, multistage robust optimization has gained some attention in recent years [todo: cite] In this thesis, we focus on two different kinds of multi-stage robust optimization:  \emph{two-stage adjustable} and \emph{recoverable} robust optimization.
 
-In two-stage adjustable robust optimization \cite{ben2004adjustable}, we distinguish between two types of variables. The values of here-and-now (first-stage) variables need to be decided beforehand. We then receive the information which scenario from the uncertainty set has been realized, before we decide on the value of wait-and-see (second-stage) variables. 
-This models a natural two-stage decision process, where in the first stage important decisions need to be made without full knowledge of the future, and in the second stage some decisions can be made to adjust to the encountered scenario.
+In two-stage adjustable robust optimization \cite{ben2004adjustable}, we distinguish between two types of variables. The values of \emph{here-and-now (first-stage)} variables need to be decided beforehand. We then receive the information which scenario from the uncertainty set has been realized, before we decide on the value of \emph{wait-and-see (second-stage)} variables. 
+This models a natural two-stage decision process, where in the first stage important decisions need to be made without full knowledge of the future, and in the second stage some restricted decisions can be made to adjust to the encountered scenario.
  A recent survey on adjustable robust optimization can be found in \cite{yanikouglu2019survey}.
 There are different models of two-stage adjustable robust optimization. In this thesis, we consider a model which is also used by other authors in the context of combinatorial optimization [todo: cite]. 
 We assume that there is some set of feasible solutions $\X \subseteq \set{0,1}^n$, and that the first-stage variables $x \in \set{0,1}^n$ together with the second-stage variables $y \in \set{0,1}^n$ must combine to a feasible solution. This is expressed by the constraint $x + y \in \X$. 
-We let $\X'$ be the set of permissible first-stage decisions and we let $\X(x) := \set{y \in \set{0,1}^n : x + y \in \X}$ be the set of possible ways the first-stage decision $x$ can be completed to a feasible solution. 
+We let $\X' \subseteq \set{0,1}^n$ be the set of permissible first-stage decisions and we let $\X(x) := \set{y \in \set{0,1}^n : x + y \in \X}$ be the set of possible ways the first-stage decision $x$ can be completed to a feasible solution. 
 To address the fact where a first-stage solution $x$ is chosen which can not be completed (i.e.\ $\X(x) = \emptyset$), we define $\min \emptyset := \infty$. This means that such a choice of $x$ should be avoided. Formally, for some objective function $f(x,y,c)$, the two-stage adjustable robust problem is given by
 
 \[\min_{x \in \X'} \max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c).\]
@@ -160,7 +154,7 @@ After the reveal of the uncertain cost function $c$, we are allowed to react to 
 Recoverable robust optimization has been considered for many combinatorial problems, including [todo]. 
 
 For both variants, the sub-problem to compute for a given first-stage solution $x$ the quantity $\max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c)$ is called the \emph{adversarial problem} $\textsc{Adv}(x)$. 
-This is inspired by the fact that robust optimization can be interpreted as a game between two players: The first player finds a minimizing $x$, while the second player, also called the adversary, has the opposite goal and selects a cost function $c \in \cU$.
+This is inspired by the fact that robust optimization can be interpreted as a game between two players: The first player finds a minimizing $x$, while the second player, also called the adversary, has the opposite goal and selects a cost function $c \in \cU$. The first player responds to the second player by choosing some $y \in \X(x)$.
 
 \paragraph*{Quadratic Shortest Path Problem.}
 A combinatorial optimization problem is \emph{quadratic}, if its cost function $f : \set{0,1}^n \to \R$ can be written as $f(x) = x^tQx$ for some $n \times n$ matrix $Q$. The \emph{quadratic shortest path problem (QSPP)} takes as input a directed graph, two vertices $s,t$, and a matrix $Q \in \R^{m \times m}$, where $m$ denotes the number of edges in $G$. It asks for the path from $s$ to $t$ of smallest quadratic cost $f(x)$ (where $x \in \R^m$ is the incidence vector of the edges of the path). 
@@ -192,12 +186,12 @@ For this reason, linearizability has been studied for many quadratic problems, i
 \section{Results of the Thesis}
 \label{sec:thesis-results}
 
-This section, we extensively describe the results obtained in each chapter.
+In this section, we extensively describe the results obtained in each chapter.
 
 \paragraph*{Recoverable representative selection.}
 In \cref{ch:recov-selection}, we consider recoverable robust optimization in combination with the \emph{selection problem} and the \emph{(multi-)representative selection problem}. 
 These are two simple combinatorial optimization problems, which are trivial to solve without robustness, but may become challenging with the introduction of robustness. 
-The selection problem is defined by having the set of feasible solutions $\X = \set{x \in \set{0,1}^n : \sum_{i=1}^n x_i = p}$ for some $p \in \N$ (i.e.\ a single knapsack constraint). 
+The selection problem is defined by having the set of feasible solutions $\X = \set{x \in \set{0,1}^n : \sum_{i=1}^n x_i = p}$ for some $p \in \N$ (i.e.\ a single cardinality constraint). 
 The multi-representative selection problem is defined for a partition $T_1 \dotunion \dots \dotunion T_K = \fromto{1}{n}$ by the set of feasible solutions $\X = \set{ \pmb{x}\in \{0,1\}^n : \sum_{i\in T_j} x_i = p_j\ \forall j \in [K] }$ for some numbers $p_1,\dots,p_K \in \N$. If $p_j = 1$ for all $j \in [K]$, then the multi-representative selection problem is called the \emph{representative selection} problem (it can be thought of the problem as selecting the representative of each part).
 
 These two problems are special cases of many well-known problems, for example the spanning tree problem or the shortest path problem in series-parallel graphs. Hence a hardness or inapproximability proof immediately propagates to these harder problems. For this reason, the selection problem is a popular toy problem in robust optimization to test the properties of proposed models \cite{averbakh2001complexity,conde2004improved,dolgui2012min,deineko2013complexity,goerigk2019robust} 
@@ -207,8 +201,8 @@ In \cref{ch:recov-selection}, we consider the above problems in combination with
 This was first considered for the representative selection problem in 2011 in the PhD thesis of Büsing \cite{busing2011phd}, but its complexity was left as an open case. 
 This was revisited again in 2018 for the selection problem by Chassein et al.\ \cite{chassein2018recoverable}, but again no complexity results could be derived. 
 
-We are able to settle the open question by showing NP-completeness of both the robust selection and robust representative selection problem. We also show the two analogous results for two-stage adjustable instead of recoverable optimization.
-The hardness proof is based on a careful balancing of two strategies. We furthermore show that the adversarial problem of recoverable representative multi-selection can be solved in polynomial time. This is based on a technically challenging argument involving LP duality, kink points of piecewise linear functions, and dynamic programming.
+We are able to settle the open question by showing NP-completeness of both the robust selection and robust representative selection problem. We also show the  analogous hardness result for two-stage adjustable (instead of recoverable) selection.
+The hardness proof is based on a careful balancing of two strategies. We furthermore show that the adversarial problem for recoverable representative multi-selection can be solved in polynomial time. This is based on a technically challenging argument involving LP duality, kink points of piecewise linear functions, and dynamic programming.
 We show that we can solve recoverable representative selection in polynomial time in the very special case that $k=1$, where $k$ is the recoverability parameter. It is an open question whether this result extends to $k = O(1)$. Finally, some computational experiments are performed.
  
 \paragraph*{$\Sigma^p_k$-hardness of multi-stage robust optimization.}
@@ -228,7 +222,7 @@ Our results are based on in some cases very technically challenging dynamic prog
 Here it is shown that restricted to interval graphs the \emph{most vital nodes problem for Hamiltonicity} can be solved in polynomial time. 
 In this problem, we are given an interval graph with the promise that it contains a Hamiltonian cycle. The question is, for some given $k$, whether we can delete $k$ vertices such that after the deletion there is no Hamiltonian cycle anymore. 
 
-We find it surprising that this problem can be solved in polynomial time, since in general graphs the Hamiltonian cycle problem is already NP-complete, and the most vital nodes variant often times makes a problem much harder. Our proof is based on the characterization of Hamiltonicity of an interval graph using the scattering number by Jung \cite{jung1978scat}, and the dynamic programming formulation of a certain non-deterministic process. Our result actually holds in a much larger generality in the framework which we introduce.
+We find it surprising that this problem can be solved in polynomial time, since in general graphs the Hamiltonian cycle problem is already NP-complete, and the most vital nodes variant often times makes a problem even harder. Our proof is based on the characterization of Hamiltonicity of an interval graph using the scattering number by Jung \cite{jung1978scat}, and the dynamic programming formulation of a certain non-deterministic process. Our result actually holds in a much larger generality in the framework which we introduce.
 
 \paragraph*{Linearization I.}
 In \cref{ch:linearization-1}, we consider linearizable special cases of the quadratic shortest path problem (QSPP). If the QSPP on a directed graph is linearizable under all possible choices of the arc interaction costs, the graph is called universally linearizable. This is motivated by an earlier result of Hu and Sotirov, who provided one specific example of a universally linearizable directed graph \cite{huSo2018}.
@@ -246,7 +240,7 @@ In fact, Hu and Sotirov first showed in 2018 that for acyclic directed grid grap
 
 In \cref{ch:linearization-2}, we provide a novel linear time algorithm for the LinQSPP on acyclic digraphs which runs in time $O(m^2)$, improving over the previously best algorithm by a factor $O(nm)$. We complement this with a trivial lower bound of $\Omega(m^2)$.
 
-The algorithm is based on a new insight revealing that the linearizability of the QSPP for acyclic digraphs can be seen as a local property. Roughly speaking, the instance as a whole is linearizable if and only if every small part of the instance is linearizable. We deem this surprising, since this reduces a global property to a local property. Still, there may be exponentially many of these small parts. Therefore, we use additional algorithmic techniques to check all these parts and obtain a polynomial-time algorithm. 
+The algorithm is based on a new insight revealing that the linearizability of the QSPP for acyclic digraphs can be seen as a local property. Roughly speaking, the instance as a whole is linearizable if and only if every small part of the instance is linearizable. We deem this surprising, since this reduces a global property to a local property. Still, there may be exponentially many of these small parts. Therefore, we use additional algorithmic techniques to check all these parts and obtain a polynomial-time algorithm. The idea for this new local-global characterization is based on insights gained in \cref{ch:linearization-1}.
 
 Our approach furthermore extends to the more general higher-order shortest path problem. Here, we obtain a runtime of $O(m^d)$ together with a matching lower bound $\Omega(m^d)$ for all orders $d \in \N, d \geq 2$. 
 Finally, we show how to compute in polynomial time a basis of the linear subspace of all linearizable degree-$d$ cost functions for a given fixed graph.
@@ -255,3 +249,7 @@ Finally, we show how to compute in polynomial time a basis of the linear subspac
 In \cref{ch:ntp}, we consider \emph{nonpreemptive tree packing}. This problem is a mixture of a scheduling problem and a structural tree packing problem.
 An instance of the non-preemptive tree packing problem consists of an undirected graph $G$ together with a weight $w(e)$ for every edge $e$. The goal is to activate every edge $e$ for some time interval of length $w(e)$, such that the activated edges keep $G$ connected for the longest possible overall time. We derive a variety of results on this problem. The problem is strongly NP-hard even on graphs of treewidth $2$, and it does not allow a polynomial time approximation scheme (unless P=NP). Furthermore, we discuss the performance of a simple greedy algorithm, and we construct and analyze a number of parameterized and exact algorithms.
 We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. Therefore, the only open cases that remain are the cases of $\set{4,5,6}$.
+
+\section{A Note on Notation}
+
+[todo]

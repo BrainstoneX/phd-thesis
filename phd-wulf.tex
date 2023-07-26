@@ -34,17 +34,17 @@
 \thesisauthor[Lasse Wulf]{Lasse Wulf, B.Sc. M.Sc. M.Sc.}
 
 % Title of your thesis (optional argument sets a different \title{}):
-\thesistitle[Generalizations of comb.\  opt.\ problems]{On generalizations of some classical combinatorial optimization problems.\\ Multi-stage robustness, higher-order cost functions, and nonpreemption.}
+\thesistitle[Generalizations of comb.\  opt.\ problems]{On Generalizations of Some Classical Combinatorial Optimization Problems: Multi-Stage Robustness, Higher-Order Cost Functions, and Nonpreemption.}
 
 % Date of completion (optional argument sets a different \date{})
-\thesisdate[ ]{July 2023}
+\thesisdate[ ]{August 2023}
 
 % Supervisor headline (select male/female/plural version)
 \supervisortitle{\germanenglish{Betreuerin}{Supervisor}}
 
 % Supervisor info
 \supervisor{%
-  Univ.-Prof. Bettina Klinz, Ph.D.
+  Ao.Univ.-Prof. Dipl.-Ing. Dr.techn. Bettina Klinz
 \\[0.7cm]
   Institute of Discrete Mathematics
 
@@ -53,7 +53,7 @@
 }
 
 % Academic degree achieved with this thesis, according to your curriculum (check curriculum and select male/female version):
-\academicdegree{Doktor der technischen Wissenschaften} % phd
+\academicdegree{Doktor der Naturwissenschaften} % phd
 
 
 %--- FRONT MATTER --------------------------------------------------------------
@@ -71,12 +71,30 @@
 \pagenumbering{roman}
 
 \chapter*{Abstract}
+This thesis is concerned with three different directions of generalization of clasic combinatorial optimization problems: Robust optimization, higher-order cost functions, and non-preemptiveness.
 
-English Abstract
+In the first part of the thesis, we consider recoverable robust oprimization in conjunction with the representative selection problem and discrete budgeted uncertainty. 
+This is a problem which is trivial without the presence of any robustness, but the addition of robustness makes it challenging. 
+Determining the computational hardness of the specific variant that we consider has been an open question since 2011, which we now resolve by showing NP-completeness. We also show that the corresponding adversarial problem can be solved in polynomial time.
+
+We furthermore consider multi-stage robust optimization, specifically recoverable robust optimization and two-stage adjustable robust optimization. We make a compelling case that the natural complexity class for many problems studied in the literature is the class $\Sigma^p_3$ from the polynomial hierarchy. Despite this, very few $\Sigma^p_3$-completeness results are known. We make a first step by showing several results of this kind.
+
+We also consider network interdiction problems, specifically with respect to interval graphs. We introduce a framework for interdiction on interval graphs, which allows one to shrink or expand intervals. We show that the well-known most vital nodes problem is a special case of the framework. Even though network interdiction problems are often times NP-complete or even harder, in our case we obtain polynomial-time algorithms for 6 of the 8 cases studied. This is done employing technically challenging dynamic programs. One of our results answers an open question by Diner et al. 
+
+In the second part of the thesis, we consider linearization of the quadratic shortest path problem. In an earlier paper, Sotirov and Hu gave an example of a certain directed graph with a peculiar property, which we call unviersally linearizable. Motivated by this example, we give a complete characterization of the class of universally linearizable directed graphs. 
+
+Inspired by some insight gained from the characterization,
+we find an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
+There is also a trivial tight lower bound of $\Omega(m^2)$, making our algorithm linear-time. 
+In contrast, the fastest previous algorithm was presented by Hu qand Sotirov and has a running time of $O(nm^3)$. Hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than $d$, where we also obtain a linear-time algorithm.
+
+In the final part of the thesis, we consider the problem of keeping a graph connected for a maximal amount of time, by scheduling its edges in a non-preemptive way. 
+%Specifically, every edge $e$ has a weight $w(e)$ attached to it, and can be scheduled during a non-interrupted interval of length $w(e)$. The goal is to maximize the time during which the scheduled edges span all the vertices. 
+We show that the problem is an interesting mixture between a scheduling problem and the graph-structural problem of tree-packing, as introduced by Nash-Williams. We derive a variety of complexity results for the problem.
 
 \begin{otherlanguage}{ngerman}
 \chapter*{Kurzfassung}
-Deutscher Abstract
+Deutscher Abstract [todo]
 \end{otherlanguage}
 
 
@@ -88,7 +106,7 @@ Deutscher Abstract
 
 \chapter*{\germanenglish{Danksagung}{Acknowledgements}}
 
-Acknowledgements.
+Acknowledgements. [todo]
 
 \cleardoublepage
 
