@@ -744,8 +744,7 @@ graph and the arc interaction costs).
 Hu \& Sotirov \cite{huSo2021} have shown that the decision problems VALID-LI\-NEARI\-ZA\-TION
 and LI\-NEA\-RIZABLE-QSPP in Figure~\ref{fig:problems} both are polynomially solvable, 
 if the underlying directed graph $G$ is acyclic.
-The following (purely combinatorial) proposition can be extracted and deduced from the algorithmic
-arguments in \cite{huSo2021}, by combining them with the techniques of our Section~\ref{sec:forbidden}.
+The following (purely combinatorial) proposition can be extracted and deduced from the next chapter, \cref{ch:linearization-2}.
 For subsets $S,T\subseteq A$ of the arc set we denote $q(S,T)=\sum_{s\in S}\sum_{t\in T}q(s,t)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -913,7 +912,7 @@ paths $P\in\ppp$:
 \sum_{P:\,a\in P} x_P             ~\ge~0 &\qquad\text{for every arc $a\in A$} \label{eq:dlp.2} 
 \end{align}
 %%%%%%%%%%%%%%%%
-Now fix some feasible solution $x^*$ for \eqref{eq:dlp.1}--\eqref{eq:dlp.2},
+Now fix some feasible solution $\pmb x^*$ for \eqref{eq:dlp.1}--\eqref{eq:dlp.2},
 let $\pppx$ denote the set of all paths $P\in\ppp$ with $x^*_P\ge0$, and 
 let $\pppy$ denote the set of all paths $P\in\ppp$ with $x^*_P<0$.
 We introduce the following additional constraints:
@@ -929,12 +928,12 @@ As the constraints \eqref{eq:dlp.3}--\eqref{eq:dlp.5} enforce $|x_P|\le1$ for ev
 the underlying feasible region is bounded.
 Furthermore it is easy to see that the feasibility of the system \eqref{eq:dlp.1}--\eqref{eq:dlp.2} 
 implies the feasibility of the system \eqref{eq:dlp.1}--\eqref{eq:dlp.5}.
-In particular, the system \eqref{eq:dlp.1}--\eqref{eq:dlp.5} possesses a feasible solution $x^{**}$ 
+In particular, the system \eqref{eq:dlp.1}--\eqref{eq:dlp.5} possesses a feasible solution $\pmb x^{**}$ 
 that satisfies the strict inequality \eqref{eq:dlp.1}, and 
 that furthermore is a corner vertex of the polytope defined by \eqref{eq:dlp.2}--\eqref{eq:dlp.5}.
-As we are working in $|\ppp|$-dimensional space, the corner vertex $x^{**}$ satisfies $|\ppp|$ of 
+As we are working in $|\ppp|$-dimensional space, the corner vertex $\pmb x^{**}$ satisfies $|\ppp|$ of 
 the constraints \eqref{eq:dlp.2}--\eqref{eq:dlp.5} with equality; this implies that at most $|A|+1$ 
-of the coordinates in $x^{**}$ are non-zero.
+of the coordinates in $\pmb x^{**}$ are non-zero.
 
 Now our coNP-certificate for LINEARIZABLE-QSPP simply lists all the paths $P\in\ppp$ with $x^{**}_P\ne0$.
 As the certificate consists of at most $|A|+1$ paths that each contain at most $|A|$ arcs, the
