@@ -3,7 +3,7 @@
 
 \newcommand{\scat}{\text{sc}}
 
-\section{Scattering Number, Hamiltonicity, and Graph Toughness}
+\section{Scattering number, Hamiltonicity, and graph toughness}
 \label{sec:hamiltonicity}
 In this section, we \las{investigate the shrink-expand framework with respect to various parameters related to Hamiltonicity of an interval graph. All the problems considered in this section are of the same structure: As input we are given an interval graph in the shrink-expand framework with shrinking intervals. The given graph is Hamiltonian (or has a property similar to Hamiltonicity, like a Hamilton path, a small path cover, large graph toughness), and the question is whether the interdictor can destroy this property by shrinking at most $k$ intervals for a given budget $k$. In this section, we consider interdiction problems and most vital nodes problems with respect to Hamilton cycle, Hamilton path, path cover (\cref{subsection:ham_interdict,subsection:ham_mvn}), and graph toughness (\cref{subsection:tough}), as well as the assistance problem for scattering number (\cref{subsection:scat}). The formal definition of each of these problems is given at the beginning of the corresponding subsection. We show that each of these problems can be solved in polynomial time.}
 
@@ -49,7 +49,7 @@ Firstly, in Section~\ref{subsection:ham_mvn}, we show how the most vital nodes p
 Secondly, the method to solve the above assistance problem can be easily extended to the interdiction problem of a related parameter, graph toughness. 
 In Section~\ref{subsection:tough}, we will define this parameter and discuss the modification needed to apply the method above to solve the latter problem. 
 
-\subsection{Assistance Problem for Scattering Number}
+\subsection{Assistance problem for scattering number}
 \label{subsection:scat}
 
 The assistance problem for $\scat(G)$ is to compute $\max_{|X| \leq k}\scat(G_X)$ with shrinking intervals. 
@@ -301,7 +301,7 @@ By Lemma~\ref{lem:ham_path}, $\beta_{\max}$ can be computed in time $\bigO(kn^3)
 Theorem~\ref{thm:ham}(a) then follows.
 \qed
 
-\subsection{Interdiction Problems for Hamiltonicity}
+\subsection{Interdiction problems for Hamiltonicity}
 \label{subsection:ham_interdict}
 
 In the interdiction problem for Hamilton path (cycle), we are given shrinking intervals $\I, \I'$, such that $\graph(\I)$ has a Hamilton path (cycle), and the interdictor wishes to select $X \subseteq [n]$ of size at most $k$, such that $\graph(\I_X)$ does not have a Hamilton path (cycle) anymore.
@@ -315,7 +315,7 @@ For the interdiction problems for Hamilton path and Hamilton cycle, we can concl
 Therefore, these problems can also be solved in time $\bigO(kn^3)$.
 \qed
 
-\subsection{Most Vital Nodes Problem for Hamiltonicity}
+\subsection{Most vital nodes problem for Hamiltonicity}
 \label{subsection:ham_mvn}
 \las{In the most vital nodes problem for Hamilton path (cycle, respectively), we are given an interval graph, which has a Hamilton path (cycle, respectively) and a budget $k$. The question is whether the interdictor can destroy the property that the graph has a Hamilton path (cycle) by deleting at most $k$ vertices. More generally, the most vital nodes problem for path cover is to compute the number $\max_{X \subseteq V, |X| \leq k} \text{pc}(G - X)$, where $\text{pc}$ denotes the path cover number. We show that all these problems can be solved in polynomial time.}
 
@@ -356,7 +356,7 @@ Combining the above lemma with Theorem~\ref{thm:ham}(a), we obtain the following
 The most vital nodes problem \las{on interval graphs} for Hamilton path, Hamilton cycle, and path cover can be solved in time $\bigO(kn^3)$
 \end{corollary}
 
-\subsection{Graph Toughness}
+\subsection{Graph toughness}
 \label{subsection:tough}
 In this subsection, we will briefly discuss a related parameter, graph toughness, which was introduced by Chv\'{a}tal~\cite{Chvatal1973} as a measure of graph connectivity. 
 A graph $G$ is $t$-tough if $|S| \geq t \cdot c(G - S)$ for any cutset $S$, i.e., $S \subseteq V(G)$ and $c(G - S) > 1$.

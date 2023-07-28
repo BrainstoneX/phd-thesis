@@ -1,4 +1,4 @@
-\chapter{Non-preemptive Tree Packing}
+\chapter{Non-Preemptive Tree Packing}
 \label{ch:ntp}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -198,7 +198,7 @@ By removing \lasse{a} vertex $v$ from $G$, we obtain the graph $G-v=G[V-\set{v}]
 Similarly, for $E'\subseteq E$ and $e\in E$ we have $G-E'=(V,E-E')$ and $G-e=G-\set{e}$. For all other graph-theoretic concepts used in the paper, we refer the reader to the
 text book by West \cite{WestBook}.
 
-\subsection{Formal Problem Definition}
+\subsection{Formal problem definition}
 
 An instance for problem {\xxxNTP} is a weighted graph $(G,w)$, where $G=(V,E)$ and $w:E\to\NN_0$. 
 A \emph{schedule} for instance $(G,w)$ is a map $\sigma:E\to\NN_0$, that maps each edge $e$ to 
@@ -231,7 +231,7 @@ However, this is not the case -- the next lemma shows that one can always assume
 
 %%%%%%%%%%%%%%%%%
 
-\subsection{\lasse{Further Definitions}}
+\subsection{\lasse{Further definitions}}
 
 \lasse{Throughout the paper, we investigate the (parameterized) complexity of non-preemptive tree packing 
 with respect to different graph classes and structural graph parameters.}
@@ -247,7 +247,7 @@ we refer the reader to the book of Cygan et al.~\cite{cygan2015parameterized}.}
 \lasse{A \emph{matroid} is a pair $(E,\mathcal{F})$, where $E$ is a finite set called the \emph{ground set} and $\mathcal{F}$ is a family of subsets of $E$ with the following properties: (i) We have $\emptyset \in \mathcal{F}$. (ii) For all $F \in \mathcal{F}$ and $F' \subseteq F$ we have $F' \in \mathcal{F}$. (iii) For all $F,F' \in \mathcal{F}$ such that $|F'| < |F|$, there exists an element $e \in F - F'$ such that $F' \cup \set{e} \in \mathcal{F}$. The sets in $\mathcal{F}$ are called \emph{independent} and a maximal independent set is called a \emph{base}. An important class of matroids are the \emph{graphical matroids}, where $E$ is the edge set of some graph and a set $F \subseteq E$ of edges is independent if it does not induce a cycle. The bases in a graphical matroid correspond exactly to the spanning trees of the graph.
 }
 
-\subsection{\lasse{General Insights}}
+\subsection{\lasse{General insights}}
 
 \begin{lemma}
 \label{le:structure}
@@ -305,7 +305,7 @@ Therefore, it is possible to pack $\beta$ spanning trees.  }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{NP-Hardness}
+\section{NP-hardness}
 \label{sec:hardness-chapter-6}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this section, we establish the NP-hardness of problem {\xxxNTP} for certain families of
@@ -472,7 +472,7 @@ of objective value $\beta$: For $k=0,\ldots,n-1$, we activate edge $\set{u_k, u_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A Negative Result for Objective Value Seven}
+\section{A negative result for objective value seven}
 \label{sec:value-seven}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this section, we show that it is NP-hard to decide whether there exists a schedule of objective value at least 7. 
@@ -707,7 +707,7 @@ worst case guarantee better than $7/6$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A Positive Result for Objective Value Three}
+\section{A positive result for objective value three}
 \label{sec:value-three}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In Section~\ref{sec:value-seven}, we have established the NP-hardness of deciding whether 
@@ -766,7 +766,7 @@ The complexity of deciding whether $\ntp(G,w)\ge\beta$ remains open for $\beta\i
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Greedy Algorithm}
+\section{The Greedy algorithm}
 \label{sec:greedy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 We introduce a greedy algorithm that maintains connectivity by always
@@ -908,7 +908,7 @@ whereas the {\greedy} algorithm only yields an objective value of~$2$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Parameterized Complexity}
+\section{Parameterized complexity}
 \label{sec:parameterized}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this section, we show that problem {\xxxNTP} is fixed parameter tractable with 

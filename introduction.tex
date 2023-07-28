@@ -16,7 +16,7 @@ The area of Combinatorial Optimization lies in the intersection between discrete
 It is a relatively young area of mathematics, which started to appear and take shape approximately in the 1950s. 
 As a consequence, even today, still many new aspects and facets of this rich field of study are being researched and discovered. Every of this new developments comes with a re-interpretation or a new perspective of the classical problems in the field. In other words, \emph{generalizations} of the classically important problems are created and analyzed.
 
-\section{Overview of the Thesis}
+\section{Overview of the thesis}
 
 This thesis deals with three kinds of generalizations of classic problems from Combinatorial Optimization. 
 The three generalizations reflect on current research trends and sub-areas of Combinatorial Optimization. 
@@ -65,7 +65,7 @@ International Conference, IPCO 2023, Madison, WI, USA \cite{cela2023linear}.
 
 The rest of the introduction proceeds as follows: Background information and motivation is given in \cref{sec:motivation-background}. In the subsequent  \cref{sec:thesis-results}, the main results of the thesis are explained in detail.
 
-\section{Motivation and Background}
+\section{Motivation and background}
 \label{sec:motivation-background}
 
 We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knowledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
@@ -183,7 +183,7 @@ For this reason, linearizability has been studied for many quadratic problems, i
 
 %\paragraph*{Spanning Tree Packing}
 
-\section{Results of the Thesis}
+\section{Results of the thesis}
 \label{sec:thesis-results}
 
 In this section, we extensively describe the results obtained in each chapter.
@@ -250,6 +250,6 @@ In \cref{ch:ntp}, we consider \emph{nonpreemptive tree packing}. This problem is
 An instance of the non-preemptive tree packing problem consists of an undirected graph $G$ together with a weight $w(e)$ for every edge $e$. The goal is to activate every edge $e$ for some time interval of length $w(e)$, such that the activated edges keep $G$ connected for the longest possible overall time. We derive a variety of results on this problem. The problem is strongly NP-hard even on graphs of treewidth $2$, and it does not allow a polynomial time approximation scheme (unless P=NP). Furthermore, we discuss the performance of a simple greedy algorithm, and we construct and analyze a number of parameterized and exact algorithms.
 We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. Therefore, the only open cases that remain are the cases of $\set{4,5,6}$.
 
-\section{A Note on Notation}
+\section{A note on notation}
 
 [todo]

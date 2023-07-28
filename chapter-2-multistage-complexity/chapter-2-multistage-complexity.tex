@@ -117,7 +117,7 @@ VC & - & NP (Cor.~\ref{cor4}) & $\Sigma^p_3$ (Thm.~\ref{thm:two-stage-and-recove
 
 
 
-\section{Robust Adjustable SAT}
+\section{Robust adjustable SAT}
 \label{sec:radj}
 
 We present a variant of the satisfiability problem (SAT), which we call the \emph{robust adjustable SAT problem with budgeted uncertainty} ({\radj} for short) that is inspired by Lemma~2.3 in \cite{pfetsch2021generic}.
@@ -275,7 +275,7 @@ If $k \geq 1$ is a constant, then $k$-stage {\radj} is $\Sigma_{2k-1}^p$-complet
 \end{theorem}
 
 
-\section{Continuous Budgeted Uncertainty}
+\section{Continuous budgeted uncertainty}
 \label{sec:contbudgeted}
 
 In this section, we study adjustable robust optimization problems with 
@@ -400,7 +400,7 @@ The feasibility variant of the adjustable robust mixed integer programming probl
 
 % Note that this is not in contradiction to remark 1, as we have uncertainty in the constraints. 
 
-\section{Discrete Budgeted Uncertainty}
+\section{Discrete budgeted uncertainty}
 \label{sec:discbudgeted}
 
 In this section, we consider \emph{discrete budgeted uncertainty} for robust multi-stage versions of \new{some classical problems}, namely the traveling salesman problem (TSP), the independent set problem, and the vertex cover problem. We consider both \emph{two-stage adjustable} robustness, as well as \emph{recoverable} robustness. We prove that all considered problems are $\Sigma_3^p$-complete. The results also generalize from two-stage robust problems to $k$-stage robust problems with $k > 2$ (we obtain $\Sigma^p_{2k-1}$-hardness then). As a consequence, under common hardness assumptions all of the problems above can not be expressed as a polynomial-sized mixed integer program. This makes it very challenging for existing MIP-solvers to tackle these problems and so new techniques likely need to be developed.
@@ -413,7 +413,7 @@ The remainder of this section is structured as follows: In \cref{subsec:two-stag
 
 
 
-\subsection{Robust Two-Stage Independent Set}
+\subsection{Robust two-stage independent set}
 \label{subsec:two-stage-ind-set}
 
 
@@ -472,7 +472,7 @@ cross/.style={path picture={
 \draw[edge] (notx2) to (c2);
 \draw[edge] (x3) to (c3);
 
-\node[below=10] at (c3) {$x_1 \lor x_2 \lor \overline x_3$};
+\node[below=0.1] at (c3) {$x_1 \lor x_2 \lor \overline x_3$};
 \end{tikzpicture}
 \caption{Classical reduction of 3SAT to the max independent set problem.}
 \label{fig:max-clique-classic-reduction}
@@ -512,7 +512,7 @@ Finally, we let $\Gamma' := \Gamma$. This completes our description of the robus
 \node[below] at (notz1) {$\overline z_1$};
 \draw[edge] (z1) to (notz1);
 
-\node[below=-14.5] at ($(z1)!0.5!(notzn)$) {$\vdots$};
+\node[below=-0.5] at ($(z1)!0.5!(notzn)$) {$\vdots$};
 
 \node[vertex] (yn) at (0,7) {};
 \node[above] at (yn) {$y_n$};
@@ -526,7 +526,7 @@ Finally, we let $\Gamma' := \Gamma$. This completes our description of the robus
 \node[below] at (noty1) {$\overline{y}_1$};
 \draw[edge] (y1) to (noty1);
 
-\node[below=-14.5] at ($(y1)!0.5!(notyn)$) {$\vdots$};
+\node[below=-0.5] at ($(y1)!0.5!(notyn)$) {$\vdots$};
 
 \node[vertex] (xn) at (0,10) {};
 \node[above] at (xn) {$x_n$};
@@ -540,7 +540,7 @@ Finally, we let $\Gamma' := \Gamma$. This completes our description of the robus
 \node[above] at (notx1) {$\overline x_1$};
 \draw[edge] (x1) to (notx1);
 
-\node[below=-14.5] at ($(x1)!0.5!(notxn)$) {$\vdots$};
+\node[below=-0.5] at ($(x1)!0.5!(notxn)$) {$\vdots$};
 
 \node[vertex] (c11) at (5,11) {};
 \node[vertex] (c12) at (4,10) {};
@@ -549,8 +549,8 @@ Finally, we let $\Gamma' := \Gamma$. This completes our description of the robus
 \draw[edge] (x1) to (c11);
 \draw[edge] (noty1) to (c12);
 \draw[edge] (notz1) to (c14);
-\node[above=10] at (c11) {$\overline x_1 \lor y_1 \lor z_1$};
-\node[below=5] at (c14) {$\vdots$};
+\node[above=0.4] at (c11) {$\overline x_1 \lor y_1 \lor z_1$};
+\node[below=0.3] at (c14) {$\vdots$};
 
 \draw[dashed,rounded corners] ($(x1)+(-.5,+.7)$) rectangle ($(notxn) + (.5,-.4)$);
 \node at ($(x1)+(-1,-1)$) {$V_1$};
@@ -609,7 +609,7 @@ This was to prove. Claim 1 and Claim 2 together complete the reduction, so we ha
 \end{proof}
 
 
-\subsection{Robust Recoverable Independent Set}
+\subsection{Robust recoverable independent set}
 \label{subsec:rec-ind-set}
 
 The goal in this subsection is to show that the recoverable independent set problem is $\Sigma_3^p$-complete. 
@@ -659,7 +659,7 @@ The rest of the proof is analogous to the proof of \cref{thm:discr-two-stage-ind
  Informally speaking, we see that the vector $\pmb x'$ completely determines the variable assignment on the set $X$, while the vector $\pmb y'$ must agree with $\pmb x'$ on the variables $X$ but can have differing assignments of the variables $Y \cup Z$.
 \end{proof}
 
-\subsection{Robust Two-Stage Traveling Salesman Problem}
+\subsection{Robust two-stage traveling salesman problem}
 \label{subsec:two-stage-tsp}
 
 The robust two-stage traveling salesman problem (TSP) is the robust problem of choosing a TSP tour in two stages: 
@@ -772,7 +772,7 @@ Then in the corresponding clause gadget, we have to choose all three edges. This
 \node[XORGadget] at (cross2) {}; 
 \draw[XOREdge, bend left] (a3') to coordinate (cross3) ($(c2)!0.5!(c3)$);
 \node[XORGadget] at (cross3) {}; 
-\node[below=10] at (c2) {$x_1 \lor x_2 \lor \overline x_3$};
+\node[below=0.5] at (c2) {$x_1 \lor x_2 \lor \overline x_3$};
 \end{tikzpicture}
 }
 \caption{Classical reduction of 3SAT to the \new{Hamiltonian} cycle problem. Arrows marked with a cross denote an XOR-gadget, as illustrated on the left. Vertices marked with a square are all connected in one clique.}
@@ -814,12 +814,12 @@ Then in the corresponding clause gadget, we have to choose all three edges. This
 \node[left] at (a6) {$z_n$}; 
 \draw[edge, bend left] (x6) to node[right]{$\overline z_n$} (x7);
 
-\node[right=12, above=-8] at (x2) {$\vdots$};
-\node[left=15, above=-8] at (x2) {$\vdots$};
-\node[right=12, above=-8] at (x4) {$\vdots$};
-\node[left=15, above=-8] at (x4) {$\vdots$};
-\node[right=12, above=-8] at (x6) {$\vdots$};
-\node[left=15, above=-8] at (x6) {$\vdots$};
+\node at ($(x2)+(.4,.1)$) {$\vdots$};
+\node at ($(x2)+(-.4,.1)$) {$\vdots$};
+\node at ($(x4)+(.4,.1)$) {$\vdots$};
+\node at ($(x4)+(-.4,.1)$) {$\vdots$};
+\node at ($(x6)+(.4,.1)$) {$\vdots$};
+\node at ($(x6)+(-.4,.1)$) {$\vdots$};
 \draw[edge] (s2) to (x1);
 \draw[edge] (s3) to (x7);
 
@@ -906,7 +906,7 @@ Using a similar reasoning as in Claim 1, we see that this variable assignment sh
 This was to prove. Claim 1 and Claim 2 together complete the reduction, so we have shown that the robust two-stage independent set problem with uncertainty set $\cU_\Gamma$ is $\Sigma_3^p$-complete.
 \end{proof}
 
-\subsection{Robust Recoverable TSP}
+\subsection{Robust recoverable TSP}
 \label{subsec:rec-tsp}
 
 The goal in this subsection is to show that the robust recoverable TSP with discrete budgeted uncertainty is $\Sigma_3^p$-complete. 
@@ -1009,7 +1009,7 @@ We make use of the fact that $K$-stage {\radj} is $\Sigma_{2K-1}^p$-complete for
 
 
 
-\section{Conclusions}
+\section{Conclusion}
 \label{sec:conclusions-chapter-2}
 
 Multi-stage (adjustable) robust optimization is a natural extension of static, one-stage approaches to model a more dynamic decision making environment. By giving an opportunity to react to adversarial choices, it is possible to reach better objective values and thus to reduce the conservatism of robust optimization. The benefits, however, come with increased computational difficulties.
