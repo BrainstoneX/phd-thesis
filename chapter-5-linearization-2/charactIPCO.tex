@@ -67,7 +67,7 @@ $c(e_2)$ fulfill the following linear equations:
     \end{array}
     \end{equation*}
     Using basic linear algebra, one can see that this system indeed has a solution whenever  \cref{eq:two-path-lin} holds (there is even a solution with $c(e_2) = 0$). Thus, $c$ constructed as above is a linearizing  cost function for $(v,P_1,P_2,Q_1,Q_2)$ with respect to $f$. 
-    \qed
+     
 \end{proof}
 
 Now, consider an instance of the GSPP with a $\Pst$-covered acyclic digraph $G$, with a  source vertex $s$, a sink vertex $t$ and a generic cost function $f\colon \Pst\to \rz$. When is this instance $(G,s,t,f)$ linearizable? Obviously, if $G$ contains a two-path system which is not linearizable with respect to $f$, then the instance $(G,s,t,f)$ as a whole is also not linearizable. Interestingly, this necessary condition turns out to be also sufficient.
@@ -95,7 +95,7 @@ Let $G$ be a $\Pst$-covered acyclic digraph with a source vertex $s$ and a sink 
     We have to prove both existence and uniqueness. For the existence, by assumption we have that $(G,s,t,f)$ is a linearizable instance. Hence there exists a linearizing function $c : A \rightarrow \R$, not necessarily in reduced form. Consider some vertex $v \in V \setminus \set{s,t}$ and its nonbasic arc $a_v$. Consider the following modification of the function $c$: Let $\beta = c(a_v)$, then reduce the cost of each outgoing arc of $v$ by $\beta$, and increase the cost of each incoming arc of $v$ by $\beta$. This operation sets the cost of $a_v$ to $0$ and does not change the linear cost of any $s$-$t$-path. Now let $v_1,\dots,v_n$ be a topological vertex order with $v_1 = s$ and $v_n = t$. We repeat the described operation for every vertex $v_{n-1}, v_{n-2}, \dots, v_2$  in this order. It is easily verified that the obtained cost function is a linearization of $(G, f)$ and is in reduced form.
     
     For the uniqueness, assume that there are two distinct linearizing functions $c, c' : A \rightarrow \R$ with the property that all nonbasic arcs have value 0. Consider some topological arc order $\preceq$ and let $a = (u,v)$ be the first arc in the order such that $c(a) \neq c'(a)$. There exists an $s$-$u$-path $P$, because $G$ is $\Pst$-covered. The path $R := P \cdot a \cdot N_v$ is an $s$-$t$-path. By assumption, we have $c(P) = c'(P)$ and $c(N_v) = c'(N_v) = 0$. But then $c(R) \neq c'(R)$, a contradiction. 
-    \qed
+     
 \end{proof}
 
 
@@ -177,7 +177,7 @@ Thus we  assume that every two-path system is linearizable with respect to $f$ a
     which was to show. This proves item (i). Item (ii) immediately follows from (i), the definition of $c(a)$ and the fact that all nonbasic arcs $a'$ have cost $c(a') = 0$.
     
     \textbf{Case 3: $u \neq s$ and $a \in N$.} Finally, if $e$ is nonbasic, then (i) is trivial. Furthermore, let $(u_P, u)$ be the last arc on the path $P$ and let $P'$ be the subpath of $P$ without the last arc. Because $a \in \Nscript$, the two paths $P' \cdot (u_P, u) \cdot N_u$ and $P \cdot a \cdot N_v$ are equal, so (ii) follows by induction applied to the arc $(u_P, u)$.
-    \qed
+     
 \end{proof}
 
 Since in general a graph contains exponentially many different two-path systems,   \cref{thm_linearization_characterization} does not seem to lead to  an  efficient algorithm for  the linearization problem \textsc{Lin}GSPP at a first glance. However, we show in the next section that this is indeed the case. The arguments  are based on a more technical version of \cref{thm_linearization_characterization} and involve the concept of  so-called \emph{strongly basic arcs} and their property $(\pi)$ defined below.
@@ -215,6 +215,6 @@ Since in general a graph contains exponentially many different two-path systems,
   In the proof of \cref{thm_linearization_characterization}
     we  use the linearizability assumption   only for  specific two-path systems  of the  form $(u, P, Q, N_u, a \cdot N_v)$,  where   $a = (u, v)$ is some strongly basic arc. Thus,  if the property $(\pi)$ holds for all strongly basic arcs, then  each such specific two-path system is linearizable with respect to $f$ and the linearizability of $(G,s,t,f)$ follows. Furthermore, the value $c(a)$ of the linearizing cost function in \cref{lincost:equ}   equals  $\xval(a)$ for  any arc $a$ which is  strongly basic, equals $f(a \cdot N_v)$ for any arc $(s,v)$ incident to $s$, and equals $0$ for any   nonbasic arc $a$. 
     %This completes the proof of the lemma.
-    \qed
+     
 \end{proof}
 

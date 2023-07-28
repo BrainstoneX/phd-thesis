@@ -264,7 +264,7 @@ By construction, $X' \subseteq X$ and $S' \subseteq S$.
 Further, following the above execution of the process $P$, it is easy to see that the intervals on the real line corresponding to the connected components of $G_X - S$ are the same as those for $G_{X'} - S'$.
 Therefore, $c(G_{X'} - S') - |S'| \geq c(G_{X} - S) - |S|$, and hence $s(X',S') \geq s(X,S)$.
 The lemma then follows.
-\qed
+ 
 \end{proof}
 
 \begin{lemma}
@@ -289,7 +289,7 @@ By construction, $H$ is a DAG, because for any edge in $H$, the first index of t
 \las{Consider} a path connecting the starting vertex $(2n, \infty, \infty, k, 0)$ to a vertex $(0, \ell, r, k', \gamma)$. \las{By definition}, its cost is the final value \las{of} $\beta$ at the end \las{of} the execution of $P$ \las{which corresponds to that path}.
 Consequently, the cost of the maximum-cost path is exactly the maximum possibe value of $\beta$ at the end of process $P$. 
 There are $\bigO(n)$ possible values for each of $i, \ell, r$ respectively, so $H$ has $\bigO(kn^3)$ vertices and edges. Hence the desired path can be found in $\bigO(kn^3)$ time.
-\qed
+ 
 \end{proof}
 
 \paragraph*{Proof of Theorem~\ref{thm:ham}(a).}
@@ -299,7 +299,7 @@ for any candidate pair $(X',S')$, there exists an execution of $P$ such that the
 This implies that $\beta_{\max}$ is the maximum of $s(X,S)$ over all candidate pairs $(X,S)$, i.e., the value of the original problem that we want to compute.
 By Lemma~\ref{lem:ham_path}, $\beta_{\max}$ can be computed in time $\bigO(kn^3)$.
 Theorem~\ref{thm:ham}(a) then follows.
-\qed
+ 
 
 \subsection{Interdiction problems for Hamiltonicity}
 \label{subsection:ham_interdict}
@@ -313,7 +313,7 @@ To solve these problems, we first compute $\max_{|X| \leq k}\scat(G_X)$, i.e. th
 This value is also the value for the interdiction problem for path cover.
 For the interdiction problems for Hamilton path and Hamilton cycle, we can conclude that the interdictor can interdict successfully, if and only if this value is more than 1 and 0 respectively.
 Therefore, these problems can also be solved in time $\bigO(kn^3)$.
-\qed
+ 
 
 \subsection{Most vital nodes problem for Hamiltonicity}
 \label{subsection:ham_mvn}
@@ -348,7 +348,6 @@ We then delete these intervals in the problem $\textsc{Scat}(G,k)$, yielding a v
 Hence, $s_1 \geq s_2 - k$.
 
 The lemma then follows. 
-\qed
 \end{proof}
 
 Combining the above lemma with Theorem~\ref{thm:ham}(a), we obtain the following:

@@ -51,8 +51,8 @@ Let $f^{(a)}(P)=SPP_{d-1}(P,q^{(a)}_{d-1})$ for any $s$-$u$-path $P$ in $G$. We 
      &= \sum_{\substack{B \subseteq P\\ |B| \leq d-1}}q^{(a)}_{d-1}(B) = f^{(a)}(P).
 \end{align*}
 We conclude that the value $\xval(a, P)$ is independent of $P$, if and only if for every path the quantity $f^{(a)}(P)$ does not depend on $P$. The latter condition is equivalent to  $I^{(a)}$  being a \textsc{YES}-instance of the APECP$_{d-1}$. Furthermore, if this is the case, then $\xval(a) = f^{(a)}(P)$ for any $s$-$u$-path $P$.
-\qed
 \end{proof}
+
 \cref{lemma:property-pi,lemma:corresponding-instance} imply that an instance $(G,s,t,q_d)$ of the SPP$_d$ with an acyclic digraph $G$ is linearizable  iff each  instance $I^{(a)}$ of the APECP$_{d-1}$ corresponding to some strongly basic arc $a$   (with respect to some fixed system of nonbasic arcs)  is a YES-instance. Furthermore, the same lemmas imply that in this case a linearizing cost function in reduced form is obtained by letting $c(a) = \beta_a$ for all strongly basic arcs, $c(a) = 0$ for all nonbasic arcs, and $c(a) = \text{SPP}_d(a \cdot N_v)$ for all arcs $a = (s,v)$ incident to the source.
 
 
@@ -69,7 +69,6 @@ Let $G = (V, A)$ be a $\Pst$-covered acyclic digraph and $\beta \in \R$. The fun
 \begin{proof}
     Clearly,  $\const_\beta$ is a linearizing function iff   all paths have the same cost $\beta$. % Further, if all paths have the same cost $\beta$, then  $\const_\beta$ is a linearizing function. 
     Furthermore, observe that all  arcs incident to the source do not belong to $N$. Therefore $\const_\beta$ is in reduced form with respect to $N$. In fact, by \cref{lemma:nonbasic-arcs}  $\const_\beta$ is the unique linearizing  functions in reduced form, and $\red(c') = \const_\beta$ for all other linearizing functions $c'$.
-\qed
 \end{proof}
 
 
@@ -82,7 +81,6 @@ Finally, we show in \cref{lemma:reduction-APEC} how the APECP$_1$ can be compute
     This is an easy exercise in dynamic programming. The algorithm uses the fact that in a $\Pst$-covered acyclic digraph all $s$-$t$-paths have the same cost if and only for every vertex $w$ all $s$-$w$-paths have the same cost. Hence we can introduce a variable $y_w \in \R$ for every vertex $w$. We let $y_s = 0$ and then check in topological vertex order for every vertex $w$, whether the value $y_u + q_1(\set{(u,w)})$ is the same for every incoming edge $(u, w)$. Finally, if this is the case, the returned common cost of all paths is given by $y_t + q_1(\emptyset)$.
     
     (We remark that attention to the case $q_1(\emptyset) \neq 0$ is crucial. This is because by definition, the term $q_1(\emptyset)$ is always included in SPP$_1(P, q_1)$ for every possible path $P$. Indeed, \cref{eq:definition_q_e} may produce instances with the property $q_1(\emptyset) \neq 0$.)
-    \qed
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,8 +189,7 @@ The line~\ref{alg:linenumber:3} and the line~\ref{alg:linenumber:f_q} of Algorit
     \begin{align*}
         f_q(a \cdot N_v) = \gamma(\emptyset, v) + \sum_{\substack{C \subseteq N_v\\ |C| \leq d - 1}}q(\set{a} \cup C).
     \end{align*}
-    This formula can be evaluated in $\bigO(m^{d-1})$ time for each arc $a$. We conclude that the set of all values $f_q(a \cdot N_v)$ in line~\ref{alg:linenumber:f_q} of Algorithm~\ref{alg} can be computed in at most $c_5m^d$ steps for some constant $c_5 \geq 0$.
-    \qed
+    This formula can be evaluated in $\bigO(m^{d-1})$ time for each arc $a$. We conclude that the set of all values $f_q(a \cdot N_v)$ in line~\ref{alg:linenumber:f_q} of Algorithm~\ref{alg} can be computed in at most $c_5m^d$ steps for some constant $c_5 \geq 0$. 
 \end{proof}
 
 \begin{proof}[Proof of \cref{thm:alg-linear-time}]
@@ -208,7 +205,6 @@ We show by induction over $d$ that $f(m, d) \leq cd(2d - 2)m^d$ and $g(m, d) \le
     g(m, d) &\leq cm + cd(2d - 2)m^d \leq cd(2d -1)m^d. 
 \end{align*}
 This implies that $f = \bigO(d^2m^d)$, which was to show.
-\qed
 \end{proof}
 
 \section{The subspace of linearizable instances}
@@ -276,7 +272,7 @@ We show these two claims by induction. The base case of the induction is concern
     \[ g_{u,1}(x) = ( y_w + x(\set{a}) - y_z)_{a = (w,z) \in A_u}.\]
     The function $g'_{u,1}$ is given by $g'_{u,1}(x) = y_u + x(\emptyset)$.
 
-    Note that indeed the two provided functions are linear. By construction we have properties (i) and (ii). Finally, it is straightforward to see that given an input $x \in \R^{A_u^{(1)}}$, the vector $g_{u,1}(x)$ can be computed in $\bigO(m^2)$ time and the value $g'_{u,1}(x)$ can be computed in $\bigO(m)$ time. However, note that we have freedom to choose the paths $P_w$. If we choose the paths $P_w$ cleverly, so that they form an out-tree rooted at $s$, then one can also compute the vector $g_{u,1}(x)$ in $\bigO(m)$ time.  \qed
+    Note that indeed the two provided functions are linear. By construction we have properties (i) and (ii). Finally, it is straightforward to see that given an input $x \in \R^{A_u^{(1)}}$, the vector $g_{u,1}(x)$ can be computed in $\bigO(m^2)$ time and the value $g'_{u,1}(x)$ can be computed in $\bigO(m)$ time. However, note that we have freedom to choose the paths $P_w$. If we choose the paths $P_w$ cleverly, so that they form an out-tree rooted at $s$, then one can also compute the vector $g_{u,1}(x)$ in $\bigO(m)$ time.   
 \end{proof}
 
 
@@ -317,13 +313,13 @@ We show these two claims by induction. The base case of the induction is concern
         \text{ and } &\forall a,a' \in F':  (f'_{u,d}(q_d))(a) = (f'_{u,d}(q_d))(a') \\
         \text{ and } &\forall a \in A_u \setminus F': (f'_{u,d}(q_d))(a) = 0. 
     \end{align*}
-    Similarly to the argument above, we can construct a linear function $g_{u,d}$ which maps to $\R^k$ for some $k = \bigO(m^d)$ such that $g_{u,d} = 0$ iff all three of the above conditions are satisfied. By choosing an arbitrary arc $a \in F'$ we can define $g'_{u,d}(q_d) := (f'_{u,d}(q_d))(a)$. Finally, by the inductive assumption, we can compute $f_{u,d}(q_d), f'_{u,d}(q_d)$ in $\bigO(m^d)$ time. It follows that the functions $g_{u,d}(q_d), g'_{u,d}(q_d)$ can be computed in $\bigO(m^d)$ time. Hence we have shown (iii), (iv) and (v). \qed
+    Similarly to the argument above, we can construct a linear function $g_{u,d}$ which maps to $\R^k$ for some $k = \bigO(m^d)$ such that $g_{u,d} = 0$ iff all three of the above conditions are satisfied. By choosing an arbitrary arc $a \in F'$ we can define $g'_{u,d}(q_d) := (f'_{u,d}(q_d))(a)$. Finally, by the inductive assumption, we can compute $f_{u,d}(q_d), f'_{u,d}(q_d)$ in $\bigO(m^d)$ time. It follows that the functions $g_{u,d}(q_d), g'_{u,d}(q_d)$ can be computed in $\bigO(m^d)$ time. Hence we have shown (iii), (iv) and (v).  
 \end{proof}
 
 \begin{proof}[Proof of \cref{thm:subspaces}]
     Consider the sink vertex $t$. By \cref{lemma:subspaces-induction}, the function $f_{t,d}$ has the property that some instance $q_d \in \R^{A_u^{(d)}}$ is linearizable iff $f_{t,d}(q_d) = 0$. 
     We show how to compute a matrix representation $M$ of this function, such that $f_{t,d}(x) = Mx$ for all $x$. Hence $\mathcal{L}_d$ is equal to the kernel of $M$.
-    Consider the set $e_1,\dots, e_k$ of all standard basis vectors of $\R^{A_u^{(d)}}$, where $k = \bigO(m^d)$. By \cref{lemma:subspaces-induction}, we can compute the vector $f_{t,d}(e_j)$ in $\bigO(m^d)$ time for every $j=1,\dots,k$. Basic linear algebra tells us that these vectors constitute the columns of $M$. We can hence compute the matrix $M$ and a basis of its kernel in polynomial time. We have therefore obtained a basis of $\mathcal{L}_d$. \qed
+    Consider the set $e_1,\dots, e_k$ of all standard basis vectors of $\R^{A_u^{(d)}}$, where $k = \bigO(m^d)$. By \cref{lemma:subspaces-induction}, we can compute the vector $f_{t,d}(e_j)$ in $\bigO(m^d)$ time for every $j=1,\dots,k$. Basic linear algebra tells us that these vectors constitute the columns of $M$. We can hence compute the matrix $M$ and a basis of its kernel in polynomial time. We have therefore obtained a basis of $\mathcal{L}_d$.  
 \end{proof}
 
 \noindent \textbf{ Acknowledgement.} This research has been supported by the Austrian Science Fund (FWF): W1230.

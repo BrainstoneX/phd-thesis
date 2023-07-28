@@ -225,7 +225,7 @@ f(p, k') = \min\set{\min\set{f(p',k')+1 \mid (p',p) \text{ not expensive}},\\ \m
 with starting conditions $f(s, k') = 0$ for all $k' \in \fromto{1}{k}$ and $f(p, -1) = \infty$ for all $p \in \mathcal{P}$.
 It is easy to show via induction that $f(p,k')$ is the length of the shortest path from $s$ to $p$
 using at most $k'$ expensive arcs. At the end $f(t,k)$ is the optimal objective value for the given assistance problem.
-\qed\end{proof}
+\end{proof}
 
 \subsection{Interdiction problem}
 In this section, we prove: 
@@ -256,7 +256,7 @@ but $|Y| \leq k$. But %if $|N(i, k) \cap X| \leq |N(i, k)|$,
 then the deletion of $N(i, k) \cap Y$ has no effect on the distance between $s$ and $t$. 
 We can therefore assume that $Y \cap N(i,k) = \emptyset$ for all $i$, which implies $Y \subseteq \I$. 
 Hence, the interdictor can also shrink the same intervals in $\I$ to get an equivalent term on the left-hand side. This completes the proof.
-\qed\end{proof}
+\end{proof}
 
 Certainly, the reduction described by the previous proof will increase the size of the instance by a factor of roughly $k$. We show at the end of this section how to overcome this problem.
 
@@ -304,7 +304,7 @@ Let $x, y \in \R_{\geq 0}, x < y$ and $d \geq 2$. A set $Z \subseteq \rel(x)$ is
 \end{lemma}
 \begin{proof}
 Note that $(Z \cap \rel(w)) \dotunion (Z \cap \betw(w, x))$ is a partition of $Z$ into two disjoint parts. For the first direction of the proof, if there exists $w$ such that these two parts have the two described properties, it is easy to see that $Z$ is indeed in state $(x, y, d)$. For the other direction, let $Z$ be in state $(x, y, d)$ and let $w < x$ be the unique point on the real line which is $(d-2)$-critical with respect to $Z$. Because $w$ is $(d-2)$-critical, and $x$ is $(d-1)$-critical, and $y$ is $d$-critical, one can check that both the required properties hold.
-\qed\end{proof}
+\end{proof}
 
 \begin{theorem}
 \label{thm_MVN_shortest_path}
@@ -356,7 +356,7 @@ We then have the following recursion formula for $d \geq 2$:
 The formula is correct, because for a set $Z$ in state $(x, y, d)$, and a point $w$ as described above, $f(w, x, d-1)$ and $\beta(w, x, y)$ are respectively the maximum size of the two disjoint sets $Z \cap \rel(w)$ and $Z \cap \betw(w, x)$.
 Hence the correctness follows from \cref{lemma:shortest_path_bellmann_principle}.
 For $d = 1$, the values $f(0, y, 1)$ can be easily computed. (Note that $f(x,y,1) = -\infty$ for $x \neq 0$.) In total, for each of the $\bigO(n^3)$ many choices of $(x, y, d)$, we need $\bigO(n)$ computation time, so the total required time is $\bigO(n^4)$. This completes the proof.
-\qed\end{proof}
+\end{proof}
 
 \las{It is now clear how to combine \cref{lemma:shortest_path_reduction,thm_MVN_shortest_path}: Given an instance of the interdiction problem in the shrink-expand framework with $n$ interval pairs and budget $k$, we can apply \cref{lemma:shortest_path_reduction} to obtain an equivalent instance of the most vital nodes problem with $N = \Theta(kn)$ vertices. Due to \cref{lemma:shortest_path_reduction}, we can solve this new problem in $\bigO(N^4)$ time. In total, we have solved the original problem in $\bigO(k^4n^4)$ time.}  
 \las{The last part of this section shows how to avoid the additional factor of $k^4$ and solve the original problem in the shrink-expand framework in $\bigO(n^4)$ time, hence proving \cref{thm:shortest_path_interdiction}.}
@@ -379,7 +379,7 @@ d_{\text{opt}} &=  \max\set{d \in \N : \exists x \in \mathcal{P} \text{ s.t.\ } 
 &\qquad (k+1)|\set{[a'_i, b'_i] \in \betw(w,x)\cap \I' : b'_i \leq y}|
 \end{align*}
 are sufficient. The set of all values for these terms can be precomputed in $\bigO(n^3)$ time each, using sweep-line algorithms. The rest of the proof is identical to \cref{thm_MVN_shortest_path}.
-\qed
+
 %\end{proof}
 
 Note that the most vital nodes problem can also be reduced to the interdiction  problem  for  shortest  path in the shrink-expand framework.
@@ -527,7 +527,7 @@ contained in an $s$-$t$-path, hence $\I(P)$ is well defined.
 
     It is now easy to see that every independent set $\J \subseteq \I \cup \I'$ such that 
 $ |\J \cap \I'| \leq k$ can also be converted into an $s$-$t$-path $P$ such that $\I(P) = \J$.
-\qed\end{proof}
+ \end{proof}
 
 Based on this lemma, it holds that computing a longest path in $D$ is 
 equivalent to solving the independence number \hun{interdiction} problem. By similar 
@@ -563,7 +563,7 @@ has expanding intervals, and the goal is to compute $\max_{|X| \leq k} \omega(G_
 The problem is a highly local problem, since the maximum clique size is achieved at a point 
 $x \in \mathbb{R}$ that is included in a maximum number of intervals.
 Let $\fromto{p_1}{p_{2n}}$ be the set of all start- and endpoints of intervals in $\I \cup \I'$. For each $i \in [2n]$, let $\alpha_i$ be the number of intervals in $\I$ that contain $p_i$. Let $\beta_i := |\set{j \in [n] : p_i \not\in I_j, p_i \in I'_j}|$. The value $\beta_i$ is the maximum possible value by which $\alpha_i$ could increase by expanding some intervals. The set of all values $\alpha_i, \beta_i$ can be computed using a single sweep line algorithm. The solution to the assistance problem is then given by $\max_{i=1,\dots,2n} (\alpha_i + \min\set{\beta_i,k})$.
-\qed\end{proof}
+ \end{proof}
 
 
 
@@ -584,7 +584,7 @@ Let $\fromto{p_1}{p_{2n}}$ be the set of all start- and endpoints of intervals i
 %
 %Note, that by modifying the proof of \autoref{thm:clique:assistance} 
 %one can circumvent the need to to solve $k$ instances and obtain the linear running time.
-%\qed\end{proof}
+% \end{proof}
 
 \subsection{Interdiction problem}
 
@@ -600,7 +600,7 @@ The maximum clique size interdiction problem and the chromatic number assistance
 \end{theorem}
 \begin{proof}
 Given an instance $(t, O_1, \dots, O_n)$ of $\textsc{1-fold 2-interval cover}$, we construct an instance of the maximum clique size interdiction problem. For each object $O_i$, we introduce a shrinking interval pair $[a_i, b_i] = [x_{i1}, x_{i4}]$ and $[a'_i, b'_i] = [x_{i2},x_{i3}]$. Let $\I := \fromto{[a_1, b_1]}{[a_n, b_n]}$ be the set of all $[a_i, b_i]$ introduced so far and let $M := \omega(\graph(\I))$ be the clique number of the corresponding interval graph. \hun{Then for each $p \in \fromto{0}{t}$, we iteratively} add additional \enquote{non-shrinkable} pairs $[a_{\hun{j}}, b_{\hun{j}}] = [a'_{\hun{j}}, b'_{\hun{j}}] = [p- \epsilon, p + \epsilon]$ for a small $\epsilon > 0$ \hun{and an unused index $j$}, until $p$ is contained in exactly $M + 1$ intervals. For this newly constructed instance, we have that the interdictor can reduce the clique number from $M + 1$ down to $M$ with a budget of $k$, if and only if there is a 1-fold 2-interval cover of $\fromto{0}{t}$ with at most $k$ objects.
-\qed\end{proof}
+ \end{proof}
 
 \input{chapter-3-interdiction/hamilton4}
 
@@ -636,7 +636,7 @@ Let $G$ be a connected interval graph on $n$ vertices. If $k < n$, then
 \enquote{$\leq$}: Suppose there is a set $B$ such that at most $k$ intervals are disjoint from $B$. Note that not all intervals are disjoint from $B$, because $k < n$. So there exists at least one interval intersecting $B$ and at most $k$ intervals disjoint from $B$. We describe an edge contraction, which reduces the number of intervals disjoint from $B$: Assume there exists at least one interval disjoint from $B$. Then there exists also a pair of an interval $I$ disjoint from $B$ and an interval $J$ intersecting $B$, such that $I \cap J \neq \emptyset$. Otherwise the set of  intervals disjoint from $B$ and the set of intervals intersecting $B$ induce at least two connected components; a contradiction. Because $I \cap J \neq \emptyset$, there is a corresponding edge in $G$. Contracting this edge yields a new interval graph with interval representation $\I' := \I \setminus \set{I, J} \cup \set{I \cup J}$. Note that the number of intervals disjoint from $B$ in $\I'$ is one less than the number of intervals disjoint from $B$ in $\I$. Therefore, we can repeat this procedure at most $k$ times, to obtain an edge set $X \subseteq E$ of size $|X| \leq k$, and an interval representation $\I''$, such that no interval in $\I''$ is disjoint from $B$ and $G/X = \graph(\I'')$. Using duality of $\alpha$ and the clique cover number $\kappa$, and the fact that no interval in $\I''$ is disjoint from $B$, we have
 \[\alpha(G/X) = \kappa(G/X) = \kappa(\graph(\I'')) \leq |B|.  \]
 
-\enquote{$\geq$}: Let $X \subseteq E$ with $|X| \leq k$, and let $\alpha(G/X) = t$. Then also $\kappa(G/X) = t$, so there exists a clique cover with $t$ cliques $C_1, \dots, C_t$. By \cref{prop:cliquecover}, each of the $t$ cliques is equal to (or contained in) the set $C(b)  \las{ := } \set{I \in \I : b \in I}$ for some $b \in \mathcal{B}$. Let $b'_1, \dots, b'_t$ be the corresponding $t$ points, such that $C_i \subseteq C(b'_i)$ for all $i = 1,\dots,t$. Let $B := \fromto{b'_1}{b'_t}$. We can now reverse the edge contractions, going from $G/X$ to $G$, and observe that each decontraction adds at most one interval disjoint to $B$. Hence, $B$ is a set of size $t$, such that at most $k$ intervals in $\I$ are disjoint to $B$. \qed
+\enquote{$\geq$}: Let $X \subseteq E$ with $|X| \leq k$, and let $\alpha(G/X) = t$. Then also $\kappa(G/X) = t$, so there exists a clique cover with $t$ cliques $C_1, \dots, C_t$. By \cref{prop:cliquecover}, each of the $t$ cliques is equal to (or contained in) the set $C(b)  \las{ := } \set{I \in \I : b \in I}$ for some $b \in \mathcal{B}$. Let $b'_1, \dots, b'_t$ be the corresponding $t$ points, such that $C_i \subseteq C(b'_i)$ for all $i = 1,\dots,t$. Let $B := \fromto{b'_1}{b'_t}$. We can now reverse the edge contractions, going from $G/X$ to $G$, and observe that each decontraction adds at most one interval disjoint to $B$. Hence, $B$ is a set of size $t$, such that at most $k$ intervals in $\I$ are disjoint to $B$.  
 \end{proof}
 
 \begin{theorem}
@@ -664,7 +664,7 @@ Finally, due to \cref{lemma:contraction}, we have that
 
 \textbf{Case 3:} $G$ is disconnected. Assume $G$ consists of \las{connected} components $C_1, \dots, C_{\ell}$, where component $C_i$ has $n_i$ vertices. The interdictor needs to distribute the budget $k = k_1 + \dots + k_{\ell}$ to the $\ell$ components. By the above argument, we can precompute in time $\bigO(kn_i^2)$ a table of all the values $\min_{|X| \leq k_i} \alpha(C_i/X)$ for $k_i \in \fromto{1}{k}$. The interdictor now needs to solve 
 \[ \min_{k = k_1 + \dots + k_{\ell}} \sum_{i=1}^{\ell} \min_{|X| \leq k_i} \alpha(C_i/X). \]
-It is an easy exercise to prove that this formula can be evaluated in time $\bigO(k\ell)$ using dynamic programming. In total, we have a running time of $\bigO(\sum_i kn_i^2 + k\ell) = \bigO(kn^2)$. \qed
+It is an easy exercise to prove that this formula can be evaluated in time $\bigO(k\ell)$ using dynamic programming. In total, we have a running time of $\bigO(\sum_i kn_i^2 + k\ell) = \bigO(kn^2)$.  
 \end{proof}
 
 \begin{corollary}

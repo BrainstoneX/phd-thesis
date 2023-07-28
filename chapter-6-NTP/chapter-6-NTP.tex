@@ -289,7 +289,7 @@ Because $e^\star$ was closing a cycle in $G^\sigma_s$, we have that $G^{\sigma'}
  Because the only change in the new schedule $\sigma'$ in comparison to the old schedule $\sigma$ is that we increased the activation time of $e^\star$ by one, we obtain that $\ntp(\sigma') \geq \ntp(\sigma)$.} 
 
 \lasse{
-In summary, the preceding argument shows that if we select a schedule $\sigma$ with the property that $\sum_{e \in E}\sigma(e)$ is maximal among all the schedules that keep the graph connected for the first consecutive $\beta$ time units, then all the graphs $G^\sigma_1,\dots,G^\sigma_\beta$ are spanning trees. This proves the lemma. \qed
+In summary, the preceding argument shows that if we select a schedule $\sigma$ with the property that $\sum_{e \in E}\sigma(e)$ is maximal among all the schedules that keep the graph connected for the first consecutive $\beta$ time units, then all the graphs $G^\sigma_1,\dots,G^\sigma_\beta$ are spanning trees. This proves the lemma.  
 }
 \end{proof}
 
@@ -376,7 +376,6 @@ For $1\le i\le n-1$, we activate edge $\set{x_i,a}$ at time~$0$ and edge $\set{x
 For $1\le i\le n$, we activate edge $\set{y_i,b}$ at time $0$; finally, the edges $\set{y_i,a}$ are
 grouped into triplets according to the solution of the \textsc{3-Partition} instance and scheduled
 as indicated in the proof of the (only if) part.
-\qed
 \end{proof}
 
 %%%%%%%%%%%%%%%%%
@@ -466,7 +465,6 @@ for the instance of \textsc{3-Partition}.
 
 Vice versa, if the \textsc{3-Partition} instance has a solution, then we  build a schedule $\sigma$
 of objective value $\beta$: For $k=0,\ldots,n-1$, we activate edge $\set{u_k, u_{k+1}}$ at time $(2k+1)Q$. For $k=0,\ldots,n-2$, we activate edge $\set{u_k, u_{k+2}}$ at time $0$. For $k=-1,\ldots,3n-2$, we activate edge $\set{v_k, v_{k+2}}$ at time $0$. Finally, the edges $\set{v_{k-1},v_k}$ are grouped into triplets and scheduled as described in the other direction of the proof.
-\qed
 \end{proof}
 
 
@@ -524,7 +522,7 @@ For claim (i), assume that $H'$ has a Hamilton cycle $C'$. Then we obtain a Hami
 
 \lasse{
 For claim (ii), we prove the contrapositive. Assume that $H$ has a Hamilton path $P = (w_1,\dots,w_n)$ starting at vertex $u$, we have to prove that $H'$ has a Hamilton cycle. Consider the second vertex $w_2$ on the path $P$. Note that if $w_2 = z$, then $w_n$ is in $A_x$. On the other hand, if $w_2$ is in $A_x$, then $w_n$ is in $A'_x$. We first assume that $w_2 \in A_x$ and $w_n \in A'_x$.
-We claim that the Hamilton path $P$ necessarily switches between $H'_1$ and $H'_2$ after every of its edges in $H'_1$ or $H'_2$. Indeed, let $v \neq x$ be a vertex of $H'$ and assume without loss of generality that from the two vertices $v_1$ and $v_2$ the path $P$ first encounters $v_1$. If the path does not immediately switch to $v_2$, then it will at a later stage need to visit $v_2$. But in this case, it has to visit $A_v$ after visiting $v_2$, in contradiction to the fact that the path has to return to $A'_x$. This proves that $P$ switches between $H'_1$ and $H'_2$ after every egde in $H'_1$ or $H'_2$. Then looking at the edges of $P$ which lie in $H'_1$ or $H'_2$, we see that $H'$ has a Hamilton cycle. Finally, an analogous statement holds in the case $w_2 = z$. So we have proven the claim. \qed
+We claim that the Hamilton path $P$ necessarily switches between $H'_1$ and $H'_2$ after every of its edges in $H'_1$ or $H'_2$. Indeed, let $v \neq x$ be a vertex of $H'$ and assume without loss of generality that from the two vertices $v_1$ and $v_2$ the path $P$ first encounters $v_1$. If the path does not immediately switch to $v_2$, then it will at a later stage need to visit $v_2$. But in this case, it has to visit $A_v$ after visiting $v_2$, in contradiction to the fact that the path has to return to $A'_x$. This proves that $P$ switches between $H'_1$ and $H'_2$ after every egde in $H'_1$ or $H'_2$. Then looking at the edges of $P$ which lie in $H'_1$ or $H'_2$, we see that $H'$ has a Hamilton cycle. Finally, an analogous statement holds in the case $w_2 = z$. So we have proven the claim.  
 }
 \end{proof}
 
@@ -596,7 +594,6 @@ Analogously, there is exactly one time slot $[t'-1, t']$ during which both edges
 the vertex $v'_{i2}$ are active, and we have $t' = 2$ or $t' = 6$. 
 As $t=t'$ yields the contradiction that $G_t$ has a cycle, we conclude $\set{t,t'}=\set{2,6}$ and (i) follows. 
 Claims (ii) and (iii) can be proven in the same manner. 
-\qed
 \end{proof}
 
 \begin{lemma}
@@ -635,7 +632,7 @@ By checking each of the cases $t=1,\dots,7$, it is easily seen that each of the 
  \caption{Description of the schedule $\sigma$ from \cref{lemma:lasse-if}.}
  \label{table:lasse-if}
 \end{table}
-\qed
+ 
 \end{proof}
 
 \begin{lemma}
@@ -653,7 +650,6 @@ Next, consider the graph $G_1$ of active edges in the first time slot. We know t
 
 Finally, we claim $d_4(u_k) = 1$. In fact, $d_4(u_k) = 0$ is impossible, because gadgets of type $L$ are semi-connected during time slot 4. For the sake of contradiction, assume $d_4(u_k) > 1$. We know that $d_2(u_k) \geq 1, d_6(u_k) \geq 1$ and $e_0 \not\in E_4$ and $w(e_0) = 1$. So our assumption $d_4(u_k) > 1$ is only possible if $e_0 \in E_2$ or $e_0 \in E_6$. But for the vertex $z_k$, we also know $d_1(z_k), d_3(z_k), d_5(z_k), d_7(z_k) \geq 1$. This is a contradiction to $e_0 \in E_2 \cup E_6$, hence our assumption was wrong and $d_4(u_k) = 1$.
 In summary, during time slot 4, all gadgets of type $L$ and $R$ are semi-connected. We also have for all $i=1,\dots,k$ that $d_4(u_i) \leq 2$ and $d_4(z_i) \leq 2$. \lasse{Furthermore, we have} $d_4(u_k) = 1$. However, $G_4$ is connected. These facts together imply that the induced subgraph $G_4[U \cup Z]$ is a Hamilton path in $H$ starting at $u_k = u$.
-\qed
 \end{proof}
 
 By combining \cref{le:Ham-to-Ham,lemma:lasse-only-if,lemma:lasse-if} we get
@@ -663,7 +659,7 @@ the following summarizing theorem.
 \label{th:value=7}
 For {\xxxNTP} it is strongly NP-hard to decide whether there exists a schedule
 of objective value at least~$7$.
-\qed
+ 
 \end{theorem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -680,7 +676,6 @@ Figure~\ref{fig_hamilton_cycle_improved} shows a modified version of this gadget
 the edges of weight~$7$ by edges with weights in $\fromto{1}{6}$.
 One easily verifies that the functionality of the gadget remains the same and that in particular
 Lemma~\ref{lemma:gadgets_properties} still holds true.
-\qed
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -700,7 +695,7 @@ in approximability result.
 \label{coro:inapproximability}
 Unless P=NP, there is no polynomial time approximation algorithm for {\xxxNTP} with
 worst case guarantee better than $7/6$.
-\qed
+ 
 \end{corollary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -756,7 +751,6 @@ A set $F\subseteq W_1$ is independent in $\mathcal{F}_2$, if and only if $F$ is 
 \lasse{Now observe that scheduling an edge of weight 1 is equivalent to choosing in which of the three time slots 1,2 or 3 it is scheduled. Scheduling an edge 2 is equivalent to always schedule it in time slot 2 and choose whether it is scheduled in time slot 1 or 3. From these facts together with \cref{le:structure}, we can deduce that we can connect the graph during time slots 1,2 and 3 (that is $\ntp(G,w)\ge3$ holds)}, if and only if there exist three pairwise disjoint subsets
 $S_1,S_2,S_3$ of $W_1 \cup W_2$, such that $S_t$ forms a base of the matroid $\mathcal{F}_t$ for $t=1,2,3$.
 This can be checked in $\bigO(m^3)$ time by using Edmond's matroid partitioning algorithm \cite{edmonds1965minimum}.
-\qed
 \end{proof}
 
 By a similar (but simpler) argument we can also decide in polynomial time whether $\ntp(G,w)\ge2$.
@@ -822,7 +816,6 @@ edge-disjoint spanning trees that can be packed into $K_n$ is $\lfloor n/2\rfloo
 This implies $\ntp(K_n,w)=\lfloor n/2\rfloor$.
 On the other hand, if the {\greedy} algorithm at time $0$ activates the $n-1$ edges in the edge
 cut $\delta(v)$ for some $v\in V$, the objective value of the resulting schedule equals~$1$.
-\qed
 \end{proof}
 
 
@@ -902,7 +895,6 @@ weights $w_H:E_H\to\NN_0$ in the four-vertex graph $H$; if an edge $e\in E'$ bel
 subdivision of some edge $f\in E_H$, we define $w(e)=w_H(f)$.
 It is easily verified that the resulting instance $(G,w)$ satisfies $\ntp(G,w)=3$,
 whereas the {\greedy} algorithm only yields an objective value of~$2$.
-\qed
 \end{proof}
 
 
@@ -939,7 +931,7 @@ The following statement can be formulated in $\text{MSO}_2$ by routine methods \
 \end{align*}
 Now Courcelle's theorem \cite{courcelle1990monadic} implies that the satisfiability of $\Phi_T$ 
 can be checked in linear time for every $T=1,\ldots,w_{\max}^2$.
-\qed
+ 
 \end{proof}
 
 \begin{restatable}{theorem}{exactAlgoExponential}
@@ -952,7 +944,7 @@ all graphs $G_1^\sigma, \dots, G_T^\sigma$ are trees.
 As these trees are uniquely determined by the ordering in which $\sigma$ activates the edges,
 we only need to check and evaluate $|E|!$ cases.
 Each case is easily checked and evaluated in $\bigO(|E|^2)$ time.
-\qed
+ 
 \end{proof}
 
 \begin{restatable}{theorem}{fptFeedbackEdge}
@@ -975,7 +967,7 @@ Now the kernelization procedure is clear:
 As long as $|V|\ge k+2$ holds, we contract an edge with largest edge weight.
 Note that the contraction maintains the inequality $|E|\le|V|-1+k$.
 The resulting kernel satisfies $|V|\le k+1$ and $|E|\le2k$.
-\qed
+ 
 \end{proof}
 
 
@@ -1020,7 +1012,6 @@ maximal $T'\in\NN_0$ such that $E(G)-E'$ contains disjoint sets $F_1, \dots, F_{
 is a base of $\mathcal{F}_t$ for all $t \in \fromto{1}{T'}$ (that is, we solve the problem of packing as 
 many bases as possible into a matroid). 
 As Edmond's Matroid Partitioning algorithm runs in $\bigO(m^3)$ time, the claimed time complexity follows.
-\qed
 \end{proof}
 
 
