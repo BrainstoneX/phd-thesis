@@ -68,7 +68,7 @@ The rest of the introduction proceeds as follows: Background information and mot
 \section{Motivation and background}
 \label{sec:motivation-background}
 
-We assume that the reader is familiar with basic concepts from Combinatorial Optimization, in particular with basic graph theory and graph algorithms. An introduction to Combinatorial Optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knowledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
+We assume that the reader is familiar with basic concepts from combinatorial optimization, in particular with basic graph theory and graph algorithms. An introduction to combinatorial optimization can be found in the books of Korte and Vygen \cite{korte2006combinatorial}, and Schrijver \cite{schrijver2003combinatorial}. We furthermore assume knowledge of basic concepts from complexity theory, like the concepts of NP-completeness and polynomial-time algorithms. Specifically in \cref{ch:multistage-complexity}, we require the notion of the polynomial hierarchy and $\Sigma^p_k$-completeness. An introduction to these topics is found in the book of Arora and Barak \cite{arora2009computational}. Finally, we also assume knowledge of linear programming and duality. An introduction to these topics can be found in the book of Matou{\v{s}}ek and Gärtner \cite{matouvsek2007understanding}.
 
 \paragraph*{Combinatorial Optimization Problem.}
 Given some ground set $E = \fromto{e_1}{e_n}$, we let $\X \subseteq \set{0,1}^n$ denote the set of \emph{feasible solutions}. 
@@ -109,7 +109,7 @@ Note that we protect ourselves against \emph{all} possible scenarios equally, by
 Since its inception in the early 2000s, the field of robust optimization has developed so rapidly, that it is impossible to give a complete overview here. We refer the reader to the book by Kouvelis and Yu \cite{kouvelis2013robust}, the book by Ben-Tal, El Ghaoui, and Nemirovski~\cite{ben2009robust} and the survey by Bertsimas, Brown and Caramaras~\cite{bertsimas2011theory}. 
 
 \paragraph*{Budgeted Uncertainty Sets.}
-The choice of uncertainty set $\cU$ is crucial for robust optimization. Many different choices have been suggested [todo]. In this thesis, we mainly consider \emph{budgeted uncertainty}. This is a type of uncertainty which allows up $\Gamma$ parameters to deviate from their nominal value for some parameter $\Gamma \in \N$. Budgeted uncertainty is also called \emph{$\Gamma$-uncertainty} in the literature. We distinguish between \emph{discrete} budgeted uncertainty and \emph{continuous} budgeted uncertainty.
+The choice of uncertainty set $\cU$ is crucial for robust optimization. Many different choices have been suggested \cite{poss2018robust,busing2012new,bertsimas2004robust,kasperski2016robust}. In this thesis, we mainly consider \emph{budgeted uncertainty}. This is a type of uncertainty which allows up $\Gamma$ parameters to deviate from their nominal value for some parameter $\Gamma \in \N$. Budgeted uncertainty is also called \emph{$\Gamma$-uncertainty} in the literature. We distinguish between \emph{discrete} budgeted uncertainty and \emph{continuous} budgeted uncertainty.
 
 Formally, for given constants $\underline{c}_i \geq 0$ and $d_i \in \R$ for all $i \in \fromto{1}{n}$ and some integer $\Gamma \geq 0$, the set $\cU^d_\Gamma$ of \emph{discrete budgeted uncertainty} is defined as
 \[
@@ -123,11 +123,13 @@ Note that the only difference between the two formulations is the range of $\del
 
 Budgeted uncertainty sets were introduced by Bertsimas and Sim \cite{bertsimas2003robust,bertsimas2004price}. 
 The high citation count on these two papers shows that discrete budgeted uncertainty has become very successful in the robust optimization literature. 
-A famous result shown by Bertsimas and Sim in the same paper is that when using budgeted uncertainty (discrete or continuous), the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems, hence it is compuationally tractable.
+The reason for this success is the fact that when using uncertainty set $\cU_\Gamma^ d$, the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems \cite{bertsimas2003robust}. This means that if the original problem is tractable (or approaximable, respecitvely), then the robust variant is tractable (or approximable, respectively) as well.
 
-Just listing some of its use cases, budgeted uncertainty sets are used in [todo]. Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
+Budgeted uncertainty are used in the areas of portfolio management \cite{bertsimas2008robust}, wine grape harvesting \cite{bohle2010robust}, supply
+chain control \cite{bertsimas2006robust}, furniture production planning \cite{alem2012production}, and train load planning \cite{bruns2014robust}, among others. 
+%Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
 
-Further history of budgeted uncertainty sets, as well as some of its generalizations can be found in [todo]
+Further history of budgeted uncertainty sets, their use within combinatorial robust optimization, as well as some of its generalizations can be found in \cite{poss2018robust,goerigk2023robust,goerigk2021robust}.
 
 \paragraph*{Multi-Stage Robust Optimization.}
 The conservative approach of robust optimization can be considered a drawback. One possible way to address this drawback is by considering \emph{multi-stage robust optimization}. 
@@ -194,7 +196,7 @@ These are two simple combinatorial optimization problems, which are trivial to s
 The selection problem is defined by having the set of feasible solutions $\X = \set{x \in \set{0,1}^n : \sum_{i=1}^n x_i = p}$ for some $p \in \N$ (i.e.\ a single cardinality constraint). 
 The multi-representative selection problem is defined for a partition $T_1 \dotunion \dots \dotunion T_K = \fromto{1}{n}$ by the set of feasible solutions $\X = \set{ \pmb{x}\in \{0,1\}^n : \sum_{i\in T_j} x_i = p_j\ \forall j \in [K] }$ for some numbers $p_1,\dots,p_K \in \N$. If $p_j = 1$ for all $j \in [K]$, then the multi-representative selection problem is simply called the \emph{representative selection} problem (it can be thought of the problem as selecting the representative of each part).
 
-These two problems are special cases of many well-known problems, for example the spanning tree problem or the shortest path problem in series-parallel graphs. Hence a hardness or inapproximability proof immediately propagates to these harder problems. For this reason, the selection problem is a popular toy problem in robust optimization to test the properties of proposed models \cite{averbakh2001complexity,conde2004improved,dolgui2012min,deineko2013complexity,goerigk2019robust} 
+These two problems are special cases of many well-known problems, for example the spanning tree problem or the shortest path problem in series-parallel graphs. Hence a hardness or inapproximability proof immediately propagates to these harder problems. For this reason, the (representative) selection problem is a popular toy problem in robust optimization to test the properties of proposed models \cite{kasperski2015approximability,averbakh2001complexity,conde2004improved,dolgui2012min,deineko2013complexity,goerigk2019robust} 
 .
 
 In \cref{ch:recov-selection}, we consider the above problems in combination with recoverable robust optimization with discrete budgeted uncertainty $\cU^d_\Gamma$. 
@@ -248,7 +250,7 @@ Finally, we show how to compute in polynomial time a basis of the linear subspac
 \paragraph*{Non-preemptive tree packing.}
 In \cref{ch:ntp}, we consider \emph{nonpreemptive tree packing}. This problem is a mixture of a scheduling problem and a structural tree packing problem.
 An instance of the non-preemptive tree packing problem consists of an undirected graph $G$ together with a weight $w(e)$ for every edge $e$. The goal is to activate every edge $e$ for some time interval of length $w(e)$, such that the activated edges keep $G$ connected for the longest possible overall time. We derive a variety of results on this problem. The problem is strongly NP-hard even on graphs of treewidth $2$, and it does not allow a polynomial time approximation scheme (unless P=NP). Furthermore, we discuss the performance of a simple greedy algorithm, and we construct and analyze a number of parameterized and exact algorithms.
-We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. Therefore, the only open cases that remain are the cases of $\set{4,5,6}$.
+We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. The intermediate cases of $\set{4,5,6}$ remain open.
 
 \section{A note on notation}
 
