@@ -72,12 +72,12 @@ We assume that the reader is familiar with basic concepts from combinatorial opt
 
 \paragraph*{Combinatorial Optimization Problem.}
 Given some ground set $E = \fromto{e_1}{e_n}$, we let $\X \subseteq \set{0,1}^n$ denote the set of \emph{feasible solutions}. 
-We assume here that the feasible solutions are encoded as $0$-$1$-vectors (i.e.\ $x_i = 1$ corresponds to element $e_i$ being part of the feasible solution, and $x_i=0$ corresponds to $e_i$ not being part of the feasible solution). 
+We assume here that the feasible solutions are encoded as $0$-$1$-vectors $\pmb x \in \R^n$ (we denote vectors in bold). This means that $x_i = 1$ corresponds to element $e_i$ being part of the feasible solution, and $x_i=0$ corresponds to $e_i$ not being part of the feasible solution. 
 For example, $\X$ could encode the set of all spanning trees of a graph, the set of all paths between two vertices, of the set of all traveling salesman tours, etc\dots If there is some \emph{objective function} (also called \emph{cost function}) $f : \set{0,1}^n \to \R$, then the problem
 \[
-\min_{x \in \X} f(x)
+\min_{\pmb x \in \X} f(\pmb x)
 \]
-is referred to as a \emph{combinatorial optimization problem}. The cost function $f$ is called \emph{linear} if there exists some vector $c \in \R^n$ such that $f(x) = c^tx$ for all $x \in \set{0,1}^n$. This means that the cost of element $e_i$ is given by $c_i$.
+is referred to as a \emph{combinatorial optimization problem}. The cost function $f$ is called \emph{linear} if there exists some vector $\pmb c \in \R^n$ such that $f(\pmb x) = \pmb c^t \pmb x$ for all $\pmb x \in \set{0,1}^n$. This means that the cost of element $e_i$ is given by $c_i$.
 
 In some chapters, we use the set-theoretic notation for linear cost functions instead. In this case, we consider a cost function $c : E \to \R$, which assigns a cost to every single element. The cost of a subset $E' \subseteq E$ is then given by
 \[ c(E') := \sum_{e \in E'}c(e). \]
@@ -99,10 +99,10 @@ Similar results are reported in the average case. This schowcases the need for r
 Mathematically, the robust optimization approach to problems of this type is to formulate an \textit{uncertainty set} $\mathcal{U}$. This set contains all the \enquote{reasonable-to-expect} cost functions, which one wants to prepare against. One then takes a worst case approach and computes the \emph{robust problem}
 
 \[
-	\min_{x \in \X} \max_{c \in \cU} c(x).
+	\min_{\pmb x \in \X} \max_{c \in \cU} c(\pmb x).
 \]
 
-The different cost functions $c \in \cU$ are also called \emph{scenarios}. By changing the size of the set $\cU$, we can influence for how many scenarios we want to prepare against, and thus control the amount of robustness of the solution (for the price of a worse objective value). The original (non-robust) problem to find $\min_{x \in \X} c(x)$ is called \emph{nominal problem}.
+The different cost functions $c \in \cU$ are also called \emph{scenarios}. By changing the size of the set $\cU$, we can influence for how many scenarios we want to prepare against, and thus control the amount of robustness of the solution (for the price of a worse objective value). The original (non-robust) problem to find $\min_{\pmb x \in \X} c(\pmb x)$ is called \emph{nominal problem}.
 
 Note that we protect ourselves against \emph{all} possible scenarios equally, by assuming that the worst-case scenario will arise. This conservative approach has the advantage that no prior probability distribution needs to be assumed about the data (agnostic approach), that it often leads to algorithmically tractable problems, and that theoretical analysis is often possible. This stands in contrast to so-called \emph{stochastic programming} \cite{birge2011introduction}, where a probability distribution is assumed, and the solution is optimized for e.g.\ the expected value. Both methods have advantages and drawbacks (compare \cite{ben2009robust} for a detailed discussion).  
  
@@ -113,11 +113,11 @@ The choice of uncertainty set $\cU$ is crucial for robust optimization. Many dif
 
 Formally, for given constants $\underline{c}_i \geq 0$ and $d_i \in \R$ for all $i \in \fromto{1}{n}$ and some integer $\Gamma \geq 0$, the set $\cU^d_\Gamma$ of \emph{discrete budgeted uncertainty} is defined as
 \[
-\cU^d_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in \set{0,1}\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
+\cU^d_\Gamma = \set{ \pmb c \in \R^n : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in \set{0,1}\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
 In other words, $\cU^d_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$ as the deviated $i$-th value. We can also consider the case, where the deviation is not binary, but can be split partially between different coeeficients. Formally, \emph{continuous budgeted uncertainty} is defined as
 \[
-\cU^c_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in [0,1]\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
+\cU^c_\Gamma = \set{ \pmb c \in \R^n : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in [0,1]\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
 Note that the only difference between the two formulations is the range of $\delta_i$.
 
@@ -127,39 +127,41 @@ The reason for this success is the fact that when using uncertainty set $\cU_\Ga
 
 Budgeted uncertainty are used in the areas of portfolio management \cite{bertsimas2008robust}, wine grape harvesting \cite{bohle2010robust}, supply
 chain control \cite{bertsimas2006robust}, furniture production planning \cite{alem2012production}, and train load planning \cite{bruns2014robust}, among others. 
-%Specifically in combinatorial optimization, there are many papers applying them to different problems [todo].
+
 
 Further history of budgeted uncertainty sets, their use within combinatorial robust optimization, as well as some of its generalizations can be found in \cite{poss2018robust,goerigk2023robust,goerigk2021robust}.
 
 \paragraph*{Multi-Stage Robust Optimization.}
 The conservative approach of robust optimization can be considered a drawback. One possible way to address this drawback is by considering \emph{multi-stage robust optimization}. 
 These are problems which enable the decision maker to undertake a partial corrective action after the uncertainty has been revealed. They are formulated as min-max-min equations.
-As classical robust optimization has been well researched and is generally understood quite well, multistage robust optimization has gained some attention in recent years [todo: cite] In this thesis, we focus on two different kinds of multi-stage robust optimization:  \emph{two-stage adjustable} and \emph{recoverable} robust optimization.
+As classical robust optimization has been well researched and is generally understood quite well, multistage robust optimization has gained some attention in recent years. In this thesis, we focus on two different kinds of multi-stage robust optimization:  \emph{two-stage adjustable} and \emph{recoverable} robust optimization.
 
 In two-stage adjustable robust optimization \cite{ben2004adjustable}, we distinguish between two types of variables. The values of \emph{here-and-now (first-stage)} variables need to be decided beforehand. We then receive the information which scenario from the uncertainty set has been realized, before we decide on the value of \emph{wait-and-see (second-stage)} variables. 
 This models a natural two-stage decision process, where in the first stage important decisions need to be made without full knowledge of the future, and in the second stage some restricted decisions can be made to adjust to the encountered scenario.
  A recent survey on adjustable robust optimization can be found in \cite{yanikouglu2019survey}.
-There are different models of two-stage adjustable robust optimization. In this thesis, we consider a model which is also used by other authors in the context of combinatorial optimization [todo: cite]. 
-We assume that there is some set of feasible solutions $\X \subseteq \set{0,1}^n$, and that the first-stage variables $x \in \set{0,1}^n$ together with the second-stage variables $y \in \set{0,1}^n$ must combine to a feasible solution. This is expressed by the constraint $x + y \in \X$. 
-We let $\X' \subseteq \set{0,1}^n$ be the set of permissible first-stage decisions and we let $\X(x) := \set{y \in \set{0,1}^n : x + y \in \X}$ be the set of possible ways the first-stage decision $x$ can be completed to a feasible solution. 
-To address the fact where a first-stage solution $x$ is chosen which can not be completed (i.e.\ $\X(x) = \emptyset$), we define $\min \emptyset := \infty$. This means that such a choice of $x$ should be avoided. Formally, for some objective function $f(x,y,c)$, the two-stage adjustable robust problem is given by
+There are different models of two-stage adjustable robust optimization. In this thesis, we consider a model which is also used by other authors in the context of multi-stage robust combinatorial optimization, for example with the shortest path problem \cite{busing2012paths}, spanning tree problem \cite{hradovich2017recoverable}, assignment problem \cite{fischer2020investigation}, traveling salesman problem \cite{goerigk2021recoverable},
+machine scheduling \cite{bold2022investigating,bold2022algorithmic}, selection problems \cite{goerigk2023optimal,goerigk2022two,kasperski2015robust}, and many others. 
 
-\[\min_{x \in \X'} \max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c).\]
+This model makes the following assumptions: We assume that there is some set of feasible solutions $\X \subseteq \set{0,1}^n$, and that the first-stage variables $\pmb x \in \set{0,1}^n$ together with the second-stage variables $\pmb y \in \set{0,1}^n$ must combine to a feasible solution. This is expressed by the constraint $\pmb x + \pmb y \in \X$. 
+We let $\X' \subseteq \set{0,1}^n$ be the set of permissible first-stage decisions and we let $\X(\pmb x) := \set{\pmb y \in \set{0,1}^n : \pmb x + \pmb y \in \X}$ be the set of possible ways the first-stage decision $\pmb x$ can be completed to a feasible solution. 
+To address the fact where a first-stage solution $\pmb x$ is chosen which can not be completed (i.e.\ $\X(\pmb x) = \emptyset$), we define $\min \emptyset := \infty$. This means that such a choice of $\pmb x$ should be avoided. Formally, for some objective function $f(\pmb x,\pmb y,c)$, the two-stage adjustable robust problem is given by
 
-Two-stage adjustable robust optimization has been considered for many combinatorial problems, including [todo]. 
+\[\min_{\pmb x \in \X'} \max_{c \in \cU} \min_{\pmb y \in \X(x)} f(\pmb x,\pmb y,c).\]
 
-A variant of this approach is recoverable robust optimization \cite{liebchen2009concept}. Here, the idea is that we have to propose some initial solution $x$, which should already resemble a feasible solution. 
-After the reveal of the uncertain cost function $c$, we are allowed to react to the new information by proposing a new solution $y$, but we must make sure that $x$ is similar to $y$. Formally, for some abstract distance function $\dist(\cdot)$ and parameter $k \in \N$, we make sure that $\dist(x,y) \leq k$. This approach is motivated by train scheduling problems: The actual train schedule $y$ can deviate from the initially planned schedule $x$ to accomodate for delays, but $x$ and $y$ should not be too dissimilar, in order to satisfy customers \cite{liebchen2009concept}. Formally, for a set $\X \subseteq \set{0,1}^n$ of feasible solutions, and $\X(x) := \set{y \in \X : \dist(x,y) \leq k}$ we consider
+The final assumption of the model is that the cost function $f$ can be written as  $f(\pmb x,\pmb y,\pmb c) = \pmb C^t \pmb x + \pmb c^t \pmb y$. This means that $f$ is linear in both $x,y$ and that the uncertainty $\pmb c \in \cU \subseteq \R^n$ only affects the second-stage variables $\pmb y$, while the costs of the first-stage variables $\pmb x$ is given by some fixed vector $\pmb C \in \R^n$ (we use small/capital case to distinguish $\pmb c$ and $\pmb C$). 
 
-\[\min_{x \in \X} \max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c).\]
+A variant of this approach is recoverable robust optimization \cite{liebchen2009concept}. Here, the idea is that we have to propose some initial solution $\pmb x$, which should already resemble a feasible solution. 
+After the reveal of the uncertain cost function $\pmb c$, we are allowed to react to the new information by proposing a new solution $\pmb y$, but we must make sure that $\pmb x$ is similar to $\pmb y$. Formally, for some abstract distance function $\dist(\cdot)$ and parameter $k \in \N$, we make sure that $\dist(\pmb x,\pmb y) \leq k$. This approach is motivated by train scheduling problems: The actual train schedule $\pmb y$ can deviate from the initially planned schedule $\pmb x$ to accomodate for delays, but $\pmb x$ and $\pmb y$ should not be too dissimilar, in order to satisfy customers \cite{liebchen2009concept}. The usual choice for the abstract distance function $\dist(\cdot)$ is the Hamming distance $\dist(\pmb x,\pmb y) := |\set{i \in [n] : x_i \neq y_i}|$. Formally, for a set $\X \subseteq \set{0,1}^n$ of feasible solutions, and $\X(\pmb x) := \set{\pmb y \in \X : \dist(\pmb x,\pmb y) \leq k}$ we consider
 
-Recoverable robust optimization has been considered for many combinatorial problems, including [todo]. 
+\[\min_{\pmb x \in \X} \max_{\pmb c \in \cU} \min_{\pmb y \in \X(\pmb x)} f(\pmb x,\pmb y,\pmb c).\]
 
-For both variants, the sub-problem to compute for a given first-stage solution $x$ the quantity $\max_{c \in \cU} \min_{y \in \X(x)} f(x,y,c)$ is called the \emph{adversarial problem} $\textsc{Adv}(x)$. 
-This is inspired by the fact that robust optimization can be interpreted as a game between two players: The first player finds a minimizing $x$, while the second player, also called the adversary, has the opposite goal and selects a cost function $c \in \cU$. The first player responds to the second player by choosing some $y \in \X(x)$.
+We make the same assumption about the cost function $f$ as above, that is, we assume that $f$ can be written as  $f(\pmb x,\pmb y,\pmb c) = \pmb C^t\pmb x + \pmb c^t\pmb y$. 
+
+For both variants, the sub-problem to compute for a given first-stage solution $\pmb x$ the quantity $\max_{\pmb c \in \cU} \min_{\pmb y \in \X(\pmb x)} f(\pmb x,\pmb y,\pmb c)$ is called the \emph{adversarial problem} $\textsc{Adv}(\pmb x)$. 
+This is inspired by the fact that robust optimization can be interpreted as a game between two players: The first player finds a minimizing $\pmb x$, while the second player, also called the adversary, has the opposite goal and selects a cost function $c \in \cU$. The first player responds to the second player by choosing some $\pmb y \in \X(\pmb x)$.
 
 \paragraph*{Quadratic Shortest Path Problem.}
-A combinatorial optimization problem is \emph{quadratic}, if its cost function $f : \set{0,1}^n \to \R$ can be written as $f(x) = x^tQx$ for some $n \times n$ matrix $Q$. The \emph{quadratic shortest path problem (QSPP)} takes as input a directed graph, two vertices $s,t$, and a matrix $Q \in \R^{m \times m}$, where $m$ denotes the number of edges in $G$. It asks for the path from $s$ to $t$ of smallest quadratic cost $f(x)$ (where $x \in \R^m$ is the incidence vector of the edges of the path). 
+A combinatorial optimization problem is \emph{quadratic}, if its cost function $f : \set{0,1}^n \to \R$ can be written as $f(\pmb x) = \pmb x^tQ\pmb x$ for some $n \times n$ matrix $Q$. The \emph{quadratic shortest path problem (QSPP)} takes as input a directed graph, two vertices $s,t$, and a matrix $Q \in \R^{m \times m}$, where $m$ denotes the number of edges in $G$. It asks for the path from $s$ to $t$ of smallest quadratic cost $f(\pmb x)$ (where $\pmb x \in \R^m$ is the incidence vector of the edges of the path). 
 
 The QSPP arises 
 in network optimization  problems where costs are associated with both single arcs and pairs of arcs.
@@ -173,8 +175,8 @@ The QSPP is NP-hard~\cite{rostami2018}.
 It is also difficult from the practical point of view~\cite{huSo2020}.
 
 \paragraph*{Linearization.}
-Since quadratic problems are often times intractable, researchers look for special solvable cases. One of these cases is the linearizable case. An instance $(G,s,t,Q)$ of the QSPP is \emph{linearizable} in the sense of Bookhold \cite{bookhold1990contribution}, if there exists a vector $c \in \R^m$ such that for all $s$-$t$-paths $P$ with incidence vector $x = x_P$ we have the equation 
-\[x^tQx = c^tx. \]
+Since quadratic problems are often times intractable, researchers look for special solvable cases. One of these cases is the linearizable case. An instance $(G,s,t,Q)$ of the QSPP is \emph{linearizable} in the sense of Bookhold \cite{bookhold1990contribution}, if there exists a vector $\pmb c \in \R^m$ such that for all $s$-$t$-paths $P$ with incidence vector $\pmb x = \pmb x_P$ we have the equation 
+\[\pmb x^tQ\pmb x = \pmb c^t\pmb x. \]
 In other words, the instance can be expressed equivalently as a linear optimization problem.
 
 Linearizations may appear quite exotic at first, but they arise naturally as special cases of the QSPP with restricted cost matrix~\cite{huSo2018}. They also have applications in understanding and designing lower bounds in general branch \& bound algorithms for quadratic optimization problems \cite{huSo2021}. 
@@ -193,7 +195,7 @@ In this section, we extensively describe the results obtained in each chapter.
 \paragraph*{Recoverable representative selection.}
 In \cref{ch:recov-selection}, we consider recoverable robust optimization in combination with the \emph{selection problem} and the \emph{(multi-)representative selection problem}. 
 These are two simple combinatorial optimization problems, which are trivial to solve without robustness, but may become challenging with the introduction of robustness. 
-The selection problem is defined by having the set of feasible solutions $\X = \set{x \in \set{0,1}^n : \sum_{i=1}^n x_i = p}$ for some $p \in \N$ (i.e.\ a single cardinality constraint). 
+The selection problem is defined by having the set of feasible solutions $\X = \set{\pmb x \in \set{0,1}^n : \sum_{i=1}^n x_i = p}$ for some $p \in \N$ (i.e.\ a single cardinality constraint). 
 The multi-representative selection problem is defined for a partition $T_1 \dotunion \dots \dotunion T_K = \fromto{1}{n}$ by the set of feasible solutions $\X = \set{ \pmb{x}\in \{0,1\}^n : \sum_{i\in T_j} x_i = p_j\ \forall j \in [K] }$ for some numbers $p_1,\dots,p_K \in \N$. If $p_j = 1$ for all $j \in [K]$, then the multi-representative selection problem is simply called the \emph{representative selection} problem (it can be thought of the problem as selecting the representative of each part).
 
 These two problems are special cases of many well-known problems, for example the spanning tree problem or the shortest path problem in series-parallel graphs. Hence a hardness or inapproximability proof immediately propagates to these harder problems. For this reason, the (representative) selection problem is a popular toy problem in robust optimization to test the properties of proposed models \cite{kasperski2015approximability,averbakh2001complexity,conde2004improved,dolgui2012min,deineko2013complexity,goerigk2019robust} 
@@ -212,7 +214,7 @@ In \cref{ch:multistage-complexity}, we are concerned with the computational comp
 
 \paragraph*{Network interdiction on interval graphs.}
 \emph{Network Interdiction} \cite{NetworkInterdictProblemsBookChapter} is the study of figuring out which parts of a network are most vulnerable to attack or failure. The area of network interdiction has grown tremendously in recent years \cite{criticalNodeDetectionSurvey}. 
-We consider network interdiction as closely related to robust optimization, since both disciplines involve solving min-max equations. One popular type of network interdiction is the \emph{most vital nodes problem} [todo:cite]. Here, the goal is to inhibit some graph parameter $\pi$ by a maximal amount by deleting only few nodes of a graph (for example, destroy all large cliques of a graph by deleting only few nodes). Diner et al. \cite{diner2018contractionDeletionBlockers} considered the most vital nodes problem for $H$-free and perfect graphs and obtained many different results. For interval graphs and parameter $\pi = \alpha$, they were unable to settle the complexity and left it as an open question \cite[(Q2)]{diner2018contractionDeletionBlockers}.
+We consider network interdiction as closely related to robust optimization, since both disciplines involve solving min-max equations. One popular type of network interdiction is the \emph{most vital nodes problem}  \cite{baier2010length,complexityOfFindingMostVitalNodesShortestPath,mostVitalNodesWrtIndSet,mostVitalLinksNodes1982,mahdavi2014minimum}. Here, the goal is to inhibit some graph parameter $\pi$ by a maximal amount by deleting only few nodes of a graph (for example, destroy all large cliques of a graph by deleting only few nodes). Diner et al. \cite{diner2018contractionDeletionBlockers} considered the most vital nodes problem for $H$-free and perfect graphs and obtained many different results. For interval graphs and parameter $\pi = \alpha$, they were unable to settle the complexity and left it as an open question \cite[(Q2)]{diner2018contractionDeletionBlockers}.
 
 In \cref{ch:interdiction}, we introduce a novel framework of graph modifications specific to interval graphs. We study interdiction problems with respect to these graph modifications. 
 Given a list of original intervals, each interval has a replacement interval such that either the replacement contains the original, or the original contains the replacement. 
