@@ -234,7 +234,7 @@ In \cref{ch:linearization-1}, we consider linearizable special cases of the quad
 We completely characterize the class of universally linearizable directed graphs.
 In fact, we provide several equivalent characterizations, which are centered around the structure of source-to-sink paths and around certain forbidden subgraphs. Our characterizations lead to fast and simple recognition algorithms for universally linearizable graphs. 
 
-Furthermore, we establish the intractability of deciding whether a concrete instance of the QSPP (with a given graph and given arc interaction costs) is linearizable. We call this problem LinQSPP. We show that LinQSPP is coNP-complete. Interestingly, showing coNP-hardness is the easy part of the proof, but the proof that the problem is even contained in the class coNP is nontrivial. For this, we make use of Farkas' lemma \cite{Farkas1902} and polyhedric geometry.
+Furthermore, we establish the intractability of deciding whether a concrete instance of the QSPP (with a given graph and given arc interaction costs) is linearizable. We call this problem LinQSPP. We show that LinQSPP is coNP-complete. Interestingly, showing coNP-hardness is the easy part of the proof, but the proof that the problem is even contained in the class coNP is nontrivial. For this, we make use of Farkas' lemma \cite{Farkas1902} and polyhedral geometry.
 
 
 \paragraph*{Linearization II.}
@@ -256,4 +256,17 @@ We can pinpoint the complexity of this problem parameterized by the objective va
 
 \section{A note on notation}
 
-[todo]
+In this thesis, we use the following notation: We denote by $[n] := \fromto{1}{n}$ the set of the first $n$ positive integers. We let $\R$ denote the real numbers, $\Z$ denote the integers, $\N := \set{1,2,3,\dots}$ denote the natural numbers, and $\N_0 := \set{0} \cup \N$ denote the natural numbers together with 0. 
+An \emph{undirected graph} is a tuple $G = (V,E)$, where $V$ is the set of its vertices and $E \subseteq \binom{V}{2}$ is the set of its edges, where $\binom{V}{2} := \set{A \subseteq V : |A| = 2}$.
+
+A \emph{directed graph}, also called a \emph{digraph}, is a tuple $G = (V, E)$, where $V$ is the set of its vertices and $E \subseteq V \times V$ is the set of its edges. The edges of a directed graph are also called \emph{arcs}.
+All graphs considered in this thesis are \emph{simple}, i.e.\ they contain neither parallel edges nor self-loops.
+
+
+A \emph{subgraph} $G' \subseteq G$ of a (directed or undirected) graph $G$ is a tuple $G' = (V', E')$ such that $V' \subseteq V$ and $E' \subseteq E$. Special subgraphs are the so-called \emph{induced subgraphs}: For a subset $V' \subseteq V$ the subgraph of $G$ induced by $V'$ is denoted by $G[V']$ and defined in the directed case by $G' = (V', E \cap (V' \times V'))$ or in the undirected case by $G' = (V', E \cap \binom{V'}{2})$. By default, all graphs in this thesis are assumed to be undirected, unless specifically stated otherwise.
+
+
+In an undirected graph, a \emph{path} is a subgraph with vertex sets $\fromto{v_1}{v_k}$ for pairwise distinct vertices $v_1,\dots,v_k$ and all the edges $\set{v_i,v_{i+1}}$ for $i=1,\dots,k-1$. Likewise, a \emph{directed path} in a directed graph is defined analogously, such that all its arcs are directed from $v_i$ to $v_{i+1}$ for all $i=1,\dots,k-1$. The \emph{length} of a path is the number of its edges.  
+
+More specific, chapter-dependent notation is introduced at the beginning of each chapter.
+

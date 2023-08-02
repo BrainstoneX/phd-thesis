@@ -429,7 +429,7 @@ where $G = (V,E)$ denotes the input graph, $\pmb C \in \R_{\geq 0}^V$ denotes th
 
 Finally, for given constants $\underline{c}_i \geq 0$ and $d_i \leq 0$ for all $i \in V$ and some integer $\Gamma \geq 0$, the set $\cU_\Gamma$ of uncertain cost functions is defined as
 \[
-\cU_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i, \delta_i \in \set{0,1}\ \forall i \in V,\ \sum_{i \in V}\delta_i \leq \Gamma }.
+\cU_\Gamma = \cU_\Gamma^d = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i, \delta_i \in \set{0,1}\ \forall i \in V,\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
 In other words, $\cU_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. Note that because we have a maximization problem, we have $d_i \leq 0$. Finally, we define $\overline{c}_i = \underline{c}_i + d_i$.
 

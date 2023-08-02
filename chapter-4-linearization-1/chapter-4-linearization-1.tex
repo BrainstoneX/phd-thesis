@@ -55,24 +55,24 @@ Rostami \& al~\cite{rostami2018}, and Hu \& Sotirov~\cite{huSo2018,huSo2021,huSo
 \medskip
 \bigskip
 \begin{center}
-\begin{tikzpicture}[scale=1.40]
+\begin{tikzpicture}[scale=1.4]
 
 \foreach \x in {1,...,8}
-  {\fill (\x,0) circle (0.12);
-   \fill (\x,1) circle (0.12);}
+  {\fill (\x,0) circle (0.06);
+   \fill (\x,1) circle (0.06);}
 
-\node at ( 0.70, 0.00) {\Large$s$};
-\node at ( 8.30, 1.00) {\Large$t$};
+\node at ( 0.70, 0.00) {\Large $s$};
+\node at ( 8.30, 1.00) {\Large $t$};
 
 \foreach \x in {1,...,8}
 {\draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-    postaction={decorate},line width=1.70pt] (\x,0)--(\x,1);}
+    postaction={decorate},line width=1.00pt] (\x,0)--(\x,1);}
 
 \foreach \x in {1,...,7}
 {\draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-    postaction={decorate},line width=1.70pt] (\x,0)--(\x+1,0);
+    postaction={decorate},line width=1.00pt] (\x,0)--(\x+1,0);
  \draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-    postaction={decorate},line width=1.70pt] (\x,1)--(\x+1,1);}
+    postaction={decorate},line width=1.00pt] (\x,1)--(\x+1,1);}
 
 \end{tikzpicture}
 \end{center}
@@ -133,26 +133,26 @@ De Meijer \& Sotirov \cite{deMeSo2020} analyze linearizations of the quadratic c
 \coordinate (p4) at ( 6.0,0);
 \coordinate (p5) at ( 7.5,0);
 
-\foreach \x in {0,...,5}{\fill (p\x) circle (0.11);}
+\foreach \x in {0,...,5}{\fill (p\x) circle (0.06);}
 
-\node at ($(p0)+(-0.1,-0.40)$) {\Large$s$};
-\node at ($(p1)+(+0.0,+0.30)$) {\Large$v_1$};
-\node at ($(p2)+(-0.2,+0.30)$) {\Large$v_2$};
-\node at ($(p3)+(+0.0,+0.30)$) {\Large$v_3$};
-\node at ($(p4)+(+0.0,+0.30)$) {\Large$v_4$};
-\node at ($(p5)+(+0.1,-0.40)$) {\Large$t$};
+\node at ($(p0)+(-0.1,-0.40)$) {\Large $s$};
+\node at ($(p1)+(+0.0,+0.30)$) {\Large $v_1$};
+\node at ($(p2)+(-0.2,+0.30)$) {\Large $v_2$};
+\node at ($(p3)+(+0.0,+0.30)$) {\Large $v_3$};
+\node at ($(p4)+(+0.0,+0.30)$) {\Large $v_4$};
+\node at ($(p5)+(+0.1,-0.40)$) {\Large $t$};
 
 \foreach \x in {0,...,4}
   {\pgfmathsetmacro{\y}{\x+1};
    \draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-      postaction={decorate},line width=1.70pt] (p\x)--(p\y);}
+      postaction={decorate},line width=1.0pt] (p\x)--(p\y);}
 
 \draw[decoration={markings,mark=at position 0.55 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p2) to[out=45,in=135] (p5);
+   postaction={decorate},line width=1.0pt]  (p2) to[out=45,in=135] (p5);
 \draw[decoration={markings,mark=at position 0.52 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p0) to[out=-45,in=-135] (p3);
+   postaction={decorate},line width=1.0pt]  (p0) to[out=-45,in=-135] (p3);
 \draw[decoration={markings,mark=at position 0.56 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p1) to[out=-45,in=-135] (p4);
+   postaction={decorate},line width=1.0pt]  (p1) to[out=-45,in=-135] (p4);
 
 \end{tikzpicture}
 \end{center}
@@ -191,7 +191,7 @@ recognition algorithms for universally linearizable graphs, and an even faster a
 linear time recognition algorithms for \emph{acyclic} universally linearizable graphs
 
 Section~\ref{sec:hardness-chapter-4} discusses two closely related decision problems.
-Problem LINEARIZABLE-QSPP asks whether a given instance of the QSPP (specified by the 
+Problem LIN-QSPP asks whether a given instance of the QSPP (specified by the 
 graph $G$ and the arc interaction costs $q$) is linearizable.
 Problem VALID-LINEARIZATION asks whether a given weight function $w$ forms a linearization
 of a given instance of the QSPP. 
@@ -199,7 +199,7 @@ Hu \& Sotirov \cite{huSo2021} have shown that both problems are polynomially sol
 in the special case where the underlying directed graph $G$ is acyclic.
 We show that both problems are coNP-complete in the general case with arbitrary directed 
 graphs that are allowed to contain directed cycles.
-The coNP-certificate for LINEARIZABLE-QSPP is not straightforward to get.
+The coNP-certificate for LIN-QSPP is not straightforward to get.
 Section~\ref{sec:conclusion-chapter-4} completes the paper with some concluding remarks.
 
 
@@ -402,40 +402,40 @@ in other words, the three paths $P'$, $P''$, $P'''$ may have length zero.
 \coordinate (p5) at ( 7.4,0);
 \coordinate (p6) at ( 9.1,0);
 
-\foreach \x in {1,...,6}{\fill (p\x) circle (0.11);}
+\foreach \x in {1,...,6}{\fill (p\x) circle (0.06);}
 
-\node at ($(p1)+( 0.00,-0.36)$) {\Large$s$};
-\node at ($(p2)+(-0.12,-0.36)$) {\Large$x_1$};
-\node at ($(p3)+(+0.18,-0.36)$) {\Large$x_2$};
-\node at ($(p4)+(-0.12,-0.36)$) {\Large$y_1$};
-\node at ($(p5)+(+0.18,-0.36)$) {\Large$y_2$};
-\node at ($(p6)+( 0.00,-0.36)$) {\Large$t$};
+\node at ($(p1)+( 0.00,-0.36)$) {\Large $s$};
+\node at ($(p2)+(-0.12,-0.36)$) {\Large $x_1$};
+\node at ($(p3)+(+0.18,-0.36)$) {\Large $x_2$};
+\node at ($(p4)+(-0.12,-0.36)$) {\Large $y_1$};
+\node at ($(p5)+(+0.18,-0.36)$) {\Large $y_2$};
+\node at ($(p6)+( 0.00,-0.36)$) {\Large $t$};
 
-\node at ($(p1)!0.5!(p2)+(0.0, 0.4)$) {\Large$P'$};
-\node at ($(p2)!0.5!(p3)+(0.2, 0.9)$) {\Large$X_2$};
-\node at ($(p2)!0.5!(p3)+(0.2,-0.2)$) {\Large$X_1$};
-\node at ($(p3)!0.5!(p4)+(0.0, 0.4)$) {\Large$P''$};
-\node at ($(p3)!0.5!(p4)+(0.0, 0.4)$) {\Large$P''$};
-\node at ($(p4)!0.5!(p5)+(0.2, 0.9)$) {\Large$Y_2$};
-\node at ($(p4)!0.5!(p5)+(0.2,-0.2)$) {\Large$Y_1$};
-\node at ($(p5)!0.5!(p6)+(0.0, 0.4)$) {\Large$P'''$};
+\node at ($(p1)!0.5!(p2)+(0.0, 0.4)$) {\Large $P'$};
+\node at ($(p2)!0.5!(p3)+(0.2, 0.9)$) {\Large $X_2$};
+\node at ($(p2)!0.5!(p3)+(0.2,-0.2)$) {\Large $X_1$};
+\node at ($(p3)!0.5!(p4)+(0.0, 0.4)$) {\Large $P''$};
+\node at ($(p3)!0.5!(p4)+(0.0, 0.4)$) {\Large $P''$};
+\node at ($(p4)!0.5!(p5)+(0.2, 0.9)$) {\Large $Y_2$};
+\node at ($(p4)!0.5!(p5)+(0.2,-0.2)$) {\Large $Y_1$};
+\node at ($(p5)!0.5!(p6)+(0.0, 0.4)$) {\Large $P'''$};
 
 \draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p1)--(p2);
+   postaction={decorate},line width=1.0pt]  (p1)--(p2);
 \draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p3)--(p4);
+   postaction={decorate},line width=1.0pt]  (p3)--(p4);
 \draw[decoration={markings,mark=at position 0.66 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p5)--(p6);
+   postaction={decorate},line width=1.0pt]  (p5)--(p6);
 
 \draw[decoration={markings,mark=at position 0.54 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p2) to[out=76,in=111] (p3);
+   postaction={decorate},line width=1.0pt]  (p2) to[out=76,in=111] (p3);
 \draw[decoration={markings,mark=at position 0.54 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p2) to[out=-71,in=-104] (p3);
+   postaction={decorate},line width=1.0pt]  (p2) to[out=-71,in=-104] (p3);
 
 \draw[decoration={markings,mark=at position 0.54 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p4) to[out=69,in=116] (p5);
+   postaction={decorate},line width=1.0pt]  (p4) to[out=69,in=116] (p5);
 \draw[decoration={markings,mark=at position 0.54 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p4) to[out=-72,in=-109] (p5);
+   postaction={decorate},line width=1.0pt]  (p4) to[out=-72,in=-109] (p5);
 
 \end{tikzpicture}
 \end{center}
@@ -487,22 +487,22 @@ Summarizing, the absence of the 12121-subgraph does not guarantee the private ar
 \coordinate (p2) at ( 0.0,-1.0);
 \coordinate (p3) at (+2.0, 0.0);
 
-\foreach \x in {0,...,3}{\fill (p\x) circle (0.12);}
-\node at ($(p0)+(-0.1,-0.35)$) {\Large$s$};
-\node at ($(p1)+(+0.4,+0.10)$) {\Large$v_1$};
-\node at ($(p2)+(+0.4,-0.15)$) {\Large$v_2$};
-\node at ($(p3)+(+0.1,-0.35)$) {\Large$t$};
+\foreach \x in {0,...,3}{\fill (p\x) circle (0.06);}
+\node at ($(p0)+(-0.1,-0.35)$) {\Large $s$};
+\node at ($(p1)+(+0.4,+0.10)$) {\Large $v_1$};
+\node at ($(p2)+(+0.4,-0.15)$) {\Large $v_2$};
+\node at ($(p3)+(+0.1,-0.35)$) {\Large $t$};
 
 \foreach \x in {1,2}
   {\draw[decoration={markings,mark=at position 0.62 with {\arrow[scale=1.5,>=stealth]{>}}},
-      postaction={decorate},line width=1.70pt] (p0)--(p\x);
+      postaction={decorate},line width=1.0pt] (p0)--(p\x);
    \draw[decoration={markings,mark=at position 0.64 with {\arrow[scale=1.5,>=stealth]{>}}},
-      postaction={decorate},line width=1.70pt] (p\x)--(p3);}
+      postaction={decorate},line width=1.0pt] (p\x)--(p3);}
 
 \draw[decoration={markings,mark=at position 0.58 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p1) to[out=-120,in=120] (p2);
+   postaction={decorate},line width=1.0pt]  (p1) to[out=-120,in=120] (p2);
 \draw[decoration={markings,mark=at position 0.58 with {\arrow[scale=1.5,>=stealth]{>}}},
-   postaction={decorate},line width=1.70pt]  (p2) to[out=60,in=-60] (p1);
+   postaction={decorate},line width=1.0pt]  (p2) to[out=60,in=-60] (p1);
 
 \end{tikzpicture}
 \end{center}
@@ -742,7 +742,7 @@ While the preceding sections investigated the structure of graphs for the QSPP,
 the current section will analyze full QSPP instances (that do specify both, the 
 graph and the arc interaction costs).
 Hu \& Sotirov \cite{huSo2021} have shown that the decision problems VALID-LI\-NEARI\-ZA\-TION
-and LI\-NEA\-RIZABLE-QSPP in Figure~\ref{fig:problems} both are polynomially solvable, 
+and LIN-QSPP in Figure~\ref{fig:problems} both are polynomially solvable, 
 if the underlying directed graph $G$ is acyclic.
 The following (purely combinatorial) proposition can be extracted and deduced from the next chapter, \cref{ch:linearization-2}.
 For subsets $S,T\subseteq A$ of the arc set we denote $q(S,T)=\sum_{s\in S}\sum_{t\in T}q(s,t)$.
@@ -763,7 +763,7 @@ QSPP instance $G$ and $q$?}
 \bigskip
 \bigskip
 %%%%%%%%%%%%%%%%%
-\boxxx{Problem: LINEARIZABLE-QSPP
+\boxxx{Problem: LIN-QSPP
 \\[2.0ex]
 Instance: A $\ppp$-covered directed graph $G=(V,A)$ with $s,t\in V$;
 arc interaction costs $q:A\times A\to\RRR$.
@@ -793,10 +793,10 @@ $q(X_1,Y_1)+q(X_2,Y_2) = q(X_1,Y_2)+q(X_2,Y_1)$.
 \end{proposition}
 %%%%%%%%%%%%%%%%%
 
-In this section we will show that the problems VALID-LINEARIZATION and LI\-NEA\-RIZ\-ABLE-QSPP
+In this section we will show that the problems VALID-LINEARIZATION and LIN-QSPP
 both are coNP-complete in arbitrary (not necessarily acyclic) directed graphs.
 Note that the combinatorial characterization in Proposition~\ref{pr:HS} yields a coNP-certificate 
-for the (polynomially solvable) special case of problem LINEARIZABLE-QSPP on acyclic graphs:
+for the (polynomially solvable) special case of problem LIN-QSPP on acyclic graphs:
 Any NO-instance contains a 12121-subgraph whose subpaths $X_1,X_2,Y_1,Y_2$ violate the equation in (L2).
 Unfortunately this coNP-certificate does not generalize to graphs with cycles, as the 
 following example demonstrates.
@@ -820,7 +820,7 @@ $Q_3=sx_3yx_2t$
 together also traverse each of the twelve arcs exactly once.
 Therefore any linear weight function $w:A\to\RRR$ will satisfy $\sum_{i=1}^3\spp(P_i,w)=\sum_{i=1}^3\spp(Q_i,w)$,
 which badly collides with $\sum_{i=1}^3\qspp(P_i,q)=6$ and $\sum_{i=1}^3\qspp(Q_i,q)=0$.
-The following lemma constructs a coNP-certificate for LINEARIZABLE-QSPP that is based on a 
+The following lemma constructs a coNP-certificate for LIN-QSPP that is based on a 
 different approach.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -841,12 +841,12 @@ different approach.
 \foreach \x in {1,...,3}{\fill (p\x) circle (0.10);}
 \foreach \x in {1,...,3}{\fill (q\x) circle (0.10);}
 
-\node at ($(p1)+(-0.3, 0.20)$) {\Large$s$};
-\node at ($(p2)+(+0.3, 0.20)$) {\Large$t$};
-\node at ($(p3)+( 0.0,-0.40)$) {\Large$y$};
-\node at ($(q1)+(-0.4, 0.00)$) {\Large$x_1$};
-\node at ($(q2)+(-0.5, 0.00)$) {\Large$x_2$};
-\node at ($(q3)+(+0.4, 0.00)$) {\Large$x_3$};
+\node at ($(p1)+(-0.3, 0.20)$) {\Large $s$};
+\node at ($(p2)+(+0.3, 0.20)$) {\Large $t$};
+\node at ($(p3)+( 0.0,-0.40)$) {\Large $y$};
+\node at ($(q1)+(-0.4, 0.00)$) {\Large $x_1$};
+\node at ($(q2)+(-0.5, 0.00)$) {\Large $x_2$};
+\node at ($(q3)+(+0.4, 0.00)$) {\Large $x_3$};
 
 \foreach \x in {1,...,3}
   {\draw[decoration={markings,mark=at position 0.33 with {\arrow[scale=1.5,>=stealth]{>}}},
@@ -883,7 +883,7 @@ different approach.
 %%%%%%%%%%%%%%%%%
 \begin{lemma}
 \label{le:coNP}
-The problems VALID-LINEARIZATION and LINEARIZABLE-QSPP are contained in the complexity class coNP.
+The problems VALID-LINEARIZATION and LIN-QSPP are contained in the complexity class coNP.
 \end{lemma}
 %%%%%%%%%%%%%%%%%
 \proof
@@ -893,7 +893,7 @@ This path $P$ is the coNP-certificate: The path can be described with polynomial
 and its violation of \eqref{eq:linearizable} is easily verified in polynomial time.
 Hence VALID-LINEARIZATION is contained in coNP.
 
-Next let us consider a NO-instance of LINEARIZABLE-QSPP.
+Next let us consider a NO-instance of LIN-QSPP.
 This means that the following system of linear equations and inequalities with real 
 variables $w_a$ for the arcs $a\in A$ is infeasible:
 %%%%%%%%%%%%%%%%
@@ -935,7 +935,7 @@ As we are working in $|\ppp|$-dimensional space, the corner vertex $\pmb x^{**}$
 the constraints \eqref{eq:dlp.2}--\eqref{eq:dlp.5} with equality; this implies that at most $|A|+1$ 
 of the coordinates in $\pmb x^{**}$ are non-zero.
 
-Now our coNP-certificate for LINEARIZABLE-QSPP simply lists all the paths $P\in\ppp$ with $x^{**}_P\ne0$.
+Now our coNP-certificate for LIN-QSPP simply lists all the paths $P\in\ppp$ with $x^{**}_P\ne0$.
 As the certificate consists of at most $|A|+1$ paths that each contain at most $|A|$ arcs, the
 size of the certificate is polynomially bounded in the instance size.
 The certificate is verified in polynomial time as follows:
@@ -943,7 +943,7 @@ We consider the restriction of the system \eqref{eq:lp.1}--\eqref{eq:lp.2} to th
 in the certificate.
 As this restricted system has a polynomial number of variables and a polynomial number of constraints,
 it can be solved (and found to be infeasible) in polynomial time by linear programming.
-Hence LINEARIZABLE-QSPP is indeed contained in coNP.
+Hence LIN-QSPP is indeed contained in coNP.
 \qed
 
 \bigskip
@@ -1055,12 +1055,12 @@ In case~(ii) we derive an analogous contradiction in the primed copy of graph $H
 %%%%%%%%%%%%%%%%%
 \begin{theorem}
 \label{th:hard}
-The problems VALID-LINEARIZATION and LINEARIZABLE-QSPP are coNP-complete.
+The problems VALID-LINEARIZATION and LIN-QSPP are coNP-complete.
 \end{theorem}
 %%%%%%%%%%%%%%%%%
 \proof
 By Lemma~\ref{le:coNP} both problems are contained in coNP.
-For the coNP-hardness of LINEARIZABLE-QSPP, our reduction uses the constructed instance of QSPP.
+For the coNP-hardness of LIN-QSPP, our reduction uses the constructed instance of QSPP.
 For the coNP-hardness of VALID-LINEARIZATION, our reduction uses the constructed instance of QSPP
 together with the arc weights $w(a)=0$ for all arcs $a\in A$.
 Lemmas~\ref{le:hard.1} and~\ref{le:hard.2} yield the correctness of both reductions.
@@ -1079,7 +1079,7 @@ and that a $\ppp$-covered universally linearizable graph must be acyclic.
 There seems to be a close connection between the QSPP on acyclic graphs and 12121-subgraphs,
 as illustrated by Theorem~\ref{th:acyclic} and Proposition~\ref{pr:HS}.
 As a rule of thumb, problems around the linearization of the QSPP (as for instance 
-the problems LINEARIZABLE-QSPP and VALID-LINEARIZATION in Section~\ref{sec:hardness-chapter-4}) 
+the problems LIN-QSPP and VALID-LINEARIZATION in Section~\ref{sec:hardness-chapter-4}) 
 are well-behaved and tractable in acyclic graphs, whereas they appear to be shambolic 
 and intractable in the general case.
 
@@ -1096,7 +1096,7 @@ The arguments in Fortune, Hopcroft \& Wyllie \cite{FoHoWy1980} imply that this a
 problem is NP-complete; we remark that this NP-completeness result is not stated explicitly in
 \cite{FoHoWy1980}, but can be extracted and deduced from the arguments.
 We stress that our hardness results in Section~\ref{sec:hardness-chapter-4} are not corollaries to the 
-intractability of recognizing $\ppp$-covered graphs: LINEARIZABLE-QSPP and VALID-LINEARIZATION 
+intractability of recognizing $\ppp$-covered graphs: LIN-QSPP and VALID-LINEARIZATION 
 are intractable even in $\ppp$-covered graphs, and they remain intractable even if for every 
 arc in $A$ a corresponding covering path is specified as part of the input.
 
