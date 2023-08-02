@@ -171,9 +171,9 @@ for some integer $\Gamma$. We define $\overline{c}_i = \underline{c}_i + d_i$.
 We refer to this type of uncertainty as discrete budgeted uncertainty. It is also possible to define continuous budgeted uncertainty, where we allow the deviations $\delta_i$ to be continuous within the interval $[0,1]$. Discrete budgeted uncertainty hence contains only the extreme points of the continuous budgeted uncertainty polyhedron. In the case of single-stage robust optimization, the continuous and discrete variants are equivalent and the robust counterpart can be solved in polynomial time if this is the case for the underlying nominal problem; these observations do not necessarily hold for two-stage robust optimization (see \cite{chassein2018recoverable}).
 
 We denote the maximum number of items that can be changed by $k$.
-Let $\Delta(\pmb{x},\pmb{y}) = \sum_{i\in[n]} |x_i-y_i|$ denote the Hamming distance, and let $R(\pmb{x}) = \{ \pmb{y}\in\X : \Delta(\pmb{x},\pmb{y})\le 2k\}$ be the set of recovery solutions for some integer $k$ (note that an exchange of $k$ items corresponds to a Hamming distance of $2k$).
+Let $\dist(\pmb{x},\pmb{y}) = \sum_{i\in[n]} |x_i-y_i|$ denote the Hamming distance, and let $\X(\pmb{x}) = \{ \pmb{y}\in\X : \dist(\pmb{x},\pmb{y})\le 2k\}$ be the set of recovery solutions for some integer $k$ (note that an exchange of $k$ items corresponds to a Hamming distance of $2k$).
 We define the following problems. In the incremental problem $\textsc{Inc}(\pmb{x},\pmb{c})$, we are given $\pmb{x}$ and $\pmb{c}$, and we solve
-\[ \textsc{Inc}(\pmb{x},\pmb{c}) = \min_{\pmb{y}\in R(\pmb{x})} \sum_{i\in[n]} c_i y_i. \]
+\[ \textsc{Inc}(\pmb{x},\pmb{c}) = \min_{\pmb{y}\in \X(\pmb{x})} \sum_{i\in[n]} c_i y_i. \]
 This represents the recovery step after the solution $\pmb{x}$ has been fixed, and the scenario has been revealed. A layer above this is the adversarial problem {$\textsc{Adv}(\pmb{x})$}, where given $\pmb{x}$, we solve
 \[ \textsc{Adv}(\pmb{x}) = \max_{\pmb{c}\in\cU}\ \textsc{Inc}(\pmb{x},\pmb{c}). \]
 Finally, the recoverable robust representatives multi-selection problem (RRRMSP) is to solve
