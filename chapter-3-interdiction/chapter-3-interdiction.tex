@@ -150,13 +150,13 @@ the shortest path from $s$ to $t$ is a path starting in $s$, ending in $t$, and
 of minimum length.
 A sequence $C = (v_0, v_1, \dots, v_{\ell})$ of pairwise distinct vertices of $G$
 is called a \emph{cycle} if, in addition to each consecutive pair of vertices being connected by an edge, 
-also $\{v_{\ell}, v_0\} \in E$. A \emph{Hamilton path} in $G$ is a path consisting of all vertices of $G$
-and a \emph{Hamilton cycle} in $G$ is a cycle consisting of all vertices of $G$. We 
-call a graph $G$ \emph{hamiltonian} if there exists a Hamilton cycle in $G$.
+also $\{v_{\ell}, v_0\} \in E$. A \emph{Hamiltonian path} in $G$ is a path consisting of all vertices of $G$
+and a \emph{Hamiltonian cycle} in $G$ is a cycle consisting of all vertices of $G$. We 
+call a graph $G$ \emph{hamiltonian} if there exists a Hamiltonian cycle in $G$.
 A \emph{path cover} of $G$ is a set of vertex-disjoint paths $P_1, \dots, P_k$ 
 such that each vertex of $G$ is contained in at least one path. The number $k$ of 
 such paths is called the size of the path cover. Note that a path cover of size $1$ 
-is a Hamilton path. If $S \subseteq V$ is a set of vertices, we denote by $G-S$ the graph obtained from $G$
+is a Hamiltonian path. If $S \subseteq V$ is a set of vertices, we denote by $G-S$ the graph obtained from $G$
 by deleting the vertices in $S$ (and their incident edges) from $G$.
 
 For $a < b$, the \emph{closed interval} $[a, b]$ is defined as $\set{x \in \R \mid a \leq x \leq b}$. It has \emph{startpoint} $a$ and \emph{endpoint} $b$. We furthermore define $[a, a] := \emptyset$. Note that this is non-standard, but it will turn out convenient to use. We only consider closed intervals in this paper. If $\mathcal{J} =  (J_1, \dots, J_n)$ is a sequence of intervals (possibly containing duplicates), then we denote by $\graph(\mathcal{J}) = (V,E)$ the corresponding \emph{interval graph}
@@ -242,7 +242,7 @@ In order to enhance the readability of the proof, we employ the following strate
 The interdiction problem for shortest path in the shrink-expand framework can be reduced to the most vital nodes problem for shortest path \las{on interval graphs}.
 \end{lemma}
 \begin{proof} 
-Let $(\I, \I', k, s,t)$ be an instance of the interdiction problem, where $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$, $\I' = \fromto{[a'_1, b'_1]}{[a'_n, b'_n]}$, and $[a'_j, b'_j] \supseteq [a_j, b_j]$ for all $j \in \fromto{1}{n}$. Furthermore, $k \in \N_0$ is the budget, and $s, t \in \R$. We construct an equivalent instance of the most vital nodes problem. This instance is described by $(M, k, s, t)$, where $k, s, t$ stay the same as before, and $M$ is the following multi-set of intervals: $M$ contains one copy of $\I$ and $k+1$ copies of $\I'$, i.e.\ it has cardinality $n(k+2)$. More formally, for each $i \in \fromto{1}{n}$, let $N(i, k)$ be the multi-set, consisting of $k+1$ copies of $[a_i', b_i']$. The multi-set $M$ is then given by
+Let $(\I, \I', k, s,t)$ be an instance of the interdiction problem, where we have $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$, $\I' = \fromto{[a'_1, b'_1]}{[a'_n, b'_n]}$, and $[a'_j, b'_j] \supseteq [a_j, b_j]$ for all $j \in \fromto{1}{n}$. Furthermore, $k \in \N_0$ is the budget, and $s, t \in \R$. We construct an equivalent instance of the most vital nodes problem. This instance is described by $(M, k, s, t)$, where $k, s, t$ stay the same as before, and $M$ is the following multi-set of intervals: $M$ contains one copy of $\I$ and $k+1$ copies of $\I'$, i.e.\ it has cardinality $n(k+2)$. More formally, for each $i \in \fromto{1}{n}$, let $N(i, k)$ be the multi-set, consisting of $k+1$ copies of $[a_i', b_i']$. The multi-set $M$ is then given by
 \[M = \I \cup \bigcup_{i=1}^n N(i, k). \]
 %that is, $M$ contains $n(k+2)$ elements.
 
@@ -602,18 +602,7 @@ The maximum clique size interdiction problem and the chromatic number assistance
 Given an instance $(t, O_1, \dots, O_n)$ of $\textsc{1-fold 2-interval cover}$, we construct an instance of the maximum clique size interdiction problem. For each object $O_i$, we introduce a shrinking interval pair $[a_i, b_i] = [x_{i1}, x_{i4}]$ and $[a'_i, b'_i] = [x_{i2},x_{i3}]$. Let $\I := \fromto{[a_1, b_1]}{[a_n, b_n]}$ be the set of all $[a_i, b_i]$ introduced so far and let $M := \omega(\graph(\I))$ be the clique number of the corresponding interval graph. \hun{Then for each $p \in \fromto{0}{t}$, we iteratively} add additional \enquote{non-shrinkable} pairs $[a_{\hun{j}}, b_{\hun{j}}] = [a'_{\hun{j}}, b'_{\hun{j}}] = [p- \epsilon, p + \epsilon]$ for a small $\epsilon > 0$ \hun{and an unused index $j$}, until $p$ is contained in exactly $M + 1$ intervals. For this newly constructed instance, we have that the interdictor can reduce the clique number from $M + 1$ down to $M$ with a budget of $k$, if and only if there is a 1-fold 2-interval cover of $\fromto{0}{t}$ with at most $k$ objects.
  \end{proof}
 
-\input{chapter-3-interdiction/hamilton4}
-
-\section{Conclusion}
-We have introduced a new framework of interdiction and assistance problems for interval graphs based on the shrinking and expanding operations.
-In this framework, we have provided algorithms and classified the computational complexity of these problems for many classical parameters, including the shortest path, independence number, and clique number.
-Except for the interdiction problem for the clique number which is NP-hard, the others are in P.
-We have also formulated a polynomial-time algorithm for the assistance problem for the scattering number, which can be used to solve the interdiction problems for Hamiltonicity.
-The interdiction problem for the scattering number, however, remains open.
-We also noted that the most vital nodes problems of the above parameters are either special cases of the shrink-expand framework or can be easily solved by relevant problems in the framework. 
-In particular, this has resolved an open problem posed by Diner et al.~\cite[(Q2)]{diner2018contractionDeletionBlockers}.
-
-Finally, we note that our polynomial-time results do not generalize to superclasses of interval graphs: For the parameters $\alpha$ and $\omega$, Diner et al. proved that the most vital nodes problem is NP-complete on chordal graphs \cite{diner2018contractionDeletionBlockers}. It is also NP-complete to decide whether a chordal and bipartite graph has a Hamilton cycle \cite{muller1996hamiltonian}, so the most vital nodes problem is NP-complete too in this case. Finally, with respect to shortest path, the most vital nodes problem is NP-complete on general graphs \cite{complexityOfFindingMostVitalNodesShortestPath}, and the complexity on chordal graphs (to the best of our knowledge) is currently unknown. 
+\input{chapter-3-interdiction/hamilton4} 
 
 \section{Answer to question (Q1)}
 \label{app:contraction}
@@ -673,3 +662,14 @@ The contraction blocker problem on interval graphs for parameter $\pi = \alpha$ 
 \begin{proof}
 Running the algorithm in \cref{thm:contraction-blocker} for $k = n$, we obtain a dynamic programming table containing for each $k' \in \fromto{1}{n}$ the maximum possible effect the interdictor can achieve with a budget of $k'$. Using binary search, we can find the minimum budget $k'$ necessary to reduce $\alpha$ down to the threshold $t$.
 \end{proof}
+
+\section{Conclusion}
+We have introduced a new framework of interdiction and assistance problems for interval graphs based on the shrinking and expanding operations.
+In this framework, we have provided algorithms and classified the computational complexity of these problems for many classical parameters, including the shortest path, independence number, and clique number.
+Except for the interdiction problem for the clique number which is NP-hard, the others are in P.
+We have also formulated a polynomial-time algorithm for the assistance problem for the scattering number, which can be used to solve the interdiction problems for Hamiltonicity.
+The interdiction problem for the scattering number, however, remains open.
+We also noted that the most vital nodes problems of the above parameters are either special cases of the shrink-expand framework or can be easily solved by relevant problems in the framework. 
+In particular, this has resolved an open problem posed by Diner et al.~\cite[(Q2)]{diner2018contractionDeletionBlockers}.
+
+Finally, we note that our polynomial-time results do not generalize to superclasses of interval graphs: For the parameters $\alpha$ and $\omega$, Diner et al. proved that the most vital nodes problem is NP-complete on chordal graphs \cite{diner2018contractionDeletionBlockers}. It is also NP-complete to decide whether a chordal and bipartite graph has a Hamiltonian cycle \cite{muller1996hamiltonian}, so the most vital nodes problem is NP-complete too in this case. Finally, with respect to shortest path, the most vital nodes problem is NP-complete on general graphs \cite{complexityOfFindingMostVitalNodesShortestPath}, and the complexity on chordal graphs (to the best of our knowledge) is currently unknown.

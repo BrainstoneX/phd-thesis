@@ -292,7 +292,7 @@ A key property is that we can enumerate a set of values of variables $\alpha_j$,
   equivalent to a classic selection problem. Furthermore, it holds that $|A_j(\beta)| = O(|T_j|)$.
 \end{lemma}
 \begin{proof}
-  For any fixed choice of $\pmb{\delta}$ in $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$, the remaining problem $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j, \cdot, \pmb{\delta})$ is piecewise linear in variable $\alpha_j$.
+  For any fixed choice of $\pmb{\delta}$ in $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$, i.e.\ in problem~(\ref{eq:a}), the remaining problem $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j, \cdot, \pmb{\delta})$ is piecewise linear in variable $\alpha_j$.
   Hence, there exists an optimal value for $\alpha_j$ that is at one of the kink points $K_j(\pmb{x}, \beta, \Gamma_j, \pmb{\delta})$, 
   where the slope of the piecewise linear function changes. 
   If $\alpha_j$ is such a kink point, then it satisfies the equation $\alpha_j + x_i \beta - \underline{c}_i - d_i\delta_i = 0$ for some $i \in T_j$,
@@ -381,7 +381,7 @@ As before, we can assume that in an optimal solution we have
   where $\textsc{Adv}(\pmb{x},\beta)$ is problem~(\ref{eq:ad}) with $\beta$ fixed. Furthermore, it holds that $|B| = O(n^2)$.
 \end{lemma}
 \begin{proof}
-The proof is similar to the proof of \cref{lemma:alpha_j_discrete}. By equation~(\ref{eq:ad-rj-ij}), we can decompose problem $\textsc{Adv}(\pmb x)$ into subproblems. Certainly, there are some values $(r(1), i(1)), \dots, (r(K), i(K))$ such that the maximum in equation~(\ref{eq:ad-rj-ij}) is attained. If we assume that we have guessed these values correctly, then an optimal solution is obtained by solving problem~(\ref{eq:complicated-rj-ij}). We can now substitute each occurrence of $\gamma_i$ in problem~(\ref{eq:complicated-rj-ij}) by equation~(\ref{eq:gamma-rj-ij}). Then we see that the objective function is piecewise linear in $\beta$. 
+The proof is similar to the proof of \cref{lemma:alpha_j_discrete}. By equation~(\ref{eq:ad-rj-ij}), we can decompose the problem $\textsc{Adv}(\pmb x)$ into subproblems. Certainly, there are some values $(r(1), i(1)), \dots, (r(K), i(K))$ such that the maximum in equation~(\ref{eq:ad-rj-ij}) is attained. If we assume that we have guessed these values correctly, then an optimal solution is obtained by solving problem~(\ref{eq:complicated-rj-ij}). We can now substitute each occurrence of $\gamma_i$ in problem~(\ref{eq:complicated-rj-ij}) by equation~(\ref{eq:gamma-rj-ij}). Then we see that the objective function is piecewise linear in $\beta$. 
 This implies that there is an optimal solution where we have that $\beta \geq 0$ and $\beta$ is equal to one of the kink points of the piecewise linear function. Note that the set of kink points is equal to 
 \begin{align*}
 B((r(1),i(1)),\ldots,(r(K),i(K)))  = &\{ \underline{c}_i + d_i\delta_i - \underline{c}_{i(j)} : j \in V_1, i\in T_j\} \\
@@ -508,7 +508,7 @@ Hence, there exists a solution to the recoverable robust selection problem with 
 
 \end{proof}
 
-As a final hardness result, we remark that also the two-stage version of the selection problem with discrete budgeted uncertainty as considered in \cite{chassein2018recoverable} is NP-hard as well. The corresponding proof is given in the appendix.
+As a final hardness result, we remark that also the two-stage version of the selection problem with discrete budgeted uncertainty as considered in \cite{chassein2018recoverable} is NP-hard as well. The corresponding proof is given in \cref{sec:two-stage-selection-hardness}.
 
 \begin{theorem}\label{th:hardness3}
 The decision version of the two-stage robust selection problem with discrete budgeted uncertainty is NP-complete, even if $k=1$.
@@ -566,7 +566,7 @@ Now, we can formally define the two adversarial strategies as
   \end{cases} $ for all $i\in[n]$.
 \end{enumerate}
 
-In the selection of $j^\star$ we aim to maximally decrease the inner maximum 
+In the selection of $j^\star$ we aim to maximally decrease the value of the inner maximum 
 $\max_{j\in[K]} [c_{\langle j, \pmb{x} \rangle} - c_{\langle j, \overline{\pmb{x}} \rangle}]_+$
 in \cref{eq:adv_problem_pj_1_short}, when attacking $\langle j^\star,\overline{\pmb{x}}\rangle$.
 Hence we can restrict our choice of $j^\star$ to
@@ -724,7 +724,7 @@ That is, we begin with a subset of scenarios and alternate between solving a mod
 Any starting subset of scenarios can be used. By construction, the algorithm ends with an optimal solution to the whole uncertainty set, given sufficient computation time. This gives the user some flexibility to start with scenarios that they may consider to be a good representation of the whole set.
 
 % and can be used in combination with an iterative column-and-row generation procedure.
-A third model is compact (i.e., has a polynomial number of variables and constraints) and is presented in Appendix~\ref{sec:compact}.
+A third model is compact (i.e., has a polynomial number of variables and constraints) and is presented in \cref{sec:two-stage-selection-hardness}.
 
 \subsection{First model}
 \label{sec:first}
@@ -785,6 +785,131 @@ Variables $\pi^{\ell}$ and $\rho^{\ell}_i$ are dual variables for constraints~\e
 
 
 
+
+
+
+\section{Proof of Theorem~\ref{th:hardness3}}
+\label{sec:two-stage-selection-hardness}
+
+We first recall the definition of the two-stage robust selection problem from \cite{chassein2018recoverable}. Let $\X' = \{ \pmb{x}\in\{0,1\}^n : \sum_{i\in[n]} x_i \le p\}$ the set of feasible first-stage solutions. Given $\pmb{x}\in\X'$, the set of feasible second-stage solutions is then $\X(\pmb{x}) = \{ y\in\{0,1\}^n : \sum_{i\in[n]} x_i + y_i = p,\ x_i+ y_i \le 1 \ \forall i\in[n]\}$. As before, let $\cU$ be a discrete budgeted uncertainty set. The two-stage robust selection problem is then given as
+\[ \min_{\pmb{x}\in\X'} \max_{\pmb{c}\in\cU} \min_{y\in\X(\pmb{x})} \pmb{C}^t\pmb{x} + \pmb{c}^t\pmb{y} \]
+We now prove hardness of this problem (Theorem~\ref{th:hardness3}).
+
+\begin{proof}
+Let an instance of \textsc{Partition} be given, consisting out of a list of values $A=\{a_1,\ldots,a_n\}$. The task is to identify a set $A_0\subseteq A$ such that $\sum A_0 = 1/2 \sum A =: Q$. We construct an instance of the two-stage robust selection problem using $2n$ items, $p=n+1$, and $\Gamma=n$. 
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{c|ccc|ccc}
+ \multicolumn{1}{c}{} & \multicolumn{3}{c}{$\alpha$}& \multicolumn{3}{c}{$\beta$}\\[-1ex]
+ \multicolumn{1}{c}{} & \multicolumn{3}{c}{\downbracefill} & \multicolumn{3}{c}{\downbracefill}\\[2ex]
+ & 1 & $\dots$ & $n$ & $n+1$ & $\dots$ & $2n$ \\
+ \hline
+$C_i$ & $\bigM$ & $\dots$ & $\bigM$ & $a_1$ & $\dots$ & $a_n$ \\
+$\underline{c}_i$ & $M$ & $\dots$ & $M$ & 0 & $\dots$ & 0 \\
+$\overline{c}_i$ & $M+2Q$ & $\dots$ & $M+2Q$ & $2a_1$ & $\dots$ & $2a_n$
+\end{tabular}
+\end{center}
+\caption{Instance used in the hardness reduction for two-stage robust selection.\label{tab:h3}}
+\end{table}
+
+There are $n$ items of type $\alpha$ and of type $\beta$. Items of type $\alpha$ all have $C_i=\bigM$, $\underline{c}_i=M$ for a sufficiently large constant $M > 2Q$, and $\overline{c}_i = M+2Q$. Here, $\bigM$ denotes a large value such that packing such an item immediately disqualifies a solution from being optimal. As the following analysis shows, $\bigM > M+4Q$ is sufficient.
+Items of type $\beta$ each correspond to one of the given values $a_i$, with $C_i = a_i$, $\underline{c}_i=0$, and $\overline{c}_i=2a_i$. Note that an optimal first-stage solution does not buy any items of type $\alpha$. The adversary now has two strategies to distribute the uncertainty budget $\Gamma$: Either the costs of all items in $\alpha$ are increased, or all costs of items in $\beta$ are increased. In both cases, a second-stage solution will buy the remaining items in $\beta$ and one item in $\alpha$. In the first strategy, the costs of this item from $\alpha$ is $M+2Q$, in the second case it is $M$. Note that other strategies do not need to be considered, as any other distribution of the uncertainty also leads to costs $M$ for the one item of type $\alpha$ that is bought in the second stage.
+
+Let $X$ be the first-stage costs of items of type $\beta$ that are packed by some solution. The total costs of this solution becomes
+\[ X + \max\{ 4Q - 2X +M , 2Q+M \} = M + 2Q + \max\{ 2Q-X, X \} \]
+which are less or equal to $M+3Q$ if and only if $X=Q$, i.e., if \textsc{Partition} is a yes-instance.
+
+
+\end{proof}
+
+
+
+\section{Third mixed-integer programming formulation}
+\label{sec:compact}
+
+We now introduce a third approach to model the RRRMSP that makes use of the dynamic program introduced in the proof of Theorem~\ref{th:adv} to require only polynomially many variables and constraints.
+As explained in Section~\ref{sec:second}, we can dualize the adversarial problem~\eqref{eq:ads} for a fixed choice of $\beta$ and $\pmb{\alpha}$ to find:
+\begin{align*}
+\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j,\alpha_j) &= \min\ (P-k)\beta\lasse{/K} + p_j\alpha_j - \sum_{i\in T_j} [\alpha_j + x_i\beta - \underline{c}_i]_+ + \Gamma_j \pi + \sum_{i\in T_j} \rho_i
+\end{align*}
+\begin{align*}
+\text{s.t. } & \pi + \rho_i \ge [\alpha_j + x_i\beta - \underline{c}_i]_+ - [\alpha_j + x_i \beta - \underline{c}_i - d_i]_+ & \forall i\in T_j \\
+& \pi \ge 0 \\
+& \rho_i \ge 0 & \forall i\in T_j
+\end{align*}
+As $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j) = \max_{\alpha\in A_j(\beta)} \textsc{Adv}_j(\pmb{x},\beta,\Gamma_j,\alpha)$, we find that
+\begin{align*}
+\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j) = &(P-k)\beta\lasse{/K} \\
++ \min\ & t_j \\
+\text{s.t. } & t_j \ge p_j \alpha - \sum_{i\in T_j} [\alpha + x_i\beta - \underline{c}_i]_+ + \Gamma_j \pi_j^\alpha + \sum_{i\in T_j} \rho_i^\alpha & \forall \alpha \in A_j(\beta) \\
+& \pi_j^\alpha + \rho_i^\alpha \ge [\alpha + x_i\beta - \underline{c}_i]_+ - [\alpha + x_i \beta - \underline{c}_i - d_i]_+ & \forall i\in T_j, \alpha\in A_j(\beta)\\
+& t_j \in \rr \\
+& \pi_j^\alpha \ge 0 & \forall \alpha\in A_j(\beta) \\
+& \rho_i^\alpha \ge 0 & \forall i\in T_j , \alpha\in A_j(\beta).
+\end{align*}
+This model enables us to evaluate $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$ during the optimization process (instead of during a preprocessing step as performed for the dynamic program). Each state of the dynamic program can now be interpreted as a node $(K',\Gamma')$ in a directed acyclic graph. The aim of the adversarial problem is to find a path from an artificial node $(0,0)$ (representing the starting state) to the node $(K,\Gamma)$ (representing the state when at most $\Gamma$ many costs have been increased up to and including part $T_K$). Traversing an edge from $(K',\Gamma')$ to $(K'+1,\Gamma'')$ with $\Gamma''\ge \Gamma'$ means that a budget of $\Gamma''-\Gamma'$ is invested in part $K'+1$. The corresponding longest path problem can be relaxed and dualized 
+(see \cite{korte2006combinatorial}),
+which gives the following compact formulation for $\textsc{Rec}$:
+\begin{subequations}\allowdisplaybreaks
+\label{eq:com}  
+\begin{align}
+\min\ & \sum_{i\in[n]} C_i x_i + t \label{com-1} \\
+\text{s.t. } & t \ge (P-k)\beta + s^\beta_{K+1,\Gamma} & \forall \beta \in B \label{com-2}\\
+% 
+& s^\beta_{j+1,\gamma'} \ge s^\beta_{j,\gamma} + c^\beta_{j,\gamma'-\gamma} & \forall \beta \in B, \gamma\in \{0\,\ldots,\Gamma\}, \gamma'\ge \gamma, j \in [K] \label{com-3}\\
+% 
+& s^\beta_{K+1,\gamma} \ge s^\beta_{K+1,\gamma-1} & \forall \beta\in B, \gamma\in[\Gamma] \label{com-4}\\
+% 
+& s^\beta_{1,\gamma} =0 & \forall \beta\in B, \gamma\in \{0,\ldots,\Gamma\} \label{com-5}\\
+% 
+& c^\beta_{j,\gamma} \ge  p_j \alpha - \sum_{i\in T_j} [\alpha + x_i\beta - \underline{c}_i]_+ + \gamma \pi^{\beta,\gamma,\alpha}_j + \sum_{i\in T_j} \rho^{\beta,\gamma,\alpha}_i \hspace{-5cm} \nonumber\\
+& & \forall \beta \in B, j \in [K], \gamma \in \{0,\ldots,\Gamma\}, \alpha \in A_j(\beta) \label{com-6} \\
+% 
+& \pi^{\beta,\gamma,\alpha}_j + \rho^{\beta,\gamma,\alpha}_i \ge [\alpha + x_i\beta - \underline{c}_i]_+ - [\alpha + x_i \beta - \underline{c}_i - d_i]_+ \hspace{-5cm} \nonumber\\
+& & \forall \beta\in B, j\in [K], \gamma\in \{0,\ldots,\Gamma\}, \alpha \in A_j(\beta), i\in T_j \label{com-7}\\
+% 
+& \sum_{i\in T_j} x_{ji} = p_j & \forall j\in [K] \label{com-8}\\
+% 
+& x_{ji} \in\{0,1\} & \forall j\in[K], i\in T_j \label{com-9}\\
+% 
+& s^\beta_{j,\gamma} \in \rr & \forall \beta \in B, \gamma\in\{0,\ldots,\Gamma\},j\in[K] \\
+& c^\beta_{j,\gamma} \in \rr & \forall \beta \in B, \gamma\in\{0,\ldots,\Gamma\},j\in[K] \\
+% 
+& \pi^{\beta,\gamma,\alpha}_j \ge 0 & \forall \beta\in B, j\in[K], \gamma\in\{0,\ldots,\Gamma\}, \alpha\in A_j(\beta) \label{com-10} \\
+% 
+& \rho^{\beta,\gamma,\alpha}_i \ge 0 & \forall \beta\in B, j\in[K], \gamma\in\{0,\ldots,\Gamma\}, \alpha\in A_j(\beta), i\in T_j. \label{com-11}
+\end{align}
+\end{subequations}
+We make use of variables $c^\beta_{j,\gamma}$ that denote the costs $\textsc{Adv}_j(\pmb{x},\beta,\gamma)$. Variables $s^\beta_{j,\gamma}$ are the dual variables corresponding to the nodes of the graphs (node potentials). For ease of notation, the index $j$ is increased by one.
+The objective~\eqref{com-1} is to minimize the sum of first-stage costs and worst-case second-stage costs, represented by variable $t$. In constraints~\eqref{com-2} we ensure that $t$ is the maximum over all candidate values $\beta$ for the adversarial problems. The right-hand side of \eqref{com-2} uses variable $s^\beta_{K+1,\Gamma}$ to express the value of the longest path in the graph modeling the adversarial problem. Constraints~(\ref{com-3}-\ref{com-5}) model the dual constraints to this problem, where $c^\beta_{j,\gamma}$ represents the arc lengths. These are variables, which depend on the worst-case choice of $\alpha\in A_j(\beta)$. This is ensured by constraints~\eqref{com-6} and \eqref{com-7}. As before, brackets $[\cdot]_+$ can be linearized using standard methods. Finally, constraint~\eqref{com-9} ensures that $\pmb{x}\in\X$. Note that the size of the model is polynomial in the input with $O(n^4\Gamma)$ many variables and constraints.
+
+Next we consider the integrality gap of this formulation. In Table~\ref{tab:example2} we present an example instance consisting of two parts, from each of which one item must be selected. As before, $\Gamma=k=1$.
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{r|rrr|rr}
+ & \multicolumn{3}{c|}{$T_1$} & \multicolumn{2}{c}{$T_2$} \\
+ & 1 & 2 & 3 & 4 & 5 \\
+ \hline
+$C_i$ & 0 & 0 & 0 & 0 & 1\\
+$\underline{c}_i$ & 0 & 0 & 0 & 1 & 0 \\
+$\overline{c}_i$ & 1 & 1 & 1 & 1 & 0
+\end{tabular}
+\end{center}
+\caption{Example problem with $\Gamma=k=1$.\label{tab:example2}}
+\end{table}
+Note that an optimal integral solution has objective value 1. Let us assume without loss of generality that item 1 is packed. If also item 4 is packed, the adversary attacks item 1, and either exchanging item 1 or item 4 results in an objective value 1. If item 5 is packed instead of item 4, we must pay one unit in the first stage but can remain without additional costs in the second stage.
+
+Now consider the fractional solution $\pmb{x}=(1/3,1/3,1/3,2/3,1/3)$. We have $B=\{-1,0,1\}$, and careful examination of all problems $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$ reveals that none of these results in an adversary value larger than 0. We can therefore make the following observation.
+
+\begin{observation}
+The compact problem formulation (\ref{eq:com}) has an unbounded integrality gap.
+\end{observation}
+
+This means in particular that we cannot expect algorithms based on rounding the linear relaxation of the compact formulation to result in approximation guarantees. A natural question is thus to consider whether local search methods may provide an approximation guarantee. 
+
+
+
 \section{Computational experiments}
 \label{sec:experiments}
 
@@ -792,10 +917,10 @@ Variables $\pi^{\ell}$ and $\rho^{\ell}_i$ are dual variables for constraints~\e
 
 The aim of this section is to compare the behavior of the exact solution methods described in Section~\ref{sec:mips} depending on instance parameters. The models we compare are:
 \begin{enumerate}
-\item Model (\ref{eq:m1}) from Section~\ref{sec:first} in combination with iterative variable-and-constraint generation. We refer to this approach as M1.
-\item Model (\ref{eq:secmod}) from Section~\ref{sec:second} in combination with iterative variable-and-constraint generation. We refer to this approach as M2.
+\item Model (\ref{eq:m1}) from Section~\ref{sec:first} combined with iterative variable-and-constraint generation. We refer to this approach as M1.
+\item Model (\ref{eq:secmod}) from Section~\ref{sec:second} combined with iterative variable-and-constraint generation. We refer to this approach as M2.
 \end{enumerate}
-Note that the compact model (\ref{eq:com}) from Appendix~\ref{sec:compact} is a natural additional comparator approach. However, preliminary experiments show that this approach does not scale well in the problem size due to the large number of variables. Hence, it is not considered in the following experiments.
+Note that the compact model (\ref{eq:com}) from \cref{sec:compact} is a natural additional comparator approach. However, preliminary experiments show that this approach does not scale well in the problem size due to the large number of variables. Hence, it is not considered in the following experiments.
 
 For both models, we start the iterative process with an empty scenario set. The first master problem is thus simply to choose items with minimal first-stage costs.
 
@@ -913,128 +1038,6 @@ Many interesting avenues for further research arise.
 While these results cover many complexity aspects of the problem, the complexity for constant $\Gamma$ remains open. Additionally, our reductions are based on weakly NP-hard problems, which means that it remains an open question if pseudopolynomial solution methods exist.
 It seems likely that the proof of Theorem~\ref{thm:easy_case_RRRS} can be extended to general values $n_j$, if $p_j=\Gamma = k = 1$ holds. There still remain two basic adversarial strategies in this case; one where the chosen item of a part has its costs increased, and one where the cheapest item not chosen in a part has its cost increased. This may lead to an enumeration-based solution method along similar lines as presented in the proof.
 Beyond the problem considered here, the complexity of other problem variants remains open as well. These include two-stage representatives selection (where an incomplete solution is built in the first stage) or other uncertainty sets, such as continuous budgeted uncertainty. In particular, it is an interesting question to determine the precise circumstances under which the algorithmic technique to derive a polynomial-time algorithm can also be extended to other problems.
-
-
-\section{Proof of Theorem~\ref{th:hardness3}}
-
-We first recall the definition of the two-stage robust selection problem from \cite{chassein2018recoverable}. Let $\X' = \{ \pmb{x}\in\{0,1\}^n : \sum_{i\in[n]} x_i \le p\}$ the set of feasible first-stage solutions. Given $\pmb{x}\in\X'$, the set of feasible second-stage solutions is then $\X(\pmb{x}) = \{ y\in\{0,1\}^n : \sum_{i\in[n]} x_i + y_i = p,\ x_i+ y_i \le 1 \ \forall i\in[n]\}$. As before, let $\cU$ be a discrete budgeted uncertainty set. The two-stage robust selection problem is then given as
-\[ \min_{\pmb{x}\in\X'} \max_{\pmb{c}\in\cU} \min_{y\in\X(\pmb{x})} \pmb{C}^t\pmb{x} + \pmb{c}^t\pmb{y} \]
-We now prove hardness of this problem (Theorem~\ref{th:hardness3}).
-
-\begin{proof}
-Let an instance of \textsc{Partition} be given, consisting of a list of values $A=\{a_1,\ldots,a_n\}$. The task is to identify a set $A_0\subseteq A$ such that $\sum A_0 = 1/2 \sum A =: Q$. We construct an instance of the two-stage robust selection problem using $2n$ items, $p=n+1$, and $\Gamma=n$. 
-
-\begin{table}[htb]
-\begin{center}
-\begin{tabular}{c|ccc|ccc}
- \multicolumn{1}{c}{} & \multicolumn{3}{c}{$\alpha$}& \multicolumn{3}{c}{$\beta$}\\[-1ex]
- \multicolumn{1}{c}{} & \multicolumn{3}{c}{\downbracefill} & \multicolumn{3}{c}{\downbracefill}\\[2ex]
- & 1 & $\dots$ & $n$ & $n+1$ & $\dots$ & $2n$ \\
- \hline
-$C_i$ & $\bigM$ & $\dots$ & $\bigM$ & $a_1$ & $\dots$ & $a_n$ \\
-$\underline{c}_i$ & $M$ & $\dots$ & $M$ & 0 & $\dots$ & 0 \\
-$\overline{c}_i$ & $M+2Q$ & $\dots$ & $M+2Q$ & $2a_1$ & $\dots$ & $2a_n$
-\end{tabular}
-\end{center}
-\caption{Instance used in the hardness reduction for two-stage robust selection.\label{tab:h3}}
-\end{table}
-
-There are $n$ items of type $\alpha$ and of type $\beta$. Items of type $\alpha$ all have $C_i=\bigM$, $\underline{c}_i=M$ for a sufficiently large constant $M > 2Q$, and $\overline{c}_i = M+2Q$. Here, $\bigM$ denotes a large value such that packing such an item immediately disqualifies a solution from being optimal. As the following analysis shows, $\bigM > M+4Q$ is sufficient.
-Items of type $\beta$ each correspond to one of the given values $a_i$, with $C_i = a_i$, $\underline{c}_i=0$, and $\overline{c}_i=2a_i$. Note that an optimal first-stage solution does not buy any items of type $\alpha$. The adversary now has two strategies to distribute the uncertainty budget $\Gamma$: Either the costs of all items in $\alpha$ are increased, or all costs of items in $\beta$ are increased. In both cases, a second-stage solution will buy the remaining items in $\beta$ and one item in $\alpha$. In the first strategy, the costs of this item from $\alpha$ is $M+2Q$, in the second case it is $M$. Note that other strategies do not need to be considered, as any other distribution of the uncertainty also leads to costs $M$ for the one item of type $\alpha$ that is bought in the second stage.
-
-Let $X$ be the first-stage costs of items of type $\beta$ that are packed by some solution. The total costs of this solution becomes
-\[ X + \max\{ 4Q - 2X +M , 2Q+M \} = M + 2Q + \max\{ 2Q-X, X \} \]
-which are less or equal to $M+3Q$ if and only if $X=Q$, i.e., if \textsc{Partition} is a yes-instance.
-
-
-\end{proof}
-
-
-
-\section{Third mixed-integer programming formulation}
-\label{sec:compact}
-
-We now introduce a third approach to model the RRRMSP that makes use of the dynamic program introduced in the proof of Theorem~\ref{th:adv} to require only polynomially many variables and constraints.
-As explained in Section~\ref{sec:second}, we can dualize the adversarial problem~\eqref{eq:ads} for a fixed choice of $\beta$ and $\pmb{\alpha}$ to find:
-\begin{align*}
-\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j,\alpha_j) = \min\ &(P-k)\beta\lasse{/K} + p_j\alpha_j - \sum_{i\in T_j} [\alpha_j + x_i\beta - \underline{c}_i]_+ + \Gamma_j \pi + \sum_{i\in T_j} \rho_i \\
-\text{s.t. } & \pi + \rho_i \ge [\alpha_j + x_i\beta - \underline{c}_i]_+ - [\alpha_j + x_i \beta - \underline{c}_i - d_i]_+ & \forall i\in T_j \\
-& \pi \ge 0 \\
-& \rho_i \ge 0 & \forall i\in T_j
-\end{align*}
-As $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j) = \max_{\alpha\in A_j(\beta)} \textsc{Adv}_j(\pmb{x},\beta,\Gamma_j,\alpha)$, we find that
-\begin{align*}
-\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j) = &(P-k)\beta\lasse{/K} \\
-+ \min\ & t_j \\
-\text{s.t. } & t_j \ge p_j \alpha - \sum_{i\in T_j} [\alpha + x_i\beta - \underline{c}_i]_+ + \Gamma_j \pi_j^\alpha + \sum_{i\in T_j} \rho_i^\alpha & \forall \alpha \in A_j(\beta) \\
-& \pi_j^\alpha + \rho_i^\alpha \ge [\alpha + x_i\beta - \underline{c}_i]_+ - [\alpha + x_i \beta - \underline{c}_i - d_i]_+ & \forall i\in T_j, \alpha\in A_j(\beta)\\
-& t_j \in \rr \\
-& \pi_j^\alpha \ge 0 & \forall \alpha\in A_j(\beta) \\
-& \rho_i^\alpha \ge 0 & \forall i\in T_j , \alpha\in A_j(\beta).
-\end{align*}
-This model enables us to evaluate $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$ during the optimization process (instead of during a preprocessing step as performed for the dynamic program). Each state of the dynamic program can now be interpreted as a node $(K',\Gamma')$ in a directed acyclic graph. The aim of the adversarial problem is to find a path from an artificial node $(0,0)$ (representing the starting state) to the node $(K,\Gamma)$ (representing the state when at most $\Gamma$ many costs have been increased up to and including part $T_K$). Traversing an edge from $(K',\Gamma')$ to $(K'+1,\Gamma'')$ with $\Gamma''\ge \Gamma'$ means that a budget of $\Gamma''-\Gamma'$ is invested in part $K'+1$. The corresponding longest path problem can be relaxed and dualized 
-(see \cite{korte2006combinatorial}),
-which gives the following compact formulation for $\textsc{Rec}$:
-\begin{subequations}\allowdisplaybreaks
-\label{eq:com}  
-\begin{align}
-\min\ & \sum_{i\in[n]} C_i x_i + t \label{com-1} \\
-\text{s.t. } & t \ge (P-k)\beta + s^\beta_{K+1,\Gamma} & \forall \beta \in B \label{com-2}\\
-% 
-& s^\beta_{j+1,\gamma'} \ge s^\beta_{j,\gamma} + c^\beta_{j,\gamma'-\gamma} & \forall \beta \in B, \gamma\in \{0\,\ldots,\Gamma\}, \gamma'\ge \gamma, j \in [K] \label{com-3}\\
-% 
-& s^\beta_{K+1,\gamma} \ge s^\beta_{K+1,\gamma-1} & \forall \beta\in B, \gamma\in[\Gamma] \label{com-4}\\
-% 
-& s^\beta_{1,\gamma} =0 & \forall \beta\in B, \gamma\in \{0,\ldots,\Gamma\} \label{com-5}\\
-% 
-& c^\beta_{j,\gamma} \ge  p_j \alpha - \sum_{i\in T_j} [\alpha + x_i\beta - \underline{c}_i]_+ + \gamma \pi^{\beta,\gamma,\alpha}_j + \sum_{i\in T_j} \rho^{\beta,\gamma,\alpha}_i \hspace{-5cm} \nonumber\\
-& & \forall \beta \in B, j \in [K], \gamma \in \{0,\ldots,\Gamma\}, \alpha \in A_j(\beta) \label{com-6} \\
-% 
-& \pi^{\beta,\gamma,\alpha}_j + \rho^{\beta,\gamma,\alpha}_i \ge [\alpha + x_i\beta - \underline{c}_i]_+ - [\alpha + x_i \beta - \underline{c}_i - d_i]_+ \hspace{-5cm} \nonumber\\
-& & \forall \beta\in B, j\in [K], \gamma\in \{0,\ldots,\Gamma\}, \alpha \in A_j(\beta), i\in T_j \label{com-7}\\
-% 
-& \sum_{i\in T_j} x_{ji} = p_j & \forall j\in [K] \label{com-8}\\
-% 
-& x_{ji} \in\{0,1\} & \forall j\in[K], i\in T_j \label{com-9}\\
-% 
-& s^\beta_{j,\gamma} \in \rr & \forall \beta \in B, \gamma\in\{0,\ldots,\Gamma\},j\in[K] \\
-& c^\beta_{j,\gamma} \in \rr & \forall \beta \in B, \gamma\in\{0,\ldots,\Gamma\},j\in[K] \\
-% 
-& \pi^{\beta,\gamma,\alpha}_j \ge 0 & \forall \beta\in B, j\in[K], \gamma\in\{0,\ldots,\Gamma\}, \alpha\in A_j(\beta) \label{com-10} \\
-% 
-& \rho^{\beta,\gamma,\alpha}_i \ge 0 & \forall \beta\in B, j\in[K], \gamma\in\{0,\ldots,\Gamma\}, \alpha\in A_j(\beta), i\in T_j. \label{com-11}
-\end{align}
-\end{subequations}
-We make use of variables $c^\beta_{j,\gamma}$ that denote the costs $\textsc{Adv}_j(\pmb{x},\beta,\gamma)$. Variables $s^\beta_{j,\gamma}$ are the dual variables corresponding to the nodes of the graphs (node potentials). For ease of notation, the index $j$ is increased by one.
-The objective~\eqref{com-1} is to minimize the sum of first-stage costs and worst-case second-stage costs, represented by variable $t$. In constraints~\eqref{com-2} we ensure that $t$ is the maximum over all candidate values $\beta$ for the adversarial problems. The right-hand side of \eqref{com-2} uses variable $s^\beta_{K+1,\Gamma}$ to express the value of the longest path in the graph modeling the adversarial problem. Constraints~(\ref{com-3}-\ref{com-5}) model the dual constraints to this problem, where $c^\beta_{j,\gamma}$ represents the arc lengths. These are variables, which depend on the worst-case choice of $\alpha\in A_j(\beta)$. This is ensured by constraints~\eqref{com-6} and \eqref{com-7}. As before, brackets $[\cdot]_+$ can be linearized using standard methods. Finally, constraint~\eqref{com-9} ensures that $\pmb{x}\in\X$. Note that the size of the model is polynomial in the input with $O(n^4\Gamma)$ many variables and constraints.
-
-Next we consider the integrality gap of this formulation. In Table~\ref{tab:example2} we present an example instance consisting of two parts, from each of which one item must be selected. As before, $\Gamma=k=1$.
-\begin{table}[htb]
-\begin{center}
-\begin{tabular}{r|rrr|rr}
- & \multicolumn{3}{c|}{$T_1$} & \multicolumn{2}{c}{$T_2$} \\
- & 1 & 2 & 3 & 4 & 5 \\
- \hline
-$C_i$ & 0 & 0 & 0 & 0 & 1\\
-$\underline{c}_i$ & 0 & 0 & 0 & 1 & 0 \\
-$\overline{c}_i$ & 1 & 1 & 1 & 1 & 0
-\end{tabular}
-\end{center}
-\caption{Example problem with $\Gamma=k=1$.\label{tab:example2}}
-\end{table}
-Note that an optimal integral solution has objective value 1. Let us assume without loss of generality that item 1 is packed. If also item 4 is packed, the adversary attacks item 1, and either exchanging item 1 or item 4 results in an objective value 1. If item 5 is packed instead of item 4, we must pay one unit in the first stage but can remain without additional costs in the second stage.
-
-Now consider the fractional solution $\pmb{x}=(1/3,1/3,1/3,2/3,1/3)$. We have $B=\{-1,0,1\}$, and careful examination of all problems $\textsc{Adv}_j(\pmb{x},\beta,\Gamma_j)$ reveals that none of these results in an adversary value larger than 0. We can therefore make the following observation.
-
-\begin{observation}
-The compact problem formulation (\ref{eq:com}) has an unbounded integrality gap.
-\end{observation}
-
-This means in particular that we cannot expect algorithms based on rounding the linear relaxation of the compact formulation to result in approximation guarantees. A natural question is thus to consider whether local search methods may provide an approximation guarantee. 
-
-
-
-
 
 
 

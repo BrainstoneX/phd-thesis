@@ -321,5 +321,3 @@ We show these two claims by induction. The base case of the induction is concern
     We show how to compute a matrix representation $M$ of this function, such that $f_{t,d}(x) = Mx$ for all $x$. Hence $\mathcal{L}_d$ is equal to the kernel of $M$.
     Consider the set $e_1,\dots, e_k$ of all standard basis vectors of $\R^{A_u^{(d)}}$, where $k = \bigO(m^d)$. By \cref{lemma:subspaces-induction}, we can compute the vector $f_{t,d}(e_j)$ in $\bigO(m^d)$ time for every $j=1,\dots,k$. Basic linear algebra tells us that these vectors constitute the columns of $M$. We can hence compute the matrix $M$ and a basis of its kernel in polynomial time. We have therefore obtained a basis of $\mathcal{L}_d$.  
 \end{proof}
-
-\noindent \textbf{ Acknowledgement.} This research has been supported by the Austrian Science Fund (FWF): W1230.

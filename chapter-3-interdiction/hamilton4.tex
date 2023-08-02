@@ -5,7 +5,7 @@
 
 \section{Scattering number, Hamiltonicity, and graph toughness}
 \label{sec:hamiltonicity}
-In this section, we \las{investigate the shrink-expand framework with respect to various parameters related to Hamiltonicity of an interval graph. All the problems considered in this section are of the same structure: As input we are given an interval graph in the shrink-expand framework with shrinking intervals. The given graph is Hamiltonian (or has a property similar to Hamiltonicity, like a Hamilton path, a small path cover, large graph toughness), and the question is whether the interdictor can destroy this property by shrinking at most $k$ intervals for a given budget $k$. In this section, we consider interdiction problems and most vital nodes problems with respect to Hamilton cycle, Hamilton path, path cover (\cref{subsection:ham_interdict,subsection:ham_mvn}), and graph toughness (\cref{subsection:tough}), as well as the assistance problem for scattering number (\cref{subsection:scat}). The formal definition of each of these problems is given at the beginning of the corresponding subsection. We show that each of these problems can be solved in polynomial time.}
+In this section, we \las{investigate the shrink-expand framework with respect to various parameters related to Hamiltonicity of an interval graph. All the problems considered in this section are of the same structure: As input we are given an interval graph in the shrink-expand framework with shrinking intervals. The given graph is Hamiltonian (or has a property similar to Hamiltonicity, like a Hamiltonian path, a small path cover, large graph toughness), and the question is whether the interdictor can destroy this property by shrinking at most $k$ intervals for a given budget $k$. In this section, we consider interdiction problems and most vital nodes problems with respect to Hamiltonian cycle, Hamiltonian path, path cover (\cref{subsection:ham_interdict,subsection:ham_mvn}), and graph toughness (\cref{subsection:tough}), as well as the assistance problem for scattering number (\cref{subsection:scat}). The formal definition of each of these problems is given at the beginning of the corresponding subsection. We show that each of these problems can be solved in polynomial time.}
 
 \las{Before we begin, we have to introduce the concept of the \emph{scattering number}, which is crucially related to Hamiltonicity of interval graphs.}
 We define by $c(G)$ the number of connected components in a graph $G$.
@@ -22,8 +22,8 @@ For an interval graph, the scattering number characterizes the Hamiltonicity of 
 \label{thm:scat}
 For an interval graph $G$ and for all constants $p \geq 1$,
 \begin{itemize}
-	\item $G$ contains a Hamilton path, if and only if $\scat(G) \leq 1$;
-	\item $G$ contains a Hamilton cycle, if and only if $\scat(G) \leq 0$;
+	\item $G$ contains a Hamiltonian path, if and only if $\scat(G) \leq 1$;
+	\item $G$ contains a Hamiltonian cycle, if and only if $\scat(G) \leq 0$;
 	\item $G$ contains a path cover of size $p$, if and only if $\scat(G) \leq p$.
 \end{itemize}
 \end{theorem}
@@ -35,8 +35,8 @@ One can easily see that the ``$\Rightarrow$" directions in the above theorem are
 In the shrink-expand framework, the following problems can be solved in time $\bigO(kn^3)$:
 \begin{itemize}
 	\item[(a)] The assistance problem for scattering number,
-	\item[(b)] The interdiction problem for Hamilton path,
-	\item[(c)] The interdiction problem for Hamilton cycle,
+	\item[(b)] The interdiction problem for Hamiltonian path,
+	\item[(c)] The interdiction problem for Hamiltonian cycle,
 	\item[(d)] The interdiction problem for path cover,
 \end{itemize}
 \end{theorem}
@@ -164,7 +164,7 @@ Our second lemma (\cref{lem:ham_path}) states that $\beta_\text{max}$ can be com
 %%%%%%%%%%%%----------------------
 \las{Consider Algorithm~\ref{alg-chapter-4}, which provides a complete description of $P$ in pseudo-code. Before we proceed with the formal proof of our main lemmas, we explain in this paragraph the ideas behind process $P$ and its components.}
 
-\las{Process $P$ receives as input an integer $k \geq 0$ and sequences of intervals $\I = (I_1,\dots,I_n) = ([a_1,b_1], \dots, [a_n,b_n])$ and $\I' = (I'_1,\dots,I'_n) = ([a'_1,b'_1], \dots, [a'_n,b'_n])$, such that for all $i \in \set{1,\dots,n}$ we have $a_i \leq a'_i \leq b'_i \leq b_i$. We can assume w.l.o.g.\ that $a_i < b_i$ for all $i=1,\dots,n$. However, a special case that we cannot avoid is that for some indices $i$ it could be the case that $a'_i = b'_i$. Recall that we defined in the introduction that in this case we have $[a'_i, b'_i] = \emptyset$. (This definition may seem a bit unorthodox. However, it is crucial to correctly model the most vital nodes problem later in \cref{subsection:ham_mvn}.)
+\las{Process $P$ receives as input an integer $k \geq 0$ together with sequences of intervals $\I = (I_1,\dots,I_n) = ([a_1,b_1], \dots, [a_n,b_n])$ and $\I' = (I'_1,\dots,I'_n) = ([a'_1,b'_1], \dots, [a'_n,b'_n])$, such that for all $i \in \set{1,\dots,n}$ we have $a_i \leq a'_i \leq b'_i \leq b_i$. We can assume w.l.o.g.\ that $a_i < b_i$ for all $i=1,\dots,n$. However, a special case that we cannot avoid is that for some indices $i$ it could be the case that $a'_i = b'_i$. Recall that we defined in the introduction that in this case we have $[a'_i, b'_i] = \emptyset$. (This definition may seem a bit unorthodox. However, it is crucial to correctly model the most vital nodes problem later in \cref{subsection:ham_mvn}.)
 }
 
 \las{After $P$ has received its input, it considers the union $\mathcal{F} := \I \cup \I'$ and orders it by the endpoints of the intervals, i.e.\ $\mathcal{F} = \fromto{F_1}{F_{2n}} = \fromto{[c_1,d_1]}{[c_{2n},d_{2n}]}$ such that $d_1 < d_2 < \dots < d_{2n}$ (we can w.l.o.g. assume that no two endpoints are equal). The main idea of $P$ is now to consider all the intervals $F_i$, starting with $i=2n$ and going down towards $i=1$, and making a partial decision about the fate of interval $F_i$. In particular, this decision is indicated by some keywords,  $\textsc{shrink}, \textsc{lock}, \textsc{delete}, \textsc{discard}, \textsc{delay}$. The meaning behind the keywords is as follows:}
@@ -276,7 +276,7 @@ An instance of the maximum-cost path in a DAG problem is a tuple $(H, \omega)$, 
 The problem is to find a path in $H$ with the maximum cost, which is defined as the sum of edge costs along the path.
 This problem can be solved with dynamic programming with runtime linear to the number of edges \las{and vertices} of $H$ \las{\cite{sedgewick2011algorithms}}.
 
-We first construct an instance of this problem for the reduction. \las{Let $\mathcal{P} := \bigcup_{i=1}^{n}\set{a_i,b_i,a_i',b'_i}$.}
+We first construct an instance of the maximimum-cost path in a DAG problem for the reduction. \las{Let $\mathcal{P} := \bigcup_{i=1}^{n}\set{a_i,b_i,a_i',b'_i}$.}
 For every possible value assignments of $L = [\ell, r]$ (with \las{$\ell, r \in \mathcal{P}, \ell < r$}), every $k' \las{\in [k]}$, and $\gamma \in \set{1,2}$ describing the memory state of process $P$ at step $i \in \fromto{2n}{0}$, we add a vertex $(i,\ell,r,k',\gamma)$ in $H$. 
 For $i \geq 1$, we create an edge from a vertex of the form $(i,\ell_1,r_1,k'_1,\gamma_1)$ to vertices $(i-1,\ell_2,r_2,k_2',\gamma_2)$, if and only if there is some possible choice in $P$ such that if the current memory state is $(i,\ell_1,r_1,k'_1,\gamma_1)$ then the new memory state would be $(i-1, \ell_2, r_2, k_2',\gamma_2)$ after this choice. 
 Observe that the knowledge of $(i, \ell_1, r_1, k'_1,\gamma_1)$ suffices to determine which \las{of the choices 1a.), 1b.), 2a.) 2b.) and 2c.)} are possible and to determine the new memory state \las{(note that the interval $F_i$ can be derived from $i$)}. 
@@ -304,22 +304,22 @@ Theorem~\ref{thm:ham}(a) then follows.
 \subsection{Interdiction problems for Hamiltonicity}
 \label{subsection:ham_interdict}
 
-In the interdiction problem for Hamilton path (cycle), we are given shrinking intervals $\I, \I'$, such that $\graph(\I)$ has a Hamilton path (cycle), and the interdictor wishes to select $X \subseteq [n]$ of size at most $k$, such that $\graph(\I_X)$ does not have a Hamilton path (cycle) anymore.
+In the interdiction problem for Hamiltonian path (cycle), we are given shrinking intervals $\I, \I'$, such that $\graph(\I)$ has a Hamiltonian path (cycle), and the interdictor wishes to select $X \subseteq [n]$ of size at most $k$, such that $\graph(\I_X)$ does not have a Hamiltonian path (cycle) anymore.
 Similarly in the interdiction problem for path cover, we also have shrinking intervals, and the objective of the interdictor is to maximize the size of the path cover within the budget $k$ shrinkages.
 
 \paragraph*{Proof of Theorem~\ref{thm:ham}(b)-(d).}
-These are implied by Theorem~\ref{thm:scat} and Theorem~\ref{thm:ham}(a).
+These are implied by Theorem~\ref{thm:scat} together with Theorem~\ref{thm:ham}(a).
 To solve these problems, we first compute $\max_{|X| \leq k}\scat(G_X)$, i.e. the value of the assistance problem of the scattering number.
 This value is also the value for the interdiction problem for path cover.
-For the interdiction problems for Hamilton path and Hamilton cycle, we can conclude that the interdictor can interdict successfully, if and only if this value is more than 1 and 0 respectively.
+For the interdiction problems for Hamiltonian path and Hamiltonian cycle, we can conclude that the interdictor can interdict successfully, if and only if this value is more than 1 and 0 respectively.
 Therefore, these problems can also be solved in time $\bigO(kn^3)$.
  
 
 \subsection{Most vital nodes problem for Hamiltonicity}
 \label{subsection:ham_mvn}
-\las{In the most vital nodes problem for Hamilton path (cycle, respectively), we are given an interval graph, which has a Hamilton path (cycle, respectively) and a budget $k$. The question is whether the interdictor can destroy the property that the graph has a Hamilton path (cycle) by deleting at most $k$ vertices. More generally, the most vital nodes problem for path cover is to compute the number $\max_{X \subseteq V, |X| \leq k} \text{pc}(G - X)$, where $\text{pc}$ denotes the path cover number. We show that all these problems can be solved in polynomial time.}
+\las{In the most vital nodes problem for Hamiltonian path (cycle, respectively), we are given an interval graph, which has a Hamiltonian path (cycle, respectively) and a budget $k$. The question is whether the interdictor can destroy the property that the graph has a Hamiltonian path (cycle) by deleting at most $k$ vertices. More generally, the most vital nodes problem for path cover is to compute the number $\max_{X \subseteq V, |X| \leq k} \text{pc}(G - X)$, where $\text{pc}$ denotes the path cover number. We show that all these problems can be solved in polynomial time.}
 
-Similar to other graph parameters discussed in this paper, a natural question is whether the most vital nodes problems for Hamilton path, Hamilton cycle, and path cover are special cases of the shrink-expand framework.
+Similar to other graph parameters discussed in this chapter, a natural question is whether the most vital nodes problems for Hamiltonian path, Hamiltonian cycle, and path cover are special cases of the shrink-expand framework.
 The simple answer is no.
 Here, shrinking to an empty interval and deleting a vertex yield different effect.
 The former operation creates an isolated vertex and disconnects the graph, while the latter does not necessarily make the graph non-hamiltonian.
@@ -352,7 +352,7 @@ The lemma then follows.
 
 Combining the above lemma with Theorem~\ref{thm:ham}(a), we obtain the following:
 \begin{corollary}
-The most vital nodes problem \las{on interval graphs} for Hamilton path, Hamilton cycle, and path cover can be solved in time $\bigO(kn^3)$
+The most vital nodes problem \las{on interval graphs} for Hamiltonian path, Hamiltonian cycle, and path cover can be solved in time $\bigO(kn^3)$
 \end{corollary}
 
 \subsection{Graph toughness}

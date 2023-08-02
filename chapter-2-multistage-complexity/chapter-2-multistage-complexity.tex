@@ -25,7 +25,7 @@
 
 As single-stage robust optimization problems have been well studied, multi-stage problems have seen increasing attention in the robust optimization community. These are problems where the decision making process is split into two or even more stages. Examples for problems of this kind are robust two-stage adjustable optimization and robust recoverable optimization.
 
-In this paper, \new{we study the complexity} of multi-stage robust optimization problems. The case of one-stage robust optimization has been thoroughly studied (see, e.g., \cite{kasperski2016robust}). In contrast, considerably less is known about the two-stage or recoverable robust case. In some cases, there is no
+In this chapter, \new{we study the complexity} of multi-stage robust optimization problems. The case of one-stage robust optimization has been thoroughly studied (see, e.g., \cite{kasperski2016robust}). In contrast, considerably less is known about the two-stage or recoverable robust case. In some cases, there is no
 % theoretical foundation
 \new{general result}
 that excludes the possibility of a compact mixed-integer programming formulation (i.e., it is not clear if the problem is in NP or not). As many one-stage robust optimization problems are already NP-hard, it seems likely that a higher level of the complexity hierarchy \cite{stockmeyer1976polynomial} needs to be studied to capture the complexity of two-stage problems. Indeed, a compelling case has been made in \cite{woeginger2021trouble} that multi-stage complexity questions should be approached from this perspective.
@@ -70,7 +70,7 @@ In its general form, the \new{two-stage (adjustable) robust optimization problem
 where $\mathcal{Z}$ denotes the primitive uncertainty set that can influence coefficient matrices $A$ and $B$, the right-hand side $\pmb{d}$ and cost coefficients $\pmb{C}$ and $\pmb{c}$ \new{(see, e.g., \cite{yanikouglu2019survey})}. While $\pmb{x}$-variables need to be fixed in advance, we can let $\pmb{y}$-variables depend on $\pmb{\zeta}$; equivalently, we can consider them as a function in $\pmb{\zeta}$. If there is no uncertainty in the constraints, we will also write $\X'$ for the set of feasible first-stage solutions, and $\X(\pmb{x})$ for the set of feasible second-stage solutions depending on first-stage solution $\pmb{x}$. In case of combinatorial optimization over a set $\X$, we often have that $\X'=\{0,1\}^n$ and $\X(\pmb{x}) = \{ \pmb{y}\in\{0,1\}^n : \pmb{x}+\pmb{y} \in\X\}$.
 
 In the classic model introduced by Ben-Tal et al.~\cite{ben2004adjustable} both $\pmb{x} \in \mathbb{R}^{n_1}, \pmb{y} \in \mathbb{R}^{n_2}$ are continuous variables.
-In this work we consider the computationally harder variant with (mixed) integer recourse, where there is the additional integrality constraint on some of the recourse decisions, hence $\pmb{y} = (\pmb{y}^c, \pmb{y}^{d}) \in (\mathbb{R}^{n_c}, \mathbb{Z}^{n_d})$.
+In this chapter we consider the computationally harder variant with (mixed) integer recourse, where there is the additional integrality constraint on some of the recourse decisions, hence $\pmb{y} = (\pmb{y}^c, \pmb{y}^{d}) \in (\mathbb{R}^{n_c}, \mathbb{Z}^{n_d})$.
 
 There are different primitive uncertainty sets $\mathcal{Z} \subseteq \mathbb{R}^{\ell}$.
 We focus on the discrete and continuous budgeted primitive uncertainty sets
@@ -80,7 +80,7 @@ with affine linear cost and right-hand side functions $\pmb{c}(\cdot)$ and $\pmb
 
 The related approach of recoverable robustness \cite{liebchen2009concept} can be framed as a special case of this adjustable approach, which differs in philosophy. In the most frequent formulation of this problem, we assume that a full solution is constructed in the first stage, while the second stage allows for modifications to the first-stage solution where we bound by how much the solution is allowed to be changed.
 
-In this paper we make the following contributions.
+In this chapter we make the following contributions.
 \begin{itemize}
 \item Our main technical contribution is the introduction of a two-stage robust satisfiability problem 
 and the proof of its $\Sigma^p_3$-completeness. 
@@ -97,7 +97,7 @@ We also show that the $K$-stage problem is $\Sigma_{2K-1}^p$-complete for fixed 
 \item Finally, we show that for fixed $K$, the $K$-stage independent set problem with discrete uncertainty is $\Sigma_{2K-1}^p$-hard. If $K$ is part of the input, then the problem becomes PSPACE-hard (see Section~\ref{subsec:multistage}).
 \end{itemize}
 
-We close with a summary of results and further research questions in Section~\ref{sec:conclusions-chapter-2}. A brief overview to the $\Sigma^p_3$-hardness results from this paper is given in Table~\ref{tab:overview}. Columns ''cont. b.u.'' and ''disc. b.u.'' correspond to continuous and discrete budgeted uncertainty, respectively. The case of right-hand side budgeted uncertainty in combinatorial problems is omitted, as the setting is not well-defined.
+We close with a summary of results and further research questions in Section~\ref{sec:conclusions-chapter-2}. A brief overview to the $\Sigma^p_3$-hardness results from this chapter is given in Table~\ref{tab:overview}. Columns ''cont. b.u.'' and ''disc. b.u.'' correspond to continuous and discrete budgeted uncertainty, respectively. The case of right-hand side budgeted uncertainty in combinatorial problems is omitted, as the setting is not well-defined.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -111,7 +111,7 @@ TSP & - & NP (Cor.~\ref{cor4}) & $\Sigma^p_3$ (Thms.~\ref{thm:discr-two-stage-ts
 VC & - & NP (Cor.~\ref{cor4}) & $\Sigma^p_3$ (Thm.~\ref{thm:two-stage-and-recoverable-vertex-cover})
 \end{tabular}
 \end{center}
-\caption{$\Sigma^p_3$ complexity results for adjustable and recoverable problems in this paper. \new{Theorem~\ref{thm:mixed-binary-recourse} only applies to adjustable problems. As MIP is a generalization of IS, TSP and VC, its hardness follows from the hardness of the special cases.}}\label{tab:overview}
+\caption{$\Sigma^p_3$ complexity results for adjustable and recoverable problems in this chapter. \new{Theorem~\ref{thm:mixed-binary-recourse} only applies to adjustable problems. As MIP is a generalization of IS, TSP and VC, its hardness follows from the hardness of the special cases.}}\label{tab:overview}
 \end{figure}
 
 
@@ -123,7 +123,7 @@ VC & - & NP (Cor.~\ref{cor4}) & $\Sigma^p_3$ (Thm.~\ref{thm:two-stage-and-recove
 We present a variant of the satisfiability problem (SAT), which we call the \emph{robust adjustable SAT problem with budgeted uncertainty} ({\radj} for short) that is inspired by Lemma~2.3 in \cite{pfetsch2021generic}.
 We show that this problem is $\Sigma_3^p$-hard. 
 The problem is tailored to be similar to many problems in the setting of robust optimization with discrete budgeted uncertainty, specifically the setting of robust recoverable and robust two-stage optimization. 
-In fact, every hardness proof in the remaining paper is based on {\radj}. 
+In fact, every hardness proof in the remaining chapter is based on {\radj}. 
 We believe that also many other problems in the same setting admit a simple reduction from {\radj}.
 
 We recall the following terms: 
@@ -212,7 +212,7 @@ The formula $\varphi$ contains the following three types of clauses:
 \end{itemize}
 Finally, we let $\Gamma :=  n$. This completes our description of the new instance. \new{We remark that the clauses~(\ref{clauses2}) and (\ref{clauses3}) as well as the variables $s_1,\dots,s_n,s$ correspond to the cheat detection. We are going to prove that the assignment $s=1$ is possible if and only if Bob cheats}
 
-We claim that the new instance $(\varphi,X,Y,Z, \Gamma)$ is a Yes-instance if and only if $(\psi,A,B,C)$ is a Yes-instance.
+We claim that the new instance $(\varphi,X,Y,Z, \Gamma)$ is a Yes-instance if and only if the old instance $(\psi,A,B,C)$ is a Yes-instance.
 
 Assume that $(\psi,A,B,C)$ is a Yes-instance. This means there is an assignment $\new{a \in \set{0,1}^n}$, such that for all assignments $\new{b \in \set{0,1}^n}$ there is an assignment $\new{c \in \set{0,1}}^n$ such that $\psi(a,b,c)$ is satisfied. 
 We now show how to satisfy $\varphi$. 
@@ -679,13 +679,13 @@ Furthermore, $C_e \geq 0$ denotes the first-stage costs for all $e \in E$, and $
 
 Finally, for given constants $\underline{c}_i, d_i \geq 0$ for all $i \in V$ and some integer $\Gamma \geq 0$, the set $\cU_\Gamma$ of uncertain cost functions is defined as
 \[
-\cU_\Gamma = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i, \delta_i \in \set{0,1}\ \forall i \in V,\ \sum_{i \in V}\delta_i \leq \Gamma }.
+\cU_\Gamma = \cU_\Gamma^d = \set{ \pmb c \in \R^V : c_i = \underline{c}_i + \delta_id_i, \delta_i \in \set{0,1}\ \forall i \in V,\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
 In other words, $\cU_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$. 
 
 \begin{theorem}
 \label{thm:discr-two-stage-tsp}
-Robust two-stage TSP with discrete budgeted uncertainty is $\Sigma_3^p$-complete.
+The robust two-stage TSP problem with discrete budgeted uncertainty is $\Sigma_3^p$-complete.
 \end{theorem}
 \begin{proof}
 \new{It follows directly from} the definition that the problem is contained in the class $\Sigma_3^p$. So it remains to prove $\Sigma_3^p$-hardness.
@@ -1016,15 +1016,15 @@ Multi-stage (adjustable) robust optimization is a natural extension of static, o
 
 While several heuristic and exact solution methods have been developed, the complexity of many such problems remained open. Of particular importance is whether a problem still remains in NP, and thus allows for a compact mixed-integer programming formulation, or if it has a higher complexity in the polynomial hierarchy. 
 
-In this paper we first introduced a variant of a multi-stage satisfiability problem, where the adversary has a budget on the number of ''attacks'' (forcing variables to zero). This problem is designed to capture the key difficulties of protecting against budgeted uncertainty sets, where a bound on the deviation from the nominal scenario is used. With the help of this SAT problem, we are able to show that adjustable problems with continuous budgeted uncertainty in the right-hand side are $\Sigma^p_3$-complete, while the problem remains in NP if the uncertainty is in the objective.
+In this chapter we first introduced a variant of a multi-stage satisfiability problem, where the adversary has a budget on the number of ''attacks'' (forcing variables to zero). This problem is designed to capture the key difficulties of protecting against budgeted uncertainty sets, where a bound on the deviation from the nominal scenario is used. With the help of this SAT problem, we are able to show that adjustable problems with continuous budgeted uncertainty in the right-hand side are $\Sigma^p_3$-complete, while the problem remains in NP if the uncertainty is in the objective.
 
 We then considered a range of classic combinatorial optimization problems (independent set, traveling salesman, vertex cover) under discrete uncertainty sets and showed that these problems become $\Sigma^p_3$-complete as well. By natural extension, $K$-stage problem variants become $\Sigma^p_{2K-1}$-complete.
 
-For future research, a lot of open questions remain. In this work, we showed that it is often times $\Sigma^p_3$-hard \new{to compute an exact solution to a robust two-stage problem}. More generally, one could also examine when it is $\Sigma^p_3$-hard to even give a constant-factor approximation.
+For future research, a lot of open questions remain. In this chapter, we showed that it is often times $\Sigma^p_3$-hard \new{to compute an exact solution to a robust two-stage problem}. More generally, one could also examine when it is $\Sigma^p_3$-hard to even give a constant-factor approximation.
 Secondly, one could strengthen \cref{thm:mixed-binary-recourse} (for continuous budgeted uncertainty) by showing hardness for more restricted optimization problems which are special cases of our model.
 Finally, it would be very insightful to find some sort of ''meta-theorem'', which generalizes the results from \cref{sec:discbudgeted} (for discrete budgeted uncertainty). 
 Such a meta-theorem may introduce some easy-to-fulfill property such that for all nominal optimization problems with this property, the corresponding robust two-stage adjustable (or robust recoverable, respectively)  counterpart is $\Sigma^p_3$-hard. \new{It is subject to further research to figure out exactly what kind of easy-to-fulfill properties these would be. 
-From the intuition we gained in this paper, we can say as much: Intuitively, we need a reduction from 3SAT such that the reduction consists out of variable-gadgets and clause-gadgets, which are parts of the reduced instance that mimick the clauses and gadgets of the 3SAT instance. Furthermore, the solutions of the 3SAT instance and the reduced instance should correspond one-to-one to each other.}
+From the intuition we gained in this chapter, we can say as much: Intuitively, we need a reduction from 3SAT such that the reduction consists out of variable-gadgets and clause-gadgets, which are parts of the reduced instance that mimick the clauses and gadgets of the 3SAT instance. Furthermore, the solutions of the 3SAT instance and the reduced instance should correspond one-to-one to each other.}
 
 Such a meta-theorem would show that in fact a lot more problems than just TSP, independent set and vertex cover possess the properties showcased in \cref{sec:discbudgeted}. As our methods are quite general, we deem it likely for such a meta-theorem to exist. 
 

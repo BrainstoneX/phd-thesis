@@ -16,7 +16,7 @@ Note that we can make this assumption without loss of generality: If some arc is
 Let $d \geq 2$ be a natural number. The \emph{Order-$d$ interaction costs} are given by a mapping $q_d\colon \set{B \subseteq A : |B| \leq d}\to \rz$, assigning a (potentially negative) interaction cost to every subset of at most $d$ arcs.
 The cost $\text{SPP}_d(P,q_d)$ of some path $P$ under interaction costs $q_d$ is defined as in equation (\ref{dSPP:obj}).
 If $d$ is unambiguously clear form the context, we use the  more compact notation $f_q(P): = \text{SPP}_d(P,q_d)$.
- In this paper we explicitly allow the case $q(\emptyset) \neq 0$, because this simplifies the calculations.  
+ In this chapter we explicitly allow the case $q(\emptyset) \neq 0$, because this simplifies the calculations.  
 The \emph{linearization problem for the Order-$d$ Shortest Path Problem} (\textsc{Lin}SPP$_d$)
 is formally defined as follows.
 \begin{center}
@@ -38,7 +38,7 @@ A linearizable instance of  the GSPP and the linearization problem for the GSPP 
 
 
 
-We note that in our \cref{def:linearizable} we allowed the case that the linearizing function $c : A \to \R$ can take negative values. This could be a problem, since if a digraph contains negative cycles, the shortest path problem is NP-hard in general. However, as we are only concerned with acyclic digraphs in this paper, this is not a problem. In fact, the following lemma shows that for acyclic digraphs it is a more difficult problem to decide if there is a linearizing function $c : A \to \R$ than the problem to decide if there is a linearizing function $c': A \to \R_+$. Hence, we consider only the first problem for the rest of the paper.
+We note that in our \cref{def:linearizable} we allowed the case that the linearizing function $c : A \to \R$ can take negative values. This could be a problem, since if a digraph contains negative cycles, the shortest path problem is NP-hard in general. However, as we are only concerned with acyclic digraphs in this chapter, this is not a problem. In fact, the following lemma shows that for acyclic digraphs it is a more difficult problem to decide if there is a linearizing function $c : A \to \R$ than the problem to decide if there is a linearizing function $c': A \to \R_+$. Hence, we consider only the first problem for the rest of the chapter.
 \begin{lemma}
 If $(G,s,t,f)$ is an instance of the GSPP such that $G  = (V,A)$ is an acyclic digraph, then there is a nonnegative linearizing function $c' : A \to \R_+$ if and only if there is a linearizing function $c : A \to \R$ and $f(P) \geq 0$ for all $s$-$t$-paths $P$.
 \end{lemma}

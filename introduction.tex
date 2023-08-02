@@ -23,7 +23,7 @@ The three generalizations reflect on current research trends and sub-areas of Co
 The thesis is roughly split into three parts, corresponding to the three different directions of generalizations that are considered.
 
 \begin{itemize}
-\item Part 1: \emph{Robust Optimization} (\cref{ch:recov-selection,ch:multistage-complexity,ch:interdiction}). In Robust Optimization \cite{ben2009robust}, one is concerned with finding good quality solutions, 
+\item Part 1: \emph{Robust Optimization} (\cref{ch:recov-selection,ch:multistage-complexity,ch:interdiction}). In the area of Robust Optimization \cite{ben2009robust}, one is concerned with finding good quality solutions, 
 which still stay maintain their good quality even if the input parameters of the problem are slightly disturbed. Such solutions are called \emph{robust}.
 %This is motivated by the fact that in real life, data upon which decisions rely is often observed to be uncertain: 
 %Measurement errors, uncertainty about the future, or other sources of uncertainty lead to the conclusion, that the available data might only be an approximate, but not an exact description of reality. Thus, the need of finding robust solutions arises. 
@@ -33,7 +33,7 @@ Network interdiction is concerned with identifying the parts of a network, which
 In part 1 of the thesis, we consider the following topics in robust optimization: The so-called recoverable representatives selection problem in \cref{ch:recov-selection}. The question of $\Sigma^p_k$-hardness of multi-stage robust optimization in \cref{ch:multistage-complexity}. 
 Network interdiction problems restricted to interval graphs in \cref{ch:interdiction}.
 
-\item Part 2: \emph{Quadratic Problems and their Linearization}  (\cref{ch:linearization-1,ch:linearization-2}). 
+\item Part 2: \emph{Linearizations of Quadratic Problems}  (\cref{ch:linearization-1,ch:linearization-2}). 
 A quadratic problem is an optimization problem whose objective can be written as a quadratic function. 
 In contrast to their linear counterpart, quadratic problems are often times intractable. 
 This has led researchers to aks the question for special solvable cases of quadratic problems. One of these special cases is the so-called \emph{linearizable} case \cite{bookhold1990contribution}. 
@@ -173,6 +173,20 @@ and network design problems
 For an overview on applications of the QSPP see \cite{huSo2020,rostami2018}.
 The QSPP is NP-hard~\cite{rostami2018}.
 It is also difficult from the practical point of view~\cite{huSo2020}.
+
+In \cref{ch:linearization-1}, we use the following notation for the QSPP: Let $G = (V,A)$ be the input graph on $m$ arcs, let $a_1,\dots,a_m$ be an ordering of the arcs of $G$, and $Q \in \R^{m \times m}$ be the input matrix, where the entry $Q_{ij}$ of the matrix corresponds to arcs $a_i$ and $a_j$.
+We define a function $q : A \times A \to \R$ by letting $q(a_i,a_j) := Q_{ij}$ for all $i,j \in \fromto{1}{m}$. It is easily seen that the quadratic cost $f(\pmb x)$ of the path $P$ is then given by
+\[ \qspp(P, q) := \sum_{a,a' \in P} q(a,a').\] 
+
+(For convenience, we use the same notation for a path and its set of arcs in this formula). The value $q(a,a')$ is also called the \emph{interaction cost} of arcs $a$ and $a'$ for all $a,a' \in A$. This means that the cost of a path is influenced by the set of arc pairs lying on that path.
+
+This stands in contrast to the classic \emph{shortest path problem (SPP)}, where for some arc weigths $w : A \to \R$ the cost of a path $P$ is given by 
+
+\[ \sum_{a \in P} w(a).\]
+
+In \cref{ch:linearization-2}, we use a slightly different notation, which is less common in the literature, but has the advantage that it is easier to generalize to higher-order cost functions. Namely, we consider a function $q_2 : \set{B \subseteq A : |B| \leq 2} \to \R$ where w.l.o.g. $q_2(\emptyset) = 0$, and we let
+\[ \qspp(P, q_2) := \sum_{B \subseteq P, |B| \leq 2} q_2(B).\]
+It is easily seen that these two notations are equivalent by setting $q_2(\set{a,a'}) := q(a,a') + q(a',a)$ for distinct arcs $a,a' \in A$ and $q_2(\set{a}) := q(a,a)$ for single arcs $a \in A$.
 
 \paragraph*{Linearization.}
 Since quadratic problems are often times intractable, researchers look for special solvable cases. One of these cases is the linearizable case. An instance $(G,s,t,Q)$ of the QSPP is \emph{linearizable} in the sense of Bookhold \cite{bookhold1990contribution}, if there exists a vector $\pmb c \in \R^m$ such that for all $s$-$t$-paths $P$ with incidence vector $\pmb x = \pmb x_P$ we have the equation 

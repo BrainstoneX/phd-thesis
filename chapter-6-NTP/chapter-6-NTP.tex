@@ -133,7 +133,7 @@ A similar problem has been studied by Heuvel and Thomassé \cite{van2012cyclic}.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Contributions of this paper.}
+\paragraph{Contributions of this chapter.}
 We analyze the computational complexity and the approximability of non-preemptive 
 tree packing, and we also provide some parameterized and exact algorithms for it.
 The complexity results are devastating:
@@ -171,14 +171,14 @@ Furthermore we design an exact algorithm for {\xxxNTP} whose (exponential)
 running time is bounded by $|E|!\cdot\text{poly}(|E|)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Organization of the paper.}
+\paragraph{Organization of the chapter.}
 Section~\ref{sec:notation} provides central definitions and summarizes the notation.
 Section~\ref{sec:hardness} contains the NP-hardness results for specially structured graph classes. 
 Sections~\ref{sec:value-seven} and~\ref{sec:value-three} contain the negative and positive results 
 for small objective values. 
 Section~\ref{sec:greedy} discusses the greedy algorithm, 
 Section~\ref{sec:parameterized} states some parameterized and exact algorithms for {\xxxNTP}, and
-\cref{sec:conclusion} concludes the paper with some discussion.
+\cref{sec:conclusion} concludes the chapter with some discussion.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,12 +190,12 @@ Section~\ref{sec:parameterized} states some parameterized and exact algorithms f
 We write $\NN_0= \NN \cup \set{0}$ for the set of nonnegative integers. 
 For $a\le b$, the term $[a,b]$ denotes the \emph{time slot} starting at $a$ and ending at $b$. 
 For \lasse{an integer} $t\ge1$, the time slot $[t-1,t]$ is often called the $t$-th time slot or time slot $t$.
-Every graph $G=(V,E)$ in this paper is simple, undirected and without loops. We write $V(G) = V$ and $E(G) = E$.
+Every graph $G=(V,E)$ in this chapter is simple, undirected and without loops. We write $V(G) = V$ and $E(G) = E$.
 For $V'\subseteq V$, the \emph{edge cut} $\delta(V')$ is the set of edges with one endpoint 
 in $V'$ and one endpoint in $V-V'$; for $v\in V$, we write $\delta(v) = \delta(\set{v})$.
 We denote by $G[V']$ the \emph{induced subgraph} \lasse{of $G$ by} $V'$.
 By removing \lasse{a} vertex $v$ from $G$, we obtain the graph $G-v=G[V-\set{v}]$.
-Similarly, for $E'\subseteq E$ and $e\in E$ we have $G-E'=(V,E-E')$ and $G-e=G-\set{e}$. For all other graph-theoretic concepts used in the paper, we refer the reader to the
+Similarly, for $E'\subseteq E$ and $e\in E$ we have $G-E'=(V,E-E')$ and $G-e=G-\set{e}$. For all other graph-theoretic concepts used in the chapter, we refer the reader to the
 text book by West \cite{WestBook}.
 
 \subsection{Formal problem definition}
@@ -221,7 +221,7 @@ At first glance, it seems like these are important details in the definition of 
 However, this is not the case -- the next lemma shows that one can always assume without loss of generality that an optimal schedule connects the graph for a continuous time interval and does so by using only spanning trees. }
 
 % \lasse{
-% Finally, in this paper we only consider weight functions $w : E \rightarrow \NN_0$ with integral values. 
+% Finally, in this chapter we only consider weight functions $w : E \rightarrow \NN_0$ with integral values. 
 % If rational weights are considered instead, it is easy to see that by multiplying with the smallest common denominator one obtains an equivalent instance with integral weights. 
 % If real-valued weights are considered, all our hardness results of course still hold. 
 % Furthermore, by a slight adaption of the proof it can be shown that \cref{le:structure} is still true, 
@@ -233,7 +233,7 @@ However, this is not the case -- the next lemma shows that one can always assume
 
 \subsection{\lasse{Further definitions}}
 
-\lasse{Throughout the paper, we investigate the (parameterized) complexity of non-preemptive tree packing 
+\lasse{Throughout the chapter, we investigate the (parameterized) complexity of non-preemptive tree packing 
 with respect to different graph classes and structural graph parameters.}
 
 \lasse{The \emph{treewidth} of a graph is a popular parameter in the area of parameterized algorithms and measures in some sense how close the graph is to a tree. It can be defined as the minimum integer $k > 0$ such that $G$ is subgraph of a $k$-tree \cite{bodlaender1998partial}. A $k$-tree is constructed by starting with a $(k +1)$-clique and then repeatedly
@@ -474,7 +474,7 @@ of objective value $\beta$: For $k=0,\ldots,n-1$, we activate edge $\set{u_k, u_
 \label{sec:value-seven}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 In this section, we show that it is NP-hard to decide whether there exists a schedule of objective value at least 7. 
-The reduction is from the following version of the Hamilton cycle problem; 
+The reduction is from the following version of the Hamiltonian cycle problem; 
 see Akiyama, Nishizeki \& Saito \cite{hamilton3regularBip}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{quote}
@@ -482,11 +482,11 @@ Problem {\xxxHAM}
 \\
 \textbf{Instance:} A bipartite, 3-regular graph $H'$.  
 \\
-\textbf{Question:} Does $H'$ possess a Hamilton cycle? 
+\textbf{Question:} Does $H'$ possess a Hamiltonian cycle? 
 \end{quote}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 The reduction is done in two steps.
-The first step transforms an instance $H'$ of {\xxxHAM} into a new 4-regular graph $H$ 
+The first step of the reduction transforms an instance $H'$ of {\xxxHAM} into a new 4-regular graph $H$ 
 with the properties described in Lemma~\ref{le:Ham-to-Ham}.
 The second step then transforms the 4-regular graph $H$ from Lemma~\ref{le:Ham-to-Ham}
 into a corresponding instance of problem {\xxxNTP}.
@@ -498,9 +498,9 @@ There is a polynomial time algorithm that takes an instance $H'$ of {\xxxHAM} as
 a 4-regular bipartite graph $H$ together with an edge $\{u,z\}\in E(H)$ \lasse{(which we call the \emph{special edge})},
 so that the following holds:
 \begin{enumerate}[(i)]
-\item If $H'$ is a YES-instance of {\xxxHAM}, then the new graph $H$ contains a Hamilton cycle 
+\item If $H'$ is a YES-instance of {\xxxHAM}, then the new graph $H$ contains a Hamiltonian cycle 
 that traverses the special edge $\{u,z\}$.
-\item If $H'$ is a NO-instance of {\xxxHAM}, then the new graph $H$ has no Hamilton path
+\item If $H'$ is a NO-instance of {\xxxHAM}, then the new graph $H$ has no Hamiltonian path
 starting in vertex $u$. 
 \end{enumerate}
 \end{lemma}
@@ -517,12 +517,12 @@ The reduction is sketched in \cref{fig_hamilton_cycle_lemma}. Let $H' = (V, E)$.
 \end{figure}
 
 \lasse{
-For claim (i), assume that $H'$ has a Hamilton cycle $C'$. Then we obtain a Hamilton cycle $C$ in $H$ using the edge $\set{u,z}$ in the following fashion: We start at the vertex $u$, and traverse all the vertices of $A_x$ in such an order that we can proceed to go to $x_1$ afterwards. Now we follow the edges of the cycle $C'$, switching alternatingly between $H'_1$ and $H'_2$ after each edge. Precisely, whenever we follow an edge of $C'$ to encounter a new vertex $v_1$ in $H'_1$ ($v_2$ in $H'_2$, respectively), we traverse all the vertices of $A_v$ and go to $v_2$ ($v_1$, respectively) and then follow the next edge of $C'$. Because the graph $H'$ has an even number of vertices (it is bipartite and 3-regular), we will end up at $x_2$. We then complete the tour by traversing all vertices of $A'_x$ and going along the edge $\set{u,z}$ at the end. This describes a Hamilton cycle of $H$ which uses the edge $\set{u,z}$.
+For claim (i), assume that $H'$ has a Hamiltonian cycle $C'$. Then we obtain a Hamiltonian cycle $C$ in $H$ using the edge $\set{u,z}$ in the following fashion: We start at the vertex $u$, and traverse all the vertices of $A_x$ in such an order that we can proceed to go to $x_1$ afterwards. Now we follow the edges of the cycle $C'$, switching alternatingly between $H'_1$ and $H'_2$ after each edge. Precisely, whenever we follow an edge of $C'$ to encounter a new vertex $v_1$ in $H'_1$ ($v_2$ in $H'_2$, respectively), we traverse all the vertices of $A_v$ and go to $v_2$ ($v_1$, respectively) and then follow the next edge of $C'$. Because the graph $H'$ has an even number of vertices (it is bipartite and 3-regular), we will end up at $x_2$. We then complete the tour by traversing all vertices of $A'_x$ and going along the edge $\set{u,z}$ at the end. This describes a Hamiltonian cycle of $H$ which uses the edge $\set{u,z}$.
 }
 
 \lasse{
-For claim (ii), we prove the contrapositive. Assume that $H$ has a Hamilton path $P = (w_1,\dots,w_n)$ starting at vertex $u$, we have to prove that $H'$ has a Hamilton cycle. Consider the second vertex $w_2$ on the path $P$. Note that if $w_2 = z$, then $w_n$ is in $A_x$. On the other hand, if $w_2$ is in $A_x$, then $w_n$ is in $A'_x$. We first assume that $w_2 \in A_x$ and $w_n \in A'_x$.
-We claim that the Hamilton path $P$ necessarily switches between $H'_1$ and $H'_2$ after every of its edges in $H'_1$ or $H'_2$. Indeed, let $v \neq x$ be a vertex of $H'$ and assume without loss of generality that from the two vertices $v_1$ and $v_2$ the path $P$ first encounters $v_1$. If the path does not immediately switch to $v_2$, then it will at a later stage need to visit $v_2$. But in this case, it has to visit $A_v$ after visiting $v_2$, in contradiction to the fact that the path has to return to $A'_x$. This proves that $P$ switches between $H'_1$ and $H'_2$ after every egde in $H'_1$ or $H'_2$. Then looking at the edges of $P$ which lie in $H'_1$ or $H'_2$, we see that $H'$ has a Hamilton cycle. Finally, an analogous statement holds in the case $w_2 = z$. So we have proven the claim.  
+For claim (ii), we prove the contrapositive. Assume that $H$ has a Hamiltonian path $P = (w_1,\dots,w_n)$ starting at vertex $u$, we have to prove that $H'$ has a Hamiltonian cycle. Consider the second vertex $w_2$ on the path $P$. Note that if $w_2 = z$, then $w_n$ is in $A_x$. On the other hand, if $w_2$ is in $A_x$, then $w_n$ is in $A'_x$. We first assume that $w_2 \in A_x$ and $w_n \in A'_x$.
+We claim that the Hamiltonian path $P$ necessarily switches between $H'_1$ and $H'_2$ after every of its edges in $H'_1$ or $H'_2$. Indeed, let $v \neq x$ be a vertex of $H'$ and assume without loss of generality that from the two vertices $v_1$ and $v_2$ the path $P$ first encounters $v_1$. If the path does not immediately switch to $v_2$, then it will at a later stage need to visit $v_2$. But in this case, it has to visit $A_v$ after visiting $v_2$, in contradiction to the fact that the path has to return to $A'_x$. This proves that $P$ switches between $H'_1$ and $H'_2$ after every egde in $H'_1$ or $H'_2$. Then looking at the edges of $P$ which lie in $H'_1$ or $H'_2$, we see that $H'$ has a Hamiltonian cycle. Finally, an analogous statement holds in the case $w_2 = z$. So we have proven the claim.  
 }
 \end{proof}
 
@@ -598,11 +598,11 @@ Claims (ii) and (iii) can be proven in the same manner.
 
 \begin{lemma}
 \label{lemma:lasse-if}
-Let the graph $H$ and the special edge $\set{u,z}$ be as described in \cref{le:Ham-to-Ham}, and let $(G, w)$ be the corresponding {\xxxNTP} instance. 
-If $H$ contains a Hamilton cycle which uses the special edge, then $\ntp(G, w) \geq 7$.
+Let the graph $H$ and the special edge $\set{u,z} \in E(H)$ be as described in \cref{le:Ham-to-Ham}, and let $(G, w)$ be the corresponding {\xxxNTP} instance. 
+If $H$ contains a Hamiltonian cycle which uses the special edge, then $\ntp(G, w) \geq 7$.
 \end{lemma}
 \begin{proof}
-Let $e_0 = \set{u, z} = \set{u_k, z_k}$ be the special edge. There is a Hamilton cycle $W$ using $e_0$. Then the graph $H-E(W)$ is 2-regular, hence there exist pairwise disjoint matchings $M_1, \ldots, M_4$ such that $M_1 \dotunion M_2 = E(W)$ and $M_3 \dotunion M_4 = E(H) - E(W)$ and $e_0 \in M_1$. We describe a schedule $\sigma$ with objective value 7:
+Let $e_0 = \set{u, z} = \set{u_k, z_k}$ be the special edge. There is a Hamiltonian cycle $W$ using $e_0$. Then the graph $H-E(W)$ is 2-regular, hence there exist pairwise disjoint matchings $M_1, \ldots, M_4$ such that $M_1 \dotunion M_2 = E(W)$ and $M_3 \dotunion M_4 = E(H) - E(W)$ and $e_0 \in M_1$. We describe a schedule $\sigma$ with objective value 7:
 \begin{itemize}
 \item All gadgets of type $R$ are fully-connected during time slots 2 and 6, and semi-connected otherwise.
 \item All gadgets of type $L$ are fully-connected during time slots 1, 3, 5, and 7, and semi-connected otherwise.
@@ -613,7 +613,7 @@ Let $e_0 = \set{u, z} = \set{u_k, z_k}$ be the special edge. There is a Hamilton
 \item All edges $e \in M_4$ have activity interval $[5, 7]$.
 \end{itemize}
 It is easy to see that a schedule $\sigma$ with these properties does indeed exist. \cref{table:lasse-if} provides a schematic description of the schedule, by indicating for each number $t$, which edges are scheduled and which gadgets are fully connected during the the $t$-th time slot $[t-1, t]$.  Notice that the active edges in $H$ form a matching of $H$ during the time slots 1,2,3,5,6, and 7, 
-and form a Hamilton path of $H$ during the time slot 4. 
+and form a Hamiltonian path of $H$ during the time slot 4. 
 By checking each of the cases $t=1,\dots,7$, it is easily seen that each of the graphs $G^\sigma_1,\ldots,G^\sigma_7$ is connected. We therefore conclude that $\ntp(\sigma) = 7$. 
 \begin{table}[htpb]
 \centering
@@ -637,7 +637,7 @@ By checking each of the cases $t=1,\dots,7$, it is easily seen that each of the 
 
 \begin{lemma}
 \label{lemma:lasse-only-if}
-Let the graph $H$ and the special edge $\set{u,z}$ be as described in \cref{le:Ham-to-Ham}, and let $(G, w)$ be the corresponding {\xxxNTP} instance. If $\ntp(G, w) \geq 7$, then $H$ contains a Hamilton path starting at vertex $u$.
+Let the graph $H$ and the special edge $\set{u,z} \in E(H)$ be as described in \cref{le:Ham-to-Ham}, and let $(G, w)$ be the corresponding {\xxxNTP} instance. If $\ntp(G, w) \geq 7$, then $H$ contains a Hamiltonian path starting at vertex $u$.
 \end{lemma}
 \begin{proof}
 So assume there exists a schedule $\sigma$ of objective value 7. 
@@ -649,7 +649,7 @@ First, recall \cref{lemma:gadgets_properties}. Consider vertex $z_i$ for some $i
 Next, consider the graph $G_1$ of active edges in the first time slot. We know that  $d_1(z_i) = 1$ for all $i= 1,\dots, k$. Hence the induced subgraph $G_1[U \cup Z]$ on $2k$ vertices is acyclic, has $k$ edges, and therefore has $k$ connected components. But because $G_1$ is connected, and because all the gadgets of type $R$ and the gadget $C$ are semi-connected during time slot 1, this implies that every single gadget of type $L$ is actually fully-connected during time slot 1. The same argument holds for time slot 7. In total, together with \cref{lemma:gadgets_properties}, we have that a gadget of type $L$ is fully-connected during the $t$-th time slot, if and only if $t \in \set{1, 3, 5, 7}$. This in turn implies that for all $i = 1,\dots, k$, one has $d_2(u_i), d_4(u_i), d_6(u_i) \geq 1$. The two facts $d_2(u_i) \geq 1$ and $d_6(u_i) \geq 1$ together imply $d_4(u_i) \leq 2$. Likewise, for all $i = 1,\dots,k$, the two facts $d_1(z_i) = 1$ and $d_7(z_i) = 1$ together imply $d_4(z_i) \leq 2$.
 
 Finally, we claim $d_4(u_k) = 1$. In fact, $d_4(u_k) = 0$ is impossible, because gadgets of type $L$ are semi-connected during time slot 4. For the sake of contradiction, assume $d_4(u_k) > 1$. We know that $d_2(u_k) \geq 1, d_6(u_k) \geq 1$ and $e_0 \not\in E_4$ and $w(e_0) = 1$. So our assumption $d_4(u_k) > 1$ is only possible if $e_0 \in E_2$ or $e_0 \in E_6$. But for the vertex $z_k$, we also know $d_1(z_k), d_3(z_k), d_5(z_k), d_7(z_k) \geq 1$. This is a contradiction to $e_0 \in E_2 \cup E_6$, hence our assumption was wrong and $d_4(u_k) = 1$.
-In summary, during time slot 4, all gadgets of type $L$ and $R$ are semi-connected. We also have for all $i=1,\dots,k$ that $d_4(u_i) \leq 2$ and $d_4(z_i) \leq 2$. \lasse{Furthermore, we have} $d_4(u_k) = 1$. However, $G_4$ is connected. These facts together imply that the induced subgraph $G_4[U \cup Z]$ is a Hamilton path in $H$ starting at $u_k = u$.
+In summary, during time slot 4, all gadgets of type $L$ and $R$ are semi-connected. We also have for all $i=1,\dots,k$ that $d_4(u_i) \leq 2$ and $d_4(z_i) \leq 2$. \lasse{Furthermore, we have} $d_4(u_k) = 1$. However, $G_4$ is connected. These facts together imply that the induced subgraph $G_4[U \cup Z]$ is a Hamiltonian path in $H$ starting at $u_k = u$.
 \end{proof}
 
 By combining \cref{le:Ham-to-Ham,lemma:lasse-only-if,lemma:lasse-if} we get

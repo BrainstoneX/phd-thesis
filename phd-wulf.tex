@@ -23,7 +23,8 @@
 %\renewcommand{\@tocrmarg}{4em}
 %\makeatother
 
-\overfullrule=3mm
+% Change this to make black boxes appear, which helps to locate and eliminate all overfull boxes/ lines that go over the margin
+\overfullrule=0mm
 
 \input{macros}
 
@@ -73,7 +74,7 @@
 \chapter*{Abstract}
 This thesis is concerned with three different directions of generalization of clasic combinatorial optimization problems: Robust optimization, higher-order cost functions, and nonpreemption.
 
-In the first part of the thesis, we consider recoverable robust oprimization in conjunction with the representative selection problem and discrete budgeted uncertainty. 
+In the first part of the thesis, we consider recoverable robust oprimization in conjunction with the representatives selection problem and discrete budgeted uncertainty. 
 This is a problem which is trivial without the presence of any robustness, but the addition of robustness makes it challenging. 
 Determining the computational hardness of the specific variant that we consider has been an open question since 2011, which we now resolve by showing NP-completeness. We also show that the corresponding adversarial problem can be solved in polynomial time.
 
@@ -86,7 +87,7 @@ In the second part of the thesis, we consider linearization of the quadratic sho
 Inspired by some insight gained from the characterization,
 we find an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
 There is also a trivial tight lower bound of $\Omega(m^2)$, making our algorithm linear-time. 
-In contrast, the fastest previous algorithm was presented by Hu qand Sotirov and has a running time of $O(nm^3)$. Hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than $d$, where we also obtain a linear-time algorithm.
+In contrast, the fastest previous algorithm was presented by Hu qand Sotirov and has a running time of $O(nm^3)$. Hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than two, where we also obtain a linear-time algorithm.
 
 In the final part of the thesis, we consider the problem of keeping a graph connected for a maximal amount of time, by scheduling its edges in a non-preemptive way. 
 %Specifically, every edge $e$ has a weight $w(e)$ attached to it, and can be scheduled during a non-interrupted interval of length $w(e)$. The goal is to maximize the time during which the scheduled edges span all the vertices. 
@@ -94,7 +95,37 @@ We show that the problem is an interesting mixture between a scheduling problem 
 
 \begin{otherlanguage}{ngerman}
 \chapter*{Kurzfassung}
-Deutscher Abstract [todo]
+
+Diese Doktorarbeit befasst sich mit drei verschiedenen Arten der Verallgemeinerung von klassischen kombinatorischen Optimierungsproblemen: Robuster Optimierung, höher-dimensionalen Kostenfunktionen, und Nicht-Präemptivität.
+
+
+Im ersten Teil der Arbeit wird rekoverable robuste Optimierung in Kombination mit dem Repräsentatanten-Selektionsproblem betrachtet. 
+In Abwesenheit von Robustheit ist es möglich, dieses Problem trivialerweise zu lösen. 
+Das Hinzufügen von Robustheit erhöht jedoch die Schwierigkeit. 
+Seit dem Jahr 2011 war es für die von uns betrachtete Variante eine offene Fragestellung, die genaue Komplexität zu ermitteln. Wir beantworten nun die offene Frage, indem wir die NP-Vollständigkeit des Problems beweisen.
+Außerdem beweisen wir, dass das zugehörige adversariale Problem in Polynomialzeit gelöst werden kann. 
+
+Weiterhin betrachten wir mehrstufige robuste Optimierung, insbesondere rekoverable robuste Optimierung und zweistufig adjustierbare robuste Optimierung. 
+Wir argumentieren überzeugend, dass die naheliegende Komplexitätsklasse für viele Probleme, die in der Literatur studiert werden, die Klasse $\Sigma^p_3$ aus der polynomiellen Hierarchie ist. Trotz alledem sind nur sehr wenige $\Sigma^p_3$-Vollständigkeitsbeweise in der Literatur vorhanden. Wir unternehmen einen ersten Schritt in ein solches Gebiet, in dem wir mehrere Resultate dieser Art beweisen. 
+
+Wir betrachten außerdem Netzwerk-Schwachstellen-Probleme, insbesondere mit Bezug auf Intervallgraphen. Wir führen ein Framework ein, das es erlaubt Intervalle zu expandieren oder zu kontrahieren. Wir zeigen, dass das bekannte most-vital-nodes Problem ein Sonderfall unseres Frameworks ist. Obwohl es oft der Fall ist, dass Netzwerk-Schwachstellen-Probleme NP-vollständig oder noch schwerer sind, können wir in unserem Fall für 6 der 8 betrachteten Probleme einen Polynomialzeit-Algorithmus erlangen. Dieses Resultat wird mithilfe technisch herausfordernder dynamischer Programmierung erreicht. Eines unser Resultate beantwortet eine offene Frage von Diner et al.
+
+
+Im zweiten Teil der Doktorarbeit untersuchen wir Linearisierungen des qudratischen kürzesten-Wege-Problems. 
+In einem früheren Artikel gaben Sotirov und Hu ein Beispiel für einen Graphen mit einer besonderen Eigenschaft an, welche wir als universelle Lienarisierbarkeit bezeichnen. 
+Durch diese Beispiel motiviert geben wir eine vollständige Charakterisierung der Klasse aller universell linearisierbaren Graphen an.
+
+Ausgehend von Erkenntnissen, die aus dieser Charakterisierung gewonnen wurden, finden wir als nächstes einen Algorithmus mit Laufzeit $O(m^2)$ für das Linearisierungsproblem zugehörig zum quadratischen kürzeste-Wege-Problem auf azyklischen gerichteten Graphen. 
+Es gibt auch eine triviale komplementäre untere Schranke von $\Omega(m^2)$, was bedeutet, dass unser Algorithmus als Linearzeitalgorithmus verstanden werden kann.
+Im Kontrast dazu hatte der schnellste bekannte Algorithmus vor unserer Arbeit eine Laufzeit von $O(nm^3)$. 
+Das bedeutet, wir verbessern den state-of-the-art für diese Problemstellung um einen Faktor $O(nm)$. 
+Unser Algorithmus basiert auf einer verblüffenden neuen Erkenntniss, nämlich dass Linearisierbarkeit auf azyklischen gerichteten Graphen als lokale Eigenschaft verstanden werden kann.
+Unser Ansatz kann auf höherdimensionale Kostenfunktionen von Grad größer als zwei verallgemeinert werden. Auch in diesem Fall finden wir einen Linearzeitalgorithmus.
+
+
+Im letzten Teil der Arbeit betrachten wir das Problem, einen Graphen für eine möglichst lange Zeit zusammenhängend zu lassen, indem wir einen nicht-präemptiven schedule für seine Kanten erstellen. Wir zeigen, dass das Problem eine interessante Mischung aus einem scheduling-Problem und dem graph-strukturellen Baum-Packungsproblem von Nash-Williams ist. Wir beweisen mehrer komplexitätstheoretische Resultate über das neu eingeführte Problem.
+
+
 \end{otherlanguage}
 
 
@@ -106,7 +137,7 @@ Deutscher Abstract [todo]
 
 \chapter*{\germanenglish{Danksagung}{Acknowledgements}}
 
-First and foremost, I want to thank to my advisor Bettina Klinz, who was always available for any kind of questions or problems that occured and helped resolve them, even if they arose on short notice. I would also like to express my gratitude for the trust she placed in me, by letting me choose my own topics and collaborations, and supporting me in every way while doing so.
+First and foremost, I want to thank my advisor Bettina Klinz, who was always available for any kind of questions or problems that occured and helped resolve them, even if they arose on short notice. I would also like to express my gratitude for the trust she placed in me, by letting me choose my own topics and collaborations, and supporting me in every way while doing so.
 
 I am very lucky for Stefan Lendl to be my mentor, who introduced me to both the world of robust optimization, and the strange world of academia in general. Working together with Stefan is immensely motivating and productive, as indicated by our amount of shared papers. 
 Likewise, I thank Michael Kerber, my second mentor, for giving helpful advise around all kinds of situations in academic life. 
@@ -114,21 +145,21 @@ Another mentor, whose knowledge and experience helped me a great amount is Marc 
 
 This thesis is also written in memory of Gerhard Woeginger, who tragically passed away after a long illness in April 2022. Gerhard was a frequent visitor to Graz, and his visits were the initial spark for the research behind \cref{ch:linearization-1,ch:linearization-2} in this thesis. Furthermore, his deep insights greatly improved the quality of \cref{ch:ntp}. Indeed, Gerhard was an expert in many areas of mathematics and academia in general, and he left us too soon.
 
-Special thanks to Nicolas El Maalouly, Marc Goerigk, Dorothee Henke, and Hung P. Hoang for bringing their great academic expertise to me by visiting Graz. All of these visits resulted in published (or soon-to-be-published) work. From all these visitors, Nicolas was here the most. I have lost count on how many times we have met at either visits to Graz, visits to Zurich, or joint conferences. My work together with Nicolas is too recent to be part of the thesis, but I am sure that the Exact Matching problem will be the hottest trend at the top conferences soon! (Maybe.)
+Special thanks to Nicolas El Maalouly, Marc Goerigk, Dorothee Henke, and Hung P. Hoang for bringing their great academic expertise to me by visiting Graz. All of these visits resulted in published (or soon-to-be-published) work. From all these visitors, Nicolas was here the most. I have lost count on how many times we have met at either visits to Graz, visits to Zurich, or joint conferences. My work together with Nicolas is too recent to be part of this thesis, but I am sure that the Exact Matching problem will be the hottest trend at the top conferences soon! (Maybe.)
 I would also like to thank my host Bernd Gärtner at ETH Zurich, whose group I could gratiously visit for three months in spring 2022, and Hung, who initiated the contact.
 
 
 Modern research is impossible without collaboration, hence I am indepted to all my co-authors for enriching scientific discussions and exciting discoveries. Namely, co-authors not yet mentioned include Reni \c{C}ela, Anita Dürr, Christoph Grüne, Sebastian Haslebacher, James B. Orlin, Raphael Steiner, and Milo\v{s} Stojakovi\'{c}.
 
-My sincere thanks goes to the external reviewers of this thesis, Franz Rendl and Frits Spieksma. Likewise, I would like to thank all other anonymous reviewers, journal editors, and conference organizers, whose voluntary work forms the backbone of science.
+Special thanks go to the external reviewers of this thesis, Franz Rendl and Frits Spieksma, for the time they invested by refereeing it. Likewise, I would like to thank all other anonymous reviewers, journal editors, and conference organizers, whose voluntary work forms the backbone of science.
 
 I would like to thank all my colleagues at TU Graz. In particular, this includes our secretaries Karin Kernbichler and Maria Urdl-Müller. Furthermore, I would like to thank all my friends and colleagues in the doctoral school of mathematics, and the DK discrete mathematics. I am also indepted to the Austrian Science Fund FWF: W1230, whose funding is responsible for all parts of this PhD thesis.
 
 Last but not least, I want to sincerely thank all my friends and family members for their great support during the time in which I was writing the thesis. 
-This includes my friends from high school, Carsten, Fabian, Manuel, Michael, Thomas. 
-Furthermore, my friends from Karlsruhe, especially Anja, Lilly, Philip, and all my other countless former flatmates and study colleagues. 
-Finally, all my friends from Graz, especially Alberto, Bianca, Lucia, my flatmates Achilina, David, Florian, and all my other friends! 
-Finally, my parents, as well as my siblings, Svea, Malte and Nele. It is you who tried to keep me from going insane in these four years. This has been partially successful.
+This includes my friends from high school, Carsten, Fabian, Manuel, Michael, and my oldest friend Thomas, for being a safe haven whenever I return home. 
+Furthermore, my friends from Karlsruhe, especially Anja, Lilly, Philip, and all my other countless former flatmates and study colleagues, for the shared memory of the special place that is L1. 
+Finally, all my friends from Graz, especially Alberto, Bianca, Lucia, my flatmates Achilina, David, Florian, and all my other friends, for accompanying me on my PhD journey. 
+Finally, my parents, as well as my siblings, Svea, Malte and Nele, for being the best possible family! It is all of you together, who tried to keep me from going insane in these four years. (This has been partially successful.)
 
 
 \cleardoublepage

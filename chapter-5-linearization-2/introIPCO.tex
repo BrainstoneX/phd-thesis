@@ -1,9 +1,8 @@
 \section{Introduction}\label{intro:sec}
 
-In this paper we consider the linearization problem for 
+Just like the last chapter, this chapter deals with the linearization problem for 
 nonlinear
-generalizations of the  \emph{Shortest Path Problem (SPP)}, a classic
-combinatorial optimization problem.
+generalizations of the  \emph{Shortest Path Problem (SPP)}. We recall the relevant definitions.
 An instance of the SPP  consists  of a digraph $G = (V, A)$,  a source vertex $s \in V$, a sink vertex $t \in V$, and a
 cost function $c\colon A\to \rz$, which maps each arc $a\in A$ to its cost
 $c(a)$.  The cost of a simple directed $s$-$t$-path $P$, 
@@ -16,7 +15,7 @@ In general it is assumed that
 there are no circuits of negative weight in $G$. 
 
 
-Consider now a number $d\in \nz$.  The \emph{Order-d Shortest Path Problem
+Unlike in the last chapter, in this chapter we are concerned with cost functions of possibly even higher order than 2. Consider a number $d\in \N, d \geq 2$.  The \emph{Order-d Shortest Path Problem
   (SPP$_d$)}
  takes as input a  digraph $G = (V, A)$,  
   a source vertex $s \in V$, a sink vertex $t \in V$, and an order-$d$ arc interaction 
@@ -31,9 +30,9 @@ The goal is to find
 a simple directed 
 $s$-$t$-path in $G$ which minimizes the objective function (\ref{dSPP:obj}).
 For $d=2$ we
-obtain the   \emph{Quadratic  Shortest Path Problem (QSPP)} which has already been studied in the literature
+obtain the   \emph{Quadratic  Shortest Path Problem (QSPP)} which has been introduced in the last chapter. We remark that the notation in this chapter is slightly different, since we are interested in generalizations to $d > 2$. However, the two notations can be easily seen to describe the same problem. We recall that the QSPP has been studied extensively in the literature
 ~\cite{cela2021linearizable,huSo2018,huSo2020,rostami2018}. 
-For notational convenience we write $\text{QSPP}(P,q)$ for $\text{SPP}_d(P,q_d)$ if $d=2$.
+For notational convenience we write $\text{QSPP}(P,q_2)$ for $\text{SPP}_d(P,q_d)$ if $d=2$.
 
 
 \smallskip
@@ -89,7 +88,7 @@ special cases of the QSPP belong to the larger class of the \emph{linearizable $
  and a  cost function $q_d$ is called linearizable if there exists a cost function
  $c\colon A\to \rz$ such that for any simple directed $s$-$t$-path  $P$ in $G$ the equality
  $\text{SPP}(P,c) = \text{SPP}_d(P,q_d)$ holds.
-  A linearizable instance  of the  QSPP is defined analogously, just  replacing $\text{SPP}_d(P,q_d)$ by $\text{QSPP}(P,q)$.
+  A linearizable instance  of the  QSPP is defined analogously, just  replacing $\text{SPP}_d(P,q_d)$ by $\text{QSPP}(P,q_2)$.
 \end{definition}
 
 The recognition of linearizable QSPP (SPP$_d$) instances, also
@@ -116,8 +115,7 @@ this context.
 \smallskip
 
 While \textsc{Lin}SPP$_d$ has not been investigated in the literature so far (to the best of our knowledge), the  \textsc{Lin}QSPP has been subject of investigation in some recent papers.
-In \cite{cela2021linearizable} \c{C}ela, Klinz, Lendl, Orlin, Woeginger and
-Wulf proved  that it  is  coNP-complete to decide whether a   QSPP instance on an   input graph
+In the last chapter, it was proven  that it  is  coNP-complete to decide whether a   QSPP instance on an   input graph
 containing   a directed cycle is linearizable.    Thus, a nice characterization of linearizable QSPP
   instances for such  graphs
   seems to be
@@ -131,20 +129,17 @@ containing   a directed cycle is linearizable.    Thus, a nice characterization 
    $G$.
 \smallskip
    
-   Finally, let us mention a related  concept, the  so-called universal linearizability,
-   studied in \cite{cela2021linearizable,huSo2018}.
+   We recall that in the last chapter, the  so-called universal linearizability was studied.
 A digraph $G$ is called \emph{universally linearizable with respect to the
   QSPP} iff every instance of the QSPP on the input graph $G$ is linearizable for
 every choice of the cost function $q$. In \cite{huSo2018} it is shown that a
 particular class of grid graphs is universally linearizable. In
-\cite{cela2021linearizable} a characterization of universally linearizable grid
-graphs in terms of structural properties of the set of $s$-$t$-paths is
-given. Moreoever, for acyclic digraphs a forbidden subgraphs characterization of
-the universal linearizability is given in \cite{cela2021linearizable}.  
+the last chapter, we obtained several different complete characterizations of the class of universally linearizable digraphs, for example in terms of 
+forbidden subgraphs.  
 \medskip
 
-\textbf{Contribution and organization of the paper.}
-In this paper we provide a novel and simple characterization of linearizable QSPP instances on acyclic 
+\textbf{Contribution and organization of the chapter.}
+In this chapter we provide a novel and simple characterization of linearizable QSPP instances on acyclic 
 digraphs.
 Our characterization shows that the linearizability can be seen as a  \emph{local} property.  In particular, we show  that an instance of the QSPP on an acyclic 
 digraph $G$  is linearizable if and only if each subinstance obtained by considering a subdigraph of $G$ consisting of two $s$-$t$-paths in $G$   is linearizable. Our simple characterization also works for the SPP$_d$  and even for completely arbitrary cost  functions, which  assign some cost $f(P)$ to every $s$-$t$-path $P$ without any further restrictions. The latter problem is referred to as the \emph{Generic Shortest Path Problem} (GSPP) and is formally introduced in Section~\ref{defi:sec}. Indeed, the characterization of the linearizable instances of the SPP$_d$ 
@@ -162,7 +157,7 @@ SPP$_d$,  need to be encoded in the input.)
 Finally, we also obtain a polynomial time algorithm that given an acyclic digraph $G$ computes a basis of the subspace of all linearizable degree-$d$ cost functions on $G$. Such a basis can be used to obtain better linearization-based bounds usable in B\&B algorithms.
 \smallskip
 
-The paper is organized as follows. 
+The chapter is organized as follows. 
 After introducing some notations and preliminaries in Section~\ref{defi:sec} we present the result on the characterization of the linearizable QSPP and SPP$_d$ instances on acyclic input digraphs in Section~\ref{charact:sec}. The algorithms for the linearization problems \textsc{Lin}QSPP and \textsc{Lin}SPP$_d$ are presented in Section~\ref{algo:sec}. 
 %In \cref{sec:subspace} we give a polynomial time algorithm computing a basis %of the subspace of all linearizable $d$-degree cost functions on an acyclic digraph $G$.
 \cref{sec:subspace} deals with 
