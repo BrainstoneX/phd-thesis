@@ -612,7 +612,7 @@ Let $e_0 = \set{u, z} = \set{u_k, z_k}$ be the special edge. There is a Hamilton
 \item All edges $e \in M_3$ have activity interval $[0, 2]$.
 \item All edges $e \in M_4$ have activity interval $[5, 7]$.
 \end{itemize}
-It is easy to see that a schedule $\sigma$ with these properties does indeed exist. \cref{table:lasse-if} provides a schematic description of the schedule, by indicating for each number $t$, which edges are scheduled and which gadgets are fully connected during the the $t$-th time slot $[t-1, t]$.  Notice that the active edges in $H$ form a matching of $H$ during the time slots 1,2,3,5,6, and 7, 
+It is easy to see that a schedule $\sigma$ with these properties does indeed exist. \cref{table:lasse-if} together with \cref{fig:one-page-if-overview} provides a schematic description of the schedule, by indicating for each number $t$, which edges are scheduled and which gadgets are fully connected during the the $t$-th time slot $[t-1, t]$.  Notice that the active edges in $H$ form a matching of $H$ during the time slots 1,2,3,5,6, and 7, 
 and form a Hamiltonian path of $H$ during the time slot 4. 
 By checking each of the cases $t=1,\dots,7$, it is easily seen that each of the graphs $G^\sigma_1,\ldots,G^\sigma_7$ is connected. We therefore conclude that $\ntp(\sigma) = 7$. 
 \begin{table}[htpb]
@@ -632,6 +632,14 @@ By checking each of the cases $t=1,\dots,7$, it is easily seen that each of the 
  \caption{Description of the schedule $\sigma$ from \cref{lemma:lasse-if}.}
  \label{table:lasse-if}
 \end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htpb]
+\centering
+ \includegraphics[width=0.95\textwidth]{chapter-6-NTP/toggle-one-page}
+\caption{A visual demonstration of how the schedule described in \cref{lemma:lasse-if} and \cref{table:lasse-if} keeps the instance connected for seven time units. A colored figure is available online. Notice how during time slot 4, the edge set $M_1 \cup M_2 - \set{e_0}$ forms a Hamiltonian path in $H$. \cref{lemma:lasse-only-if} shows that this is unavoidable for any schedule $\sigma$ with $\ntp(\sigma) = 7$.}
+\label{fig:one-page-if-overview}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 \end{proof}
 
