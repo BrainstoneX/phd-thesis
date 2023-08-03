@@ -136,8 +136,6 @@
 \section{Introduction}\label{sec:intro}
 
 
-\subsection{Motivation}
-
 Most optimization problems in practice are uncertain. To handle such problems under uncertainty, a vibrant field of research has been developed, including such approaches as fuzzy optimization (see e.g. \cite{lodwick2010fuzzy,klir1995fuzzy}), the stability approach (see e.g. \cite{sotskov2014sequencing}), stochastic programming (see e.g. \cite{birge2011introduction}), or robust optimization (see e.g. \cite{kasperski2016robust}). Treating uncertainty in an optimization problem typically increases its computational complexity, which means that a problem that is simple under known problem data may become challenging when the data is not known precisely.
 
 In this paper we consider one such problem, which is the representatives multi-selection problem (RMSP). We are given several disjoint sets of items, and need to choose a specified number of items from each set. The aim is to minimize a linear cost function. Due to their simplicity, selection problems arise as special cases of many other fundamental combinatorial optimization problems, see \cite{kasperski2013approximating} for an overview. These include knapsack, assignment, scheduling, matroid base, spanning tree and shortest path problems. Choosing representative subsets in the widest sense also occurs, e.g., in data mining \cite{daszykowski2002representative,wang2017representative}, computer vision \cite{meng2016keyframes}, multi-objective optimization \cite{zio2011clustering}, or signal processing \cite{wang2015novel}.

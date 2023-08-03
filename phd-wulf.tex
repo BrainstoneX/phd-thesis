@@ -82,7 +82,7 @@ We furthermore consider multi-stage robust optimization, specifically recoverabl
 
 We also consider network interdiction problems, specifically with respect to interval graphs. We introduce a framework for interdiction on interval graphs, which allows one to shrink or expand intervals. We show that the well-known most vital nodes problem is a special case of the framework. Even though network interdiction problems are often times NP-complete or even harder, in our case we obtain polynomial-time algorithms for 6 of the 8 cases studied. This is done employing technically challenging dynamic programs. One of our results answers an open question by Diner et al. 
 
-In the second part of the thesis, we consider linearization of the quadratic shortest path problem. In an earlier paper, Sotirov and Hu gave an example of a certain directed graph with a peculiar property, which we call unviersally linearizable. Motivated by this example, we give a complete characterization of the class of universally linearizable directed graphs. 
+In the second part of the thesis, we consider linearization of the quadratic shortest path problem. In an earlier paper, Sotirov and Hu gave an example of a certain directed graph with a peculiar property, which we call universally linearizable. Motivated by this example, we give a complete characterization of the class of universally linearizable directed graphs. 
 
 Inspired by some insight gained from the characterization,
 we find an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
@@ -90,7 +90,6 @@ There is also a trivial tight lower bound of $\Omega(m^2)$, making our algorithm
 In contrast, the fastest previous algorithm was presented by Hu qand Sotirov and has a running time of $O(nm^3)$. Hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than two, where we also obtain a linear-time algorithm.
 
 In the final part of the thesis, we consider the problem of keeping a graph connected for a maximal amount of time, by scheduling its edges in a non-preemptive way. 
-%Specifically, every edge $e$ has a weight $w(e)$ attached to it, and can be scheduled during a non-interrupted interval of length $w(e)$. The goal is to maximize the time during which the scheduled edges span all the vertices. 
 We show that the problem is an interesting mixture between a scheduling problem and the graph-structural problem of tree-packing, as introduced by Nash-Williams. We derive a variety of complexity results for the problem.
 
 \begin{otherlanguage}{ngerman}
@@ -99,21 +98,21 @@ We show that the problem is an interesting mixture between a scheduling problem 
 Diese Doktorarbeit befasst sich mit drei verschiedenen Arten der Verallgemeinerung von klassischen kombinatorischen Optimierungsproblemen: Robuster Optimierung, höher-dimensionalen Kostenfunktionen, und Nicht-Präemptivität.
 
 
-Im ersten Teil der Arbeit wird rekoverable robuste Optimierung in Kombination mit dem Repräsentatanten-Selektionsproblem betrachtet. 
-In Abwesenheit von Robustheit ist es möglich, dieses Problem trivialerweise zu lösen. 
+Im ersten Teil der Arbeit wird rekoverable robuste Optimierung in Kombination mit dem Repräsentanten-Selektionsproblem betrachtet. 
+In Abwesenheit von Robustheit ist dieses Problem trivial. 
 Das Hinzufügen von Robustheit erhöht jedoch die Schwierigkeit. 
-Seit dem Jahr 2011 war es für die von uns betrachtete Variante eine offene Fragestellung, die genaue Komplexität zu ermitteln. Wir beantworten nun die offene Frage, indem wir die NP-Vollständigkeit des Problems beweisen.
+Seit dem Jahr 2011 war es für die von uns betrachtete Variante eine offene Fragestellung, die genaue Komplexität zu ermitteln. Wir beantworten nun die offene Frage, indem wir die NP-Vollständigkeit des Problems zeigen.
 Außerdem beweisen wir, dass das zugehörige adversariale Problem in Polynomialzeit gelöst werden kann. 
 
 Weiterhin betrachten wir mehrstufige robuste Optimierung, insbesondere rekoverable robuste Optimierung und zweistufig adjustierbare robuste Optimierung. 
-Wir argumentieren überzeugend, dass die naheliegende Komplexitätsklasse für viele Probleme, die in der Literatur studiert werden, die Klasse $\Sigma^p_3$ aus der polynomiellen Hierarchie ist. Trotz alledem sind nur sehr wenige $\Sigma^p_3$-Vollständigkeitsbeweise in der Literatur vorhanden. Wir unternehmen einen ersten Schritt in ein solches Gebiet, in dem wir mehrere Resultate dieser Art beweisen. 
+Wir argumentieren überzeugend, dass die naheliegende Komplexitätsklasse für viele dieser Probleme, die in der Literatur studiert werden, die Klasse $\Sigma^p_3$ aus der polynomiellen Hierarchie ist. Trotzdem sind nur sehr wenige $\Sigma^p_3$-Vollständigkeitsbeweise in der Literatur vorhanden. Wir unternehmen einen ersten Schritt in ein solches Gebiet, in dem wir mehrere Resultate dieser Art beweisen. 
 
-Wir betrachten außerdem Netzwerk-Schwachstellen-Probleme, insbesondere mit Bezug auf Intervallgraphen. Wir führen ein Framework ein, das es erlaubt Intervalle zu expandieren oder zu kontrahieren. Wir zeigen, dass das bekannte most-vital-nodes Problem ein Sonderfall unseres Frameworks ist. Obwohl es oft der Fall ist, dass Netzwerk-Schwachstellen-Probleme NP-vollständig oder noch schwerer sind, können wir in unserem Fall für 6 der 8 betrachteten Probleme einen Polynomialzeit-Algorithmus erlangen. Dieses Resultat wird mithilfe technisch herausfordernder dynamischer Programmierung erreicht. Eines unser Resultate beantwortet eine offene Frage von Diner et al.
+Wir betrachten außerdem Netzwerk-Schwachstellen-Probleme, insbesondere mit Bezug auf Intervallgraphen. Wir führen ein Framework ein, das es erlaubt Intervalle zu expandieren oder zu kontrahieren. Wir zeigen, dass das bekannte most-vital-nodes Problem ein Sonderfall unseres Frameworks ist. Obwohl es oft der Fall ist, dass Netzwerk-Schwachstellen-Probleme NP-vollständig oder noch schwerer sind, können wir in unserem Fall für 6 der 8 betrachteten Probleme einen Polynomialzeit-Algorithmus erhalten. Dieses Resultat wird mithilfe technisch herausfordernder dynamischer Programmierung erreicht. Eines unser Resultate beantwortet eine offene Frage von Diner et al.
 
 
-Im zweiten Teil der Doktorarbeit untersuchen wir Linearisierungen des qudratischen kürzesten-Wege-Problems. 
+Im zweiten Teil der Doktorarbeit untersuchen wir Linearisierungen des qudratischen kürzeste-Wege-Problems. 
 In einem früheren Artikel gaben Sotirov und Hu ein Beispiel für einen Graphen mit einer besonderen Eigenschaft an, welche wir als universelle Lienarisierbarkeit bezeichnen. 
-Durch diese Beispiel motiviert geben wir eine vollständige Charakterisierung der Klasse aller universell linearisierbaren Graphen an.
+Durch dieses Beispiel motiviert geben wir eine vollständige Charakterisierung der Klasse aller universell linearisierbaren Graphen an.
 
 Ausgehend von Erkenntnissen, die aus dieser Charakterisierung gewonnen wurden, finden wir als nächstes einen Algorithmus mit Laufzeit $O(m^2)$ für das Linearisierungsproblem zugehörig zum quadratischen kürzeste-Wege-Problem auf azyklischen gerichteten Graphen. 
 Es gibt auch eine triviale komplementäre untere Schranke von $\Omega(m^2)$, was bedeutet, dass unser Algorithmus als Linearzeitalgorithmus verstanden werden kann.
@@ -123,7 +122,7 @@ Unser Algorithmus basiert auf einer verblüffenden neuen Erkenntniss, nämlich d
 Unser Ansatz kann auf höherdimensionale Kostenfunktionen von Grad größer als zwei verallgemeinert werden. Auch in diesem Fall finden wir einen Linearzeitalgorithmus.
 
 
-Im letzten Teil der Arbeit betrachten wir das Problem, einen Graphen für eine möglichst lange Zeit zusammenhängend zu lassen, indem wir einen nicht-präemptiven schedule für seine Kanten erstellen. Wir zeigen, dass das Problem eine interessante Mischung aus einem scheduling-Problem und dem graph-strukturellen Baum-Packungsproblem von Nash-Williams ist. Wir beweisen mehrer komplexitätstheoretische Resultate über das neu eingeführte Problem.
+Im letzten Teil der Arbeit betrachten wir das Problem, einen Graphen für eine möglichst lange Zeit zusammenhängend zu lassen, indem wir einen nicht-präemptiven schedule für seine Kanten erstellen. Wir zeigen, dass das Problem eine interessante Mischung aus einem scheduling-Problem und dem graph-strukturellen Baum-Packungsproblem von Nash-Williams ist. Wir beweisen mehrere komplexitätstheoretische Resultate über das neu eingeführte Problem.
 
 
 \end{otherlanguage}

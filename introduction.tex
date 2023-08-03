@@ -2,11 +2,11 @@
 \chapter{Introduction}
 Less than 80 years after the invention of the first computer, today we are surrounded by digital technology at every step we take. 
 Computers influence and control countless aspects of modern life. 
-We have grown so accustomed to digital machines, that we take many of their wonderous abilities for granted. 
-One of these wonderous abilities is the following: Computers are able to find the optimal solution to a problem out of an incredibly large amount of possibilities.
+We have grown so accustomed to digital machines, that we take many of their wondrous abilities for granted. 
+One of these wondrous abilities is the following: Computers are able to find the optimal solution to a problem out of an incredibly large amount of possibilities.
 For example, suppose you wanted to travel from Paris to Berlin by car. There is an almost infinite amount of different paths from Paris to Berlin. Yet, a clever computer algorithm can select the single unique path which is the fastest among all of them.
 
-This ability of computers to find the optimal solution for a given problem is used in countless areas of modern live: Computers are used to find the cheapest flight schedule for an airline, to find the best investment scheme for a portfolio, to decide which taxis from a taxi company should pick up which customer, to design optimal communication networks, and many, many more problems. Application areas range from Economics, Logistics, Operations Research, Computer Science, Healthcare, Biology, and many other disciplines.
+This ability of computers to find the optimal solution for a given problem is used in countless areas of modern life: Computers are used to find the cheapest flight schedule for an airline, to find the best investment scheme for a portfolio, to decide which taxis from a taxi company should pick up which customer, to design optimal communication networks, and many, many more problems. Application areas range from Economics, Logistics, Operations Research, Computer Science, Healthcare, Biology, and many other disciplines.
 
 It is important to state that computers do not come with this ability a priori. Instead, specific programs and algorithms need to be developed, to be able to handle the huge amount of possibilities. 
 \emph{Combinatorial Optimization} is the scientific field concerned with the question: How do we pick the optimal solution out of a huge (but still finite) amount of possibilities? 
@@ -24,7 +24,7 @@ The thesis is roughly split into three parts, corresponding to the three differe
 
 \begin{itemize}
 \item Part 1: \emph{Robust Optimization} (\cref{ch:recov-selection,ch:multistage-complexity,ch:interdiction}). In the area of Robust Optimization \cite{ben2009robust}, one is concerned with finding good quality solutions, 
-which still stay maintain their good quality even if the input parameters of the problem are slightly disturbed. Such solutions are called \emph{robust}.
+which still maintain their good quality even if the input parameters of the problem are slightly disturbed. Such solutions are called \emph{robust}.
 %This is motivated by the fact that in real life, data upon which decisions rely is often observed to be uncertain: 
 %Measurement errors, uncertainty about the future, or other sources of uncertainty lead to the conclusion, that the available data might only be an approximate, but not an exact description of reality. Thus, the need of finding robust solutions arises. 
 Robust optimization problems are formulated as min-max expressions. Modern research sees a trend towards investigating \emph{Multi-Stage Robust Optimization}, which solves min-max-min or even more complicated expressions.
@@ -36,7 +36,7 @@ Network interdiction problems restricted to interval graphs in \cref{ch:interdic
 \item Part 2: \emph{Linearizations of Quadratic Problems}  (\cref{ch:linearization-1,ch:linearization-2}). 
 A quadratic problem is an optimization problem whose objective can be written as a quadratic function. 
 In contrast to their linear counterpart, quadratic problems are often times intractable. 
-This has led researchers to aks the question for special solvable cases of quadratic problems. One of these special cases is the so-called \emph{linearizable} case \cite{bookhold1990contribution}. 
+This has led researchers to ask the question for special solvable cases of quadratic problems. One of these special cases is the so-called \emph{linearizable} case \cite{bookhold1990contribution}. 
 An instance of a quadratic optimization problem is called linearizable, if it can be re-written so that it is equivalent to a linear problem. Linearizations can also help in the design of general Branch \& Bound algorithms. Part 2 of the thesis is concerned with the linearization of the quadratic shortest path problem (QSPP). In \cref{ch:linearization-1}, we present a characterization of the class of universally linearizable directed graphs. In \cref{ch:linearization-2}, we consider the problem of recognizing linearizable instances of the QSPP. We present a novel algorithm for this problem, which runs significantly faster than the current state-of-the-art.
 
 \item Part 3: \emph{Non-Preemptiveness} (\cref{ch:ntp}). In part 3 of the thesis, we are concerned with keeping a network connected as long as possible, by scheduling its edges in a non-preemptive fashion.
@@ -91,8 +91,8 @@ In real-world applications, decision-makers are faced with the problem that the 
 These errors may have substantial effect on the quality of the solution. For example, in a study performed by Ben-Tal and Nemirovski \cite{ben2000robust}, the case of linear programming was considered: 
 Taking a linear program (abbreviated LP) from the well-known NETLIB library, they disturbed the coefficients of the LP by 0.1\%. 
 The authors solved the disturbed LP (which represents the data known to the decision maker) to optimality and compared the solution quality to the original LP (which represents the true data, unknown to the decision maker). 
-In one case, the optimal solution to the disturbed LP was infeasible for the orgininal LP by a relative constraint violation of 450\%. 
-Similar results are reported in the average case. This schowcases the need for robust solutions. The idea is that possibly one can sacrifice a small amount of optimality in the solution, in order to compute a solution which is not necessarily the best for the known data, but in exchange is stable against disturbations of the input data. Such a solution is called \emph{robust}.
+In one case, the optimal solution to the disturbed LP was infeasible for the original LP by a relative constraint violation of 450\%. 
+Similar results are reported in the average case. This showcases the need for robust solutions. The idea is that possibly one can sacrifice a small amount of optimality in the solution, in order to compute a solution which is not necessarily the best for the known data, but in exchange is stable against disturbance of the input data. Such a solution is called \emph{robust}.
 
 
 
@@ -115,7 +115,7 @@ Formally, for given constants $\underline{c}_i \geq 0$ and $d_i \in \R$ for all 
 \[
 \cU^d_\Gamma = \set{ \pmb c \in \R^n : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in \set{0,1}\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
-In other words, $\cU^d_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$ as the deviated $i$-th value. We can also consider the case, where the deviation is not binary, but can be split partially between different coeeficients. Formally, \emph{continuous budgeted uncertainty} is defined as
+In other words, $\cU^d_\Gamma$ contains those cost functions where at most $\Gamma$ entries deviate from their nominal cost $\underline{c}_i$. We define $\overline{c}_i = \underline{c}_i + d_i$ as the deviated $i$-th value. We can also consider the case, where the deviation is not binary, but can be split partially between different coefficients. Formally, \emph{continuous budgeted uncertainty} is defined as
 \[
 \cU^c_\Gamma = \set{ \pmb c \in \R^n : c_i = \underline{c}_i + \delta_id_i,\  \delta_i \in [0,1]\ \forall i \in [n],\ \sum_{i \in V}\delta_i \leq \Gamma }.
 \]
@@ -123,7 +123,7 @@ Note that the only difference between the two formulations is the range of $\del
 
 Budgeted uncertainty sets were introduced by Bertsimas and Sim \cite{bertsimas2003robust,bertsimas2004price}. 
 The high citation count on these two papers shows that discrete budgeted uncertainty has become very successful in the robust optimization literature. 
-The reason for this success is the fact that when using uncertainty set $\cU_\Gamma^ d$, the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems \cite{bertsimas2003robust}. This means that if the original problem is tractable (or approaximable, respecitvely), then the robust variant is tractable (or approximable, respectively) as well.
+The reason for this success is the fact that when using uncertainty set $\cU_\Gamma^ d$, the robust min-max problem can be solved by decomposing it into $O(n)$ nominal problems \cite{bertsimas2003robust}. This means that if the original problem is tractable (or approximable, respectively), then the robust variant is tractable (or approximable, respectively) as well.
 
 Budgeted uncertainty are used in the areas of portfolio management \cite{bertsimas2008robust}, wine grape harvesting \cite{bohle2010robust}, supply
 chain control \cite{bertsimas2006robust}, furniture production planning \cite{alem2012production}, and train load planning \cite{bruns2014robust}, among others. 
@@ -151,7 +151,7 @@ To address the fact where a first-stage solution $\pmb x$ is chosen which can no
 The final assumption of the model is that the cost function $f$ can be written as  $f(\pmb x,\pmb y,\pmb c) = \pmb C^t \pmb x + \pmb c^t \pmb y$. This means that $f$ is linear in both $x,y$ and that the uncertainty $\pmb c \in \cU \subseteq \R^n$ only affects the second-stage variables $\pmb y$, while the costs of the first-stage variables $\pmb x$ is given by some fixed vector $\pmb C \in \R^n$ (we use small/capital case to distinguish $\pmb c$ and $\pmb C$). 
 
 A variant of this approach is recoverable robust optimization \cite{liebchen2009concept}. Here, the idea is that we have to propose some initial solution $\pmb x$, which should already resemble a feasible solution. 
-After the reveal of the uncertain cost function $\pmb c$, we are allowed to react to the new information by proposing a new solution $\pmb y$, but we must make sure that $\pmb x$ is similar to $\pmb y$. Formally, for some abstract distance function $\dist(\cdot)$ and parameter $k \in \N$, we make sure that $\dist(\pmb x,\pmb y) \leq k$. This approach is motivated by train scheduling problems: The actual train schedule $\pmb y$ can deviate from the initially planned schedule $\pmb x$ to accomodate for delays, but $\pmb x$ and $\pmb y$ should not be too dissimilar, in order to satisfy customers \cite{liebchen2009concept}. The usual choice for the abstract distance function $\dist(\cdot)$ is the Hamming distance $\dist(\pmb x,\pmb y) := |\set{i \in [n] : x_i \neq y_i}|$. Formally, for a set $\X \subseteq \set{0,1}^n$ of feasible solutions, and $\X(\pmb x) := \set{\pmb y \in \X : \dist(\pmb x,\pmb y) \leq k}$ we consider
+After the reveal of the uncertain cost function $\pmb c$, we are allowed to react to the new information by proposing a new solution $\pmb y$, but we must make sure that $\pmb x$ is similar to $\pmb y$. Formally, for some abstract distance function $\dist(\cdot, \cdot)$ and parameter $k \in \N$, we make sure that $\dist(\pmb x,\pmb y) \leq k$. This approach is motivated by train scheduling problems: The actual train schedule $\pmb y$ can deviate from the initially planned schedule $\pmb x$ to accommodate for delays, but $\pmb x$ and $\pmb y$ should not be too dissimilar, in order to satisfy customers \cite{liebchen2009concept}. The usual choice for the abstract distance function is the Hamming distance $\dist(\pmb x,\pmb y) := \sum_{i=1}^n |x_i - y_i|$. Formally, for a set $\X \subseteq \set{0,1}^n$ of feasible solutions, and $\X(\pmb x) := \set{\pmb y \in \X : \dist(\pmb x,\pmb y) \leq k}$ we consider
 
 \[\min_{\pmb x \in \X} \max_{\pmb c \in \cU} \min_{\pmb y \in \X(\pmb x)} f(\pmb x,\pmb y,\pmb c).\]
 
@@ -180,17 +180,17 @@ We define a function $q : A \times A \to \R$ by letting $q(a_i,a_j) := Q_{ij}$ f
 
 (For convenience, we use the same notation for a path and its set of arcs in this formula). The value $q(a,a')$ is also called the \emph{interaction cost} of arcs $a$ and $a'$ for all $a,a' \in A$. This means that the cost of a path is influenced by the set of arc pairs lying on that path.
 
-This stands in contrast to the classic \emph{shortest path problem (SPP)}, where for some arc weigths $w : A \to \R$ the cost of a path $P$ is given by 
+This stands in contrast to the classic \emph{shortest path problem (SPP)}, where for some arc weights $w : A \to \R$ the cost of a path $P$ is given by 
 
-\[ \sum_{a \in P} w(a).\]
+\[ \spp(P, w) := \sum_{a \in P} w(a).\]
 
 In \cref{ch:linearization-2}, we use a slightly different notation, which is less common in the literature, but has the advantage that it is easier to generalize to higher-order cost functions. Namely, we consider a function $q_2 : \set{B \subseteq A : |B| \leq 2} \to \R$ where w.l.o.g. $q_2(\emptyset) = 0$, and we let
 \[ \qspp(P, q_2) := \sum_{B \subseteq P, |B| \leq 2} q_2(B).\]
 It is easily seen that these two notations are equivalent by setting $q_2(\set{a,a'}) := q(a,a') + q(a',a)$ for distinct arcs $a,a' \in A$ and $q_2(\set{a}) := q(a,a)$ for single arcs $a \in A$.
 
 \paragraph*{Linearization.}
-Since quadratic problems are often times intractable, researchers look for special solvable cases. One of these cases is the linearizable case. An instance $(G,s,t,Q)$ of the QSPP is \emph{linearizable} in the sense of Bookhold \cite{bookhold1990contribution}, if there exists a vector $\pmb c \in \R^m$ such that for all $s$-$t$-paths $P$ with incidence vector $\pmb x = \pmb x_P$ we have the equation 
-\[\pmb x^tQ\pmb x = \pmb c^t\pmb x. \]
+Since quadratic problems are often times intractable, researchers look for special solvable cases. One of these cases is the linearizable case. An instance $(G,s,t,q)$ of the QSPP is \emph{linearizable} in the sense of Bookhold \cite{bookhold1990contribution}, if there exists arc weights $w : A \to \R$ such that for all $s$-$t$-paths $P$ we have the equation 
+\[\spp(P, w) = \qspp(P, q). \]
 In other words, the instance can be expressed equivalently as a linear optimization problem.
 
 Linearizations may appear quite exotic at first, but they arise naturally as special cases of the QSPP with restricted cost matrix~\cite{huSo2018}. They also have applications in understanding and designing lower bounds in general branch \& bound algorithms for quadratic optimization problems \cite{huSo2021}. 
@@ -199,7 +199,22 @@ For this reason, linearizability has been studied for many quadratic problems, i
  \cite{CeDeWo2016,Erdogan2006,ErTa2007,ErTa2011,kabadi2011n,punnen2013linear,waddellcharacterizing}, 
  the quadratic minimum spanning tree problem \cite{CuPu2018,sotirov2021quadratic},   the quadratic TSP \cite{PuWaWo2017}, and  the quadratic cycle cover problem \cite{deMeSo2020}.  
 
-%\paragraph*{Spanning Tree Packing}
+\paragraph*{Spanning Tree Packing}
+For a given undirected connected graph $G=(V,E)$ and a weight function $w:E \to \N$,
+Nash-Williams \cite{Nash-Williams1961} considered the following optimization problem:
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{align*}
+\text{maximize}~~ &\sum\left\{x_T:\,\text{$T$ is a spanning tree} \right\} 
+\\
+\text{such that}~~&\sum\left\{x_T:\,e\in T\right\}\le w(e)\qquad\text{for every $e\in E$}
+\\
+                 &x\ge0,~\text{integral}
+\end{align*}
+%%%%%%%%%%%%%%%%%%%%%%%
+This is interpreted as the problem of packing as many spanning trees into a graph as possible, while respecting the edge weights. The variable $x_T$ counts how often the tree $T$ is used in the packing. 
+Nash-Williams \cite{Nash-Williams1961} derives a min-max relation for the problem, which is nowadays known as the Nash-Williams theorem.
+There exist multiple different approaches to solve the spanning tree packing problem in polynomial time. More information on these approaches is given in the introduction of \cref{ch:ntp}.
+
 
 \section{Results of the thesis}
 \label{sec:thesis-results}
@@ -267,7 +282,7 @@ Finally, we show how to compute in polynomial time a basis of the linear subspac
 \paragraph*{Non-preemptive tree packing.}
 In \cref{ch:ntp}, we consider \emph{nonpreemptive tree packing}. This problem is a mixture of a scheduling problem and a structural tree packing problem.
 An instance of the non-preemptive tree packing problem consists of an undirected graph $G$ together with a weight $w(e)$ for every edge $e$. The goal is to activate every edge $e$ for some time interval of length $w(e)$, such that the activated edges keep $G$ connected for the longest possible overall time. We derive a variety of results on this problem. The problem is strongly NP-hard even on graphs of treewidth $2$, and it does not allow a polynomial time approximation scheme (unless P=NP). Furthermore, we discuss the performance of a simple greedy algorithm, and we construct and analyze a number of parameterized and exact algorithms.
-We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. The intermediate cases of $\set{4,5,6}$ remain open.
+We can pinpoint the complexity of this problem parameterized by the objective value down to a small gap: On the one hand, it is NP-complete to decide if the graph can be connected for 7 time units. This result is obtained with a non-trivial NP-hardness proof consisting out of several steps. On the other hand, if 7 is replaced by 3, this problem becomes polynomial-time solvable. This result is obtained using matroid techniques. The intermediate cases of $\set{4,5,6}$ remain open.
 
 \section{A note on notation}
 
@@ -275,10 +290,10 @@ In this thesis, we use the following notation: We denote by $[n] := \fromto{1}{n
 An \emph{undirected graph} is a tuple $G = (V,E)$, where $V$ is the set of its vertices and $E \subseteq \binom{V}{2}$ is the set of its edges, where $\binom{V}{2} := \set{A \subseteq V : |A| = 2}$.
 
 A \emph{directed graph}, also called a \emph{digraph}, is a tuple $G = (V, E)$, where $V$ is the set of its vertices and $E \subseteq V \times V$ is the set of its edges. The edges of a directed graph are also called \emph{arcs}.
-All graphs considered in this thesis are \emph{simple}, i.e.\ they contain neither parallel edges nor self-loops.
+All graphs considered in this thesis are \emph{simple}, i.e.\ they contain neither parallel edges nor self-loops. By default, all graphs in this thesis are assumed to be undirected, unless specifically stated otherwise.
 
 
-A \emph{subgraph} $G' \subseteq G$ of a (directed or undirected) graph $G$ is a tuple $G' = (V', E')$ such that $V' \subseteq V$ and $E' \subseteq E$. Special subgraphs are the so-called \emph{induced subgraphs}: For a subset $V' \subseteq V$ the subgraph of $G$ induced by $V'$ is denoted by $G[V']$ and defined in the directed case by $G' = (V', E \cap (V' \times V'))$ or in the undirected case by $G' = (V', E \cap \binom{V'}{2})$. By default, all graphs in this thesis are assumed to be undirected, unless specifically stated otherwise.
+A \emph{subgraph} $G' \subseteq G$ of a (directed or undirected) graph $G$ is a tuple $G' = (V', E')$ such that $V' \subseteq V$ and $E' \subseteq E$. Special subgraphs are the so-called \emph{induced subgraphs}: For a subset $V' \subseteq V$ the subgraph of $G$ induced by $V'$ is denoted by $G[V']$ and defined in the directed case by $G' = (V', E \cap (V' \times V'))$ or in the undirected case by $G' = (V', E \cap \binom{V'}{2})$. 
 
 
 In an undirected graph, a \emph{path} is a subgraph with vertex sets $\fromto{v_1}{v_k}$ for pairwise distinct vertices $v_1,\dots,v_k$ and all the edges $\set{v_i,v_{i+1}}$ for $i=1,\dots,k-1$. Likewise, a \emph{directed path} in a directed graph is defined analogously, such that all its arcs are directed from $v_i$ to $v_{i+1}$ for all $i=1,\dots,k-1$. The \emph{length} of a path is the number of its edges.  
