@@ -72,9 +72,9 @@
 \pagenumbering{roman}
 
 \chapter*{Abstract}
-This thesis is concerned with three different directions of generalization of clasic combinatorial optimization problems: Robust optimization, higher-order cost functions, and nonpreemption.
+This thesis is concerned with three different directions of generalization of classic combinatorial optimization problems: Robust optimization, higher-order cost functions, and nonpreemption.
 
-In the first part of the thesis, we consider recoverable robust oprimization in conjunction with the representatives selection problem and discrete budgeted uncertainty. 
+In the first part of the thesis, we consider recoverable robust optimization in conjunction with the representatives selection problem and discrete budgeted uncertainty. 
 This is a problem which is trivial without the presence of any robustness, but the addition of robustness makes it challenging. 
 Determining the computational hardness of the specific variant that we consider has been an open question since 2011, which we now resolve by showing NP-completeness. We also show that the corresponding adversarial problem can be solved in polynomial time.
 
@@ -87,7 +87,7 @@ In the second part of the thesis, we consider linearization of the quadratic sho
 Inspired by some insight gained from the characterization,
 we find an algorithm that solves the linearization problem of the quadratic shortest path problem on acyclic directed graphs in running time $O(m^2)$. 
 There is also a trivial tight lower bound of $\Omega(m^2)$, making our algorithm linear-time. 
-In contrast, the fastest previous algorithm was presented by Hu qand Sotirov and has a running time of $O(nm^3)$. Hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than two, where we also obtain a linear-time algorithm.
+In contrast, the fastest previous algorithm was presented by Hu and Sotirov and has a running time of $O(nm^3)$. Hence we improve the state-of-the art by a factor of $O(mn)$. Our algorithm is based on a surprising new insight, stating that linearizability of an acyclic directed graph can be understood as a local property.  Our approach generalizes to the case of cost functions of degree higher than two, where we also obtain a linear-time algorithm.
 
 In the final part of the thesis, we consider the problem of keeping a graph connected for a maximal amount of time, by scheduling its edges in a non-preemptive way. 
 We show that the problem is an interesting mixture between a scheduling problem and the graph-structural problem of tree-packing, as introduced by Nash-Williams. We derive a variety of complexity results for the problem.
@@ -136,23 +136,23 @@ Im letzten Teil der Arbeit betrachten wir schließlich das Problem, einen Graphe
 
 \chapter*{\germanenglish{Danksagung}{Acknowledgements}}
 
-First and foremost, I want to thank my advisor Bettina Klinz, who was always available for any kind of questions or problems that occured and helped resolve them, even if they arose on short notice. I would also like to express my gratitude for the trust she placed in me, by letting me choose my own topics and collaborations, and supporting me in every way while doing so.
+First and foremost, I want to thank my advisor Bettina Klinz, who was always available for any kind of questions or problems that occurred and helped resolve them, even if they arose on short notice. I would also like to express my gratitude for the trust she placed in me, by letting me choose my own topics and collaborations, and supporting me in every way while doing so.
 
 I am very lucky for Stefan Lendl to be my mentor, who introduced me to both the world of robust optimization, and the strange world of academia in general. Working together with Stefan is immensely motivating and productive, as indicated by our amount of shared papers. 
 Likewise, I thank Michael Kerber, my second mentor, for giving helpful advise around all kinds of situations in academic life. 
-Another mentor, whose knowledge and experience helped me a great amount is Marc Goerigk. Working together with him made research fun, and I benefitted greatly from his seemingly limitless knowledge of robust optimization.
+Another mentor, whose knowledge and experience helped me a great amount is Marc Goerigk. Working together with him made research fun, and I benefited greatly from his seemingly limitless knowledge of robust optimization.
 
 This thesis is also written in memory of Gerhard Woeginger, who tragically passed away after a long illness in April 2022. Gerhard was a frequent visitor to Graz, and his visits were the initial spark for the research behind \cref{ch:linearization-1,ch:linearization-2} in this thesis. Furthermore, his deep insights greatly improved the quality of \cref{ch:ntp}. Indeed, Gerhard was an expert in many areas of mathematics and academia in general, and he left us too soon.
 
 Special thanks to Nicolas El Maalouly, Marc Goerigk, Dorothee Henke, and Hung P. Hoang for bringing their great academic expertise to me by visiting Graz. All of these visits resulted in published (or soon-to-be-published) work. From all these visitors, Nicolas was here the most. I have lost count on how many times we have met at either visits to Graz, visits to Zurich, or joint conferences. My work together with Nicolas is too recent to be part of this thesis, but I am sure that the Exact Matching problem will be the hottest trend at the top conferences soon! (Maybe.)
-I would also like to thank my host Bernd Gärtner at ETH Zurich, whose group I could gratiously visit for three months in spring 2022, and Hung, who initiated the contact.
+I would also like to thank my host Bernd Gärtner at ETH Zurich, whose group I could graciously visit for three months in spring 2022, and Hung, who initiated the contact.
 
 
-Modern research is impossible without collaboration, hence I am indepted to all my co-authors for enriching scientific discussions and exciting discoveries. Namely, co-authors not yet mentioned include Reni \c{C}ela, Anita Dürr, Christoph Grüne, Sebastian Haslebacher, James B. Orlin, Raphael Steiner, and Milo\v{s} Stojakovi\'{c}.
+Modern research is impossible without collaboration, hence I am indebted to all my co-authors for enriching scientific discussions and exciting discoveries. Namely, co-authors not yet mentioned include Reni \c{C}ela, Anita Dürr, Christoph Grüne, Sebastian Haslebacher, James B. Orlin, Raphael Steiner, and Milo\v{s} Stojakovi\'{c}.
 
 Special thanks go to the external reviewers of this thesis, Franz Rendl and Frits Spieksma, for the time they invested by refereeing it. Likewise, I would like to thank all other anonymous reviewers, journal editors, and conference organizers, whose voluntary work forms the backbone of science.
 
-I would like to thank all my colleagues at TU Graz. In particular, this includes our secretaries Karin Kernbichler and Maria Urdl-Müller. Furthermore, I would like to thank all my friends and colleagues in the doctoral school of mathematics, and the DK discrete mathematics. I am also indepted to the Austrian Science Fund FWF: W1230, whose funding is responsible for all parts of this PhD thesis.
+I would like to thank all my colleagues at TU Graz. In particular, this includes our secretaries Karin Kernbichler and Maria Urdl-Müller. Furthermore, I would like to thank all my friends and colleagues in the doctoral school of mathematics, and the DK discrete mathematics. I am also indebted to the Austrian Science Fund FWF: W1230, whose funding is responsible for all parts of this PhD thesis.
 
 Last but not least, I want to sincerely thank all my amazing friends and family members for their great support during the time in which I was writing the thesis. 
 This includes my friends from high school, Carsten, Fabian, Manuel, Michael, and my oldest friend Thomas, for being a safe haven whenever I return home. 
