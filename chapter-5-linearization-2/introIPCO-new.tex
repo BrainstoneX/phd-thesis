@@ -1,0 +1,164 @@
+\section{Introduction}\label{intro:sec}
+
+Just like the last chapter, this chapter deals with the linearization problem for 
+nonlinear
+generalizations of the  \emph{Shortest Path Problem (SPP)}. We recall the relevant definitions.
+An instance of the SPP  consists  of a digraph $G = (V, A)$,  a source vertex $s \in V$, a sink vertex $t \in V$, and a
+cost function $c\colon A\to \rz$, which maps each arc $a\in A$ to its cost
+$c(a)$.  The cost of a simple directed $s$-$t$-path $P$, 
+is given by\footnote{We use the same  notation for the path $P$ and the set of its arcs.}
+\begin{equation}\label{SPP:obj}  \text{SPP}(P,c):=\sum_{a\in P} c(a)\, .  \end{equation}
+The goal  is to find a simple directed 
+$s$-$t$-path in $G$ which minimizes the objective 
+(\ref{SPP:obj}).
+In general it is assumed that 
+there are no circuits of negative weight in $G$. 
+
+
+Unlike in the last chapter, in this chapter we are concerned with cost functions of possibly even higher order than 2. Consider a number $d\in \N, d \geq 2$.  The \emph{Order-d Shortest Path Problem
+  (SPP$_d$)}
+ takes as input a  digraph $G = (V, A)$,  
+  a source vertex $s \in V$, a sink vertex $t \in V$, and an order-$d$ arc interaction 
+cost  function $q_d\colon \set{B \subseteq A : |B| \leq d}
+\to \rz$. Thus $q_d$ assigns a  weight to every subset of
+arcs of cardinality at most $d$.
+ The cost of a simple directed $s$-$t$-path $P$ 
+is given by
+\begin{equation}\label{dSPP:obj}
+  \text{SPP}_d(P,q_d):=\sum_{S\subseteq P \colon |S|\le d} q_d(S)\, .\end{equation}
+The goal is to find  
+a simple directed 
+$s$-$t$-path in $G$ which minimizes the objective function (\ref{dSPP:obj}).
+For $d=2$ we
+obtain the   \emph{Quadratic  Shortest Path Problem (QSPP)} which has been introduced in the last chapter. We remark that the notation in this chapter is slightly different, since we are interested in generalizations to $d > 2$. However, the two notations can be easily seen to describe the same problem. We recall that the QSPP has been studied extensively in the literature
+~\cite{cela2021linearizable,huSo2018,huSo2020,rostami2018}. 
+
+
+\smallskip
+
+The QSPP arises 
+in network optimization  problems where costs are associated with both single arcs and pairs of arcs.
+This includes 
+variants of stochastic and time-dependent route planing  problems  
+\cite{nie2009reliable,sen2001mean,sivakumar1994variance}
+and network design problems 
+\cite{murakami1997restoration,gamvros2006satellite}. 
+
+For an overview of applications of the QSPP see \cite{huSo2020,rostami2018}.
+We are not  aware of any
+publications  
+for the case $d>2$.
+
+
+While the SPP can be solved in polynomial time, the QSPP is an NP-hard
+problem even for the special case of the adjacent QSPP where  the  costs of all pairs of non-consecutive  arcs are  
+zero ~\cite{rostami2018}.
+The QSPP is  an  extremely difficult
+problem also from the practical point of view.  
+ Hu and Sotirov~\cite{huSo2020} report that a state-of-the-art quadratic solver can
+solve QSPP instances with up to $365$ arcs, while their  tailor-made B\&B
+%branch and
+%bound 
+algorithm can solve instances with up to $1300$ arcs to optimality within one  hour. 
+Instances of the SPP can however be solved in a fraction of a second for graphs with
+millions of vertices and arcs.
+
+\smallskip
+
+Given the 
+hardness of the QSPP, a research line on this problem has focussed
+on 
+polynomially solvable special cases which
+arise if the input graph and/or the cost coefficients have certain specific
+properties. Rostami et al.~\cite{rostami2015} have presented a polynomial time
+algorithm for the adjacent QSPP in acyclic digraphs and in series-parallel graphs. Hu 
+and Sotirov~\cite{huSo2018}
+have shown that the QSPP can be solved in polynomial time if the  quadratic
+costs build a  nonnegative symmetric product matrix, or if the quadratic costs
+build a sum matrix and all $s$-$t$-paths in 
+$G$ have the same number of arcs. 
+These two polynomially solvable
+special cases of the QSPP belong to the larger class of the \emph{linearizable $\text{SPP}_d$ instances} defined as follows.
+\begin{definition}
+\label{def:linearizable}
+ An instance of the SPP$_d$ with an input digraph $G=(V,A)$, a source node $s$, a sink node $t$
+ and a  cost function $q_d$ is called linearizable if there exists a cost function
+ $c\colon A\to \rz$ such that for any simple directed $s$-$t$-path  $P$ in $G$ the equality
+ $\text{SPP}(P,c) = \text{SPP}_d(P,q_d)$ holds.
+ %\todo{BK: Slight change of this sentence. We could also omit it alltogether}
+  %A linearizable instance  of the  QSPP is defined analogously, just  replacing %$\text{SPP}_d(P,q_d)$ by $\text{QSPP}(P,q)$.
+  A linearizable instance  of the  QSPP is a linearizable instance of the $\text{SPP}_2$.
+  %defined analogously, just  replacing $\text{SPP}_d(P,q_d)$ by $\text{QSPP}(P,q)$.
+\end{definition}
+
+The recognition of linearizable QSPP (SPP$_d$) instances, also
+called \emph{the linearization problem for the QSPP (SPP$_d$)}, abbreviated by \textsc{Lin}QSPP (\textsc{Lin}SPP$_d$) arises 
+as a natural question. In this problem the task 
+consists of deciding whether a
+given  instance of the  QSPP (SPP$_d$)  is linearizable and in finding the linear cost function
+$c$ in the positive case.
+The 
+notion of 
+linearizable special cases of hard
+combinatorial optimization problems  goes back to
+ Bookhold~\cite{bookhold1990contribution} who introduced 
+ it for  the quadratic assignment problem (QAP). 
+ For symmetric linearizable QAP instances a full characterization has been obtained while
+ only partial results are available for the linearizability of the general QAP, see
+ \cite{CeDeWo2016,Erdogan2006,ErTa2007,ErTa2011,kabadi2011n,punnen2013linear,waddellcharacterizing}.
+The linearization problem has been studied for several other quadratic combinatorial optimization problems, see  \cite{CuPu2018,sotirov2021quadratic}
+for the quadratic minimum spanning tree problem,  \cite{PuWaWo2017} for the quadratic TSP, \cite{deMeSo2020} for the quadratic cycle cover problem and  \cite{huSo2021} for general binary quadratic programs.  
+Linearizable instances of  a quadratic problem can be used  to generate lower bounds  needed   in B\&B algorithms. For example, Hu and Sotirov introduce the family of the so-called \emph{linearization-based bounds} \cite{huSo2021} for the binary quadratic problem. Each specific bound of this family is based on   a set of linearizable instances of the problem. The authors show that 
+well-known bounds from the literature are special cases of the newly introduced bounds.
+Clearly, fast algorithm for the  linearization problem are important in 
+this context.
+\smallskip
+
+While \textsc{Lin}SPP$_d$ has not been investigated in the literature so far (to the best of our knowledge), the  \textsc{Lin}QSPP has been subject of investigation in some recent papers.
+In the last chapter, it was proven  that it  is  coNP-complete to decide whether a   QSPP instance on an   input graph
+containing   a directed cycle is linearizable.    Thus, a nice characterization of linearizable QSPP
+  instances for such  graphs
+  seems to be
+  unlikely.
+   In the acyclic case, Hu and Sotirov first described a polynomial-time
+   algorithm for the \textsc{Lin}QSPP  on  directed
+   two-dimensional grid graphs \cite{huSo2018}. Recently, in  \cite{huSo2021} they  generalized this
+   result to all acyclic digraphs and proposed  an algorithm which solves the
+   problem in $\bigO(nm^3)$, where $n$ and $m$ denote the number of vertices and
+   arcs in 
+   $G$.
+\smallskip
+   
+   We recall that in the last chapter, the  so-called universal linearizability was studied.
+A digraph $G$ is called \emph{universally linearizable with respect to the
+  QSPP} iff every instance of the QSPP on the input graph $G$ is linearizable for
+every choice of the cost function $q$. In \cite{huSo2018} it is shown that a
+particular class of grid graphs is universally linearizable. In
+the last chapter, we obtained several different complete characterizations of the class of universally linearizable digraphs, for example in terms of 
+forbidden subgraphs.  
+\medskip
+
+\textbf{Contribution and organization of the chapter.}
+In this chapter we provide a novel and simple characterization of linearizable QSPP instances on acyclic 
+digraphs.
+Our characterization shows that the linearizability can be seen as a  \emph{local} property.  In particular, we show  that an instance of the QSPP on an acyclic 
+digraph $G$  is linearizable if and only if each subinstance obtained by considering a subdigraph of $G$ consisting of two $s$-$t$-paths in $G$   is linearizable. Our simple characterization also works for the SPP$_d$  and even for completely arbitrary cost  functions, which  assign some cost $f(P)$ to every $s$-$t$-path $P$ without any further restrictions. The latter problem is referred to as the \emph{Generic Shortest Path Problem} (GSPP) and is formally introduced in Section~\ref{defi:sec}. Indeed, the characterization of the linearizable instances of the SPP$_d$ 
+follows from the characterization of the linearizable instances of the GSPP, both on acyclic digraphs. We remark that in parallel and independent to our work, Matuschke proved an equivalent result \cite[Theorem 6]{matuschke2023decomposition}.
+
+Further,  we propose  a 
+linear time algorithm
+which can check the local condition mentioned above   for the QSPP and the SPP$_d$. 
+We note that this is not straightforward, because the number of the subinstances for which the condition needs to be checked is in general exponential. As a side result our approach reveals  an interesting connection between the \textsc{Lin}QSPP and the problem of deciding  whether all $s$-$t$-paths in a digraph have the same length.
+As a result, we obtain an algorithm which solves the \textsc{Lin}QSPP  in $\bigO(m^2)$ time, thus improving the best previously known running time of $\bigO(nm^3)$ obtained in \cite{huSo2021}. Our approach yields an $\bigO(d^2 m^d)$ time algorithm for the \textsc{Lin}SPP$_d$, thus providing  the first (polynomial time) algorithm for this problem.  Note that the running time of the proposed algorithms is linear in the input size for both problems,  \textsc{Lin}QSPP and \textsc{Lin}SPP$_d$, respectively. 
+(The costs of all $\Omega(m^2)$ pairs of arcs, in the case of the QSPP, and the  costs of all $\Omega(m^d/d!)$ subsets of  arcs of cardinality $d$, in the case of the
+SPP$_d$,  need to be encoded in the input.) 
+
+
+Finally, we also obtain a polynomial time algorithm that given an acyclic digraph $G$ computes a basis of the subspace of all linearizable degree-$d$ cost functions on $G$. Such a basis can be used to obtain better linearization-based bounds usable in B\&B algorithms.
+
+The chapter is organized as follows. 
+After introducing some notations and preliminaries in Section~\ref{defi:sec} we present the result on the characterization of the linearizable QSPP and SPP$_d$ instances on acyclic input digraphs in Section~\ref{charact:sec}. The algorithms for the linearization problems \textsc{Lin}QSPP and \textsc{Lin}SPP$_d$ are presented in Section~\ref{algo:sec}. 
+%In \cref{sec:subspace} we give a polynomial time algorithm computing a basis %of the subspace of all linearizable $d$-degree cost functions on an acyclic digraph $G$.
+\cref{sec:subspace} deals with 
+%we give a polynomial time algorithm 
+computing a basis of the subspace of all linearizable $d$-degree cost functions on an acyclic digraph $G$.
