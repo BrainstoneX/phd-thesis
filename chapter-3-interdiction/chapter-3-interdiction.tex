@@ -83,7 +83,7 @@ When considering the most vital \emph{edges}, instead of the most vital nodes, t
 We introduce a novel framework of graph modifications  
 specific to interval graphs. The most vital nodes problem for interval graphs can be reduced to  this framework for all the graph parameters studied in this work. We observe that under this model not only interdiction but also the 
 notion of an assistance problem can be defined. 
-We study these two problem types for the four graph parameters $\alpha$, $\omega$, shortest path, and scattering number. The scattering number of an interval graph is related to its hamiltonian properties. In particular, we look at the \emph{interdiction problem with respect to Hamiltonicity}. Here, we are given an interval graph, which is hamiltonian, and the interdictor wishes to modify the graph such that it is not hamiltonian anymore.
+We study these two problem types for the four graph parameters $\alpha$, $\omega$, shortest path, and scattering number. The scattering number of an interval graph is related to its Hamiltonian properties. In particular, we look at the \emph{interdiction problem with respect to Hamiltonicity}. Here, we are given an interval graph, which is Hamiltonian, and the interdictor wishes to modify the graph such that it is not Hamiltonian anymore.
 We also obtain similar results for the related parameters of the path cover number, and graph toughness.
 
 Even though the framework is general, we obtain polynomial-time algorithms
@@ -421,7 +421,7 @@ on interval graphs. Note that for this problem, we consider the case of expandin
 \[ \min_{X \subseteq [n] \colon |X| \leq k } \alpha(G_X) = \min_{X \subseteq [n] \colon |X| \leq k} \kappa(G_X). \]
 Therefore, we can focus on solving the clique cover number assistance problem.
 Let $\F := \I \cup \I' = \fromto{F_1}{F_{2n}}$ and $F_j = [c_j, d_j]$\hun{, for $j \in [2n]$}. Without loss of generality, we assume that the elements of $\F$ are ordered by endpoints, i.e.\ we have $d_1 < d_2 < \dots < d_{2n}$. 
-Due to \cref{prop:cliquecover}, we can assume that in an optimal solution $X \subseteq [n]$, the clique cover $(V_1, \dots, V_r)$ of $G_X$ is in one-to-one correspondance to a  subset of cardinality $r$ of the
+Due to \cref{prop:cliquecover}, we can assume that in an optimal solution $X \subseteq [n]$, the clique cover $(V_1, \dots, V_r)$ of $G_X$ is in one-to-one correspondence to a  subset of cardinality $r$ of the
 positions $d_1, \dots, d_{2n}$.
 
 We define $c(i,j)$ 
@@ -611,7 +611,7 @@ Let $G = (V, E)$ be a graph. For a set $X \subseteq E$, we denote by $G/X$ the g
 \begin{equation}
 \min_{X \subseteq E, |X| \leq k}\alpha(G/X). \label{eq:contraction-problem}
 \end{equation}  
-We first show how to compute expression (\ref{eq:contraction-problem}) for connected interval graphs and then extend the answer to disconnected graphs. Like in \cref{sec:independence-interdiction}, let $\kappa(G)$ denote the clique-cover number of $G$. We also use the following notation in this section: We denote by $G = (V, E)$ some interval graph on $n$ vertices, with interval represention $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$. The set $\mathcal{B} =  \fromto{b_1}{b_n}$ is the set of all endpoints of intervals. Let $B \subseteq \mathcal{B}$. We call an interval $I \in \I$ \emph{disjoint from $B$}, if $I \cap B = \emptyset$. The following lemma establishes a connection between intervals disjoint to $B$ and problem (\ref{eq:contraction-problem}). Note that if $k = n$,  problem (\ref{eq:contraction-problem}) becomes trivial, so we can assume without loss of generality, that $k < n$.
+We first show how to compute expression (\ref{eq:contraction-problem}) for connected interval graphs and then extend the answer to disconnected graphs. Like in \cref{sec:independence-interdiction}, let $\kappa(G)$ denote the clique-cover number of $G$. We also use the following notation in this section: We denote by $G = (V, E)$ some interval graph on $n$ vertices, with interval representation $\I = \fromto{[a_1, b_1]}{[a_n, b_n]}$. The set $\mathcal{B} =  \fromto{b_1}{b_n}$ is the set of all endpoints of intervals. Let $B \subseteq \mathcal{B}$. We call an interval $I \in \I$ \emph{disjoint from $B$}, if $I \cap B = \emptyset$. The following lemma establishes a connection between intervals disjoint to $B$ and problem (\ref{eq:contraction-problem}). Note that if $k = n$,  problem (\ref{eq:contraction-problem}) becomes trivial, so we can assume without loss of generality, that $k < n$.
 
 \begin{lemma}
 \label{lemma:contraction}
