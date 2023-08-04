@@ -26,7 +26,7 @@ The most vital nodes problem has been considered for many different parameters, 
 With respect to the clique number, they proved that a simple greedy-algorithm 
 solves the most vital nodes problem on interval graphs. However, with respect to the independence number $\alpha$, they could not determine the complexity of the most vital nodes problem on interval graphs and left it as an open question~\cite[(Q2)]{diner2018contractionDeletionBlockers}.
 
-In this paper, we positively answer (Q2): On interval graphs, the most vital nodes problem with respect to $\alpha$ can be solved in polynomial time.  Moreover, we extend this result to a much more general framework. For many graph parameters, the most vital nodes problem is a special case of the framework.
+In this chapter, we positively answer (Q2): On interval graphs, the most vital nodes problem with respect to $\alpha$ can be solved in polynomial time.  Moreover, we extend this result to a much more general framework. For many graph parameters, the most vital nodes problem is a special case of the framework.
 
 \subsection{The shrink-expand framework} 
 We propose a new framework, the \emph{shrink-expand framework}, for interdiction problems specifically 
@@ -39,7 +39,7 @@ for interval graphs. It revolves around \emph{shrinking} and \emph{expanding} in
 We study interdiction problems with respect to shrinking and expanding intervals. As an input, we are given a fixed list $I_1,\dots,I_n$ of original intervals, and a fixed list $I'_1,\dots,I'_n$ of replacement intervals. For each $j=1,\dots,n$, the interval $I'_j$ is the replacement of the interval $I_j$, and we have $I'_j \subseteq I_j$ or $I'_j \supseteq I_j$.
 Furthermore, we are given a budget $k \geq 0$. We start with the interval graph on the original intervals $I_1,\dots,I_n$.
 In order to impair $\pi$, the interdictor can then choose a set of at most $k$ intervals and shrink (expand) the chosen intervals.
-The question for the interdictor is now, which intervals to select in order to maximally impair $\pi$. For all the graph parameters considered in this paper, only one of shrinking or expanding makes sense. For example, in the clique number interdiction problem, the network owner seeks to find a clique of maximal size, and the interdictor impairs this objective by shrinking intervals. In the next section, we will list for each problem considered, whether one has shrinking or expanding intervals.
+The question for the interdictor is now, which intervals to select in order to maximally impair $\pi$. For all the graph parameters considered in this chapter, only one of shrinking or expanding makes sense. For example, in the clique number interdiction problem, the network owner seeks to find a clique of maximal size, and the interdictor impairs this objective by shrinking intervals. In the next section, we will list for each problem considered, whether one has shrinking or expanding intervals.
 
 For many graph parameters, the shrink-expand framework contains the most vital nodes problem as a special case for the following reason: Consider a pair of original interval $I_j$ and its replacement interval $I'_j$, such that the replacement interval $I'_j = \emptyset$ is empty. The act of shrinking $I_j$ down to $I'_j$ corresponds to removing all edges from the corresponding vertex $v$ in the interval graph. For the graph parameters of  clique number and shortest path, it is easily seen that removing all incident edges from a vertex is equivalent to deleting it from the graph. Therefore, if every single replacement interval is empty, we have exactly the most vital nodes problem. For the graph parameter of independent set, an analogous observation holds. (Here, one chooses the replacement interval so large, that it intersects every other interval.)
 
@@ -47,7 +47,7 @@ For many graph parameters, the shrink-expand framework contains the most vital n
 While interdiction problems are min-max or max-min type of problems, the shrink-expand framework allows us to also consider \emph{assistance problems}, which are min-min or max-max type of problems. An assistance problem is a two-player problem, where the first player selects at most $k$ intervals to shrink (expand), and the second player optimizes some graph parameter $\pi$. But this time, the two players have a shared objective, instead of a conflicting one. For example, in the assistance problem for the clique number, one has expanding intervals, and the question is which intervals to expand in order to get an interval graph with maximum possible clique number.
 If the interdiction problem has shrinking intervals, the assistance problem has expanding intervals, and vice versa. Assistance problems are interesting to consider, as they are the natural counterpart to interdiction problems. 
 
-In this paper, we consider the interdiction and assistance problem for the following 
+In this chapter, we consider the interdiction and assistance problem for the following 
 four classical graph parameters: 
 Independence number $\alpha$, maximum clique size $\omega$, shortest path, 
 and the scattering number (a graph parameter determining the Hamiltonicity property of interval graphs). 
@@ -55,12 +55,12 @@ and the scattering number (a graph parameter determining the Hamiltonicity prope
 \subsection{Related work}
 The area of interdiction problems on graphs has gained significant attention in 
 the computer science literature (see eg.~\cite{NetworkInterdictProblemsBookChapter}).
-The \emph{most vital nodes} problem for graph parameter $\pi$ is the problem where the interdictor is given a budget of $k$ vertex deletions and wants to maximally impair $\pi$. (In the earlier literature, the name only refers to the case $\pi =$  shortest path \cite{mostVitalLinksNodes1982}.)  In the very closely related \emph{vertex blocker} problem, the interdictor is given a threshold $t < \pi(G)$, and we wish to compute the required budget $k$ to reduce $\pi(G)$ down to $t$ \cite{shortPathsInterdictionTotalAndNodeWise}. In this paper, the difference is of no concern: We consider $k, t$ as part of the input, and in this case it is clear that if one problem is in $P$, so is the other. Many different parameters $\pi$ have been considered for both problems, see e.g.\ Nasirian et al. for a short summary \cite{nasirian2019exact}.
+The \emph{most vital nodes} problem for graph parameter $\pi$ is the problem where the interdictor is given a budget of $k$ vertex deletions and wants to maximally impair $\pi$. (In the earlier literature, the name only refers to the case $\pi =$  shortest path \cite{mostVitalLinksNodes1982}.)  In the very closely related \emph{vertex blocker} problem, the interdictor is given a threshold $t < \pi(G)$, and we wish to compute the required budget $k$ to reduce $\pi(G)$ down to $t$ \cite{shortPathsInterdictionTotalAndNodeWise}. In this chapter, the difference is of no concern: We consider $k, t$ as part of the input, and in this case it is clear that if one problem is in $P$, so is the other. Many different parameters $\pi$ have been considered for both problems, see e.g.\ Nasirian et al. for a short summary \cite{nasirian2019exact}.
 It is easy to see that the most vital nodes problem can be modeled as a special case of the interdiction problem in the shrink-expand framework.
 Lewis and Yannakakis proved that for every hereditary and nontrivial graph parameter $\pi$, 
 the most vital node problem is NP-complete in general graphs \cite{metaTheoremHereditary}.
  
-%We give a solution to (Q2) in (ref) and also show in the appendix how to solve their question (Q1) with the same method.
+%We give a solution to (Q2) in (ref) and also show in \cref{app:contraction} how to solve their question (Q1) with the same method.
 The most vital nodes problem for parameters $\alpha$ and $\omega$ are well studied, 
 even for special graph classes~\cite{mostVitalNodesWrtIndSet,costa2011minimum},
 but interval graphs have not yet been investigated. Also, the most vital nodes 
@@ -99,7 +99,7 @@ The following problems can be solved in polynomial time:
 \end{theorem}
 
 The interdiction problem in the shrink-expand framework for the parameter $\omega$ is shown to be NP-complete and $W[1]$-hard. \cref{tab:result-overview} provides an overview of our results. 
-Our results for the independence number answer the question (Q2) stated by Diner et al. \cite[(Q2)]{diner2018contractionDeletionBlockers}. Additionally, in Appendix~\ref{app:contraction}, we show how to modify our proof to also answer their question (Q1), regarding edge contraction blockers on interval graphs~\cite[(Q1)]{diner2018contractionDeletionBlockers}.
+Our results for the independence number answer the question (Q2) stated by Diner et al. \cite[(Q2)]{diner2018contractionDeletionBlockers}. Additionally, in \cref{app:contraction}, we show how to modify our proof to also answer their question (Q1), regarding edge contraction blockers on interval graphs~\cite[(Q1)]{diner2018contractionDeletionBlockers}.
 
 \begin{table}
 \centering
@@ -132,12 +132,12 @@ shortest path & $O(kn)$ & $O(n^4)$ & $\bigO(n^4)$
 %and examining computer memory structures.} 
 %
 %Specifically, many authors considered the \emph{Job Interval Selection Problem
-%with $k$ intervals per job} (JISP$k$) \cite{nakajima1982complexity,spieksma1999approximability,chuzhoy2006approximation,erlebach2003interval}. Here, each job has exactly $k$ intervals attached to it, and the goal is to schedule as many jobs as possible on a single machine. Equivalently, we have to find an independent set of maximum size in an interval graph, which uses at most one interval in each predescribed $k$-tuple of intervals. It is known that already JISP2 is NP-complete and has no PTAS \cite{spieksma1999approximability}. The difference from JISP2 to the shrink-expand framework is, that in the shrink-expand framework we require for each job, that the two intervals attached to it are nested. We further require that at most $k$ of the \enquote{small} intervals may be selected (otherwise the problem becomes trivial). Our results show that in this case, JISP2 and other related scheduling problems are computable in polynomial time.]]\comment{paragraph [[...]] can be cut from the paper maybe}
+%with $k$ intervals per job} (JISP$k$) \cite{nakajima1982complexity,spieksma1999approximability,chuzhoy2006approximation,erlebach2003interval}. Here, each job has exactly $k$ intervals attached to it, and the goal is to schedule as many jobs as possible on a single machine. Equivalently, we have to find an independent set of maximum size in an interval graph, which uses at most one interval in each predescribed $k$-tuple of intervals. It is known that already JISP2 is NP-complete and has no PTAS \cite{spieksma1999approximability}. The difference from JISP2 to the shrink-expand framework is, that in the shrink-expand framework we require for each job, that the two intervals attached to it are nested. We further require that at most $k$ of the \enquote{small} intervals may be selected (otherwise the problem becomes trivial). Our results show that in this case, JISP2 and other related scheduling problems are computable in polynomial time.]]\comment{paragraph [[...]] can be cut from the chapter maybe}
 
 \section{Preliminaries}
 \label{sec:prelim}
 Let $[n] = \fromto{1}{n}$ denote the set of the first $n$ positive natural numbers and $\mathbb{N}_0 = \mathbb{N} \cup \{ 0 \}$ denote the set of nonnegative integers. We use standard notation and terminology from graph theory to denote 
-the common graph parameters studied in this work. 
+the common graph parameters studied in this chapter. 
 Given a graph $G = (V,E)$ a  subset $S$ of $V$ is called a \emph{clique} if 
 for each pair of distinct vertices $u,v \in S$, it holds that $\{u,v\} \in E$.
 Analogously, a subset $S$ of $V$ is called an \emph{independent set} if for each pair 
@@ -159,9 +159,9 @@ such paths is called the size of the path cover. Note that a path cover of size 
 is a Hamiltonian path. If $S \subseteq V$ is a set of vertices, we denote by $G-S$ the graph obtained from $G$
 by deleting the vertices in $S$ (and their incident edges) from $G$.
 
-For $a < b$, the \emph{closed interval} $[a, b]$ is defined as $\set{x \in \R \mid a \leq x \leq b}$. It has \emph{startpoint} $a$ and \emph{endpoint} $b$. We furthermore define $[a, a] := \emptyset$. Note that this is non-standard, but it will turn out convenient to use. We only consider closed intervals in this paper. If $\mathcal{J} =  (J_1, \dots, J_n)$ is a sequence of intervals (possibly containing duplicates), then we denote by $\graph(\mathcal{J}) = (V,E)$ the corresponding \emph{interval graph}
+For $a < b$, the \emph{closed interval} $[a, b]$ is defined as $\set{x \in \R \mid a \leq x \leq b}$. It has \emph{startpoint} $a$ and \emph{endpoint} $b$. We furthermore define $[a, a] := \emptyset$. Note that this is non-standard, but it will turn out convenient to use. We only consider closed intervals in this chapter. If $\mathcal{J} =  (J_1, \dots, J_n)$ is a sequence of intervals (possibly containing duplicates), then we denote by $\graph(\mathcal{J}) = (V,E)$ the corresponding \emph{interval graph}
 where $V = [n]$ and for any $u,v \in V$, it holds that $\{u,v\} \in E$ if and only if 
-$J_u \cap J_v \neq \emptyset$. Note that in the whole work, we identify the set of 
+$J_u \cap J_v \neq \emptyset$. Note that in the whole chapter, we identify the set of 
 vertices of the graph with the integers from $1$ to $n$. Given a subset of vertices $X \subseteq [n]$, we denote by 
 $\J[X] = \{ J_i \colon i \in X \}$ the set of corresponding intervals.
 The sequence $\mathcal{J}$ is called an \emph{interval representation} of the graph $\graph(\mathcal{J})$. It is folklore that if $\mathcal{J}$ contains two intervals which have a common start- or endpoint, one can easily obtain a representation $\mathcal{J}'$ such that no two intervals have a common start- or endpoint and $\graph(\mathcal{J}') = \graph(\mathcal{J})$. We will therefore assume this property whenever it is convenient.
@@ -182,7 +182,7 @@ scattering number & shrink & expand
 \caption{Problems in the shrink-expand framework have either shrinking or expanding intervals.}
 \label{tab:shrink-expand-overview}
 \end{table}
-A problem in the shrink-expand framework is defined by an input $(\I, \I', n, k)$. Here, $n$ is the number of vertices, $k \geq 0$ is the budget, $\I = (I_1, \dots, I_n)$ is the sequence of original intervals, and $\I' = (I'_1, \dots, I'_n)$ is the sequence of replacement intervals. The interval $I'_j$ is the replacement interval of the original interval $I_j$ for $j \in [n]$.  We have either $I'_j \subseteq I_j$ for all $j$ (\emph{shrinking} case), or $I'_j \supseteq I_j$ for all $j$ (\emph{expanding} case). \cref{tab:shrink-expand-overview} explains for all problems in the shrink-expand framework, whether we are in the shrinking case or the expanding case. Throughout the paper, we always use the letters $a$ and $b$ for start- and endpoints of $I_j$ and $I'_j$, that is $I_j = [a_j, b_j]$, and $I'_j = [a'_j, b'_j]$.
+A problem in the shrink-expand framework is defined by an input $(\I, \I', n, k)$. Here, $n$ is the number of vertices, $k \geq 0$ is the budget, $\I = (I_1, \dots, I_n)$ is the sequence of original intervals, and $\I' = (I'_1, \dots, I'_n)$ is the sequence of replacement intervals. The interval $I'_j$ is the replacement interval of the original interval $I_j$ for $j \in [n]$.  We have either $I'_j \subseteq I_j$ for all $j$ (\emph{shrinking} case), or $I'_j \supseteq I_j$ for all $j$ (\emph{expanding} case). \cref{tab:shrink-expand-overview} explains for all problems in the shrink-expand framework, whether we are in the shrinking case or the expanding case. Throughout the chapter, we always use the letters $a$ and $b$ for start- and endpoints of $I_j$ and $I'_j$, that is $I_j = [a_j, b_j]$, and $I'_j = [a'_j, b'_j]$.
 
 For a set $X \subseteq [n]$ of indices, we denote by $\I_X$ the sequence of intervals that is obtained from \las{the sequence} $\I$ after shrinking (expanding) the intervals with indices in $X$. Formally, 
 \[(\I_X)_j = \begin{cases} I'_j & \text{if }j \in X \\
